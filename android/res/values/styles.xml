@@ -6,13 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
-        <!--<item name="android:colorBackgroundCacheHint">@null</item>-->
-        <!--<item name="android:windowAnimationStyle">@android:style/Animation</item>-->
-        <!--<item name="android:windowNoTitle">false</item>-->
-        <!--<item name="android:windowContentOverlay">@null</item>-->
-        <!--<item name="android:windowFullscreen">false</item>-->
-
     </style>
 
     <style name="ToolbarStyle" parent="AppTheme"></style>

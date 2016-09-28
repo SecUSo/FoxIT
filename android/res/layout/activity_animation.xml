@@ -17,99 +17,86 @@
         app:tabGravity="fill"
         app:tabMode="fixed" />
 
-
-    <RelativeLayout
-        android:id="@+id/hintFrame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/image_scrollhint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="false"
-            android:src="@drawable/ic_expand_more_black_48dp"
-            android:visibility="visible" />
-    </RelativeLayout>
-
     <FrameLayout
-        android:id="@+id/appFrame"
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="center">
-
-    </FrameLayout>
-
-
-    <FrameLayout
-        android:id="@+id/settingFrame"
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="center">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/permissionFrame"
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tabs"
-        android:layout_gravity="center">
-
-        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            tools:context="net.voidynullness.android.tabitytabs.TabLayoutActivity"
-            android:layout_alignTop="@+id/tabs"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center">
-
-        </android.support.v4.view.ViewPager>
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageView4"
-            android:maxHeight="40dp"
-            android:maxWidth="40dp"
-            android:src="@mipmap/fox_5"
-            android:longClickable="false"
-            android:adjustViewBounds="true"
-            android:minHeight="40dp"
-            android:minWidth="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="5dp"
-            android:layout_gravity="center_horizontal|bottom"
-            android:backgroundTint="#ffffff" />
-
+    android:id="@+id/permissionFrame"
+    android:layout_width="match_parent"
+    android:layout_height="550dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:layout_gravity="center"
+    android:layout_alignTop="@+id/tabs">>
         <ImageButton
-            android:layout_width="78dp"
-            android:layout_height="71dp"
-            android:id="@+id/imageButton"
-            android:layout_gravity="left|bottom"
-            android:src="@drawable/paw"
-            android:background="?android:attr/windowBackground" />
-
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/imageButton"
+        android:layout_gravity="left|bottom"
+        android:src="@drawable/paw"
+            android:background="#ffffff" />
     </FrameLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
-
-    </RelativeLayout>
+    <fragment
+    android:id="@+id/list"
+    android:name="com.bp.AnimationWindow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    tools:layout="@layout/fragment_animation_window"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
+        android:layout_alignTop="@+id/tabs" />
 
 </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/hintFrame"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:visibility="gone">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/image_scrollhint"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentEnd="false"-->
+            <!--android:src="@drawable/ic_expand_more_black_48dp"-->
+            <!--android:visibility="visible" />-->
+    <!--</RelativeLayout>-->
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/permissionFrame"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="550dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_alignTop="@+id/tabs">-->
+
+        <!--<fragment-->
+            <!--android:id="@+id/list"-->
+            <!--android:name="fragment_animation_window"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--tools:layout="@layout/fragment_animation_window" />-->
+
+        <!--<ImageButton-->
+            <!--android:layout_width="78dp"-->
+            <!--android:layout_height="71dp"-->
+            <!--android:id="@+id/imageButton"-->
+            <!--android:layout_gravity="left|bottom"-->
+            <!--android:src="@drawable/paw"-->
+            <!--android:background="?android:attr/windowBackground" />-->
+
+    <!--</FrameLayout>-->
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/relativeLayout"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true">-->
+
+    <!--</RelativeLayout>-->
+
+<!--</RelativeLayout>-->

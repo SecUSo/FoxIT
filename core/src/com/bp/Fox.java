@@ -12,11 +12,6 @@ public class Fox implements ApplicationListener {
     private Animation animation;
     private float elapsedTime = 0;
 
-
-
-// starts libGDX render thread initialize(new !ToastTest(actionResolver), false); } }``
-
-
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -32,7 +27,7 @@ public class Fox implements ApplicationListener {
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();

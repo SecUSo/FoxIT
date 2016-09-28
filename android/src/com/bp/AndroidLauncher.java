@@ -1,6 +1,10 @@
 package com.bp;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -9,15 +13,21 @@ import android.widget.RelativeLayout;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
 import com.bp.Game;
+import android.support.v4.app.FragmentTransaction;
 
-public class AndroidLauncher extends AppCompatActivity {
+import java.lang.reflect.Field;
+
+public class AndroidLauncher extends ActionBarActivity implements AndroidFragmentApplication.Callbacks {
+
 	Toolbar toolbar;
 
 	@Override
-	protected void onCreate (Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_animation);
+		getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 		// show toolbar
 		toolbar = (Toolbar) findViewById(R.id.my_toolbar);
 		setSupportActionBar(toolbar);
@@ -46,5 +56,9 @@ public class AndroidLauncher extends AppCompatActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void exit() {
 	}
 }
