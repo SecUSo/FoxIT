@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/creme"
+    android:id="@+id/count_frame">
+
+    <include layout="@layout/toolbar_actionbar"
+        android:id="@+id/include3" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="446dp"
+        android:id="@+id/lection_frame"
+        android:layout_weight="0.90"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#ffffff"
+        android:contextClickable="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_button"
+            android:src="@drawable/ic_arrow_back_black_48dp"
+            android:maxHeight="70dp"
+            android:maxWidth="100dp"
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+            android:adjustViewBounds="true"
+            android:nestedScrollingEnabled="false"
+            android:paddingRight="10dp"
+            android:scaleType="fitCenter"
+            android:background="#00ffffff"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="31dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/next_button"
+            android:src="@drawable/ic_arrow_forward_red_100_48dp"
+            android:maxHeight="70dp"
+            android:maxWidth="100dp"
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+            android:adjustViewBounds="true"
+            android:nestedScrollingEnabled="false"
+            android:paddingRight="10dp"
+            android:scaleType="fitCenter"
+            android:background="#00ffff00"
+            android:layout_marginEnd="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/second_fragment_frame"
+        android:layout_below="@+id/include2"
+        android:layout_marginTop="55dp">
+
+    </RelativeLayout>
+
+    <include layout="@layout/toolbar_actionbar"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/first_fragment_frame"
+        android:layout_below="@+id/include2"
+        android:layout_marginTop="55dp">
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>

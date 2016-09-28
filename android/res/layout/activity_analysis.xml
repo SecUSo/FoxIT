@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loading"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/analysisProgressBar"
+        android:layout_marginTop="148dp"
+        android:background="@color/colorPrimaryDark"
+        android:indeterminate="false"
+        android:indeterminateDuration="@android:integer/config_mediumAnimTime"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Einstellungen analysieren..."
+        android:id="@+id/progressComment"
+        android:layout_below="@+id/analysisProgressBar"
+        android:layout_alignRight="@+id/analysisProgressBar"
+        android:layout_alignEnd="@+id/analysisProgressBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        style="@style/Theme.AppCompat.Light.NoActionBar"
+        android:hint="Loading..."
+        android:textAlignment="center"
+        android:textStyle="italic"
+        android:typeface="monospace" />
+
+    <include layout="@layout/toolbar_actionbar" />
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Beschreibt eine Zeile der Listendarstellung der erfassten Apps-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="4dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/text_question"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_question"
+            android:layout_alignParentStart="true"
+            android:minHeight="0dp"
+            android:text="Dies ist eine Antwort"
+            android:id="@+id/text_answer"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- specifies the menu button -->
+
+    <item
+        android:id="@+id/goBack"
+        android:icon="@drawable/back"
+        android:title="Zurück"
+        app:showAsAction="always"
+        android:visible="true"
+        android:layout_gravity="left"/>
+
+    <item
+        android:id="@+id/goOn"
+        android:icon="@drawable/forward"
+        android:title="Weiter"
+        app:showAsAction="always"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/action_options"
+        android:icon="@drawable/ic_more_vert_white_48dp"
+        android:title="@string/action_options"
+        app:showAsAction="always"
+        android:visible="true" />
+
+</menu>

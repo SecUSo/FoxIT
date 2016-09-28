@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FoxIt</string>
+    <string name="action_options">Options</string>
+    <string name="ueberspringen">Überspringen</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="ShowAppsButtonText">Show me my apps.</string>
+    <string name="ShowSettingsButtonText">Show me my settings.</string>
+    <string name="title_activity_profile">profile</string>
+</resources>

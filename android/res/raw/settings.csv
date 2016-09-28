@@ -1,0 +1,109 @@
+accessibility_display_magnification_auto_update;1;Eingabehilfe: Display-Zoom kontinuierlich;Spezielle Einstellung, ob die Display Vergrößerung automatische upgedatet werden soll.
+accessibility_display_magnification_enabled;1;Eingabehilfe: Display-Zoom;Ist die Display-Vergrößerung an oder aus.
+dasistgarantiertnichtdrin;0;ichbinschöner;hierkeineordentlichebeschreibung
+accessibility_display_magnification_scale;2;Eingabehilfe: Display-Zoom-Faktor;Es fehlt leider eine Beschreibung.
+accessibility_script_injection;1;Eingabehilfe: individuelle Skripte einfügen;Es fehlt leider eine Beschreibung.
+airplane_mode_on;1;Flugmodus;Es fehlt leider eine Beschreibung.
+airplane_mode_radios;0;Bei Flugmodus deaktivierte Funktionen;Es fehlt leider eine Beschreibung.
+accessibility_script_injection_url;0;Eingabehilfe: Skript-Adresse;Es fehlt leider eine Beschreibung.
+accessibility_web_content_key_bindings;0;Eingabehilfe: Tastenzuweisung bei Webinhalten;Es fehlt leider eine Beschreibung.
+airplane_mode_toggleable_radios;0;Bei Flugmodus schaltbare Funktionen;Es fehlt leider eine Beschreibung.
+android_id;2;Android ID (systemeigen);Es fehlt leider eine Beschreibung.
+app_idle_constants;0;Erlaubter Leerlauf einer App;Es fehlt leider eine Beschreibung.
+assisted_gps_enabled;1;Netzwerkunterstütztes GPS;
+audio_safe_volume_state;1;Anzeige von Hörschädigungshinweis;
+auto_time;1;Automatischer Abruf von Zeit/Datum;
+auto_time_zone;1;Automatischer Abruf der Zeitzone;
+bluetooth_on;1;Bluetooth;
+call_auto_retry;1;Automatische Wahlwiederholung;
+car_dock_sound;0;Auto-Dockingstations-Ton;
+car_undock_sound;0;Auto-Dockingstation-Endton;
+cdma_cell_broadcast_sms;1;SMS-Broadcast per CDMA erhalten;
+backup_enabled;1;System-Backup aktiviert;
+data_roaming;1;Daten-Roaming;
+default_install_location;0;Standard App-Speicherort;
+desk_dock_sound;0;Dockingstation-Anschlusston;
+desk_undock_sound;0;Dockingstation-Trennton;
+device_name;0;Gerätename;
+device_provisioned;1;Sperre bei mehreren Nutzern;
+dock_audio_media_enabled;1;Medienwiedergabe über Dockingstation;
+dock_sounds_enabled;1;Tonwiedergabe über Dockingstation;
+double_tap_to_wake;1;Aufwecken des Bildschirms durch doppeltes Tippen;
+dropbox:data_app_anr;0;Dropbox-ANR;
+dropbox:data_app_crash;0;Dropbox-Crash;
+dropbox:data_app_wtf;0;Dropbox-WTF;
+emergency_tone;1;Notfall-Ton;
+facelock_detection_threshold;0;Gesichtsentsperrungsschwelle;
+facelock_liveliness_recognition_threshold;0;Gesichtsentsperrungsschwelle bei Bewegung;
+facelock_max_center_movement;0;Gesichtsentsperrungsschwelle bei Bewegung in der Mitte;
+guest_user_enabled;1;Gastprofil aktiviert;
+heads_up_notifications_enabled;1;Heads-up Benachrichtigungen;
+immersive_mode_confirmations;1;Bestätigung für Vollbildmodus;
+input_methods_subtype_history;1;Historie für Eingabemethoden;
+install_non_market_apps;1;Apps unbekannter Quellen installieren;
+locationPackagePrefixWhitelist;0;Erlaubnisliste für Ortungsprogramm;
+locationPackagePrefixBlacklist;0;Ausschlussliste für Ortungsprogramm;
+location_providers_allowed;0;Aktivierte Ortungsdienste;
+lock_screen_allow_private_notifications;1;Sensible Benachrichtigungsinhalte auf dem Sperrbildschirm;
+lock_screen_owner_info_enabled;1;Besitzerinformationen auf Sperrbildschirm;
+lock_sound;0;Ton bei Bildschirmsperre;
+lockscreen.disabled;1;Sperrbildschirm deaktiviert;
+lockscreen.options;0;Aktivierte Sperrbildschirm-Optionen;
+long_press_timeout;2;Erkennung von gedrückt halten (ms);
+low_battery_sound;0;Ton bei niedrigem Akkustand;
+masterLocationPackagePrefixBlacklist;0;Ausschlussliste für Hauotortungsprogramm;
+masterLocationPackagePrefixWhitelist;0;Erlaubnisliste für Hauptortungsprogramm;
+adb_enabled;1;Android Debug Funktion;
+bluetooth_adress;0;Bluetooth-Adresse;
+bluetooth_name;0;Bluetooth Anzeigename;
+ble_scan_always_enabled;1;Durchgehender Bluetooth Low Energy Scan;
+bluetooth_addr_valid;1;Valide Bluetooth-Adresse;
+development_settings_enabled;1;Entwickleroptionen;
+doze_enabled;1;Atmungseffekt bei ausgeschaltetem Bildschirm und Nachricht;
+enable_accessability_global_gesture_enabled;1;Eingabehilfe: Gesten überall;
+lock_screen_lock_after_timeout;2;Sperrbildschirm aktivierung nach (ms);
+low_power_trigger_level;2;Kritischer Akkustand bei (%);
+mobile_data;1;Mobiler Datenverkehr;
+mock_location;1;Falsche Standorte;
+mode_ringer;2;Benachrichtigungs-Modus;
+multi_sim_data_call;1;VoIP mit MultiSIM;
+multi_sim_sms;1;SMS mit MultiSIM;
+multi_sim_sms_prompt;1;Abfrage bei SMS mit MultiSIM;
+multi_sim_voice_call;1;Anrufe mit MultiSIM;
+netstats_enabled;1;Netzwerkstatistiken;
+network_scoring_provisioned;1;Beschränkte Netzwerkzählung;
+nfc_default_route;0;NFC Standard Modus;
+package_verifier_enable;1;App-Verifizierung;
+package_verifier_user_consent;1;App-Verifizierung nach Nutzer-Einwilligung;
+power_sounds_enabled;1;Töne für Akkustand und Laden;
+preferred_network_mode1;2;Bevorzugte mobile Netze;
+preferred_network_mode;2;Bevorzugte mobile Netze;
+screensaver_activate_on_dock;1;Bildschirmschoner in Dockingstation aktivieren;
+screensaver_activate_on_sleep;1;Bildschirmschoner bei Inaktivität aktivieren;
+screensaver_enabled;1;Bildschirmschoner;
+selected_input_method_subtype;2;Untereinstellung der aktuellen Eingabemethode;
+send_action_app_error;1;Einen App-Fehler melden;
+serial_blacklist;0;Ausschlussliste für Seriennummern;
+set_install_location;1;Den App-Installationsort setzen;
+show_note_about_notification_hiding;1;Nachricht bei Verstecken von Benachrichtigungen anzeigen;
+show_processes;1;Laufende Prozesse anzeigen;
+sleep_timeout;2;Verzögerung, bis der Prozessor in den Schlaf-Modus geht;
+sms_outgoing_check_interval_ms;2;Zeitintervall, in dem die Menge ausgehender SMS geprüft wird;
+sms_outgoing_check_max_count;2;Menge an SMS, die in dem Intervall gesendet werden dürfen;
+speak_password;1;Eingabehilfen: Passwörter aussprechen;
+ssl_session_cache;0;Modus des SSL-Caches;
+stay_on_while_plugged_in;1;Display anlassen, wenn Strom angeschlossen ist.;
+usb_mass_storage_enabled;1;USB-Massenspeicher;
+use_google_mail;1;Gmail-Referenzen werden zu Google aufgelöst;
+wifi_max_dhcp_retry_count;2;Maximale Anzahl von Versuchen eine Verbindung aufzubauen;
+wifi_mobile_data_transition_wakelock_timeout_ms;2;Maximale Dauer zum Aufbau einer mobilen Datenverbindung vor dem Übergang in den Sleep-Modus (ms);
+wifi_networks_available_notification_on;1;Wiederholte Meldung verfügbarer Netze;
+wifi_networks_available_repeat_delay;2;Zeit zur wiederholten Meldung verfügbarer Netze (s);
+wifi_num_open_networks_kept;2;Anzahl gespeicherter Wifi-Access-Points;
+wifi_on;1;WiFi;
+wifi_sleep_policy_default;2;Default-Einstellung für den Wifi-Sleep-Modus;
+wifi_sleep_policy;2;Aktiver Wifi-Sleep-Modus;
+wifi_sleep_policy_never;2;Wifi-Sleep-Modus immer aus;
+wifi_sleep_policy_never_while_plugged;1;Wifi-Sleep-Modus beim Aufladen des Handys aus;
+wifi_watchdog_on;1;Regelmäßige Wifi-Suche;
+window_animation_scale;0;Faktor zum Skalieren normaler Animationen;

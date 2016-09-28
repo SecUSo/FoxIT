@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:padding="2dp"
+        android:layout_marginTop="55dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginLeft="10dp">
+
+        <RelativeLayout
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:background="@color/creme">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="200"
+                android:id="@+id/text_token_count"
+                android:textSize="28dp"
+                android:layout_alignTop="@+id/image_acorn_symbol"
+                android:textColor="@color/material_deep_teal_200"
+                android:maxLines="1"
+                android:layout_alignParentStart="true"
+                android:gravity="top|center"
+                android:layout_toStartOf="@+id/image_acorn_symbol"
+                android:singleLine="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/image_token_symbol"
+                android:src="@mipmap/eichel"
+                android:maxHeight="35dp"
+                android:maxWidth="35dp"
+                android:adjustViewBounds="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="1dp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>

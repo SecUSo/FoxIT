@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:weightSum="1">
+
+    <RelativeLayout
+        app:layout_widthPercent="100%"
+        android:layout_height="wrap_content"
+        android:id="@+id/trophy_frame"
+        android:background="#dad7b4">
+
+        <ImageView
+            android:id="@+id/grid_item_image"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10px"
+            android:src="@mipmap/test_trophy"
+            android:layout_weight="15.50"
+            android:adjustViewBounds="true"
+            android:longClickable="false"
+            android:layout_below="@+id/textView6"
+            android:layout_centerHorizontal="true">
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Text"
+            android:id="@+id/grid_item_label"
+            android:textColor="@color/abc_search_url_text_pressed"
+            android:layout_below="@+id/grid_item_image"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Baumhaus Kapitalist"
+            android:id="@+id/text_trophy_name"
+            android:textColor="#be0e0e"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>
