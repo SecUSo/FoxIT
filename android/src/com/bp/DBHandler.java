@@ -370,7 +370,8 @@ public class DBHandler extends SQLiteOpenHelper{
                 db.execSQL("UPDATE "+ TABLE_LESSIONS +" SET "+COLUMN_CONTENT+" = \'"+lessionString+"\', "+COLUMN_COURSE+" = \'"+lessionArray[0]+
                         "\' WHERE "+COLUMN_LECTURENAME+" = \'"+lessionArray[1]+"\';");
             } else {
-                db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\""+lessionArray[1]+"\", \""+lessionArray[3]+"\", \""+lessionArray[0]+"\", \""+lessionString+"\", \""+lessionArray[2]+"\", 1, \""+time+"\", \""+lessionArray[4]+"\");");
+                Log.d("db","INSERT INTO "+ TABLE_LESSIONS +" VALUES(\""+lessionArray[1]+"\", \""+lessionArray[3]+"\", \""+lessionArray[0]+"\", \""+lessionString+"\", \""+lessionArray[2]+"\", 1, \""+time+"\", \""+lessionArray[4]+"\");");
+                db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\'"+lessionArray[1]+"\', \'"+lessionArray[3]+"\', \'"+lessionArray[0]+"\', \'"+lessionString+"\', \'"+lessionArray[2]+"\', 1, \'"+time+"\', \'"+lessionArray[4]+"\');");
             }
         }
 
@@ -428,6 +429,7 @@ public class DBHandler extends SQLiteOpenHelper{
      */
     private String createLessionString(String[] lessionArray){
         StringBuffer sb = new StringBuffer();
+        Log.d("lessionarray",lessionArray[2]);
             sb.append("[name~" + lessionArray[1]+"]");
             //iterates over the parts of the Array which contains the actual slides
             for(int i=5;i<lessionArray.length;i++){

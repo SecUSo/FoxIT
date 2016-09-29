@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="24" />
+        android:targetSdkVersion="23" />
 
 
     <application
@@ -34,7 +34,6 @@
         <activity android:name=".Home" />
         <activity android:name=".AnimationLauncher" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".Welcome" />
     </application>
 
 </manifest>
