@@ -82,6 +82,7 @@ public class Home extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
         menu.findItem(R.id.goOn).setVisible(false);
         menu.findItem(R.id.goBack).setVisible(false);
+        menu.findItem(R.id.action_options).setVisible(false);
         return true;
     }
 
@@ -94,15 +95,6 @@ public class Home extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-            return true;
-        }*/
-        if (id == R.id.action_options) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 }

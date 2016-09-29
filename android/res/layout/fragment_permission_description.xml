@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:minHeight="40dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="40dp">
 
 
     <RelativeLayout
+        android:id="@+id/permission_headline_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/permission_headline_frame"
         android:background="#aab7df"
         android:clickable="true">
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/text_permission_headline"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+            android:id="@+id/text_permission_headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/text_permission_name"
-        android:text=" "
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/image_app_icon" />
+            android:id="@+id/text_permission_name"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/image_app_icon"
+            android:text=" "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image_app_icon"
-        android:maxHeight="40dp"
-        android:maxWidth="40dp"
-        android:src="@mipmap/ic_cat"
-        android:longClickable="false"
-        android:adjustViewBounds="true"
-        android:minHeight="40dp"
-        android:minWidth="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp" />
+            android:id="@+id/image_app_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:adjustViewBounds="true"
+            android:longClickable="false"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+            android:src="@mipmap/ic_cat" />
     </RelativeLayout>
 
 
     <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="500dp"
-    android:id="@+id/scrollView"
-        android:layout_below="@+id/permission_headline_frame"
-        android:layout_alignParentStart="true">
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/permission_headline_frame">
 
         <TextView
+            android:id="@+id/text_permission_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Hier wird bald eine Beschreibung der Permission stehen! "
-            android:id="@+id/text_permission_description"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/image_app_icon"
-            android:layout_alignParentStart="true" />
+            android:text="Hier wird bald eine Beschreibung der Permission stehen! "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </ScrollView>
 
 </RelativeLayout>
