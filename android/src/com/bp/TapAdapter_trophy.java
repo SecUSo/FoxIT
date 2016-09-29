@@ -72,7 +72,7 @@ public class TapAdapter_trophy extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {
-            return "Trophen";
+            return "Trophäen";
         } else {
             return "Animationen";
         }

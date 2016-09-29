@@ -37,7 +37,8 @@
         android:minWidth="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp" />
 
 
 </RelativeLayout>

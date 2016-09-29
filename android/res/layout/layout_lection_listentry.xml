@@ -7,7 +7,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/text_lection_name"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -20,18 +31,9 @@
             android:adjustViewBounds="true"
             android:minHeight="40dp"
             android:minWidth="40dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginEnd="6dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="31dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/text_lection_name"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </LinearLayout>

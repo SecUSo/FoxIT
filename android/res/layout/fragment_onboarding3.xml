@@ -44,7 +44,8 @@
             android:layout_below="@id/GameText"
             android:layout_marginTop="50dp"
             android:text="Erspiele Punkte in den Lektionen und setzte sie ein, um deinen Fuchs zum Privatsphären-Schnüffler werden zu lassen."
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 

@@ -5,37 +5,12 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:id="@+id/app_headline_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ed5252"
         android:clickable="true">
-
-        <TextView
-            android:id="@+id/text_app_permissions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/image_app_icon"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="18dp"
-            android:maxHeight="50dp"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/text_permission_app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/image_permission_app_icon"
-            android:maxHeight="50dp"
-            android:maxWidth="230dp"
-            android:minHeight="50dp"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/white"/>
 
         <ImageView
             android:id="@+id/image_permission_app_icon"
@@ -51,6 +26,33 @@
             android:minHeight="40dp"
             android:minWidth="40dp"
             android:src="@mipmap/ic_cat" />
+
+        <TextView
+            android:id="@+id/text_app_permissions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:maxHeight="50dp"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/text_permission_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="50dp"
+            android:maxWidth="230dp"
+            android:minHeight="50dp"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/image_permission_app_icon" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -87,7 +89,8 @@
             android:clickable="true"
             android:nestedScrollingEnabled="true"
             android:text="App Einstellungen"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/colorPrimaryDark" />
 
     </RelativeLayout>
 

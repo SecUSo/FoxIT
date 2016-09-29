@@ -46,7 +46,8 @@
             android:id="@+id/LectionDescription"
             android:layout_below="@id/LectionText"
             android:layout_marginTop="50dp"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 

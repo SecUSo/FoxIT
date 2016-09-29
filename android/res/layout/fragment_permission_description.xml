@@ -34,16 +34,16 @@
             android:id="@+id/image_app_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="6dp"
             android:adjustViewBounds="true"
             android:longClickable="false"
             android:maxHeight="40dp"
             android:maxWidth="40dp"
             android:minHeight="40dp"
             android:minWidth="40dp"
-            android:src="@mipmap/ic_cat" />
+            android:src="@mipmap/ic_cat"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
 
@@ -61,7 +61,9 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/image_app_icon"
             android:text="Hier wird bald eine Beschreibung der Permission stehen! "
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp" />
     </ScrollView>
 
 </RelativeLayout>

@@ -15,7 +15,8 @@
         android:layout_alignBottom="@+id/image_app_icon"
         android:layout_toLeftOf="@+id/image_permission_rating"
         android:layout_toRightOf="@+id/image_app_icon"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,7 +31,8 @@
         android:minWidth="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,6 +47,6 @@
         android:layout_marginLeft="5dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="31dp" />
+        android:layout_marginEnd="30dp" />
 
 </RelativeLayout>
