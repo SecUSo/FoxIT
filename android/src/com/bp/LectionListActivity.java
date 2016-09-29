@@ -280,12 +280,12 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
 
             //setting the stars
             ImageView solvedIcon = (ImageView) itemView.findViewById(R.id.image_lection_solved);
-            if(lection.getNextfreetime()>(System.currentTimeMillis()%Integer.MAX_VALUE)){
-                solvedIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.ic_hourglass_empty_black_48dp));
-            }else {
+            //if(lection.getNextfreetime()>(System.currentTimeMillis()%Integer.MAX_VALUE)){
+              //  solvedIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.ic_hourglass_empty_black_48dp));
+            //}else {
 
                 solvedIcon.setImageDrawable(getIcon(lection.getProcessingStatus()));
-            }
+            //}
             return itemView;
         }
 
