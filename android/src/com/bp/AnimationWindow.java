@@ -14,11 +14,18 @@ import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
 import java.lang.reflect.Field;
 
 /**
- * Created by Lynn on 28.09.2016.
+ * Created by Lena on 28.09.2016.
+ * initiates animation and forwards to core project
  */
-
 public class AnimationWindow extends AndroidFragmentApplication {
 
+    /**
+     * start animating
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return initializeForView(new Fox());

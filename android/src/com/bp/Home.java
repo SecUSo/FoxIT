@@ -67,7 +67,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getApplicationContext(),Fox.class);
+                Intent i = new Intent(getApplicationContext(),AnimationLauncher.class);
                 startActivity(i);
 
             }

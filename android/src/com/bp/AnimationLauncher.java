@@ -19,10 +19,19 @@ import android.support.v4.app.FragmentTransaction;
 
 import java.lang.reflect.Field;
 
-public class AndroidLauncher extends ActionBarActivity implements AndroidFragmentApplication.Callbacks {
+/**
+ * kicks off the animation
+ * includes android toolbar design
+ */
+public class AnimationLauncher extends ActionBarActivity implements AndroidFragmentApplication.Callbacks {
 
 	Toolbar toolbar;
 
+	/**
+	 * start animation via static fragment implementation
+	 * show android toolbar
+	 * @param savedInstanceState
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +42,11 @@ public class AndroidLauncher extends ActionBarActivity implements AndroidFragmen
 		setSupportActionBar(toolbar);
 	}
 
+	/**
+	 * show back button
+	 * @param menu
+	 * @return
+     */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -43,6 +57,11 @@ public class AndroidLauncher extends ActionBarActivity implements AndroidFragmen
 		return true;
 	}
 
+	/**
+	 * make backButton working correctly
+	 * @param item
+	 * @return
+     */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -58,6 +77,9 @@ public class AndroidLauncher extends ActionBarActivity implements AndroidFragmen
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * close callbacks
+	 */
 	@Override
 	public void exit() {
 	}
