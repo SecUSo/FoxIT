@@ -32,6 +32,7 @@ public class TradeRequestFragment extends Fragment {
 
     @Override
     /**
+     * defines the layout of this fragment and provides the yes and no button behavior
      * @author Tim
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
@@ -81,6 +82,7 @@ public class TradeRequestFragment extends Fragment {
     }
 
     /**
+     * tells the fragment the information needed for this trade, called whenever this fragment gets created
      * @author Tim
      * @param arg
      */

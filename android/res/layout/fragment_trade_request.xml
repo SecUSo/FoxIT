@@ -21,17 +21,6 @@
             android:background="@color/creme"
             android:id="@+id/relativeLayout2">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView3"
-                android:src="@mipmap/eichel"
-                android:maxWidth="35dp"
-                android:minHeight="35dp"
-                android:adjustViewBounds="true"
-                android:layout_alignBottom="@+id/text_amount"
-                android:layout_toEndOf="@+id/text_amount" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,17 +29,8 @@
                 android:id="@+id/text_product_type"
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@+id/text_amount"
-                android:layout_alignStart="@+id/text_amount" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="5"
-                android:id="@+id/text_amount"
-                android:layout_below="@+id/textView5"
-                android:layout_alignStart="@+id/textView5"
-                android:layout_marginBottom="15dp" />
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,6 +43,28 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="15dp"
                 android:gravity="center_vertical|center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="5"
+                android:id="@+id/text_amount"
+                android:layout_marginEnd="13dp"
+                android:layout_below="@+id/textView5"
+                android:layout_toStartOf="@+id/imageView3" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:src="@mipmap/eichel"
+                android:maxWidth="35dp"
+                android:minHeight="35dp"
+                android:adjustViewBounds="true"
+                android:layout_marginEnd="17dp"
+                android:layout_above="@+id/text_product_type"
+                android:layout_alignEnd="@+id/textView5" />
 
         </RelativeLayout>
 
@@ -83,17 +85,35 @@
                 android:singleLine="true"
                 android:minWidth="70dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="6dp" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Nein"
+                android:id="@+id/button"
+                android:singleLine="true"
+                android:minWidth="70dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Ja"
                 android:id="@+id/button_yes"
                 android:minWidth="70dp"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/button_no" />
+                style="?android:attr/buttonStyleSmall"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp" />
+
         </RelativeLayout>
 
     </RelativeLayout>

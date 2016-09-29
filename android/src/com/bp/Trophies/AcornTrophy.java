@@ -17,6 +17,7 @@ public class AcornTrophy extends TrophyObject {
  * @return true ->trophy is unlocked, false -> trophy is locked
  */
     public boolean checkScore() {
+        //unlock the trophy if the current score succeeds the needed score
         unlocked = (scoreCurrently >= scoreNeeded);
         return unlocked;
     }

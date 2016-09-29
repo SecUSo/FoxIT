@@ -46,7 +46,8 @@
             android:id="@+id/WelcomeDescription"
             android:layout_below="@id/WelcomeText"
             android:layout_marginTop="50dp"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 

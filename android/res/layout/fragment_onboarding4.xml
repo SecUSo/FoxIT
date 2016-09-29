@@ -6,7 +6,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/creme">
+        android:background="@color/creme"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:layout_width="100dp"
@@ -43,18 +45,18 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/AnalyseText"
             android:layout_marginTop="50dp"
-            android:text="Erfahre alles über die aktuellen Einstellungen auf deinem Smartphone und die Berechtigungen der Apps, die du gerade verwendest!"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="Erfahre alles über die aktuellen Einstellungen und Berechtigungen der Apps, die du gerade verwendest!"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAlignment="center" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Los geht's!"
             android:id="@+id/button_accept"
-            android:layout_below="@+id/LectionDescription"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="58dp"
-            android:background="@color/button_material_light" />
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:layout_above="@+id/imageView2"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
