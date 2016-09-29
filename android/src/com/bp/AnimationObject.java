@@ -17,24 +17,24 @@ boolean unlocked; //whether the animation is already unlocked
      * @param icon
      * @param price
      */
-    public AnimationObject(String name, String toastDescription, int icon, int price){
+    public AnimationObject(String name, String toastDescription,int icon, int price){
     this.name=name;
     this.toastDescription=toastDescription;
     this.icon=icon;
     this.price=price;
 
-    //fetch the unlocked status form ObserverSingleton where it's stored
-    ObserverSingleton o =ObserverSingleton.getInstance();
+    //fetch the unlocked status form ValueKeeper where it's stored
+    ValueKeeper o = ValueKeeper.getInstance();
     o.addTrophyIfNotContained(name,unlocked);
     unlocked=o.isAnimationUnlocked(name);
 }
 
     /**
-     * check if the animation is already unlocked by accessing ObserverSingleton
+     * check if the animation is already unlocked by accessing ValueKeeper
      * @author Tim
      */
     public void checkUnlocked(){
-    ObserverSingleton o=ObserverSingleton.getInstance();
+    ValueKeeper o= ValueKeeper.getInstance();
     unlocked=o.isAnimationUnlocked(name);
 }
 

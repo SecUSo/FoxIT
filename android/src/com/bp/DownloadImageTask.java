@@ -26,15 +26,17 @@ import java.io.InputStream;
      * load the image by url
      * @param urls the url with http up front
      * @return the Bitmap to be displayed in the imageView
-     * @author i totally did not write it by myself, do we want to lie about it? (Tim) TODO
+     * @author Tim
      */
     protected Bitmap doInBackground(String... urls) {
         String urldisplay = urls[0];
         Bitmap theImage = null;
         try {
+            //try loading the image by input stream
             InputStream in = new java.net.URL(urldisplay).openStream();
             theImage = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
+            //display message on fail
             Log.e("MyApp", e.getMessage());
             e.printStackTrace();
         }
@@ -43,6 +45,7 @@ import java.io.InputStream;
 
     /**
      * insert the loaded image in the imageView
+     * @author Tim
      */
     protected void onPostExecute(Bitmap result) {
         imageView.setImageBitmap(result);

@@ -1,13 +1,17 @@
 package com.bp;
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +19,15 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * presents and structures the user device settings
@@ -101,9 +110,12 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
         Bundle settingsBundle = new Bundle();                  //Bundle to pass arguments to the Fragment
         SettingValueFragment fragment =new SettingValueFragment();
         final PackageManager pm = context.getPackageManager();
+
                 settingsBundle.putString("settingName",settingsArray[position].substring(0,settingsArray[position].indexOf(";")));
-                settingsBundle.putString("settingValue",settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length()));
-                fragment.setArguments(settingsBundle);
+        String preValue =settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
+        settingsBundle.putString("settingValue", preValue.substring(0,preValue.indexOf(";")));
+                settingsBundle.putString("settingOriginalName",preValue.substring(preValue.indexOf(";") + 1, preValue.length()));
+        fragment.setArguments(settingsBundle);
 
 
         //add fragment so the activitys' context
@@ -164,7 +176,8 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
 
             //set the text for the setting's setting
             TextView settingSetting = (TextView) itemView.findViewById(R.id.text_setting_setting);
-            String value = settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
+            String preValue =settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
+            String value = preValue.substring(0,preValue.indexOf(";"));
             if (value.equals("0")) value = "OFF";
             if (value.equals("1")) value = "ON";
             settingSetting.setText(value);

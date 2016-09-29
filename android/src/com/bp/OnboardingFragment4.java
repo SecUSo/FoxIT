@@ -2,6 +2,7 @@ package com.bp;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.widget.Button;
 public class OnboardingFragment4 extends Fragment {
     String onboardingText; //the permission described by the fragment
     int icon;
-
+    Button analysisButton;
     @Override
     /**
      * @author Hannah
@@ -28,12 +29,14 @@ public class OnboardingFragment4 extends Fragment {
      * @author Hannah
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_onboarding4, container, false);
 
+        View view = inflater.inflate(R.layout.fragment_onboarding4, container, false);
         Button button = (Button) view.findViewById(R.id.button_accept);
+        analysisButton =button;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                analysisButton.setBackgroundColor(Color.GREEN);
                 Intent i = new Intent(getActivity(), Analysis.class);
                 startActivity(i);
             }

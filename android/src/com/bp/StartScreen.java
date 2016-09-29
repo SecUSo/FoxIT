@@ -2,16 +2,25 @@ package com.bp;
 
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.os.Bundle;
+import android.database.Cursor;
+import android.support.annotation.IntegerRes;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class StartScreen extends AppCompatActivity {
 
@@ -26,14 +35,19 @@ public class StartScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-
+       DBHandler dbHandler = new DBHandler(this,null,null,1);
+       /*  dbHandler.updateSettingDescriptions(readCSV(R.raw.settings));
+        dbHandler.updatePermissions(readCSV(R.raw.permissions));
+        dbHandler.updateLessions(readCSV(R.raw.lektionen));
+        dbHandler.updateClasses(readCSV(R.raw.classes));
+        */
         //sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
         //get Settings from DB into ListView
-        DBHandler dbHandler = new DBHandler(this,null,null,1);
         settingsArray=dbHandler.getSettingsFromDB();
+        Log.d("settingsArraylength", Integer.toString(settingsArray.length));
 
         //defining the tabs and the tab bar
         adapter=new TapAdapter(getFragmentManager(),this,settingsArray);
@@ -79,7 +93,11 @@ public class StartScreen extends AppCompatActivity {
 
 
     }
+@Override
+public void onResume(){
+    super.onResume();
 
+}
     /** Method for goToHomeButton
      * if pressed Activity Home will appear
      *
@@ -172,9 +190,33 @@ public class StartScreen extends AppCompatActivity {
                 appFrame.setVisibility(View.VISIBLE); //make the hidden appList visible again
                 mViewPager.setVisibility(View.VISIBLE);
             }
-        } else {//if no fragments exist behave normal
-            super.onBackPressed();
+        } else {//if no fragments exist go to home
+            Intent i = new Intent(getApplicationContext(),Home.class);
+            startActivity(i);
+            //super.onBackPressed();
         }
     }
+    public ArrayList readCSV(int input){
+        InputStream is = getResources().openRawResource(input);
+        ArrayList result = new ArrayList();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        try{
+            String templine;
+            while ((templine=br.readLine())!=null){
+                String[] csvrow = templine.split(";");
+                result.add(csvrow);
+            }
+        } catch (IOException e){
+            throw new RuntimeException("CSV file couldn't be read properly: "+e);
+        } finally {
+            try {
+                is.close();
+                br.close();
+            } catch (IOException e){
+                throw new RuntimeException("Input Stream couldn't be closed properly: "+e);
+            }
+        }
+        return result;
 
+    }
 }

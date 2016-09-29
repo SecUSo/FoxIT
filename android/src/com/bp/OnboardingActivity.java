@@ -1,9 +1,13 @@
 package com.bp;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.widget.RelativeLayout;
 
 public class OnboardingActivity extends AppCompatActivity {
 
@@ -23,5 +27,9 @@ public class OnboardingActivity extends AppCompatActivity {
         mViewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        SettingsActivity sa = new SettingsActivity();
+        sa.updateLessions(this);
+        sa.updatePermissions(this);
+        sa.updateSettings(this);
     }
 }

@@ -1,5 +1,4 @@
 package com.bp;
-
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 /**
  * Created by Tim on 25.06.2016.
  */
-public class AcornCountFragment extends Fragment {
+public class AcornCountFragment extends Fragment{
     View view; //the fragments view, useful for usages outside of onCreateView
     int acornCount; //amount of acorn currently on display
 
@@ -21,8 +20,8 @@ public class AcornCountFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //fetch the current acornCount from the ObserverSingleton
-        acornCount=ObserverSingleton.getInstance().getAcornCount();
+        //fetch the current acornCount from the ValueKeeper
+        acornCount= ValueKeeper.getInstance().getAcornCount();
         //and display it
         TextView text=(TextView) view.findViewById(R.id.text_acorn_count);
                 text.setText(Integer.toString(acornCount));

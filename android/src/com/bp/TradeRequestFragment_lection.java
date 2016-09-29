@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Tim on 25.06.2016.
@@ -42,22 +43,29 @@ public class TradeRequestFragment_lection extends Fragment {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+ValueKeeper o= ValueKeeper.getInstance();
+                if(price>o.getTokenCount()){
+                    //display the animation description
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Du hast nicht genug Tokens um diese Lektion zu kaufen.", Toast.LENGTH_SHORT).show();
 
-                boolean tradeSuccessful = false;
-                Activity activity = getActivity();
-                //call the purchase method of LectionListActivity
-                if (activity instanceof LectionListActivity) {
-                    LectionListActivity lectionListActivity = (LectionListActivity) activity;
-                    tradeSuccessful = lectionListActivity.purchase(articleOfCommerce);
+
+               }else {
+                    boolean tradeSuccessful = false;
+                    Activity activity = getActivity();
+                    //call the purchase callClassMethod of LectionListActivity
+                    if (activity instanceof LectionListActivity) {
+                        LectionListActivity lectionListActivity = (LectionListActivity) activity;
+                        tradeSuccessful = lectionListActivity.purchase(articleOfCommerce);
+                    }
+
+                    //if the trade was successful change the tokenCount
+                    if (tradeSuccessful) {
+                        MethodFactory m = new MethodFactory(getActivity());
+                        Method changeTokenCount = m.createMethod("changeTokenCount");
+                        changeTokenCount.callClassMethod("-" + Integer.toString(price));
+                    }
                 }
-
-                //if the trade was successful change the tokenCount
-                if (tradeSuccessful) {
-                    MethodFactory m = new MethodFactory(getActivity());
-                    Method changeTokenCount = m.createMethod("changeTokenCount");
-                    changeTokenCount.method("-" + Integer.toString(price));
-                }
-
                 //remove this fragment after the trade is finished
                 getActivity().getFragmentManager().beginTransaction().remove(thisFragment).commit();
             }

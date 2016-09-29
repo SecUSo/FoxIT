@@ -1,26 +1,33 @@
 package com.bp;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+
 /**
  * Created by Ich on 25.06.2016.
  */
-public class PermissionDescriptionFragment extends Fragment {
+public class PermissionDescriptionFragment extends Fragment{
     String permissionName; //the permission described by the fragment
     String shortPermissionName; //english permission name without the file structure up front
     int appRating;

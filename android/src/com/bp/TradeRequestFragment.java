@@ -16,7 +16,7 @@ public class TradeRequestFragment extends Fragment {
     View view; //the fragments view, useful for usages outside of onCreateView
     int price = 0; //the price of the article of commerce
     String articleOfCommerce; //the name of the item on display
-    Fragment thisFragment; //this fragment useful to be called in another method
+    Fragment thisFragment; //this fragment useful to be called in another callClassMethod
 
     /**
      * @author Tim
@@ -46,7 +46,7 @@ public class TradeRequestFragment extends Fragment {
 
                 boolean tradeSuccessful = false;
                 Activity activity = getActivity();
-                //call the purchase method of the current activity
+                //call the purchase callClassMethod of the current activity
                 if (activity instanceof LectionListActivity) {
                     LectionListActivity lectionListActivity = (LectionListActivity) activity;
                     tradeSuccessful = lectionListActivity.purchase(articleOfCommerce);
@@ -61,7 +61,7 @@ public class TradeRequestFragment extends Fragment {
                 if (tradeSuccessful) {
                     MethodFactory mf = new MethodFactory(getActivity());
                     Method changeAcornCount = mf.createMethod("changeAcornCount");
-                    changeAcornCount.method("-" + Integer.toString(price));
+                    changeAcornCount.callClassMethod("-" + Integer.toString(price));
                 }
                 //remove this fragment after the trade is finished
                 getActivity().getFragmentManager().beginTransaction().remove(thisFragment).commit();

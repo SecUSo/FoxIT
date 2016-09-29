@@ -12,15 +12,20 @@ import android.database.Cursor;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,7 +51,7 @@ public class Analysis extends AppCompatActivity {
         //sets our toolbar as the action bar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-
+        analyse();
         // Timer: Open StartScreen after 7 Seconds
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
@@ -55,27 +60,13 @@ public class Analysis extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), StartScreen.class);
                 startActivity(i);
             }
-        }, 7000L);
+        }, 3000L);
 
-        dbHandler = new DBHandler(this, null, null, 1);
-        //dbHandler.getWritableDatabase().delete(dbHandler.TABLE_APPS, "1", null);
+    }
 
-        // Get all apps
-        getALL_APPS();
-
-        // Get all settings
-        Uri uri_global = Settings.Global.CONTENT_URI;
-        String[] proj_global = new String[]{Settings.Global.NAME, Settings.Global.VALUE};
-        Uri uri_secure = Settings.Secure.CONTENT_URI;
-        String[] proj_secure = new String[]{Settings.Secure.NAME, Settings.Secure.VALUE};
-        ContentValues[] firstArray = getSETTINGS(uri_global, proj_global);
-        ContentValues[] secondArray = getSETTINGS(uri_secure, proj_secure);
-        ContentValues[] resultArray = combineArrays(firstArray, secondArray);
-
-        dbHandler.addParamColumn(resultArray);
-
-        // insert German names
-       // dbHandler.insertGoodNames();
+    @Override
+    public void onResume(){
+        super.onResume();
     }
 
     /**
@@ -85,9 +76,9 @@ public class Analysis extends AppCompatActivity {
      * @return result a new array containing the content of input arrays
      * @author Noah
      */
-    public static ContentValues[] combineArrays(ContentValues[] first, ContentValues[] second) {
+    public static ContentValues[] combineArraysP2(ContentValues[] first, ContentValues[] second) {
         int length = first.length + second.length;
-        ContentValues[] result = new ContentValues[length];
+        ContentValues[] result = new ContentValues[length+2];
         System.arraycopy(first, 0, result, 0, first.length);
         System.arraycopy(second, 0, result, first.length, second.length);
         return result;
@@ -100,6 +91,7 @@ public class Analysis extends AppCompatActivity {
      * @author Noah
      */
     public void getALL_APPS() {
+        DBHandler dbHandler = new DBHandler(this,null,null,1);
         final PackageManager pm = getPackageManager();
 
         // get a list of installed apps.
@@ -153,33 +145,42 @@ public class Analysis extends AppCompatActivity {
      * 66     -exception
      * @author Tim
      */
-    private int getPASSWORT_QUALITY() {
+    private ContentValues getPASSWORT_QUALITY() {
+        int value;
+        String name;
+        ContentValues cv = new ContentValues(3);
 
         //In case of APK != M there is a LOCK_PATTERN_UTILS
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             String LOCK_PATTERN_UTILS = "com.android.internal.widget.LockPatternUtils";
+            name="lock_pattern_utils";
 
             try {
                 Class<?> lockPatternUtilsClass = Class.forName(LOCK_PATTERN_UTILS);
                 Object lockPatternUtils = lockPatternUtilsClass.getConstructor(Context.class).newInstance(this);
                 Method method = lockPatternUtilsClass.getMethod("getActivePasswordQuality");
                 int lockProtectionLevel = Integer.valueOf(String.valueOf(method.invoke(lockPatternUtils)));
-                return lockProtectionLevel;
+                value= lockProtectionLevel;
                 // Then check if lockProtectionLevel == DevicePolicyManager.TheConstantForWhicheverLevelOfProtectionYouWantToEnforce, and return true if the check passes, false if it fails
             } catch (Exception ex) {
                 ex.printStackTrace();
-                return 66;
+                value= 66;
             }
         }
         //In case of APK = M there is a KeyguardManager
         else {
+            name="keyguard_manager";
             KeyguardManager a = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
             if (a.isDeviceSecure()) {
-                return 1;
+                value= 1;
             } else {
-                return 0;
+                value= 0;
             }
         }
+        cv.put(DBHandler.COLUMN_SETTING,name);
+        cv.put(DBHandler.COLUMN_TYPE,2);
+        cv.put(DBHandler.COLUMN_INITIAL,value);
+        return cv;
     }
 
     /**
@@ -192,10 +193,12 @@ public class Analysis extends AppCompatActivity {
      * 6- API 23: An aber keine genauen Angaben
      * @author Tim
      */
-    public int getLOCATION_MODE() {
+    public ContentValues getLOCATION_MODE() {
         int locationMode = 0;
+        String name;
         // If APK < KITKAT Settings.Secure.LOCATION_PROVIDERS_ALLOWED
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            name = "location_providers_allowed";
 
             String providers = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
             if (TextUtils.isEmpty(providers)) {
@@ -208,6 +211,7 @@ public class Analysis extends AppCompatActivity {
         }
         // If APK >= KITKAT Settings.Secure.LOCATION_MODE
         else {
+            name= "location_mode";
 
             try {
                 locationMode = Settings.Secure.getInt(this.getContentResolver(),
@@ -218,7 +222,11 @@ public class Analysis extends AppCompatActivity {
             }
         }
         Log.d("MyApp", Integer.toString(locationMode));
-        return locationMode;
+        ContentValues cv = new ContentValues(3);
+        cv.put(DBHandler.COLUMN_SETTING, name);
+        cv.put(DBHandler.COLUMN_INITIAL, locationMode);
+        cv.put(DBHandler.COLUMN_TYPE,2);
+        return cv;
     }
 
 
@@ -278,5 +286,26 @@ public class Analysis extends AppCompatActivity {
         return contentValues;
     }
 
+    private void analyse(){
+        dbHandler = new DBHandler(this, null, null, 1);
+
+        // Get all apps
+        getALL_APPS();
+
+        // Get all settings
+        Uri uri_global = Settings.Global.CONTENT_URI;
+        String[] proj_global = new String[]{Settings.Global.NAME, Settings.Global.VALUE};
+        Uri uri_secure = Settings.Secure.CONTENT_URI;
+        String[] proj_secure = new String[]{Settings.Secure.NAME, Settings.Secure.VALUE};
+        ContentValues[] firstArray = getSETTINGS(uri_global, proj_global);
+        ContentValues[] secondArray = getSETTINGS(uri_secure, proj_secure);
+        ContentValues[] resultArray = combineArraysP2(firstArray, secondArray);
+        resultArray[resultArray.length-2]=getLOCATION_MODE();
+        resultArray[resultArray.length-1]=getPASSWORT_QUALITY();
+
+        dbHandler.addParamColumn(resultArray);
+
+
+    }
 
 }

@@ -1,5 +1,4 @@
 package com.bp;
-
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 /**
  * Created by Ich on 25.06.2016.
  */
-public class TokenCountFragment extends Fragment {
+public class TokenCountFragment extends Fragment{
     View view; //the fragments view, useful for usages outside of onCreateView
     int tokenCount; //amount of token currently on display
 
@@ -21,8 +20,8 @@ public class TokenCountFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //fetch the current tokenCount from the ObserverSingleton
-        tokenCount=ObserverSingleton.getInstance().getTokenCount();
+        //fetch the current tokenCount from the ValueKeeper
+        tokenCount= ValueKeeper.getInstance().getTokenCount();
         //and display it
         TextView text=(TextView) view.findViewById(R.id.text_token_count);
                 text.setText(Integer.toString(tokenCount));

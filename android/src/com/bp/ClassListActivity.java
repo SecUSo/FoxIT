@@ -52,8 +52,8 @@ public class ClassListActivity extends AppCompatActivity implements AdapterView.
     String[] classList = {};
 
     String[] firstLection = {"[name~Meine Einstellung gegenüber Privatsphäre][0~type~text'text~Hallo! \nIn dieser Lektion geht es darum, ein bisschen etwas über Privatsphäre am Smartphone zu erfahren und erste Impulse für einen besseren Umgang mit Apps und Einstellungen zu setzten. Wir starten damit, herauszufinden was Privatsphäre für dich ist.]" +
-            "[1~type~question'text~Also: \nInteressiert dich Privatsphäre?'buttonText~Ja'method~slideSwitch'methodParameter~2'buttonText2~Nein'method2~'methodParameter2~]" +
-            "[2~type~question'text~Sehr gut! \n Hast du schon einmal aktiv etwas für deine Privatsphäre am Smartphone gemacht?’buttonText~Ja’method~’methodParameter~’buttonText2~Nein’method2~’methodParameter2~]"+"[solved~false]",
+            "[1~type~question'text~Also: \nInteressiert dich Privatsphäre?'buttonText~Ja'callClassMethod~slideSwitch'methodParameter~2'buttonText2~Nein'method2~'methodParameter2~]" +
+            "[2~type~question'text~Sehr gut! \n Hast du schon einmal aktiv etwas für deine Privatsphäre am Smartphone gemacht?’buttonText~Ja’callClassMethod~’methodParameter~’buttonText2~Nein’method2~’methodParameter2~]"+"[solved~false]",
             "[name~Kleines Quiz][0~type~quiz4'text~Sollte man am Smartphone eine Bildschirmsperre einrichten?’answer1text~Braucht man nicht’answer1solution~false’answer2text~Entsperrmuster, damit bin ich sicher’answer2solution~false’answer3text~Hat jemand anderes mein Handy, kann ich eh nichts mehr tun. Nein’answer3solution~false’answer4text~Zahlencode oder Passwort, nur dann bin ich sicher’answer4solution~true’successText~Das stimmt! Nur mit Passwort oder Zahlencode ist man größtenteils gesichert!’failureText~Eher nicht… Um dein Smartphone zu sichern solltest du auf jeden Fall einen Zahlencode oder ein Passwort verwenden!’points~10][solved~false]"
     };
 

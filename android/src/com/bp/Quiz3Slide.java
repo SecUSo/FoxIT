@@ -108,7 +108,7 @@ public class Quiz3Slide extends QuizSlide {
         if(answer1true==box1.isChecked()&&answer2true==box2.isChecked()&&answer3true==box3.isChecked()){
         Toast.makeText(getActivity(),rightAnswer, Toast.LENGTH_LONG).show();
             MethodFactory factory=new MethodFactory(getActivity());
-            factory.createMethod("scoreAdd").method(points);
+            factory.createMethod("scoreAdd").callClassMethod(points);
 
         }else{
             Toast.makeText(getActivity(), wrongAnswer,

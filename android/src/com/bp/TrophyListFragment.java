@@ -116,7 +116,7 @@ public class TrophyListFragment extends Fragment {
     /**
      * defines the specifications of the GridView
      *
-     * @param
+     * @param savedInstanceState
      * @author Tim
      */
     private class TrophyViewAdapter extends BaseAdapter {
@@ -160,8 +160,7 @@ public class TrophyListFragment extends Fragment {
                 } else {
                     textView.setText("???");
                 }
-                TextView trophyName = (TextView) view.findViewById(R.id.text_trophy_name);
-                Log.d("Trophy Absturz", Boolean.toString(trophyName==null));
+                TextView trophyName = (TextView) gridView.findViewById(R.id.text_trophy_name);
                 trophyName.setText(trophyArray[position].getName());
 
                 // set trophy image

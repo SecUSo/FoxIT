@@ -14,5 +14,5 @@ public abstract class Method {
     }
 
     //the generic methodLeft to be overwritten in the childclasses
-    public abstract void method(String s);
+    public abstract void callClassMethod(String s);
 }

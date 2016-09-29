@@ -5,24 +5,26 @@ import java.util.HashMap;
 /**
  * Created by Ich on 12.09.2016.
  */
-//is going to store all the user's scores
-public class ObserverSingleton {
+//stores all the user's scores
+public class ValueKeeper {
+//this class implements the singleton design pattern therefor all instances are to be created by calling getInstance()
 
-    //it implements the singleton design pattern, therefor the class exists only once
-    static ObserverSingleton instance;
+
+    static ValueKeeper instance;
     private int acornCount=0; //amount of acorn the player collected
-    private int tokenCount=0;
-    private ObserverSingleton() {};
+    private int tokenCount=0; //amount of token the player collected
+    private ValueKeeper() {};
     HashMap<String,Boolean> animationList =new HashMap<>();
+    HashMap<String,String> profilList=new HashMap<>();
 
     /**
      * create a new instance of the class at first call, return this instance at every other call
      * @author Tim
      * @return the instance of this class
      */
-    public static ObserverSingleton getInstance(){
+    public static ValueKeeper getInstance(){
         if(instance==null){
-            instance=new ObserverSingleton();
+            instance=new ValueKeeper();
         }
         return instance;
     }
@@ -82,5 +84,13 @@ public class ObserverSingleton {
     public int getTokenCount(){
         return tokenCount;
     }
+
+    public void setProfilList(ProfilListObject[] profilList){
+        for(ProfilListObject p:profilList){
+            this.profilList.put(p.getInputType(),p.getInput());
+        }
+
+    }
+
 
 }

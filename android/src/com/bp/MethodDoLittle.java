@@ -6,8 +6,8 @@ package com.bp;
 public class MethodDoLittle extends Method{
 
     @Override
-    /**method to be called if the method description in the lectionDescribtion is wrong
+    /**callClassMethod to be called if the callClassMethod description in the lectionDescribtion is wrong
      * @author Tim
      */
-    public void method(String neverUsed){}
+    public void callClassMethod(String neverUsed){}
 }

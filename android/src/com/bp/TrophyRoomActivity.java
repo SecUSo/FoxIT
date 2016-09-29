@@ -1,8 +1,8 @@
 package com.bp;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -48,7 +48,7 @@ public class TrophyRoomActivity extends AppCompatActivity {
      * @return if the purchase was successful
      */
     public boolean purchase(String articleOfCommerce) {
-        ObserverSingleton o = ObserverSingleton.getInstance();
+        ValueKeeper o = ValueKeeper.getInstance();
         //reloads the gridView to be up to date
         animationListFragment.refreshAllAnimations();
         //unlock the animation

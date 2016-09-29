@@ -12,24 +12,26 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.util.Pair;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Set;
 import java.util.TimeZone;
 
-public class DBHandler extends SQLiteOpenHelper {
+public class DBHandler extends SQLiteOpenHelper{
 
     //DB-Version is updated, when changes in structur apply
-    private static final int DB_VERSION = 22;
+    private static final int DB_VERSION = 27;
     //table-names
     private static final String TABLE_APPS = "apps";
     private static final String TABLE_LESSIONS = "lessions";
     private static final String TABLE_CLASSES = "classes";
     private static final String TABLE_PERMISSIONS = "permissions";
     private static final String TABLE_SETTINGS = "rawdata";
+    private static final String TABLE_PERSONAL = "personalstuff";
     //column-names
     static final String COLUMN_APPNAME = "name";
     static final String COLUMN_PERMISSIONS = "permissions";
@@ -39,6 +41,7 @@ public class DBHandler extends SQLiteOpenHelper {
     static final String COLUMN_INITIAL = "initial";
     private static final String COLUMN_GOODNAME = "propername";
     private static final String COLUMN_SETTINGDESCRIPTION = "sdescription";
+    private static final String COLUMN_LATEST ="latestvalue";
     //type: for readout - 0=String, 1=BOOLEAN, 2=int
     static final String COLUMN_TYPE = "type";
 
@@ -47,7 +50,6 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_COURSE = "course";
     //0=not available yet; 1=not yet read; 2=not yet finished; 3=finished
     private static final String COLUMN_STATUS = "status";
-    private static final String COLUMN_LEVEL = "level";
     private static final String COLUMN_DELAY = "delay";
     private static final String COLUMN_FREETIME = "freeat";
     private static final String COLUMN_LECTURETYPE = "ltype";
@@ -60,6 +62,9 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_PERMISSIONDESCRIPTION = "pdescription";
     private static final String COLUMN_PERMISSIONNICENAME = "propername";
     private static final String COLUMN_PERMISSIONLEVEL = "plevel";
+
+    private static final String COLUMN_KEY ="key";
+    private static final String COLUMN_VALUE = "value";
     //file-name
     private static final String DB_NAME = "rawdata.db";
 
@@ -86,6 +91,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_TYPE + " INTEGER DEFAULT 0, " +
                 COLUMN_INITIAL + " TEXT DEFAULT '-99', " +
                 COLUMN_GOODNAME + " TEXT, " +
+                COLUMN_LATEST + " TEXT DEFAULT '-99', " +
                 COLUMN_SETTINGDESCRIPTION + " TEXT DEFAULT 'hier fehlt leider eine Beschreibung. Du kannst gerne eine anfordern!'" +
                 ");";
         db.execSQL(query);
@@ -102,7 +108,6 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(query3);
         String query4 = "CREATE TABLE "+ TABLE_LESSIONS + "(" +
                 COLUMN_LECTURENAME + " TEXT PRIMARY KEY, " +
-                COLUMN_LEVEL + " INTEGER, " +
                 COLUMN_STATUS + " INTEGER, "+
                 COLUMN_COURSE + " TEXT, " +
                 COLUMN_CONTENT + " TEXT, " +
@@ -119,6 +124,11 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_PERMISSIONLEVEL + " INTEGER DEFAULT -1"+
                 ");";
         db.execSQL(query5);
+        String query6= "CREATE TABLE "+ TABLE_PERSONAL+"("+
+                COLUMN_KEY + " TEXT PRIMARY KEY, "+
+                COLUMN_VALUE+ " TEXT"+
+                ");";
+        db.execSQL(query6);
 
     }
 
@@ -136,6 +146,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ TABLE_CLASSES);
         db.execSQL("DROP TABLE IF EXISTS "+ TABLE_LESSIONS);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_PERMISSIONS);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_PERSONAL);
         onCreate(db);
     }
 
@@ -155,73 +166,62 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Inserts a whole Array of Settings to the DB if it's empty or creates a new Column with the
+     * current time to it and adds the value to that. In both cases the 'latest' column ist updated
+     * with the current value
+     * @param values
+     */
     public void addParamColumn(ContentValues[] values){
         SQLiteDatabase db = getWritableDatabase();
+        //Cursor to count the current Entries in the table
         Cursor count = db.rawQuery("SELECT COUNT(*) AS count FROM "+ TABLE_SETTINGS +";",null);
         count.moveToFirst();
+        //Here should an output for the user happen instead of the Log but with similiar values
         Log.d("DBHandler","PARAM-Column Länge von values:"+values.length);
         int i=0;
-
-
+        //If there are Entries in the table already
         if (count.getInt(0)>0){
+            //output for the user, information of existing entries
             Log.d("DBHandler","Rawdata hat einträge");
             count.close();
+            //constructing a name for the new column
             SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss", Locale.GERMANY);
             String date = df.format(Calendar.getInstance(TimeZone.getDefault()).getTime());
-
-
+            //adding the new column
             db.execSQL("ALTER TABLE "+ TABLE_SETTINGS +" ADD COLUMN '(" +date+ ")' TEXT;");
+            //updating the new and the latest column with the new values in their respective row
             for (ContentValues value:values
                  ) {
                 if (value!=null){
                     db.execSQL("UPDATE "+ TABLE_SETTINGS +" SET '("+date+")' = \""+value.getAsString(COLUMN_INITIAL)
-                            +"\" WHERE "+ COLUMN_SETTING +" = '"+value.getAsString(COLUMN_SETTING)+"'");
+                            +"\", "+COLUMN_LATEST+" = \'"+value.getAsString(COLUMN_INITIAL)+"\' WHERE "+ COLUMN_SETTING +" = '"+value.getAsString(COLUMN_SETTING)+"'");
+
                     i++;
                 }
-
             }
 
         } else{
+            //here should output happen
             Log.d("DBHandler","Rawdata hat keine Einträge");
             count.close();
+            //inserting the contentValues directly (as they are all new) and updating the latest column
             for (ContentValues value:values
                  ) {
                 if (value!=null){
                     db.insert(TABLE_SETTINGS,null, value);
+                    db.execSQL("UPDATE "+TABLE_SETTINGS+" SET "+COLUMN_LATEST+" = \'"+value.getAsString(COLUMN_INITIAL)+"\' WHERE "+COLUMN_SETTING+" = '"+value.getAsString(COLUMN_SETTING)+"'");
                     i++;
                 }
 
             }
         }
+        //output for user please
         Log.d("DBHandler","Rawdata eingefügt: "+i);
         db.close();
 
     }
 
-    /**
-     * function to remove a setting from the rawdata-table
-     * @param name name of setting to be deleted
-     */
-    public void removeParameter(String name){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_SETTINGS + " WHERE " + COLUMN_SETTING + "=\"" + name + "\";");
-        db.close();
-    }
-
-    /**
-     * function to add an app to the app-database
-     * @param appname name of the app-package to be added
-     * @param permissions permissions in the form of semicolon-parted string
-     * @param description description, which was retrieved with the app
-     */
-    public void addApp(String appname, String permissions, String description){ ContentValues values = new ContentValues();
-        values.put(COLUMN_APPNAME,appname);
-        values.put(COLUMN_PERMISSIONS,permissions);
-        values.put(COLUMN_APPDESCRIPTION,description);
-        SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_APPS, null, values);
-        db.close();
-    }
 
     /**
      * function to add apps in a whole list of ContentValues
@@ -229,20 +229,23 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void addAppColumn(ContentValues[] values){
         SQLiteDatabase db = getWritableDatabase();
+        //Cursor for counting the entries
         Cursor count = db.rawQuery("SELECT COUNT(*) AS count FROM "+ TABLE_APPS+";",null);
         count.moveToFirst();
+        //output for User here
         Log.d("DBHandler","APP-Column Länge von values:"+values.length);
         int i=0;
-
-
+        //if there are entries in the table
         if (count.getInt(0)>0){
+            //output for User here
             Log.d("DBHandler","Apps hat einträge");
             count.close();
+            //creating the name for the new column
             SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss", Locale.GERMANY);
             String date = df.format(Calendar.getInstance(TimeZone.getDefault()).getTime());
-
-
+            //creating the new column
             db.execSQL("ALTER TABLE "+TABLE_APPS+" ADD COLUMN '(" +date+ ")' TEXT;");
+            //updating the new column with an active tag to signalise, that it's still installed
             for (ContentValues value:values
                     ) {
                 if (value!=null){
@@ -250,33 +253,23 @@ public class DBHandler extends SQLiteOpenHelper {
                     i++;
                 }
             }
-
         } else{
+            //output for User here
             Log.d("DBHandler","Apps hat keine Einträge");
             count.close();
+            //inserting all the Apps with their values into the table
             for (ContentValues value:values
                     ) {
                 if (value!=null){
                     db.insert(TABLE_APPS,null, value);
                     i++;
                 }
-
             }
         }
+        //output for User here
         Log.d("DBHandler","Apps eingefügt: "+i);
         db.close();
 
-    }
-
-
-    /**
-     * function to remove an app from the app-table
-     * @param name name (primary key) of app to be removed
-     */
-    public void removeApp(String name){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_APPS + " WHERE " + COLUMN_APPNAME + "=\"" + name + "\";");
-        db.close();
     }
 
     /**
@@ -377,7 +370,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 db.execSQL("UPDATE "+ TABLE_LESSIONS +" SET "+COLUMN_CONTENT+" = \'"+lessionString+"\', "+COLUMN_COURSE+" = \'"+lessionArray[0]+
                         "\' WHERE "+COLUMN_LECTURENAME+" = \'"+lessionArray[1]+"\';");
             } else {
-                db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\""+lessionArray[1]+"\", \""+lessionArray[2]+"\", \""+lessionArray[4]+"\", \""+lessionArray[0]+"\", \""+lessionString+"\", \""+lessionArray[3]+"\", 1, \""+time+"\", \""+lessionArray[5]+"\");");
+                db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\""+lessionArray[1]+"\", \""+lessionArray[3]+"\", \""+lessionArray[0]+"\", \""+lessionString+"\", \""+lessionArray[2]+"\", 1, \""+time+"\", \""+lessionArray[4]+"\");");
             }
         }
 
@@ -437,10 +430,11 @@ public class DBHandler extends SQLiteOpenHelper {
         StringBuffer sb = new StringBuffer();
             sb.append("[name~" + lessionArray[1]+"]");
             //iterates over the parts of the Array which contains the actual slides
-            for(int i=6;i<lessionArray.length;i++){
+            for(int i=5;i<lessionArray.length;i++){
                 String[] slides = lessionArray[i].split("_");
                 slides[0]=slides[0].toLowerCase();
-                    sb.append("[" + (i - 6) + "~type~" + slides[0] + "\'");
+                sb.append("[" + (i - 5) + "~type~" + slides[0] + "\'");
+                //puts the input in the desired form depending on the type of slide it is
                     switch (slides[0]) {
                         case "text":
                             sb.append("text~" + slides[1]);
@@ -464,6 +458,7 @@ public class DBHandler extends SQLiteOpenHelper {
                         default:
                             sb.append("text~" + slides[1]);
                     }
+                //appending the next and back functions, if it is found
                     if (lessionArray[i].contains("next")) {
                         sb.append("\'next~" + lessionArray[i].substring(lessionArray[i].lastIndexOf("next") + 4, lessionArray[i].lastIndexOf("next") + 5));
                     }
@@ -495,13 +490,14 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * gives all Lections that belong to the specified class and are activated
+     * @author Noah
      * @param courseName identifier of the class
      * @return ArrayList of LectionObjects
      */
     public ArrayList<LectionObject> getLectionsFromDB(String courseName){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+ TABLE_LESSIONS +" WHERE "
-                +COLUMN_COURSE+"=\'"+courseName+"\' AND "+COLUMN_STATUS+" IS NOT 0",null);
+                +COLUMN_COURSE+"=\'"+courseName+"\' AND "+COLUMN_STATUS+" IS NOT -99",null);
         ArrayList<LectionObject> result = new ArrayList<LectionObject>();
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
@@ -521,181 +517,11 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    private Pair<String, Integer> individualSetting(String name) {
-        switch (name){
-            case "accessibility_display_magnification_auto_update": return (new Pair<>("Eingabehilfe: Display-Zoom kontinuierlich",1));
-            case "accessibility_display_magnification_enabled" : return (new Pair<>("Eingabehilfe: Display-Zoom",1));
-            case "accessibility_display_magnification_scale" : return (new Pair<>("Eingabehilfe: Display-Zoom-Faktor",2));
-            case "accessibility_script_injection": return (new Pair<>("Eingabehilfe: individuelle Skripte einfügen",1));
-            case "airplane_mode_on": return (new Pair<>("Flugmodus",1));
-            case "airplane_mode_radios": return (new Pair<>("Bei Flugmodus deaktivierte Funktionen",0));
-            case "accessibility_script_injection_url": return (new Pair<>("Eingabehilfe: Skript-Adresse",0));
-            case "accessibility_web_content_key_bindings": return (new Pair<>("Eingabehilfe: Tastenzuweisung bei Webinhalten",0));
-            case "airplane_mode_toggleable_radios": return (new Pair<>("Bei Flugmodus schaltbare Funktionen",0));
-            case "android_id": return (new Pair<>("Android ID (systemeigen)",2));
-            case "app_idle_constants": return (new Pair<>("Erlaubter Leerlauf einer App",0));
-            case "assisted_gps_enabled": return (new Pair<>("Netzwerkunterstütztes GPS",1));
-            case "audio_safe_volume_state": return (new Pair<>("Anzeige von Hörschädigungshinweis",1));
-            case "auto_time": return (new Pair<>("Automatischer Abruf von Zeit/Datum",1));
-            case "auto_time_zone": return (new Pair<>("Automatischer Abruf der Zeitzone",1));
-            case "bluetooth_on": return (new Pair<>("Bluetooth",1));
-            case "call_auto_retry": return (new Pair<>("Automatische Wahlwiederholung",1));
-            case "car_dock_sound": return (new Pair<>("Auto-Dockingstations-Ton",0));
-            case "car_undock_sound": return (new Pair<>("Auto-Dockingstation-Endton",0));
-            case "cdma_cell_broadcast_sms": return (new Pair<>("SMS-Broadcast per CDMA erhalten",1));
-            case "backup_enabled": return (new Pair<>("System-Backup aktiviert",1));
-            case "data_roaming": return (new Pair<>("Daten-Roaming",1));
-            case "default_install_location": return (new Pair<>("Standard App-Speicherort",0));
-            case "desk_dock_sound": return (new Pair<>("Dockingstation-Anschlusston",0));
-            case "desk_undock_sound": return (new Pair<>("Dockingstation-Trennton",0));
-            case "device_name": return (new Pair<>("Gerätename",0));
-            case "device_provisioned": return (new Pair<>("Sperre bei mehreren Nutzern",1));
-            case "dock_audio_media_enabled": return (new Pair<>("Medienwiedergabe über Dockingstation",1));
-            case "dock_sounds_enabled": return (new Pair<>("Tonwiedergabe über Dockingstation",1));
-            case "double_tap_to_wake": return (new Pair<>("Aufwecken des Bildschirms durch doppeltes Tippen",1));
-            case "dropbox:data_app_anr": return (new Pair<>("Dropbox-ANR",0));
-            case "dropbox:data_app_crash": return (new Pair<>("Dropbox-Crash",0));
-            case "dropbox:data_app_wtf": return (new Pair<>("Dropbox-WTF",0));
-            case "emergency_tone": return (new Pair<>("Notfall-Ton",1));
-            case "facelock_detection_threshold": return (new Pair<>("Gesichtsentsperrungsschwelle",0));
-            case "facelock_liveliness_recognition_threshold": return (new Pair<>("Gesichtsentsperrungsschwelle bei Bewegung",0));
-            case "facelock_max_center_movement": return (new Pair<>("Gesichtsentsperrungsschwelle bei Bewegung in der Mitte",0));
-            case "guest_user_enabled": return (new Pair<>("Gastprofil aktiviert",1));
-            case "heads_up_notifications_enabled": return (new Pair<>("Heads-up Benachrichtigungen",1));
-            case "immersive_mode_confirmations": return (new Pair<>("Bestätigung für Vollbildmodus",1));
-            case "input_methods_subtype_history": return (new Pair<>("Historie für Eingabemethoden",1));
-            case "install_non_market_apps": return (new Pair<>("Apps unbekannter Quellen installieren",1));
-            case "locationPackagePrefixWhitelist": return (new Pair<>("Erlaubnisliste für Ortungsprogramm",0));
-            case "locationPackagePrefixBlacklist": return (new Pair<>("Ausschlussliste für Ortungsprogramm",0));
-            case "location_providers_allowed": return (new Pair<>("aktivierte Ortungsdienste",0));
-            case "lock_screen_allow_private_notifications": return (new Pair<>("Sensible Benachrichtigungsinhalte auf dem Sperrbildschirm",1));
-            case "lock_screen_owner_info_enabled": return (new Pair<>("Besitzerinformationen auf Sperrbildschirm",1));
-            case "lock_sound": return (new Pair<>("Ton bei Bildschirmsperre",0));
-            case "lockscreen.disabled": return (new Pair<>("Sperrbildschirm deaktiviert",1));
-            case "lockscreen.options": return (new Pair<>("aktivierte Sperrbildschirm-Optionen",0));
-            case "long_press_timeout": return (new Pair<>("Erkennung von gedrückt halten (ms)",2));
-            case "low_battery_sound": return (new Pair<>("Ton bei niedrigem Akkustand",0));
-            case "masterLocationPackagePrefixBlacklist": return (new Pair<>("Ausschlussliste für ",0));
-            case "masterLocationPackagePrefixWhitelist": return (new Pair<>("Erlaubnisliste für ",0));
-            case "adb_enabled": return (new Pair<>("Android Debug Funktion",1));
-            case "bluetooth_adress": return (new Pair<>("Bluetooth-Adresse",0));
-            case "bluetooth_name": return (new Pair<>("Bluetooth Anzeigename",0));
-            case "ble_scan_always_enabled": return (new Pair<>("Bluetooth Low Energy Scan",1));
-            case "bluetooth_addr_valid": return (new Pair<>("Valide Bluetooth-Adresse",1));
-            case "development_settings_enabled": return (new Pair<>("Entwickleroptionen",1));
-            case "doze_enabled": return (new Pair<>("Atmungseffekt bei ausgeschaltetem Bildschirm und Nachricht",1));
-            case "enable_accessability_global_gesture_enabled": return (new Pair<>("Eingabehilfe: Gesten überall",1));
-            case "lock_screen_lock_after_timeout": return (new Pair<>("Sperrbildschirm aktivierung nach (ms)",2));
-            case "low_power_trigger_level": return (new Pair<>("Kritischer Akkustand bei (%)",2));
-            case "mobile_data": return (new Pair<>("Mobiler Datenverkehr",1));
-            case "mock_location": return (new Pair<>("Falsche Standorte",1));
-            case "mode_ringer": return (new Pair<>("Benachrichtigungs-Modus",2));
-            case "multi_sim_data_call": return (new Pair<>("VoIP mit MultiSIM",1));
-            case "multi_sim_sms": return (new Pair<>("SMS mit MultiSIM",1));
-            case "multi_sim_sms_prompt": return (new Pair<>("Abfrage bei SMS mit MultiSIM",1));
-            case "multi_sim_voice_call": return (new Pair<>("Anrufe mit MultiSIM",1));
-            case "netstats_enabled": return (new Pair<>("Netzwerkstatistiken",1));
-            case "network_scoring_provisioned": return (new Pair<>("Beschränkte Netzwerkzählung",1));
-            case "nfc_default_route": return (new Pair<>("NFC Standard Modus",0));
-            case "package_verifier_enable": return (new Pair<>("App-Verifizierung",1));
-            case "package_verifier_user_consent": return (new Pair<>("App-Verifizierung nach Nutzer-Einwilligung",1));
-            case "power_sounds_enabled": return (new Pair<>("Töne für Akkustand und Laden",1));
-            case "preferred_network_mode1": return (new Pair<>("Bevorzugte mobile Netze",2));
-            case "preferred_network_mode": return (new Pair<>("Bevorzugte mobile Netze",2));
-            case "screensaver_activate_on_dock": return (new Pair<>("Bildschirmschoner in Dockingstation aktivieren",1));
-            case "screensaver_activate_on_sleep": return (new Pair<>("Bildschirmschoner bei Inaktivität aktivieren",1));
-            case "screensaver_enabled": return (new Pair<>("Bildschirmschoner",1));
-            case "selected_input_method_subtype": return (new Pair<>("Untereinstellung der aktuellen Eingabemethode",2));
-            case "send_action_app_error": return (new Pair<>("Einen App-Fehler melden",1));
-            case "serial_blacklist": return (new Pair<>("Ausschlussliste für Seriennummern",0));
-            case "set_install_location": return (new Pair<>("Den App-Installationsort setzen",1));
-            case "show_note_about_notification_hiding": return (new Pair<>("Nachricht bei Verstecken von Benachrichtigungen anzeigen",1));
-            case "show_processes": return (new Pair<>("Laufende Prozesse anzeigen",1));
-            case "sleep_timeout": return (new Pair<>("Verzögerung, bis der Prozessor in den Schlaf-Modus geht",2));
-            case "sms_outgoing_check_interval_ms": return (new Pair<>("Zeitintervall, in dem die Menge ausgehender SMS geprüft werden",2));
-            case "sms_outgoing_check_max_count": return (new Pair<>("Menge an SMS, die in dem Intervall gesendet werden dürfen",2));
-            case "speak_password": return (new Pair<>("Eingabehilfen: Passwörter aussprechen",1));
-            case "ssl_session_cache": return (new Pair<>("Modus des SSL-Caches",0));
-            case "stay_on_while_plugged_in": return (new Pair<>("Display anlassen, wenn Strom angeschlossen ist.",1));
-            case "usb_mass_storage_enabled": return (new Pair<>("USB-Speicher",1));
-            case "use_google_mail": return (new Pair<>("Gmail-Referenzen werden zu Google aufgelöst",0));
-            case "wifi_max_dhcp_retry_count": return (new Pair<>("Maximale Anzahl von Versuchen eine Verbindung aufzubauen",2));
-            case "wifi_mobile_data_transition_wakelock_timeout_ms": return (new Pair<>("Maximale Dauer zum Aufbau einer mobilen Datenverbindung vor dem Übergang in den Sleep-Modus (ms)",2));
-            case "wifi_networks_available_notification_on": return (new Pair<>("Wiederholte Meldung verfügbarer Netze",1));
-            case "wifi_networks_available_repeat_delay": return (new Pair<>("Zeit zur wiederholten Meldung verfügbarer Netze (s)",2));
-            case "wifi_num_open_networks_kept": return (new Pair<>("Anzahl gespeicherter Wifi-Access-Points",2));
-            case "wifi_on": return (new Pair<>("Wifi",1));
-            case "wifi_sleep_policy_default": return (new Pair<>("Deafult-Einstellung für den Wifi-Sleep-Modus",2));
-            case "wifi_sleep_policy": return (new Pair<>("Aktiver Wifi-Sleep-Modus",2));
-            case "wifi_sleep_policy_never": return (new Pair<>("Wifi-Sleep-Modus immer aus",2));
-            case "wifi_sleep_policy_never_while_plugged": return (new Pair<>("Wifi-Sleep-Modus beim Aufladen des Handys aus",1));
-            case "wifi_watchdog_on": return (new Pair<>("Regelmäßige Wifi-Suche",1));
-            case "window_animation_scale": return (new Pair<>("Faktor zum Skalieren normaler Animationen",0));
 
-            default: {
-                name = name.replace("_", " ");
-                name = name.substring(0,1).toUpperCase() + name.substring(1);
-                return (new Pair<>(name,0));
-            }
-        }
-    }
-
-    /**
-     * returns the whole specified column from TABLE_SETTINGS as an Array
-     * @param columnName identifier of the column
-     * @return the StringArray with all entries from this column
-     */
-    private String[] returnColumn(String columnName) {
-        //create String array with correct length
-        Cursor count = getWritableDatabase().rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_SETTINGS + ";", null);
-        count.moveToFirst();
-        String[] settingsArray = new String[count.getInt(0)];
-        count.close();
-        //fill array with DB-entries
-        Cursor c = getWritableDatabase().rawQuery("SELECT " + columnName + " FROM " + TABLE_SETTINGS + " WHERE 1;", null);
-        if (c != null) {
-            c.moveToFirst();
-            int i = 0;
-            while (!c.isAfterLast()) {
-                settingsArray[i] = (c.getString(c.getColumnIndex(columnName)));
-                i++;
-                c.moveToNext();
-            }
-            c.close();
-        }
-
-        close();
-        return settingsArray;
-
-    }
-
-    /**
-     * updates the COLUMN_GOODNAME of a setting with the proper name
-     * @param fieldname setting-identifier
-     * @param nicename proper name to be saved with identifier
-     */
-    private void updateName(String fieldname, String nicename) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE "+ TABLE_SETTINGS +" SET "+COLUMN_GOODNAME
-                +" = \'"+nicename+"\' WHERE "+ COLUMN_SETTING +" = \'"+fieldname+"\';");
-        db.close();
-    }
-
-    /**
-     * go through all the default names and convert them into readable ones
-     * @author Lena
-     */
-    void insertGoodNames() {
-        String[] oldNames = returnColumn(COLUMN_SETTING);
-
-        for (String name : oldNames) {
-            String goodName = individualSetting(name).first;
-            updateName(name, goodName);
-        }
-    }
 
     /**
      * updates the permission-table with their data from CSV-input
+     * @author Noah
      * @param permissionlist the List of permissions from CSV
      */
     void updatePermissions(ArrayList<String[]> permissionlist){
@@ -721,17 +547,20 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * get the description of a permissionidentifier
+     * @author Noah
      * @param permissionname the identifier of the permission
      * @return a String with the text of description
      */
     String getPermissionDescription(String permissionname){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_PERMISSIONS+" WHERE "+COLUMN_PERMISSIONNAME+" = \'"+permissionname+"\';",null);
+        //if more than the name column is filled and there is an entry
         if (cursor.getColumnCount()>1&&cursor.getCount()>0) {
             cursor.moveToFirst();
             String result = cursor.getString(cursor.getColumnIndex(COLUMN_PERMISSIONDESCRIPTION));
             cursor.close();
             return result;
+        //if there is no description for the permission
         } else{
             cursor.close();
             return "Diese Permission hat noch keine Beschreibung.";
@@ -740,18 +569,21 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * get the good name of a permissionidentifier
+     * @author Noah
      * @param permissionname the identifier
      * @return the good name as String (or default apologise)
      */
     String getPermissionNiceName(String permissionname){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_PERMISSIONS+" WHERE "+COLUMN_PERMISSIONNAME+" = \'"+permissionname+"\';",null);
-        if (cursor.getCount()>2) {
+        //if there are more than 2 Columns are filled, a description is there
+        if (cursor.getColumnCount()>2) {
             cursor.moveToFirst();
             String result = cursor.getString(cursor.getColumnIndex(COLUMN_PERMISSIONNICENAME));
             cursor.close();
             return result;
-        } else{
+        //if no description is found
+        } else {
             cursor.close();
             return "Diese Permission hat noch keinen besseren Namen.";
         }
@@ -759,17 +591,20 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * get the level of the asked permission
+     * @author
      * @param permissionname permissionidentifier
      * @return level as integer
      */
     int getPermissionLevel(String permissionname){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_PERMISSIONS+" WHERE "+COLUMN_PERMISSIONNAME+" = \'"+permissionname+"\';",null);
-        if (cursor.getCount()>3){
+        //if there are more than 3 Columns found, there is a level found
+        if (cursor.getColumnCount()>3){
             cursor.moveToFirst();
             int result= cursor.getInt(cursor.getColumnIndex(COLUMN_PERMISSIONLEVEL));
             cursor.close();
             return result;
+            //when there is no level in the DB
         }else{
             cursor.close();
             return -1;
@@ -785,7 +620,6 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 2 WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
         db.close();
-
     }
 
     /**
@@ -833,24 +667,6 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    /**
-     * method to get the proportion of solved to all lessions in a specified Class
-     * @param classname the class to get the proportion for
-     * @return a String with "x/y" (x<y)
-     */
-    public String countSolvedLessions(String classname){
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor solved = db.rawQuery("SELECT COUNT(*) AS count FROM "+TABLE_LESSIONS+" WHERE "+COLUMN_STATUS+" = 3 AND "+COLUMN_COURSE+" = \'"+classname+"\';",null);
-        Cursor all = db.rawQuery("SELECT COUNT(*) AS count FROM "+TABLE_LESSIONS+" WHERE "+COLUMN_STATUS+" > 0 AND "+COLUMN_COURSE+" = \'"+classname+"\';",null);
-        solved.moveToFirst();
-        all.moveToFirst();
-        int solvedcount=solved.getInt(0);
-        int allcount=all.getInt(0);
-        solved.close();
-        all.close();
-        db.close();
-        return Integer.toString(solvedcount)+"/"+ Integer.toString(allcount);
-    }
 
     public void updateSettingDescriptions(ArrayList<String[]> settingsData){
         SQLiteDatabase db = getWritableDatabase();
@@ -926,22 +742,50 @@ public class DBHandler extends SQLiteOpenHelper {
     public String[] getSettingsFromDB(){
         //create String array with correct length
         String[] settingsArray;
-        Cursor count = getWritableDatabase().rawQuery("SELECT COUNT(*) AS count FROM "+TABLE_SETTINGS +" WHERE "+COLUMN_INITIAL+" IS NOT '-99';",null);
+        Cursor count = getWritableDatabase().rawQuery("SELECT COUNT(*) AS count FROM "+TABLE_SETTINGS +" WHERE "+COLUMN_LATEST+" IS NOT '-99';",null);
         count.moveToFirst();
         settingsArray = new String[count.getInt(0)];
         count.close();
         //fill array with DB-entries
-        Cursor c  =getWritableDatabase().rawQuery("SELECT "+COLUMN_GOODNAME+", "+COLUMN_INITIAL+" FROM "+TABLE_SETTINGS +" WHERE "+COLUMN_INITIAL+" IS NOT '-99';",null);
+        Cursor c  =getWritableDatabase().rawQuery("SELECT "+COLUMN_GOODNAME+", "+COLUMN_LATEST+", "+COLUMN_SETTING+" FROM "+TABLE_SETTINGS +" WHERE "+COLUMN_LATEST+" IS NOT '-99';",null);
         if (c!=null) c.moveToFirst();
         int i=0;
         while (c!=null&&!c.isAfterLast()){
-            settingsArray[i]=(c.getString(c.getColumnIndex(COLUMN_GOODNAME))+";"+c.getString(c.getColumnIndex(COLUMN_INITIAL)));
+            settingsArray[i]=(c.getString(c.getColumnIndex(COLUMN_GOODNAME))+";"+c.getString(c.getColumnIndex(COLUMN_LATEST))+";"+c.getString(c.getColumnIndex(COLUMN_SETTING)));
             i++;
             c.moveToNext();
         }
         if (c!=null) c.close();
         return settingsArray;
 
+    }
+
+    public void insertIndividualData(HashMap<String,String> hashMap){
+        SQLiteDatabase db = getWritableDatabase();
+        Set<String> keys= hashMap.keySet();
+        for (String key: keys){
+            db.execSQL("INSERT OR REPLACE INTO "+TABLE_PERSONAL+" VALUES(\'"+key+"\', \'"+hashMap.get(key)+"\');");
+        }
+        db.close();
+    }
+    public HashMap<String,String> getIndividualData(){
+        SQLiteDatabase db = getWritableDatabase();
+        HashMap<String,String> result = new HashMap<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_PERSONAL+" WHERE 1",null);
+        if(cursor!=null){
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                result.put(cursor.getString(0), cursor.getString(1));
+            }
+        } else {
+            result.put("leer","leer");
+        }
+        return result;
+    }
+    public void changeIndividualValue(String key,String value){
+        SQLiteDatabase db =getWritableDatabase();
+        db.execSQL("UPDATE "+TABLE_PERSONAL+" SET "+COLUMN_VALUE+" = \'"+value+"\' WHERE "+COLUMN_KEY+" = \'"+key+"\';");
+        db.close();
     }
 
 

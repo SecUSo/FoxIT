@@ -15,7 +15,7 @@ import java.util.Arrays;
 //Class which defines the Tabs in StartScreen
 public class TapAdapter extends FragmentPagerAdapter {
 
-    Activity activity; //reference to StartScreen
+    //Activity startScreenActivity; //reference to StartScreen
     String[] settingsArray;
 
     /**
@@ -26,13 +26,13 @@ public class TapAdapter extends FragmentPagerAdapter {
      */
     public TapAdapter(android.app.FragmentManager fm, Activity activity, String[] settingsArray) {
         super(fm);
-        this.activity = activity;
+        //this.startScreenActivity = activity;
         this.settingsArray = settingsArray;
     }
 
     /**
      * Fills the TabAdapter with the Fragments to be displayed
-     *
+     * by creating a new fragment for each page of the TabView
      * @param position describes which tab is pressed
      * @return
      * @author Tim
@@ -41,14 +41,14 @@ public class TapAdapter extends FragmentPagerAdapter {
     @Override
     public android.app.Fragment getItem(int position) {
         if (position == 0) {
-            //adds SettingListFragment
+            //adds SettingListFragment for the first page
             SettingListFragment settingList = new SettingListFragment();
             Bundle settings = new Bundle();
             settings.putStringArrayList("settings", new ArrayList<String>(Arrays.asList(settingsArray)));
             settingList.setArguments(settings);
             return settingList;
         } else {
-            //adds AppListFragment
+            //adds AppListFragment for the second page
             return new AppListFragment();
         }
 

@@ -69,7 +69,7 @@ public class LectionActivity extends AppCompatActivity {
 
 
 
-        // define the proper button behavior for switching slides
+        // define the proper button behavior for switching slides, and change the button image accordingly
         ImageButton nextButton = (ImageButton) findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
 
@@ -109,16 +109,16 @@ public class LectionActivity extends AppCompatActivity {
                 ft.commit();
             }
         });
-
+        // define the proper button behavior for going back one slide, and change the button image accordingly
         backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-
+                Slide currentSlide =lection.slideHashMap.get(Integer.toString(slideNumber));
                 //if the slide defines a backSlide jump to it
-                if (lection.slideHashMap.get(Integer.toString(slideNumber)).back() != null) {
-                    jumpToSlide(lection.slideHashMap.get(Integer.toString(slideNumber)).back());
+                if (currentSlide.back() != null) {
+                    jumpToSlide(currentSlide.back());
                 } else {
                     //otherwise if its not prevented to jump back jump to the last slide in the backStack of slides
                     if (!lection.getBackSlide().equals("noBack")) {
@@ -129,7 +129,7 @@ public class LectionActivity extends AppCompatActivity {
                         } else {
                             setImage("kreuz");
                         }
-                        ft.hide(lection.slideHashMap.get(Integer.toString(slideNumber)));
+                        ft.hide(currentSlide);
                         //set the right slideNumber
                         slideNumber = Integer.parseInt(lection.getBackSlide());
                         //remove the last slide from the slideBackStack
@@ -144,21 +144,24 @@ public class LectionActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //defines the exact same behavior as the nextButton for the whole slide except that quizSlides are not evaluated
         RelativeLayout lectionFrame = (RelativeLayout) findViewById(R.id.lection_frame);
         lectionFrame.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                String nextSlideNumber= lection.slideHashMap.get(Integer.toString(slideNumber)).next();
 
-                Slide slide=lection.slideHashMap.get(Integer.toString(slideNumber));
+                Slide slide = lection.slideHashMap.get(Integer.toString(slideNumber));
                 if (!(didEvaluationStart)&&(!(slide instanceof QuizSlide) || ((QuizSlide) slide).getEvaluated())) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 int slideToJumpTo; //aka the next SlideNumber
                 //if the next slide is a quizSlide show the question mark
-                if (lection.slideHashMap.get(Integer.toString(slideNumber)).next() != null && lection.slideHashMap.get(Integer.toString(slideNumber)).next().equals("quiz")) {
+                if (nextSlideNumber != null && nextSlideNumber.equals("quiz")) {
                     ((QuizSlide) lection.slideHashMap.get(Integer.toString(slideNumber))).evaluation();
                     //if there is no next slide after the next show the cross
-                    if ((lection.slideHashMap.get(Integer.toString(slideNumber)).next() == null) && (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null)) {
+                    if ((nextSlideNumber == null) && (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null)) {
                         setImage("kreuz");
                         //if there is a next slide after the next slide set the arrow
                     } else {
@@ -166,8 +169,8 @@ public class LectionActivity extends AppCompatActivity {
                     }
                 } else {
                     //if the current slide defines a next slide that's the slideNumberToJumpTo
-                    if (lection.slideHashMap.get(Integer.toString(slideNumber)).next() != null) {
-                        slideToJumpTo = Integer.parseInt(lection.slideHashMap.get(Integer.toString(slideNumber)).next());
+                    if (nextSlideNumber != null) {
+                        slideToJumpTo = Integer.parseInt(nextSlideNumber);
                     } else {
                         //otherwise it's the slide with the next higher number
                         slideToJumpTo = slideNumber + 1;
@@ -203,12 +206,13 @@ public class LectionActivity extends AppCompatActivity {
             case ("check"):
                 nextButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check));
                 break;
+            default: nextButton.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.kreuz));
         }
     }
 
     /**
      * jump to a specific slide
-     * @param next slideNumber to jump to
+     * @param next the slide Number of the slide to switch to
      * @author Tim
      */
     public void jumpToSlide(String next) {
@@ -283,10 +287,10 @@ public class LectionActivity extends AppCompatActivity {
 
         MethodFactory factory=new MethodFactory(this);
         Method method =factory.createMethod("changeTokenCount");
-        method.method("1");
+        method.callClassMethod("1");
             //raise the acornCount on success
             Method method2 =factory.createMethod("changeAcornCount");
-            method2.method(Integer.toString(lection.getReward()));//TODO customisable number
+            method2.callClassMethod(Integer.toString(lection.getReward()));//TODO customisable number
 
         Handler handler =new Handler();
         handler.postDelayed(new Runnable() {
@@ -297,7 +301,7 @@ public class LectionActivity extends AppCompatActivity {
             }
         },4250);}else{
 
-            long nextFreeTime= System.currentTimeMillis()+lection.getDelaytime();
+            long nextFreeTime=System.currentTimeMillis()+lection.getDelaytime();
             DBHandler db = new DBHandler(this,null,null,1);
             db.setLectionNextFreeTime(lection.getLectionName(),nextFreeTime);
 

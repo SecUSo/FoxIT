@@ -1,5 +1,7 @@
 package com.bp.Trophies;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by Ich on 17.09.2016.
  */
@@ -31,7 +33,7 @@ abstract public class TrophyObject {
     abstract public boolean checkScore();
 
 
-    /**fetch the current score of the trophy from ObserverSingleton and update it
+    /**fetch the current score of the trophy from ValueKeeper and update it
      * @author Tim
      */
     abstract public void updateScore();

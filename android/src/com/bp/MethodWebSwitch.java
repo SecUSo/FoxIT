@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 
 /**
- * Created by Ich on 30.07.2016.
+ * Created by Tim on 30.07.2016.
+ *
  */
+//provides a callClassMethod for jumping to web pages
 public class MethodWebSwitch extends Method {
 
     /**
@@ -14,7 +16,7 @@ public class MethodWebSwitch extends Method {
      */
 
     @Override
-    public void method(String webPageUrl){
+    public void callClassMethod(String webPageUrl){
         //open the website by intend
         String url = webPageUrl;
         Intent i = new Intent(Intent.ACTION_VIEW);

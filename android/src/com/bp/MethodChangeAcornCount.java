@@ -10,13 +10,13 @@ import android.os.Handler;
 public class MethodChangeAcornCount extends Method{
 
     /**
-     * change the acornCount in ObserverSingleton and manage fragment visualising  the change
+     * change the acornCount in ValueKeeper and manage fragment visualising  the change
      * @aauthor Tim
      * @param acornDifference the amount the acornCount is raised lowered, has to be an Integer-String
      */
     @Override
-    public void method(String acornDifference){
-        final int amount= Integer.parseInt(acornDifference);
+    public void callClassMethod(String acornDifference){
+        final int amount=Integer.parseInt(acornDifference);
 
         //add the acornCountFragment to the activity's context
         final FragmentManager manager = activity.getFragmentManager();
@@ -34,9 +34,9 @@ public class MethodChangeAcornCount extends Method{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ObserverSingleton observer= ObserverSingleton.getInstance();
+                ValueKeeper observer= ValueKeeper.getInstance();
                 observer.changeAcornCountBy(amount);
-                count.changeText(Integer.toString(ObserverSingleton.getInstance().getAcornCount()));
+                count.changeText(Integer.toString(ValueKeeper.getInstance().getAcornCount()));
             }
         },1250);
         //after 4000ms the Fragment disappears

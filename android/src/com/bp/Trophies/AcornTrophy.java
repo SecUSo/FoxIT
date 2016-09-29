@@ -1,6 +1,5 @@
 package com.bp.Trophies;
-
-import com.bp.ObserverSingleton;
+import com.bp.ValueKeeper;
 
 /**
  * Created by Ich on 17.09.2016.
@@ -28,7 +27,7 @@ public class AcornTrophy extends TrophyObject {
  * @author Tim
  */
     public void updateScore() {
-        ObserverSingleton o = ObserverSingleton.getInstance();
+        ValueKeeper o = ValueKeeper.getInstance();
         scoreCurrently = o.getAcornCount();
 
 }

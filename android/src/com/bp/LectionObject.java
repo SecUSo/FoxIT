@@ -1,9 +1,11 @@
 package com.bp;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ich on 18.07.2016.
@@ -12,12 +14,12 @@ public class LectionObject {
     String lectionName; //name~
     int processingStatus; //solved~
     String type;//Lesson-type
-    int delaytime;
-    int nextfreetime;
-    int reward;
+    int delaytime; //how much time has to pass if the lection is blocked until it is unlocked again
+    int nextfreetime; //the lection is blocked to this point in time
+    int reward; //the amount of acorn gained by solving this lection
 
 
-    String content;
+    String content; //the slides stored as one large String
     //Hashmap to store the split up version of the lectionDescription-String
     public HashMap<String,String> lectionInfoHashMap =new HashMap<>();
 
@@ -32,8 +34,9 @@ public class LectionObject {
     /**
      * @author Tim
      */
-    public LectionObject(String name, String content, String type, int delay, int freetime, int status, int acorn) {
+    public LectionObject(String name,String content,String type,int delay, int freetime, int status, int acorn) {
         //filling the lectionInfoHashMap by spliting the lectionDescriptionString
+        Log.d("content",content);
         String[] s = content.replace("[", "").split("]");
         for (int i = 0; i < s.length && !s[i].isEmpty(); i++) {
             String key = s[i].substring(0, s[i].indexOf("~"));
@@ -53,10 +56,10 @@ public class LectionObject {
         lectionName= name;
         processingStatus = status;
         this.type=type;
-        delaytime=delay;
-        nextfreetime=freetime;
-        reward=acorn;
-        this.content=content;
+        delaytime=delay;    //how much time has to pass if the lection is blocked until it is unlocked again
+        nextfreetime=freetime; //the lection is blocked to this point in time
+        reward=acorn;   //the amount of acorn gained by solving this lection
+        this.content=content;   //the amount of acorn gained by solving this lection
 
     }
 

@@ -2,7 +2,11 @@ package com.bp;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**

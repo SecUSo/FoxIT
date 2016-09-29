@@ -82,20 +82,20 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
             Intent i = new Intent(getActivity().getApplicationContext(),Analysis.class);
             startActivity(i);
         }else{
-            Fragment newPage = fragmentList.get(profileListItems[position]);
-            if (newPage != null) {
+        Fragment newPage = fragmentList.get(profileListItems[position]);
+        if (newPage != null) {
 
-                //add fragment to the activitys' context
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
+            //add fragment to the activitys' context
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-                transaction.add(R.id.second_fragment_frame, newPage, "setting");
-                transaction = transaction.addToBackStack("setting");
-                transaction.commit();
+            transaction.add(R.id.second_fragment_frame, newPage, "setting");
+            transaction = transaction.addToBackStack("setting");
+            transaction.commit();
 
-                RelativeLayout firstFragment = (RelativeLayout) getActivity().findViewById(R.id.first_fragment_frame);
-                firstFragment.setVisibility(View.GONE);
-            }
+            RelativeLayout firstFragment = (RelativeLayout) getActivity().findViewById(R.id.first_fragment_frame);
+            firstFragment.setVisibility(View.GONE);
+        }
         }
 
     }
@@ -135,37 +135,37 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
      * @author Tim
      */
     private class MyListAdapter_permission extends ArrayAdapter<String> {
-        public MyListAdapter_permission() {
-            //defining the listView's layout for single entries
-            super(context, R.layout.list_item_profile, profileListItems);
-        }
-
-        /**
-         * Here ist defined how the XML-Layout is filed  by the data stored in the array.
-         *
-         * @param position    position in the array used
-         * @param convertView
-         * @param parent
-         * @return
-         * @author Tim
-         */
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            //convertView has to be filled with layout_app if it's null
-            View itemView = convertView;
-            if (itemView == null) {
-                itemView = getActivity().getLayoutInflater().inflate(R.layout.list_item_profile, parent, false);
-            }
-
-
-            TextView fragmentName= (TextView) itemView.findViewById(R.id.text_fragment_name);
-            fragmentName.setText(profileListItems[position]);
-
-
-            return itemView;
-        }
-
-
+    public MyListAdapter_permission() {
+        //defining the listView's layout for single entries
+        super(context, R.layout.list_item_profile, profileListItems);
     }
+
+    /**
+     * Here ist defined how the XML-Layout is filed  by the data stored in the array.
+     *
+     * @param position    position in the array used
+     * @param convertView
+     * @param parent
+     * @return
+     * @author Tim
+     */
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        //convertView has to be filled with layout_app if it's null
+        View itemView = convertView;
+        if (itemView == null) {
+            itemView = getActivity().getLayoutInflater().inflate(R.layout.list_item_profile, parent, false);
+        }
+
+
+        TextView fragmentName= (TextView) itemView.findViewById(R.id.text_fragment_name);
+        fragmentName.setText(profileListItems[position]);
+
+
+        return itemView;
+    }
+
+
+}
 
 }

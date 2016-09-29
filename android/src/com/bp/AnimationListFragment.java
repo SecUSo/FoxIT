@@ -55,7 +55,7 @@ public class AnimationListFragment extends Fragment {
         AnimationObject[] animationArray = {new AnimationObject("Schmetterlingsfangen", "Schau dem Fuchs dabei zu einen Schmetterling zu verspeisen!", R.mipmap.ic_cat, 15), new AnimationObject("Sich putzig putzen", "Schau dem Fuchs dabei wie er sicch putzt! Voll putzig!", R.mipmap.badapprating, 10)};
 
         //check for each animation if it's already unlocked
-        ObserverSingleton o = ObserverSingleton.getInstance();
+        ValueKeeper o = ValueKeeper.getInstance();
         for (AnimationObject ao : animationArray) {
             o.addTrophyIfNotContained(ao.getName(), ao.getUnlocked());
         }
@@ -151,7 +151,7 @@ public class AnimationListFragment extends Fragment {
                 ImageView imageView = (ImageView) gridView
                         .findViewById(R.id.grid_item_image);
 
-                imageView.setImageResource(animationArray[position].getIcon());
+                //imageView.setImageResource(animationArray[position].getIcon());
 
 
                 //change the animations color whether it's unlocked

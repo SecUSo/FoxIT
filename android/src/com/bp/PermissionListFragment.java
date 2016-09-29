@@ -183,12 +183,14 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
      * @author Tim
      */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String permissionName= permissionArray[position];
+        if(!(permissionName.equals("Gefährliche Berechtigungen:")||permissionName.equals("Normale Berechtigungen:")||permissionName.equals("Harmlose Berechtigungen:")||permissionName.equals("Andere Berechtigungen:"))){
         //Fragment is created
         PermissionDescriptionFragment fragment = new PermissionDescriptionFragment();
-        Bundle permissionName = new Bundle();
-        permissionName.putString("permissionName", permissionArray[position]);
-        permissionName.putInt("appRating", appRating);
-        fragment.setArguments(permissionName);
+        Bundle permissionNameBundle = new Bundle();
+        permissionNameBundle.putString("permissionName", permissionArray[position]);
+        permissionNameBundle.putInt("appRating", appRating);
+        fragment.setArguments(permissionNameBundle);
 
         //add fragment so the activitys' context
         FragmentManager childFragmentManager = getChildFragmentManager();
@@ -202,7 +204,7 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
         if (getActivity() instanceof StartScreen) {
             ((StartScreen) getActivity()).setScrollMessageVisiblility(false);
         }
-        firstTimeScrollhint = false;
+        firstTimeScrollhint = false;}
     }
 
     @Override

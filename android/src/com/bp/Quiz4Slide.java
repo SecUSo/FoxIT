@@ -117,7 +117,7 @@ public class Quiz4Slide extends QuizSlide {
         if(answer1true==box1.isChecked()&&answer2true==box2.isChecked()&&answer3true==box3.isChecked()&&answer4true==box4.isChecked()){
         Toast.makeText(getActivity(),rightAnswer, Toast.LENGTH_LONG).show();
             MethodFactory factory=new MethodFactory(getActivity());
-            factory.createMethod("scoreAdd").method(points);
+            factory.createMethod("scoreAdd").callClassMethod(points);
 
         }else{
             Toast.makeText(getActivity(), wrongAnswer,

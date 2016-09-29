@@ -286,12 +286,10 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
      * @return list of retrieved apps
      */
     public List<ApplicationInfo> fetchALL_APPS(){
-        if(context==null){
-            Log.d("MyApp","context is Null");}
+        if(context==null){Log.d("MyApp","context is Null");}
         final PackageManager pm = context.getPackageManager();
         //get a list of installed apps.
-        if(pm==null){
-            Log.d("MyApp","pm is Null");}
+        if(pm==null){Log.d("MyApp","pm is Null");}
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
                 Collections.sort(packages, new Comparator<ApplicationInfo>() {
                     @Override
@@ -421,11 +419,11 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
                     int dangerLevel=permissionInfo.protectionLevel;
 
                     //and the permission is added to the associated list
-                    if(dangerLevel== PermissionInfo.PROTECTION_DANGEROUS){
+                    if(dangerLevel==PermissionInfo.PROTECTION_DANGEROUS){
                         dangerousPermissions.add(permissionApp);
                         continue outerloop;
                     }
-                    if(dangerLevel== PermissionInfo.PROTECTION_NORMAL){
+                    if(dangerLevel==PermissionInfo.PROTECTION_NORMAL){
                         normalPermissions.add(permissionApp);
                                 continue outerloop;
                     }
@@ -438,13 +436,13 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
             }
 
             //the created lists are added onto each other divided by headlines
-            if(dangerousPermissions.size()!=0) result.add("Dangerous:");
+            if(dangerousPermissions.size()!=0) result.add("Gefährliche Berechtigungen:");
             result.addAll(dangerousPermissions);
-            if(normalPermissions.size()!=0)result.add("Normal:");
+            if(normalPermissions.size()!=0)result.add("Normale Berechtigungen:");
             result.addAll(normalPermissions);
-            if(harmlessPermissions.size()!=0)result.add("Harmless:");
+            if(harmlessPermissions.size()!=0)result.add("Harmlose Berechtigungen:");
             result.addAll(harmlessPermissions);
-            if(dangerousPermissions.size()+normalPermissions.size()+harmlessPermissions.size()!=allPermissions.length)result.add("Other:");
+            if(dangerousPermissions.size()+normalPermissions.size()+harmlessPermissions.size()!=allPermissions.length)result.add("Andere Berechtigungen:");
             result.addAll(otherPermissions);
         }
         return result;

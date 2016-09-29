@@ -2,17 +2,31 @@ package com.bp;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.os.Bundle;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.bp.DBHandler;
+
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -24,12 +38,6 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        DBHandler dbHandler = new DBHandler(this,null,null,1);
-        dbHandler.updateLessions(readCSV(R.raw.lektionen));
-        dbHandler.updatePermissions(readCSV(R.raw.permissions));
-        dbHandler.updateClasses(readCSV(R.raw.classes));
-        dbHandler.updateSettingDescriptions(readCSV(R.raw.settings));
-
 
         //Fragment is created
         SettingsFragment fragment = new SettingsFragment();
@@ -44,13 +52,12 @@ public class SettingsActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         transaction.add(R.id.first_fragment_frame, fragment, "permissionDescription");
-        transaction = transaction.addToBackStack("permissionDescription");
         transaction.commit();
 
     }
 
-    public ArrayList readCSV(int input){
-        InputStream is = getResources().openRawResource(input);
+    public ArrayList readCSV(int input, Context context){
+        InputStream is = context.getResources().openRawResource(input);
         ArrayList result = new ArrayList();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         try{
@@ -98,5 +105,43 @@ public class SettingsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void updatePermissions(Context context){
+        DBHandler dbHandler = new DBHandler(context,null,null,1);
+        dbHandler.updatePermissions(readCSV(R.raw.permissions,context));
+        dbHandler.close();
+    }
+    public void updateLessions(Context context){
+        DBHandler dbHandler = new DBHandler(context,null,null,1);
+        dbHandler.updateLessions(readCSV(R.raw.lektionen,context));
+        dbHandler.updateClasses(readCSV(R.raw.classes,context));
+        dbHandler.close();
+    }
+    public void updateSettings(Context context){
+        DBHandler dbHandler = new DBHandler(context,null,null,1);
+        dbHandler.updateSettingDescriptions(readCSV(R.raw.settings,context));
+        dbHandler.close();
+    }
+
+
+    @Override
+    /**
+     * overrides the behavior of the backButton for it to properly support Fragments and Fragments in Fragments (ChildFragments)
+     * @author Tim
+     */
+
+    public void onBackPressed() {
+        //if there is an fragment
+        RelativeLayout firstFragmentFrame =(RelativeLayout) findViewById(R.id.first_fragment_frame);
+
+
+        if (firstFragmentFrame.getVisibility()==View.GONE) {
+                getFragmentManager().popBackStack(); //destroy PermissionListFragment
+                firstFragmentFrame.setVisibility(View.VISIBLE); //make the hidden appList visible again
+
+        } else {//if no fragments exist behave normal
+            super.onBackPressed();
+        }
+    }
+
 
 }

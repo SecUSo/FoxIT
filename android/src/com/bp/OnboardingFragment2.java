@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 /**
  * Created by Ich on 25.06.2016.
  */
-public class OnboardingFragment2 extends Fragment {
+public class OnboardingFragment2 extends Fragment{
     String onboardingText; //the permission described by the fragment
     int icon;
 

@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by Ich on 25.06.2016.
+ * Created by Tim on 25.06.2016.
  */
 public class TextSlide extends Slide {
     View view;
 
-    /*
+    /* fills the slide's layout by calling fillLayout
      *@author Tim
      */
     @Override
@@ -24,14 +24,14 @@ public class TextSlide extends Slide {
     }
 
 
-    /**
+    /**fills the slide's layout
      * @author Tim
      */
     @Override
     void fillLayout() {
+        //sets the displayed text
         TextView text=(TextView) view.findViewById(R.id.text);
         text.setText(parameter.get("text"));
-        Log.d("MyApp",parameter.toString());
     }
 
 

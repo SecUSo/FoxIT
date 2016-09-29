@@ -12,18 +12,18 @@ import android.widget.TextView;
  */
 public class QuestionSlide extends Slide {
     View view;
-    //method for the left button
+    //callClassMethod for the left button
     Method methodLeft;
-    //method for the right button
+    //callClassMethod for the right button
     Method methodRight;
 
-    /**
+    /** fills the layout by calling fillLayout
      *@author Tim
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         view=inflater.inflate(R.layout.layout_slide_question,container,false);
-       //generic method of all slides to fill the slideDescription into the layout
+       //generic callClassMethod of all slides to fill the slideDescription into the layout
         fillLayout();
 
         return view;
@@ -31,37 +31,39 @@ public class QuestionSlide extends Slide {
 
 
     @Override
-    /**
+    /** fills the slide's layout
      * @author Tim
      */
     void fillLayout() {
+        //fetches the methods for the buttons
         MethodFactory methodFactory= new MethodFactory(getActivity());
         methodLeft =methodFactory.createMethod(parameter.get("method"));
         methodRight=methodFactory.createMethod(parameter.get("method2"));
 
+        //sets the text displayed on a slide
         TextView text=(TextView) view.findViewById(R.id.question_text);
         text.setText(parameter.get("text"));
 
+        //sets the text displayed on the left button
         Button buttonLeft =(Button) view.findViewById((R.id.button_left));
         buttonLeft.setText(parameter.get("buttonText"));
-
+        //sets the callClassMethod for the left button
         buttonLeft.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                methodLeft.method(parameter.get("methodParameter"));
+                methodLeft.callClassMethod(parameter.get("methodParameter"));
             }});
 
+        //sets the text displayed on the left button
         Button buttonRight =(Button) view.findViewById((R.id.button_right));
         buttonRight.setText(parameter.get("buttonText2"));
-
-
-
+        //sets the callClassMethod for the right button
         buttonRight.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                methodRight.method(parameter.get("methodParameter2"));
+                methodRight.callClassMethod(parameter.get("methodParameter2"));
             }});
 
     }
