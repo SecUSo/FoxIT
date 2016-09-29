@@ -15,7 +15,7 @@ public class LectionObject {
     int processingStatus; //solved~
     String type;//Lesson-type
     int delaytime; //how much time has to pass if the lection is blocked until it is unlocked again
-    int nextfreetime; //the lection is blocked to this point in time
+    long nextfreetime; //the lection is blocked to this point in time
     int reward; //the amount of acorn gained by solving this lection
 
 
@@ -100,7 +100,7 @@ public class LectionObject {
     public int getDelaytime() {
         return delaytime;
     }
-    public int getNextfreetime() {
+    public long getNextfreetime() {
         return nextfreetime;
     }
     public int getReward() {

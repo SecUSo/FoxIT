@@ -52,7 +52,8 @@ public class AnimationListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
 
         //creating the animationObjects - TODO: make it tidy for more animations to be added
-        AnimationObject[] animationArray = {new AnimationObject("Schmetterlingsfangen", "Schau dem Fuchs dabei zu einen Schmetterling zu verspeisen!", R.mipmap.ic_cat, 15), new AnimationObject("Sich putzig putzen", "Schau dem Fuchs dabei wie er sicch putzt! Voll putzig!", R.mipmap.badapprating, 10)};
+        AnimationObject[] animationArray = {new AnimationObject("Schmetterlingsfangen", "Schau dem Fuchs dabei zu einen Schmetterling zu verspeisen!", R.mipmap.ic_cat, 15),
+                                            new AnimationObject("Sich putzig putzen", "Schau dem Fuchs dabei wie er sicch putzt! Voll putzig!", R.mipmap.badapprating, 10)};
 
         //check for each animation if it's already unlocked
         ValueKeeper o = ValueKeeper.getInstance();

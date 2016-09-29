@@ -10,10 +10,10 @@ import java.util.Arrays;
 
 
 /**
- * Created by Ich on 04.08.2016.
+ * Created by Tim on 04.08.2016.
  */
 
-//Class which defines the Tabs in StartScreen
+//Class which defines the Tabs in TrophyRoomActivity
 public class TapAdapter_trophy extends FragmentPagerAdapter {
 
     Activity activity; //reference to TrophyRoomActivity

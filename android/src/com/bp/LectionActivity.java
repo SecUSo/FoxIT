@@ -296,17 +296,15 @@ public class LectionActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(), LectionListActivity.class);
-                startActivity(i);
+                onBackPressed();
             }
         },4250);}else{
 
-            long nextFreeTime=System.currentTimeMillis()+lection.getDelaytime();
+            long nextFreeTime=(lection.getDelaytime());//System.currentTimeMillis()%Integer.MAX_VALUE)+lection.getDelaytime();
             DBHandler db = new DBHandler(this,null,null,1);
             db.setLectionNextFreeTime(lection.getLectionName(),nextFreeTime);
 
-            Intent i = new Intent(getApplicationContext(), LectionListActivity.class);
-            startActivity(i);
+            onBackPressed();
         }
     }
 

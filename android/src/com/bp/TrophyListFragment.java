@@ -24,6 +24,7 @@ import com.bp.Trophies.AcornTrophy;
 import com.bp.Trophies.TrophyObject;
 
 /**
+ * @author Tim
  * presents and structures the user device settings
  */
 public class TrophyListFragment extends Fragment {
@@ -42,7 +43,7 @@ public class TrophyListFragment extends Fragment {
 
     /**
      * shows a setting list
-     *
+     * @author Tim
      * @param inflater
      * @param container
      * @param saveInstanceState

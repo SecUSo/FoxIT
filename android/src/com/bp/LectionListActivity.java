@@ -191,10 +191,15 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
 
 
         } else {
-            if (lectionObjectList.get(position).getNextfreetime() > System.currentTimeMillis()) {
+            if (lectionObjectList.get(position).getNextfreetime() > (System.currentTimeMillis())%Integer.MAX_VALUE) {
 
 
             } else {
+
+                Log.d("MyApp","CurrentTime"+ Long.toString((System.currentTimeMillis())%Integer.MAX_VALUE));
+                Log.d("MyApp","duTime"+Long.toString(lectionObjectList.get(position).getNextfreetime()));
+
+
                 Intent intent = new Intent(getApplicationContext(), LectionActivity.class);
                 //to inform lectionActivity which lection is to be displayed
                 Log.d("how many lections inLOL", Integer.toString(lectionObjectList.size()));
@@ -275,8 +280,12 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
 
             //setting the stars
             ImageView solvedIcon = (ImageView) itemView.findViewById(R.id.image_lection_solved);
-            solvedIcon.setImageDrawable(getIcon(lection.getProcessingStatus()));
+            if(lection.getNextfreetime()>(System.currentTimeMillis()%Integer.MAX_VALUE)){
+                solvedIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.ic_hourglass_empty_black_48dp));
+            }else {
 
+                solvedIcon.setImageDrawable(getIcon(lection.getProcessingStatus()));
+            }
             return itemView;
         }
 
@@ -291,7 +300,7 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
             Context context = getApplicationContext();
             switch (processingStatus) {
                 case 0:
-                    return ContextCompat.getDrawable(context, R.mipmap.stern_leer);
+                    return ContextCompat.getDrawable(context, R.mipmap.ic_lock_outline_black_48dp);
                 case 1:
                     return ContextCompat.getDrawable(context, R.mipmap.stern_leer);
                 case 2:
