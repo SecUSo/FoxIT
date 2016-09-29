@@ -10,17 +10,16 @@ import java.util.Arrays;
 
 
 /**
- * Created by Ich on 04.08.2016.
+ * Created by Hannah on 04.08.2016.
+ * Class which defines the Tabs in Onboarding
  */
-
-//Class which defines the Tabs in StartScreen
 public class TapAdapter_onboarding extends FragmentPagerAdapter {
 
-    Activity activity; //reference to OnboardingActivity
+    Activity activity; //reference to onboardingActivity
 
     /**
      * @param fm
-     * @param activity      reference to StartScreen
+     * @param activity      reference to Onboarding
      * @author Hannah
      */
     public TapAdapter_onboarding(FragmentManager fm, Activity activity) {
@@ -30,12 +29,10 @@ public class TapAdapter_onboarding extends FragmentPagerAdapter {
 
     /**
      * Fills the TabAdapter with the Fragments to be displayed
-     *
      * @param position describes which tab is pressed
      * @return
      * @author Hannah
      */
-
     @Override
     public android.app.Fragment getItem(int position) {
         switch (position){
@@ -61,7 +58,6 @@ public class TapAdapter_onboarding extends FragmentPagerAdapter {
 
     /**
      * defines the number of tabs presented (2)
-     *
      * @return the number of Tabs
      * @author Hannah
      */
@@ -79,6 +75,6 @@ public class TapAdapter_onboarding extends FragmentPagerAdapter {
      */
     @Override
     public CharSequence getPageTitle(int position) {
-       return "";
+        return "";
     }
 }

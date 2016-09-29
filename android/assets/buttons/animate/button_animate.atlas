@@ -1,0 +1,19 @@
+
+button_animate.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ic_pets_black_24dp
+  rotate: false
+  xy: 1, 1
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+cat(2)
+  rotate: false
+  xy: 99, 49
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
