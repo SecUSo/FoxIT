@@ -13,7 +13,7 @@ import java.util.Map;
 public class LectionObject {
     String lectionName; //name~
     int processingStatus; //solved~
-    String type;//Lesson-type
+    int type;//Lesson-type
     int delaytime; //how much time has to pass if the lection is blocked until it is unlocked again
     long nextfreetime; //the lection is blocked to this point in time
     int reward; //the amount of acorn gained by solving this lection
@@ -34,15 +34,15 @@ public class LectionObject {
     /**
      * @author Tim
      */
-    public LectionObject(String name,String content,String type,int delay, int freetime, int status, int acorn) {
+    public LectionObject(String name,String content,int type,int delay, int freetime, int status, int acorn) {
         //filling the lectionInfoHashMap by spliting the lectionDescriptionString
-        Log.d("content",content);
         String[] s = content.replace("[", "").split("]");
         for (int i = 0; i < s.length && !s[i].isEmpty(); i++) {
             String key = s[i].substring(0, s[i].indexOf("~"));
             String value = s[i].substring(s[i].indexOf("~") + 1, s[i].length());
             lectionInfoHashMap.put(key, value);
         }
+
 
         //generating the first Slide
         String slideDescription=lectionInfoHashMap.get("0");
@@ -94,7 +94,7 @@ public class LectionObject {
 
 
     }
-    public String getType() {
+    public int getType() {
         return type;
     }
     public int getDelaytime() {

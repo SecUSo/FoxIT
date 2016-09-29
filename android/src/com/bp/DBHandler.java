@@ -192,7 +192,7 @@ public class DBHandler extends SQLiteOpenHelper{
             db.execSQL("ALTER TABLE "+ TABLE_SETTINGS +" ADD COLUMN '(" +date+ ")' TEXT;");
             //updating the new and the latest column with the new values in their respective row
             for (ContentValues value:values
-                 ) {
+                    ) {
                 if (value!=null){
                     db.execSQL("UPDATE "+ TABLE_SETTINGS +" SET '("+date+")' = \""+value.getAsString(COLUMN_INITIAL)
                             +"\", "+COLUMN_LATEST+" = \'"+value.getAsString(COLUMN_INITIAL)+"\' WHERE "+ COLUMN_SETTING +" = '"+value.getAsString(COLUMN_SETTING)+"'");
@@ -207,7 +207,7 @@ public class DBHandler extends SQLiteOpenHelper{
             count.close();
             //inserting the contentValues directly (as they are all new) and updating the latest column
             for (ContentValues value:values
-                 ) {
+                    ) {
                 if (value!=null){
                     db.insert(TABLE_SETTINGS,null, value);
                     db.execSQL("UPDATE "+TABLE_SETTINGS+" SET "+COLUMN_LATEST+" = \'"+value.getAsString(COLUMN_INITIAL)+"\' WHERE "+COLUMN_SETTING+" = '"+value.getAsString(COLUMN_SETTING)+"'");
@@ -363,15 +363,16 @@ public class DBHandler extends SQLiteOpenHelper{
     public void updateLessions(ArrayList<String[]> theLessions){
         SQLiteDatabase db = getWritableDatabase();
         long time = System.currentTimeMillis();
-       // db.execSQL("DROP TABLE IF EXISTS "+TABLE_LESSIONS);
+        // db.execSQL("DROP TABLE IF EXISTS "+TABLE_LESSIONS);
         for (String[] lessionArray:theLessions) {
             String lessionString = createLessionString(lessionArray).replace("'","''");
             if (checkIfInside(TABLE_LESSIONS,COLUMN_LECTURENAME+" = \'"+lessionArray[1]+"\'")){
-                db.execSQL("UPDATE "+ TABLE_LESSIONS +" SET "+COLUMN_CONTENT+" = \'"+lessionString+"\', "+COLUMN_COURSE+" = \'"+lessionArray[0]+
+                db.execSQL("UPDATE "+ TABLE_LESSIONS +" SET "+COLUMN_CONTENT+" = \'"+lessionString+"\', "+COLUMN_COURSE+" = \'"+lessionArray[0]+"\', " +
+                        "\'"+COLUMN_DELAY+"\' = \'"+lessionArray[2]+"\', \'"+COLUMN_LECTURETYPE+"\' = \'"+lessionArray[5]+"\', \'"+COLUMN_EICHELN+"\' = \'"+lessionArray[4]+
                         "\' WHERE "+COLUMN_LECTURENAME+" = \'"+lessionArray[1]+"\';");
             } else {
                 Log.d("db","INSERT INTO "+ TABLE_LESSIONS +" VALUES(\""+lessionArray[1]+"\", \""+lessionArray[3]+"\", \""+lessionArray[0]+"\", \""+lessionString+"\", \""+lessionArray[2]+"\", 1, \""+time+"\", \""+lessionArray[4]+"\");");
-                db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\'"+lessionArray[1]+"\', \'"+lessionArray[3]+"\', \'"+lessionArray[0]+"\', \'"+lessionString+"\', \'"+lessionArray[2]+"\', 1, \'"+time+"\', \'"+lessionArray[4]+"\');");
+                db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\'"+lessionArray[1]+"\', \'"+lessionArray[3]+"\', \'"+lessionArray[0]+"\', \'"+lessionString+"\', \'"+lessionArray[2]+"\', \'"+lessionArray[5]+"\', \'"+time+"\', \'"+lessionArray[4]+"\');");
             }
         }
 
@@ -429,46 +430,45 @@ public class DBHandler extends SQLiteOpenHelper{
      */
     private String createLessionString(String[] lessionArray){
         StringBuffer sb = new StringBuffer();
-        Log.d("lessionarray",lessionArray[2]);
-            sb.append("[name~" + lessionArray[1]+"]");
-            //iterates over the parts of the Array which contains the actual slides
-            for(int i=5;i<lessionArray.length;i++){
-                String[] slides = lessionArray[i].split("_");
-                slides[0]=slides[0].toLowerCase();
-                sb.append("[" + (i - 5) + "~type~" + slides[0] + "\'");
-                //puts the input in the desired form depending on the type of slide it is
-                    switch (slides[0]) {
-                        case "text":
-                            sb.append("text~" + slides[1]);
-                            break;
-                        case "quiz4":
-                            sb.append("points~" + slides[1] + "\'text~" + slides[2] + "\'answer1text~" + slides[3] + "\'answer1solution~" +
-                                    slides[4] + "\'answer2text~" + slides[5] + "\'answer2solution~" +
-                                    slides[6] + "\'answer3text~" + slides[7] + "\'answer3solution~" +
-                                    slides[8] + "\'answer4text~" + slides[9] + "\'answer4solution~" +
-                                    slides[10]);
-                            break;
-                        case "button":
-                            sb.append("text~" + slides[1] + "\'buttonText~" + slides[2] + "\'method~" + slides[3] + "\'methodParameter~" + slides[4]);
-                            break;
-                        case "question":
-                            sb.append("text~" + slides[1] + "\'buttonText~" + slides[2] + "\'method~" + slides[3] + "\'methodParameter~" + slides[4] + "\'buttonText2~" + slides[5] + "\'method2~" + slides[6] + "\'methodParameter2~" + slides[7]);
-                            break;
-                        case "certificate":
-                            sb.append("successText~" + slides[1] + "\'failureText~" + slides[2] + "\'pointsNeeded~" + slides[3]);
-                            break;
-                        default:
-                            sb.append("text~" + slides[1]);
-                    }
-                //appending the next and back functions, if it is found
-                    if (lessionArray[i].contains("next")) {
-                        sb.append("\'next~" + lessionArray[i].substring(lessionArray[i].lastIndexOf("next") + 4, lessionArray[i].lastIndexOf("next") + 5));
-                    }
-                    if (lessionArray[i].contains("back")) {
-                        sb.append("\'back~" + lessionArray[i].substring(lessionArray[i].lastIndexOf("back") + 4, lessionArray[i].lastIndexOf("back") + 5));
-                    }
-                    sb.append("]");
+        sb.append("[name~" + lessionArray[1]+"]");
+        //iterates over the parts of the Array which contains the actual slides
+        for(int i=6;i<lessionArray.length;i++){
+            String[] slides = lessionArray[i].split("_");
+            slides[0]=slides[0].toLowerCase();
+            sb.append("[" + (i - 6) + "~type~" + slides[0] + "\'");
+            //puts the input in the desired form depending on the type of slide it is
+            switch (slides[0]) {
+                case "text":
+                    sb.append("text~" + slides[1]);
+                    break;
+                case "quiz4":
+                    sb.append("points~" + slides[1] + "\'text~" + slides[2] + "\'answer1text~" + slides[3] + "\'answer1solution~" +
+                            slides[4] + "\'answer2text~" + slides[5] + "\'answer2solution~" +
+                            slides[6] + "\'answer3text~" + slides[7] + "\'answer3solution~" +
+                            slides[8] + "\'answer4text~" + slides[9] + "\'answer4solution~" +
+                            slides[10]);
+                    break;
+                case "button":
+                    sb.append("text~" + slides[1] + "\'buttonText~" + slides[2] + "\'method~" + slides[3] + "\'methodParameter~" + slides[4]);
+                    break;
+                case "question":
+                    sb.append("text~" + slides[1] + "\'buttonText~" + slides[2] + "\'method~" + slides[3] + "\'methodParameter~" + slides[4] + "\'buttonText2~" + slides[5] + "\'method2~" + slides[6] + "\'methodParameter2~" + slides[7]);
+                    break;
+                case "certificate":
+                    sb.append("successText~" + slides[1] + "\'failureText~" + slides[2] + "\'pointsNeeded~" + slides[3]);
+                    break;
+                default:
+                    sb.append("text~" + slides[1]);
             }
+            //appending the next and back functions, if it is found
+            if (lessionArray[i].contains("next")) {
+                sb.append("\'next~" + lessionArray[i].substring(lessionArray[i].lastIndexOf("next") + 4, lessionArray[i].lastIndexOf("next") + 5));
+            }
+            if (lessionArray[i].contains("back")) {
+                sb.append("\'back~" + lessionArray[i].substring(lessionArray[i].lastIndexOf("back") + 4, lessionArray[i].lastIndexOf("back") + 5));
+            }
+            sb.append("]");
+        }
 
         return sb.toString();
     }
@@ -506,7 +506,7 @@ public class DBHandler extends SQLiteOpenHelper{
             result.add(new LectionObject(
                     cursor.getString(cursor.getColumnIndex(COLUMN_LECTURENAME)),
                     cursor.getString(cursor.getColumnIndex(COLUMN_CONTENT)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_LECTURETYPE)),
+                    cursor.getInt(cursor.getColumnIndex(COLUMN_LECTURETYPE)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_DELAY)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_FREETIME)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)),
@@ -562,7 +562,7 @@ public class DBHandler extends SQLiteOpenHelper{
             String result = cursor.getString(cursor.getColumnIndex(COLUMN_PERMISSIONDESCRIPTION));
             cursor.close();
             return result;
-        //if there is no description for the permission
+            //if there is no description for the permission
         } else{
             cursor.close();
             return "Diese Permission hat noch keine Beschreibung.";
@@ -584,7 +584,7 @@ public class DBHandler extends SQLiteOpenHelper{
             String result = cursor.getString(cursor.getColumnIndex(COLUMN_PERMISSIONNICENAME));
             cursor.close();
             return result;
-        //if no description is found
+            //if no description is found
         } else {
             cursor.close();
             return "Diese Permission hat noch keinen besseren Namen.";
@@ -633,7 +633,7 @@ public class DBHandler extends SQLiteOpenHelper{
         db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 3 WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
         db.close();
 
-}
+    }
 
     /**
      * try to change the lection's status from locked (0) to unlocked (1) and return true on
@@ -711,12 +711,12 @@ public class DBHandler extends SQLiteOpenHelper{
                             +") VALUES(\'"+
                             setting[0]+"\', \'"+setting[1]+"\', \'"+setting[2]+"\')");
                 }else
-                db.execSQL("INSERT INTO "+TABLE_SETTINGS+"("
-                        +COLUMN_SETTING+", "
-                        +COLUMN_TYPE+", "
-                        +COLUMN_GOODNAME+", "
-                        +COLUMN_SETTINGDESCRIPTION+") VALUES(\'"+
-                        setting[0]+"\', \'"+setting[1]+"\', \'"+setting[2]+"\', \'"+setting[3]+"\')");
+                    db.execSQL("INSERT INTO "+TABLE_SETTINGS+"("
+                            +COLUMN_SETTING+", "
+                            +COLUMN_TYPE+", "
+                            +COLUMN_GOODNAME+", "
+                            +COLUMN_SETTINGDESCRIPTION+") VALUES(\'"+
+                            setting[0]+"\', \'"+setting[1]+"\', \'"+setting[2]+"\', \'"+setting[3]+"\')");
             }
         }
         renameEmptySettings();
