@@ -39,7 +39,6 @@ public class CSVRefreshFragment extends Fragment{
         classButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Handler handler =new Handler();
                 refreshClassButton.setBackgroundColor(Color.GREEN);
                 DBHandler dbHandler = new DBHandler(getActivity(),null,null,1);
                 dbHandler.updateLessions(((SettingsActivity)getActivity()).readCSV(R.raw.lektionen,getActivity()));
@@ -54,7 +53,6 @@ public class CSVRefreshFragment extends Fragment{
         descriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Handler handler =new Handler();
                 refreshDescriptionButton.setBackgroundColor(Color.GREEN);
                 DBHandler dbHandler = new DBHandler(getActivity(),null,null,1);
                 dbHandler.updateLessions(((SettingsActivity)getActivity()).readCSV(R.raw.permissions,getActivity()));
