@@ -508,7 +508,7 @@ public class DBHandler extends SQLiteOpenHelper{
                     cursor.getString(cursor.getColumnIndex(COLUMN_CONTENT)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_LECTURETYPE)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_DELAY)),
-                    cursor.getInt(cursor.getColumnIndex(COLUMN_FREETIME)),
+                    cursor.getLong(cursor.getColumnIndex(COLUMN_FREETIME)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_EICHELN))));
             cursor.moveToNext();
@@ -665,6 +665,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public void setLectionNextFreeTime(String lectionName, long nextFreeTime){
         SQLiteDatabase db = getWritableDatabase();
         long time = System.currentTimeMillis() + nextFreeTime;
+        Log.d("new time to insert",Long.toString(time));
         db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_FREETIME + " = \'" + time + "\' WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
         db.close();
     }
