@@ -41,15 +41,15 @@ public class TapAdapter extends FragmentPagerAdapter {
     @Override
     public android.app.Fragment getItem(int position) {
         if (position == 0) {
+            //adds AppListFragment for the second page
+            return new AppListFragment();
+        } else {
             //adds SettingListFragment for the first page
             SettingListFragment settingList = new SettingListFragment();
             Bundle settings = new Bundle();
             settings.putStringArrayList("settings", new ArrayList<String>(Arrays.asList(settingsArray)));
             settingList.setArguments(settings);
             return settingList;
-        } else {
-            //adds AppListFragment for the second page
-            return new AppListFragment();
         }
 
     }
@@ -75,9 +75,9 @@ public class TapAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {
-            return "Einstellungen";
-        } else {
             return "App-Liste";
+        } else {
+            return "Einstellungen";
         }
     }
 }

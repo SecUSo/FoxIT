@@ -31,8 +31,9 @@
         style="@style/Theme.AppCompat.Light.NoActionBar"
         android:hint="Loading..."
         android:textAlignment="center"
-        android:textStyle="italic"
-        android:typeface="monospace" />
+
+        android:typeface="monospace"
+        android:textSize="18sp" />
 
     <include layout="@layout/toolbar_actionbar" />
 

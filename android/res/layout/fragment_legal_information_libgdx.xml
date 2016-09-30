@@ -20,7 +20,7 @@
             tools:text=" https://www.apache.org/foundation/" />
 
         <TextView
-            android:text="Da wir für unser Projekt die Bibliothe libGDX benutzen, welche unter der Apache 2.0 Lizens steht, haben wir hier die entsprende Lizens angehängt."
+            android:text="Da wir für unser Projekt die Bibliothek libGDX benutzen, welche unter der Apache 2.0 Lizens steht, haben wir hier die entsprende Lizens angehängt."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView10"

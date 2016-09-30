@@ -54,7 +54,9 @@ public class TrophyListFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
 
-        TrophyObject[] trophyArray = {new AcornTrophy("acornTrophy", 3, "Es geht um Geld", true, R.mipmap.test_trophy), new AcornTrophy("acornTrophy", 3, "Es geht um mehr Geld!!!", false, R.mipmap.test_trophy)};
+        TrophyObject[] trophyArray = {new AcornTrophy("Baumhauskapitalist", 5, "Sammle viele Eicheln.", true, R.mipmap.test_trophy), new AcornTrophy("Goldene Gans", 15, "Geradezu dick vor Eicheln.", true, R.mipmap.test_trophy),
+                new AcornTrophy("Siebenschläfer", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy)
+        };
         this.trophyArray = trophyArray;
         Log.d("TrophyListFragment", "trophyArray created");
 
