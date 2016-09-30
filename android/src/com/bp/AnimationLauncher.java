@@ -55,8 +55,8 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 		AnimationHide f_hide = new AnimationHide();
 
 		assignFragment(R.id.tale, f_tale, "animationTale");
-		assignFragment(R.id.head, f_head, "animationTale");
-		assignFragment(R.id.hide, f_hide, "animationTale");
+		assignFragment(R.id.head, f_head, "animationHead");
+		assignFragment(R.id.hide, f_hide, "animationHide");
 
 		// BUTTONS
 		android.widget.ImageButton buttonTale = (android.widget.ImageButton) findViewById(R.id.button_tale);
@@ -67,15 +67,16 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 			}
 		});
 
-		android.widget.ImageButton buttonHead = (android.widget.ImageButton) findViewById(R.id.button_tale);
+		android.widget.ImageButton buttonHead = (android.widget.ImageButton) findViewById(R.id.button_head);
 		buttonTale.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
 				findViewById(R.id.head).setVisibility(View.VISIBLE);
 			}
 		});
 
-		android.widget.ImageButton buttonHide = (android.widget.ImageButton) findViewById(R.id.button_tale);
+		android.widget.ImageButton buttonHide = (android.widget.ImageButton) findViewById(R.id.button_hide);
 		buttonTale.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -94,7 +95,6 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
 		transaction.add(id, fragment,name);
-		transaction=transaction.addToBackStack(name);
 		transaction.commit();
 	}
 
