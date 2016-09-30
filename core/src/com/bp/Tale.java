@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 
-import sun.rmi.runtime.Log;
 
 public class Tale implements ApplicationListener {
 
@@ -38,8 +37,9 @@ public class Tale implements ApplicationListener {
 
         // animation
         batch = new SpriteBatch();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("tale/atlas_tale.atlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("tale/tale.atlas"));
         animation = new Animation(1/15f, textureAtlas.getRegions());
+
     }
 
     @Override

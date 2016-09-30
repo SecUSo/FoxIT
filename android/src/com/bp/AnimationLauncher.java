@@ -51,12 +51,12 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 
 		// FRAGMENTS
 		AnimationTale f_tale = new AnimationTale();
-		AnimationHead f_head = new AnimationHead();
-		AnimationHide f_hide = new AnimationHide();
+//		AnimationHead f_head = new AnimationHead();
+//		AnimationHide f_hide = new AnimationHide();
 
 		assignFragment(R.id.tale, f_tale, "animationTale");
-		assignFragment(R.id.head, f_head, "animationHead");
-		assignFragment(R.id.hide, f_hide, "animationHide");
+//		assignFragment(R.id.head, f_head, "animationHead");
+//		assignFragment(R.id.hide, f_hide, "animationHide");
 
 		// BUTTONS
 		android.widget.ImageButton buttonTale = (android.widget.ImageButton) findViewById(R.id.button_tale);
@@ -69,26 +69,27 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 			}
 		});
 
-		android.widget.ImageButton buttonHead = (android.widget.ImageButton) findViewById(R.id.button_head);
-		buttonHead.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				findViewById(R.id.head).setVisibility(View.VISIBLE);
-				findViewById(R.id.tale).setVisibility(View.GONE);
-				findViewById(R.id.hide).setVisibility(View.GONE);
-			}
-		});
-
-		android.widget.ImageButton buttonHide = (android.widget.ImageButton) findViewById(R.id.button_hide);
-		buttonHide.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				findViewById(R.id.hide).setVisibility(View.VISIBLE);
-				findViewById(R.id.head).setVisibility(View.GONE);
-				findViewById(R.id.tale).setVisibility(View.GONE);
-			}
-		});
-
+//
+//		android.widget.ImageButton buttonHead = (android.widget.ImageButton) findViewById(R.id.button_head);
+//		buttonHead.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				findViewById(R.id.head).setVisibility(View.VISIBLE);
+//				findViewById(R.id.tale).setVisibility(View.GONE);
+//				findViewById(R.id.hide).setVisibility(View.GONE);
+//			}
+//		});
+//
+//		android.widget.ImageButton buttonHide = (android.widget.ImageButton) findViewById(R.id.button_hide);
+//		buttonHide.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				findViewById(R.id.hide).setVisibility(View.VISIBLE);
+//				findViewById(R.id.head).setVisibility(View.GONE);
+//				findViewById(R.id.tale).setVisibility(View.GONE);
+//			}
+//		});
+//
 	}
 
 
