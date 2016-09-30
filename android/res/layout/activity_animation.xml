@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartScreen">
+    tools:context=".StartScreen"
+    android:background="@color/creme">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/tabs"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="100dp"
         android:id="@+id/tale">
 
     </RelativeLayout>
@@ -22,7 +23,7 @@
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/tabs"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="100dp"
         android:id="@+id/head">
     </RelativeLayout>
 
@@ -31,8 +32,9 @@
             android:layout_height="match_parent"
             android:layout_alignTop="@+id/tabs"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="100dp"
             android:id="@+id/hide">
+
     </RelativeLayout>
 
 
@@ -49,36 +51,75 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:srcCompat="@drawable/button_rot"
+        android:id="@+id/button_hide"
+        android:minHeight="0dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/button_rot"
+        android:layout_alignTop="@+id/button_head"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:srcCompat="@drawable/button_entenkacke"
         android:id="@+id/button_head"
         android:minHeight="0dp"
+        android:background="@drawable/button_entenkacke"
+        android:layout_alignTop="@+id/button_tale"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp" />
+
+    <TextView
+        android:text="Huhu!"
+        android:layout_width="wrap_content"
+        android:id="@+id/textView15"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_entenkacke"
-        android:layout_marginBottom="6dp" />
+        android:layout_marginTop="6dp"
+        android:layout_height="30dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_tale"
         android:minHeight="0dp"
-        android:layout_marginStart="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         app:srcCompat="@drawable/button_blau"
         android:background="@drawable/button_blau"
-        android:layout_marginBottom="6dp" />
+        android:layout_marginStart="40dp"
+        android:layout_above="@+id/textView13"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp" />
 
-    <ImageButton
+    <TextView
+        android:text="Wedeln!"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/button_rot"
-        android:id="@+id/button_hide"
-        android:minHeight="0dp"
-        android:layout_marginEnd="35dp"
+        android:id="@+id/textView13"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="6dp"
+        android:layout_height="30dp" />
+
+    <TextView
+        android:text="Buhhh!"
+        android:layout_width="wrap_content"
+        android:id="@+id/textView16"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/button_rot"
-        android:layout_marginBottom="6dp" />
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="6dp"
+        android:layout_height="30dp" />
 
 </RelativeLayout>

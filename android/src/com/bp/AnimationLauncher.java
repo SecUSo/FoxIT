@@ -3,6 +3,7 @@ package com.bp;
 import android.app.FragmentManager;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,9 +24,14 @@ import com.bp.Game;
 import android.support.v4.app.FragmentTransaction;
 
 import java.lang.reflect.Field;
+import java.sql.Time;
+import java.util.Date;
+import java.util.HashMap;
 
+import static android.R.attr.format24Hour;
 import static android.R.attr.id;
 import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * kicks off the animation
@@ -48,6 +54,16 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 		// show toolbar
 		toolbar = (Toolbar) findViewById(R.id.my_toolbar);
 		setSupportActionBar(toolbar);
+		HashMap<String, Boolean> unlockedAnimations = ValueKeeper.getInstance().animationList;
+		boolean unlocked = false;
+		for (String s : unlockedAnimations.keySet()) {
+			unlocked = unlockedAnimations.get(s);
+			if(unlocked) {
+				
+
+
+			}
+		}
 
 		// FRAGMENTS
 		AnimationTale f_tale = new AnimationTale();
@@ -63,7 +79,7 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 		buttonTale.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				findViewById(R.id.tale).setVisibility(View.VISIBLE);
+				findViewById(R.id.tale).setVisibility(VISIBLE);
 				findViewById(R.id.head).setVisibility(View.GONE);
 				findViewById(R.id.hide).setVisibility(View.GONE);
 			}
