@@ -64,6 +64,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
         fragmentList.put("Ergebnisse der initalen Analyse", new LegalInformationFragment());
         fragmentList.put("Hilfe", new FAQFragment());
         fragmentList.put("Impressum", new LegalInformationFragment());
+        fragmentList.put("App aktualisieren", new CSVRefreshFragment());
 
         context=getActivity().getApplicationContext();
         List<String> profileList = new ArrayList<>(Arrays.asList(profileListItems));
