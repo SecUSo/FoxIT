@@ -149,12 +149,10 @@ public class AnimationListFragment extends Fragment {
                     textView.setText("unlocked");}else{
                     textView.setText(Integer.toString(animationArray[position].getPrice()));
                 }
-                // set the animation's image
-                ImageView imageView = (ImageView) gridView
-                        .findViewById(R.id.grid_item_image);
 
-                //imageView.setImageResource(animationArray[position].getIcon());
 
+                TextView name=(TextView) gridView.findViewById(R.id.text_animation_name);
+                name.setText(animationArray[position].getName());
 
                 //change the animations color whether it's unlocked
                 RelativeLayout trophyFrame = (RelativeLayout) gridView

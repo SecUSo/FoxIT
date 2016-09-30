@@ -40,9 +40,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Baumhaus Kapitalist"
-            android:id="@+id/textView6"
-            android:textSize="18sp"
-            android:textColor="#b32d00"
+            android:id="@+id/text_animation_name"
+            android:textColor="#be0e0e"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
