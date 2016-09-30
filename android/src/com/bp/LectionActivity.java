@@ -300,7 +300,7 @@ public class LectionActivity extends AppCompatActivity {
             }
         },4250);}else{
 
-            long nextFreeTime=(lection.getDelaytime());//System.currentTimeMillis()%Integer.MAX_VALUE)+lection.getDelaytime();
+            long nextFreeTime=(System.currentTimeMillis()%Integer.MAX_VALUE)+lection.getDelaytime();
             DBHandler db = new DBHandler(this,null,null,1);
             db.setLectionNextFreeTime(lection.getLectionName(),nextFreeTime);
 

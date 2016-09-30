@@ -8,11 +8,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/text_fragment_name"
         android:text=" "
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/image_app_icon" />
+        android:layout_toEndOf="@+id/image_app_icon"
+        android:layout_marginLeft="5dp" />
 
 
 </RelativeLayout>
