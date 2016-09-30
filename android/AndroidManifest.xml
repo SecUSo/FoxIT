@@ -16,7 +16,7 @@
         android:minSdkVersion="17"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OnboardingActivity">
+        <activity android:name=".AnimationLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +32,7 @@
         <activity android:name=".ClassListActivity" />
         <activity android:name=".TrophyRoomActivity" />
         <activity android:name=".Home" />
-        <activity android:name=".AnimationLauncher" />
+        <activity android:name=".OnboardingActivity" />
         <activity android:name=".SettingsActivity" />
     </application>
 

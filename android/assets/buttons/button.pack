@@ -1,19 +1,19 @@
 
-button_animate.png
+button.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-ic_pets_black_24dp
+button
   rotate: false
   xy: 1, 1
-  size: 96, 96
-  orig: 96, 96
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
   index: -1
-cat(2)
+buttonpressed
   rotate: false
-  xy: 99, 49
-  size: 48, 48
-  orig: 48, 48
+  xy: 195, 1
+  size: 192, 192
+  orig: 192, 192
   offset: 0, 0
   index: -1
