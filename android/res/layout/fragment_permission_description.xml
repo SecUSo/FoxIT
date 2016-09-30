@@ -28,7 +28,8 @@
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/image_app_icon"
             android:text=" "
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffffff" />
 
         <ImageView
             android:id="@+id/image_app_icon"

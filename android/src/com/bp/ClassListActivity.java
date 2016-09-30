@@ -2,6 +2,7 @@ package com.bp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -157,6 +159,18 @@ public class ClassListActivity extends AppCompatActivity implements AdapterView.
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.layout_class_listentry, parent, false);
             }
+
+            ImageView classIcon =(ImageView) itemView.findViewById(R.id.image_class_icon);
+            //classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.onion));
+
+            switch(classObjectList.get(position).getName()){
+                case "Deep Web": {classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.onion));
+                break;}
+
+                case "Erstes Tapsen":{ classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.literature));break;}
+                default: classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.ring));
+            }
+
 
 
             //setting the text for lectionName

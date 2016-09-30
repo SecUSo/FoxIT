@@ -45,7 +45,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="1dp"
-                tools:src="@mipmap/mushroom" />
+                tools:src="@mipmap/mushroom"
+                android:src="@mipmap/mushroom" />
         </RelativeLayout>
     </FrameLayout>
 

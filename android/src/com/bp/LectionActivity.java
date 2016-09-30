@@ -281,7 +281,7 @@ public class LectionActivity extends AppCompatActivity {
         RelativeLayout layout=(RelativeLayout) findViewById(R.id.lection_frame);
         layout.setEnabled(true);
 
-        if(lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved()){
+        if(lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved()&&(lection.getProcessingStatus()!=3)){
          DBHandler db =new DBHandler(this,null,null,1);
             db.changeLectionToSolved(lection.getLectionName());
 

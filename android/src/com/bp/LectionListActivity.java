@@ -234,6 +234,7 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
         adapter = new MyListAdapter_lection();
         lectionList.setAdapter(adapter);
         lectionList.setOnItemClickListener(this);
+        adapter.notifyDataSetChanged();
     }
 
     /**

@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * Created by Tim on 11.06.2016.
  */
 public class PermissionListFragment extends ListFragment implements AdapterView.OnItemClickListener {
-    String[] permissionArray = {"This app does not request permissions."}; //contains the permissions displayed in the listView
+    String[] permissionArray = {"Diese App benötigt keine Berechtigungen."}; //contains the permissions displayed in the listView
     Context context;
     ApplicationInfo currentApp;           //the App whose permission are on display
     static boolean firstTimeScrollhint = true;  //true=the scrollHint has to be displayed, false= the listView has been scrolled
@@ -184,7 +184,7 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
      */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String permissionName= permissionArray[position];
-        if(!(permissionName.equals("Gefährliche Berechtigungen:")||permissionName.equals("Normale Berechtigungen:")||permissionName.equals("Harmlose Berechtigungen:")||permissionName.equals("Andere Berechtigungen:"))){
+        if(!(permissionName.equals("Gefährliche Berechtigungen:")||permissionName.equals("Normale Berechtigungen:")||permissionName.equals("Harmlose Berechtigungen:")||permissionName.equals("Andere Berechtigungen:")||permissionName.equals("Diese App benötigt keine Berechtigungen."))){
         //Fragment is created
         PermissionDescriptionFragment fragment = new PermissionDescriptionFragment();
         Bundle permissionNameBundle = new Bundle();
