@@ -51,11 +51,11 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/button_rot"
+        app:srcCompat="@drawable/button_entenkacke"
         android:id="@+id/button_hide"
         android:minHeight="0dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/button_rot"
+        android:background="@drawable/button_entenkacke"
         android:layout_alignTop="@+id/button_head"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp" />
@@ -63,14 +63,14 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/button_entenkacke"
         android:id="@+id/button_head"
         android:minHeight="0dp"
-        android:background="@drawable/button_entenkacke"
         android:layout_alignTop="@+id/button_tale"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="0dp"
+        android:background="@drawable/button_entenkacke"
+        app:srcCompat="@drawable/button_entenkacke" />
 
     <TextView
         android:text="Huhu!"
