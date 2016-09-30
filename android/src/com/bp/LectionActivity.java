@@ -41,7 +41,7 @@ public class LectionActivity extends AppCompatActivity {
         }
 
         //setting the lectionObject, it's used for storing the slides
-        lection = new LectionObject(getIntent().getStringExtra("name"),lectionDescription,getIntent().getIntExtra("type",0),getIntent().getIntExtra("delay",0),getIntent().getIntExtra("freetime",0),getIntent().getIntExtra("status",1),getIntent().getIntExtra("acorn",3));
+        lection = new LectionObject(getIntent().getStringExtra("name"),lectionDescription,getIntent().getIntExtra("type",0),getIntent().getIntExtra("delay",0),getIntent().getLongExtra("freetime",0),getIntent().getIntExtra("status",1),getIntent().getIntExtra("acorn",3));
 
         DBHandler db=new DBHandler(this,null,null,1);
         if(lection.getProcessingStatus()<2){
