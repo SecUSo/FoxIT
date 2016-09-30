@@ -1,14 +1,11 @@
 package com.bp;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
-import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
 
 import java.lang.reflect.Field;
@@ -17,7 +14,7 @@ import java.lang.reflect.Field;
  * Created by Lena on 28.09.2016.
  * initiates animation and forwards to core project
  */
-public class AnimationWindow extends AndroidFragmentApplication {
+public class AnimationTale extends AndroidFragmentApplication {
 
     /**
      * start animating
@@ -28,7 +25,7 @@ public class AnimationWindow extends AndroidFragmentApplication {
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return initializeForView(new Fox());
+        return initializeForView(new Tale());
     }
 
     @Override
