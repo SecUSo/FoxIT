@@ -16,6 +16,13 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DBHandler dbHandler = new DBHandler(this,null,null,1);
+        if (!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){
+            dbHandler.close();
+            Intent intent = new Intent(getApplicationContext(),OnboardingActivity.class);
+            startActivity(intent);
+        }
+        dbHandler.close();
         setContentView(R.layout.activity_home);
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
