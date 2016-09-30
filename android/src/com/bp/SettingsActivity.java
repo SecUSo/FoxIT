@@ -42,11 +42,6 @@ public class SettingsActivity extends AppCompatActivity {
         //Fragment is created
         SettingsFragment fragment = new SettingsFragment();
 
-        //Bundle permissionName = new Bundle();
-        //permissionName.putString("permissionName", permissionArray[position]);
-        //permissionName.putInt("appRating", appRating);
-        //fragment.setArguments(permissionName);
-
         //add fragment so the activitys' context
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

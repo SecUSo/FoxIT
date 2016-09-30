@@ -115,6 +115,7 @@ public class ClassListActivity extends AppCompatActivity implements AdapterView.
         //to inform lectionActivity which lection is to be displayed
         intent.putExtra("description",classObjectList.get(position).getDescriptionText());
         intent.putExtra("name", classObjectList.get(position).getName());
+        intent.putExtra("icon",getClassIcon(classObjectList.get(position).getName()));
         startActivity(intent);
     }
 
@@ -161,15 +162,8 @@ public class ClassListActivity extends AppCompatActivity implements AdapterView.
             }
 
             ImageView classIcon =(ImageView) itemView.findViewById(R.id.image_class_icon);
-            //classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.onion));
 
-            switch(classObjectList.get(position).getName()){
-                case "Deep Web": {classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.onion));
-                break;}
-
-                case "Erstes Tapsen":{ classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.literature));break;}
-                default: classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.ring));
-            }
+            classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),getClassIcon(classObjectList.get(position).getName())));
 
 
 
@@ -184,5 +178,12 @@ public class ClassListActivity extends AppCompatActivity implements AdapterView.
 
     }
 
+private int getClassIcon(String className){
+        switch(className){
+        case "Deep Web": return R.mipmap.onion;
+
+        case "Erstes Tapsen": return R.mipmap.literature;
+default: return R.mipmap.ring;
 
 }
+}}

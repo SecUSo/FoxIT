@@ -43,7 +43,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
             "Persönliche Daten",
             "Ergebnisse der initalen Analyse",
             "Hilfe",
-            "Impressum"
+            "Impressum", "App aktualisieren"
     };
     HashMap<String, Fragment> fragmentList = new HashMap<>();
 

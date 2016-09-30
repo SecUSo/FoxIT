@@ -75,6 +75,13 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
             classDescriptionText = getIntent().getStringExtra("description");
         }
 
+        if ( getIntent().getIntExtra("icon",0)!= 0) {
+            ImageView icon=(ImageView) findViewById(R.id.image_class_icon);
+            icon.setImageDrawable(ContextCompat.getDrawable(this,getIntent().getIntExtra("icon",0)));
+        }
+
+
+
         lectionObjectList = dbHandler.getLectionsFromDB(className);
         Log.d("lectionObjectList=empty", Boolean.toString(lectionObjectList.isEmpty()));
         lectionStringArray = new String[lectionObjectList.size()];
