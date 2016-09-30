@@ -27,8 +27,7 @@
         <activity android:name=".Analysis" />
         <activity android:name=".StartScreen" />
         <activity android:name=".LectionActivity"
-            android:noHistory="true"
-            />
+            android:noHistory="true" />
         <activity android:name=".LectionListActivity" />
         <activity android:name=".ClassListActivity" />
         <activity android:name=".TrophyRoomActivity" />
@@ -36,5 +35,4 @@
         <activity android:name=".AnimationLauncher" />
         <activity android:name=".SettingsActivity" />
     </application>
-
 </manifest>

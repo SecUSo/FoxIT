@@ -24,7 +24,7 @@ public class Head implements ApplicationListener {
 
         // animation
         batch = new SpriteBatch();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("tale/atlas_tale.atlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("head/atlas_tale.atlas"));
         animation = new Animation(1/15f, textureAtlas.getRegions());
     }
 
