@@ -59,7 +59,8 @@ public class AnimationListFragment extends Fragment {
         //check for each animation if it's already unlocked
         ValueKeeper o = ValueKeeper.getInstance();
         for (AnimationObject ao : animationArray) {
-            o.addTrophyIfNotContained(ao.getName(), ao.getUnlocked());
+            o.addTrophyIfNotContained(ao.getName(), true);
+            //ao.getUnlocked());
         }
         this.animationArray=animationArray;
         return view;
