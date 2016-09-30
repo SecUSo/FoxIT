@@ -6,8 +6,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,15 +17,9 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * presents and structures the user device settings
@@ -54,7 +46,6 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-
         return inflater.inflate(R.layout.fragment_setting_list, container, false);
     }
 
@@ -69,12 +60,14 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         context = getActivity().getApplicationContext();
+
         //creates the listView
         ArrayAdapter<String> adapter = new MyListAdapter_settings();
         setListAdapter(adapter);
 
         //adds the onClickAction defined by onItemClick()
         getListView().setOnItemClickListener(this);
+
         // on scrolling down the scrollHint disappears
         getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
 
@@ -87,7 +80,6 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
             }
         });
     }
@@ -106,10 +98,18 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
         Arrays.sort(settingsArray);
     }
 
+    /**
+     * show advanced setting options in new fragment
+     *
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Bundle settingsBundle = new Bundle();                  //Bundle to pass arguments to the Fragment
+        Bundle settingsBundle = new Bundle(); //Bundle to pass arguments to the Fragment
         SettingValueFragment fragment = new SettingValueFragment();
         final PackageManager pm = context.getPackageManager();
 
@@ -118,7 +118,6 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
         settingsBundle.putString("settingValue", preValue.substring(0, preValue.indexOf(";")));
         settingsBundle.putString("settingOriginalName", preValue.substring(preValue.indexOf(";") + 1, preValue.length()));
         fragment.setArguments(settingsBundle);
-
 
         //add fragment so the activitys' context
         FragmentManager manager = getFragmentManager();
@@ -134,9 +133,7 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
         appFrame.setVisibility(View.GONE);
         StartScreen a = (StartScreen) getActivity();
         a.mViewPager.setVisibility(View.GONE);
-
     }
-
 
     /**
      * class to define the way the settings are displayed in the listView
@@ -186,7 +183,5 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
             return itemView;
         }
     }
-
-
 }
 

@@ -3,7 +3,6 @@ package com.bp;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -22,7 +21,8 @@ public class LectionActivity extends AppCompatActivity {
     String lectionDescription;
     int slideNumber = 0;
     Toolbar toolbar;
-    boolean didEvaluationStart=false;
+    boolean didEvaluationStart = false;
+
     /**
      * @author Tim
      */
@@ -36,16 +36,17 @@ public class LectionActivity extends AppCompatActivity {
         // sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        if(toolbar!=null) {
+        if (toolbar != null) {
             toolbar.setTitle("Toolbar");
         }
 
         //setting the lectionObject, it's used for storing the slides
-        lection = new LectionObject(getIntent().getStringExtra("name"),lectionDescription,getIntent().getIntExtra("type",0),getIntent().getIntExtra("delay",0),getIntent().getLongExtra("freetime",0),getIntent().getIntExtra("status",1),getIntent().getIntExtra("acorn",3));
+        lection = new LectionObject(getIntent().getStringExtra("name"), lectionDescription, getIntent().getIntExtra("type", 0), getIntent().getIntExtra("delay", 0), getIntent().getLongExtra("freetime", 0), getIntent().getIntExtra("status", 1), getIntent().getIntExtra("acorn", 3));
 
-        DBHandler db=new DBHandler(this,null,null,1);
-        if(lection.getProcessingStatus()<2){
-        db.changeLectionToRead(lection.getLectionName());}
+        DBHandler db = new DBHandler(this, null, null, 1);
+        if (lection.getProcessingStatus() < 2) {
+            db.changeLectionToRead(lection.getLectionName());
+        }
 
         //add the first slide to the activities' context
         FragmentManager manager = getFragmentManager();
@@ -57,17 +58,13 @@ public class LectionActivity extends AppCompatActivity {
             setImage("check");
         }
         transaction.add(R.id.lection_frame, firstSlide, "slide");
-
         transaction.commit();
-
 
         //if the first slide does not have a previous slide, hide the backArrow
         final ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
         if (lection.slideHashMap.get(Integer.toString(slideNumber)).back() == null) {
             backButton.setVisibility(View.GONE);
         }
-
-
 
         // define the proper button behavior for switching slides, and change the button image accordingly
         ImageButton nextButton = (ImageButton) findViewById(R.id.next_button);
@@ -115,7 +112,7 @@ public class LectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                Slide currentSlide =lection.slideHashMap.get(Integer.toString(slideNumber));
+                Slide currentSlide = lection.slideHashMap.get(Integer.toString(slideNumber));
                 //if the slide defines a backSlide jump to it
                 if (currentSlide.back() != null) {
                     jumpToSlide(currentSlide.back());
@@ -139,7 +136,6 @@ public class LectionActivity extends AppCompatActivity {
                     if (lection.getBackSlide().equals("noBack") && lection.slideHashMap.get(Integer.toString(slideNumber)).back() == null) {
                         backButton.setVisibility(View.GONE);
                     }
-
                     ft.commit();
                 }
             }
@@ -151,45 +147,47 @@ public class LectionActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String nextSlideNumber= lection.slideHashMap.get(Integer.toString(slideNumber)).next();
+                String nextSlideNumber = lection.slideHashMap.get(Integer.toString(slideNumber)).next();
 
                 Slide slide = lection.slideHashMap.get(Integer.toString(slideNumber));
-                if (!(didEvaluationStart)&&(!(slide instanceof QuizSlide) || ((QuizSlide) slide).getEvaluated())) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                int slideToJumpTo; //aka the next SlideNumber
-                //if the next slide is a quizSlide show the question mark
-                if (nextSlideNumber != null && nextSlideNumber.equals("quiz")) {
-                    ((QuizSlide) lection.slideHashMap.get(Integer.toString(slideNumber))).evaluation();
-                    //if there is no next slide after the next show the cross
-                    if ((nextSlideNumber == null) && (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null)) {
-                        setImage("kreuz");
-                        //if there is a next slide after the next slide set the arrow
+                if (!(didEvaluationStart) && (!(slide instanceof QuizSlide) || ((QuizSlide) slide).getEvaluated())) {
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    int slideToJumpTo; //aka the next SlideNumber
+                    //if the next slide is a quizSlide show the question mark
+                    if (nextSlideNumber != null && nextSlideNumber.equals("quiz")) {
+                        ((QuizSlide) lection.slideHashMap.get(Integer.toString(slideNumber))).evaluation();
+                        //if there is no next slide after the next show the cross
+                        if ((nextSlideNumber == null) && (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null)) {
+                            setImage("kreuz");
+                            //if there is a next slide after the next slide set the arrow
+                        } else {
+                            setImage("pfeil_rechts");
+                        }
                     } else {
-                        setImage("pfeil_rechts");
+                        //if the current slide defines a next slide that's the slideNumberToJumpTo
+                        if (nextSlideNumber != null) {
+                            slideToJumpTo = Integer.parseInt(nextSlideNumber);
+                        } else {
+                            //otherwise it's the slide with the next higher number
+                            slideToJumpTo = slideNumber + 1;
+                        }
+                        //if the slide with the retrieved number exists, jump to it
+                        if (lection.lectionInfoHashMap.get(Integer.toString(slideToJumpTo)) != null) {
+                            jumpToSlide(Integer.toString(slideToJumpTo));
+                        } else {
+                            //otherwise close the Activity
+                            goBackToLectionList(slideNumber);
+                        }
                     }
-                } else {
-                    //if the current slide defines a next slide that's the slideNumberToJumpTo
-                    if (nextSlideNumber != null) {
-                        slideToJumpTo = Integer.parseInt(nextSlideNumber);
-                    } else {
-                        //otherwise it's the slide with the next higher number
-                        slideToJumpTo = slideNumber + 1;
-                    }
-                    //if the slide with the retrieved number exists, jump to it
-                    if (lection.lectionInfoHashMap.get(Integer.toString(slideToJumpTo)) != null) {
-                        jumpToSlide(Integer.toString(slideToJumpTo));
-                    } else {
-                        //otherwise close the Activity
-                        goBackToLectionList(slideNumber);
-                    }
+                    ft.commit();
                 }
-                ft.commit();
             }
-        }});
+        });
     }
 
     /**
      * set the right icon for the right button
+     *
      * @param image kreuz, pfeil_rechts, question
      * @author Tim
      */
@@ -206,12 +204,14 @@ public class LectionActivity extends AppCompatActivity {
             case ("check"):
                 nextButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check));
                 break;
-            default: nextButton.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.kreuz));
+            default:
+                nextButton.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.kreuz));
         }
     }
 
     /**
      * jump to a specific slide
+     *
      * @param next the slide Number of the slide to switch to
      * @author Tim
      */
@@ -267,43 +267,45 @@ public class LectionActivity extends AppCompatActivity {
                 }
             }
         }
-
         ft.commit();
-
     }
 
-    private void goBackToLectionList(int currentSlide){
-        didEvaluationStart=true;
-        ImageView button=(ImageView) findViewById(R.id.next_button);
+    /**
+     * wrap up the lection, count points and return to lection overview
+     * @param currentSlide
+     */
+    private void goBackToLectionList(int currentSlide) {
+        didEvaluationStart = true;
+        ImageView button = (ImageView) findViewById(R.id.next_button);
         button.setVisibility(View.GONE);
-        button=(ImageView) findViewById(R.id.back_button);
+        button = (ImageView) findViewById(R.id.back_button);
         button.setVisibility(View.GONE);
-        RelativeLayout layout=(RelativeLayout) findViewById(R.id.lection_frame);
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.lection_frame);
         layout.setEnabled(true);
 
-        if(lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved()&&(lection.getProcessingStatus()!=3)){
-         DBHandler db =new DBHandler(this,null,null,1);
+        if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3)) {
+            DBHandler db = new DBHandler(this, null, null, 1);
             db.changeLectionToSolved(lection.getLectionName());
 
-        MethodFactory factory=new MethodFactory(this);
-        Method method =factory.createMethod("changeTokenCount");
-        method.callClassMethod("1");
+            MethodFactory factory = new MethodFactory(this);
+            Method method = factory.createMethod("changeTokenCount");
+            method.callClassMethod("1");
             //raise the acornCount on success
-            Method method2 =factory.createMethod("changeAcornCount");
+            Method method2 = factory.createMethod("changeAcornCount");
             method2.callClassMethod(Integer.toString(lection.getReward()));//TODO customisable number
 
-        Handler handler =new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                onBackPressed();
-            }
-        },4250);}else{
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onBackPressed();
+                }
+            }, 4250);
+        } else {
 
-            long nextFreeTime=(System.currentTimeMillis()%Integer.MAX_VALUE)+lection.getDelaytime();
-            DBHandler db = new DBHandler(this,null,null,1);
-            db.setLectionNextFreeTime(lection.getLectionName(),nextFreeTime);
-
+            long nextFreeTime = (System.currentTimeMillis() % Integer.MAX_VALUE) + lection.getDelaytime();
+            DBHandler db = new DBHandler(this, null, null, 1);
+            db.setLectionNextFreeTime(lection.getLectionName(), nextFreeTime);
             onBackPressed();
         }
     }
