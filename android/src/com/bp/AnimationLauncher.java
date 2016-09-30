@@ -64,24 +64,28 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 			@Override
 			public void onClick(View v) {
 				findViewById(R.id.tale).setVisibility(View.VISIBLE);
+				findViewById(R.id.head).setVisibility(View.GONE);
+				findViewById(R.id.hide).setVisibility(View.GONE);
 			}
 		});
 
 		android.widget.ImageButton buttonHead = (android.widget.ImageButton) findViewById(R.id.button_head);
-		buttonTale.setOnClickListener(new View.OnClickListener() {
+		buttonHead.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
 				findViewById(R.id.head).setVisibility(View.VISIBLE);
+				findViewById(R.id.tale).setVisibility(View.GONE);
+				findViewById(R.id.hide).setVisibility(View.GONE);
 			}
 		});
 
 		android.widget.ImageButton buttonHide = (android.widget.ImageButton) findViewById(R.id.button_hide);
-		buttonTale.setOnClickListener(new View.OnClickListener() {
+		buttonHide.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				findViewById(R.id.hide).setVisibility(View.VISIBLE);
-
+				findViewById(R.id.head).setVisibility(View.GONE);
+				findViewById(R.id.tale).setVisibility(View.GONE);
 			}
 		});
 
