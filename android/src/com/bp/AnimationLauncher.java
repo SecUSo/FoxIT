@@ -59,6 +59,7 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 		for (String s : unlockedAnimations.keySet()) {
 			unlocked = unlockedAnimations.get(s);
 			if(unlocked) {
+
 				if(s.equalsIgnoreCase("Kopfschütteln")) {
 					AnimationHead f_head = new AnimationHead();
 					assignFragment(R.id.head, f_head, "animationHead");
@@ -72,33 +73,33 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 						}
 					});
 				}
-				if(s.equalsIgnoreCase("Schwanzwedeln")) {
-
-					AnimationTale f_tale = new AnimationTale();
-					assignFragment(R.id.tale, f_tale, "animationTale");
-					android.widget.ImageButton buttonTale = (android.widget.ImageButton) findViewById(R.id.button_tale);
-					buttonTale.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							findViewById(R.id.tale).setVisibility(VISIBLE);
-							findViewById(R.id.head).setVisibility(View.GONE);
-							findViewById(R.id.hide).setVisibility(View.GONE);
-						}
-					});
-				}
-				if(s.equalsIgnoreCase("Halt")) {
-					AnimationHide f_hide = new AnimationHide();
-					assignFragment(R.id.hide, f_hide, "animationHide");
-					android.widget.ImageButton buttonHide = (android.widget.ImageButton) findViewById(R.id.button_hide);
-					buttonHide.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							findViewById(R.id.hide).setVisibility(View.VISIBLE);
-							findViewById(R.id.head).setVisibility(View.GONE);
-							findViewById(R.id.tale).setVisibility(View.GONE);
-						}
-					});
-				}
+//				if(s.equalsIgnoreCase("Schwanzwedeln")) {
+//
+//					AnimationTale f_tale = new AnimationTale();
+//					assignFragment(R.id.tale, f_tale, "animationTale");
+//					android.widget.ImageButton buttonTale = (android.widget.ImageButton) findViewById(R.id.button_tale);
+//					buttonTale.setOnClickListener(new View.OnClickListener() {
+//						@Override
+//						public void onClick(View v) {
+//							findViewById(R.id.tale).setVisibility(VISIBLE);
+//							findViewById(R.id.head).setVisibility(View.GONE);
+//							findViewById(R.id.hide).setVisibility(View.GONE);
+//						}
+//					});
+//				}
+//				if(s.equalsIgnoreCase("Halt")) {
+//					AnimationHide f_hide = new AnimationHide();
+//					assignFragment(R.id.hide, f_hide, "animationHide");
+//					android.widget.ImageButton buttonHide = (android.widget.ImageButton) findViewById(R.id.button_hide);
+//					buttonHide.setOnClickListener(new View.OnClickListener() {
+//						@Override
+//						public void onClick(View v) {
+//							findViewById(R.id.hide).setVisibility(View.VISIBLE);
+//							findViewById(R.id.head).setVisibility(View.GONE);
+//							findViewById(R.id.tale).setVisibility(View.GONE);
+//						}
+//					});
+//				}
 			}
 		}
 	}
@@ -106,7 +107,12 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 	public void assignFragment(int id, Fragment fragment, String name) {
 		//add fragment so the activity's context
 		RelativeLayout layout = (RelativeLayout) findViewById(id);
-		layout.setVisibility(GONE);
+		if (id == R.id.hide) {
+			layout.setVisibility(VISIBLE);
+		}
+		else {
+			layout.setVisibility(GONE);
+		}
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
 		transaction.add(id, fragment,name);
