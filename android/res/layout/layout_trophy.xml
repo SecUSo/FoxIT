@@ -22,7 +22,6 @@
             android:layout_weight="15.50"
             android:adjustViewBounds="true"
             android:longClickable="false"
-            android:layout_below="@+id/textView6"
             android:layout_centerHorizontal="true">
         </ImageView>
 

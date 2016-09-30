@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/second_fragment_frame"
-        android:layout_below="@+id/include2"
+        android:layout_below="@+id/include"
         android:layout_marginTop="55dp">
 
     </RelativeLayout>
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:id="@+id/first_fragment_frame"
-        android:layout_below="@+id/include2"
+        android:layout_below="@+id/include"
         android:layout_marginTop="55dp">
 
 
