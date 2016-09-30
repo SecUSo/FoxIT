@@ -18,7 +18,7 @@
 
     <TextView
         app:layout_widthPercent="55%"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/text_setting_type"
@@ -29,7 +29,8 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:clickable="false"
-        android:gravity="left" />
+        android:gravity="left"
+        android:minHeight="50dp" />
 
     <TextView
         app:layout_widthPercent="35%"

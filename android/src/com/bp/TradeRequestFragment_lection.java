@@ -36,7 +36,7 @@ public class TradeRequestFragment_lection extends Fragment {
      * @author Tim
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        view = inflater.inflate(R.layout.fragment_trade_request, container, false);
+        view = inflater.inflate(R.layout.fragment_trade_request_lection, container, false);
         thisFragment = this;
 
         //add the yes button's behavior

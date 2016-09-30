@@ -36,8 +36,8 @@ public class ProfilFragment extends ListFragment implements AdapterView.OnItemCl
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         lengthArray =new String[profilList.length];
-        ValueKeeper vk=ValueKeeper.getInstance();
-        profilList= vk.getProfilList(profilList);
+        //ValueKeeper vk=ValueKeeper.getInstance();
+       // profilList= vk.getProfilList(profilList);
 
         context = getActivity().getApplicationContext();
         view = getActivity().getLayoutInflater().inflate(R.layout.fragment_profil, container, false);

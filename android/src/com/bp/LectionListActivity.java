@@ -59,6 +59,11 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
             toolbar.setTitle("Toolbar");
         }
 
+        ListView lectionList = (ListView) findViewById(R.id.headline_frame);
+        //creates the listView
+        adapter = new MyListAdapter_lection();
+        lectionList.setAdapter(adapter);
+        lectionList.setOnItemClickListener(this);
 
         //retrieve the lectionDescriptions
         if (getIntent().getStringArrayExtra("lection") != null) {
@@ -230,18 +235,13 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
 
     /**
      * @author Tim
-     * just an experiment if you can change the listEntrys afterwards,
-     * I will remove it at given time
+     * reloads the listEntrys afterwards,
      */
     @Override
     public void onResume() {
-        super.onResume();
-        ListView lectionList = (ListView) findViewById(R.id.headline_frame);
-        //creates the listView
-        adapter = new MyListAdapter_lection();
-        lectionList.setAdapter(adapter);
-        lectionList.setOnItemClickListener(this);
+
         adapter.notifyDataSetChanged();
+        super.onResume();
     }
 
     /**
