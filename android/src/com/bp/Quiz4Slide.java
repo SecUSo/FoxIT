@@ -118,7 +118,7 @@ public class Quiz4Slide extends QuizSlide {
         if(answer1true==box1.isChecked()&&answer2true==box2.isChecked()&&answer3true==box3.isChecked()&&answer4true==box4.isChecked()){
             Toast toast = Toast.makeText(getActivity(), rightAnswer, Toast.LENGTH_LONG);
             TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-            v.setBackgroundColor(Color.GREEN);
+            //v.setBackgroundColor(Color.GREEN);
             toast.show();
             MethodFactory factory=new MethodFactory(getActivity());
             factory.createMethod("scoreAdd").callClassMethod(points);
@@ -127,7 +127,7 @@ public class Quiz4Slide extends QuizSlide {
 
             Toast toast = Toast.makeText(getActivity(), wrongAnswer, Toast.LENGTH_LONG);
             TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-            v.setBackgroundColor(Color.RED);
+            //v.setBackgroundColor(Color.RED);
             toast.show();
 
 

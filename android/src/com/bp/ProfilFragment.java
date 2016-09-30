@@ -36,27 +36,31 @@ public class ProfilFragment extends ListFragment implements AdapterView.OnItemCl
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         lengthArray =new String[profilList.length];
+        ValueKeeper vk=ValueKeeper.getInstance();
+        profilList= vk.getProfilList(profilList);
 
         context = getActivity().getApplicationContext();
         view = getActivity().getLayoutInflater().inflate(R.layout.fragment_profil, container, false);
 
-        EditText inputField= (EditText) view.findViewById(R.id.input_input);
+        final EditText inputField= (EditText) view.findViewById(R.id.input_input);
         inputField.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if(markedProfil!=-1){
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                 {
                     switch (keyCode)
                     {
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-                            profilList[markedProfil].setInput(inputText.getText().toString());
+                            profilList[markedProfil].setInput(inputField.getText().toString());
                             adapter.notifyDataSetChanged();
                             return true;
                         default:
                             break;
                     }
-                }
+                }}
                 return false;
             }
         });
@@ -150,6 +154,14 @@ public class ProfilFragment extends ListFragment implements AdapterView.OnItemCl
         }
 
 }
+    @Override
+   public void onDestroyView (){
+
+    ValueKeeper vk= ValueKeeper.getInstance();
+    vk.setProfilList(profilList);
+super.onDestroyView();
+}
+
 
 }
 

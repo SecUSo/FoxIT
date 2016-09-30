@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="für diese Lektion ausgeben?"
+                android:text="für diese Animation ausgeben?"
                 android:id="@+id/text_product_type"
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@+id/text_amount"
