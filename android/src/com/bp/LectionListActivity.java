@@ -22,14 +22,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-
-public class LectionListActivity extends AppCompatActivity implements  AdapterView.OnItemClickListener {
+//Displayes the lections corresponding to a certain course and manages their usage
+public class LectionListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     //List of lectionDescribtions, send by ClassListActivity
     static String[] lectionStringArray; //has to be static for now
@@ -75,11 +71,10 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
             classDescriptionText = getIntent().getStringExtra("description");
         }
 
-        if ( getIntent().getIntExtra("icon",0)!= 0) {
-            ImageView icon=(ImageView) findViewById(R.id.image_class_icon);
-            icon.setImageDrawable(ContextCompat.getDrawable(this,getIntent().getIntExtra("icon",0)));
+        if (getIntent().getIntExtra("icon", 0) != 0) {
+            ImageView icon = (ImageView) findViewById(R.id.image_class_icon);
+            icon.setImageDrawable(ContextCompat.getDrawable(this, getIntent().getIntExtra("icon", 0)));
         }
-
 
 
         lectionObjectList = dbHandler.getLectionsFromDB(className);
@@ -103,9 +98,6 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
         TextView description = (TextView) findViewById(R.id.description_text);
         description.setText(classDescriptionText);
 
-        //TODO
-        //Methode schreiben, die abhängig von
-        //den schon gelösten Lektionen die Zahlen ändern
 
         /**
          * Display the descriptionText if the headline is pressed
@@ -203,8 +195,8 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
 
             } else {
 
-                Log.d("MyApp","CurrentTime"+ Long.toString((System.currentTimeMillis())%Integer.MAX_VALUE));
-                Log.d("MyApp","duTime"+Long.toString(lectionObjectList.get(position).getNextfreetime()));
+                Log.d("MyApp", "CurrentTime" + Long.toString((System.currentTimeMillis()) % Integer.MAX_VALUE));
+                Log.d("MyApp", "duTime" + Long.toString(lectionObjectList.get(position).getNextfreetime()));
 
 
                 Intent intent = new Intent(getApplicationContext(), LectionActivity.class);
@@ -287,9 +279,9 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
 
             //setting the stars
             ImageView solvedIcon = (ImageView) itemView.findViewById(R.id.image_lection_solved);
-            if(lection.getNextfreetime()>System.currentTimeMillis()){
-                solvedIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.mipmap.ic_hourglass_empty_black_48dp));
-            }else {
+            if (lection.getNextfreetime() > System.currentTimeMillis()) {
+                solvedIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_hourglass_empty_black_48dp));
+            } else {
 
                 solvedIcon.setImageDrawable(getIcon(lection.getProcessingStatus()));
             }
@@ -335,7 +327,7 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
                 l.setProcessingStatus(1);
                 //update the listView
                 adapter.notifyDataSetChanged();
-                DBHandler dbHandler = new DBHandler(this, null,null,1);
+                DBHandler dbHandler = new DBHandler(this, null, null, 1);
                 dbHandler.changeLectionToUnlocked(articleOfCommerce);
                 dbHandler.close();
                 return true;

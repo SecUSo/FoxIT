@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * presents and structures the user device settings
  */
-public class SettingListFragment extends ListFragment implements AdapterView.OnItemClickListener{
+public class SettingListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     /*
     an array holding all of the displayed settings
@@ -68,7 +68,7 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        context= getActivity().getApplicationContext();
+        context = getActivity().getApplicationContext();
         //creates the listView
         ArrayAdapter<String> adapter = new MyListAdapter_settings();
         setListAdapter(adapter);
@@ -93,44 +93,46 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
     }
 
 
-    /**methodLeft to set the fragment's arguments from the outside
-     * @author Tim
+    /**
+     * methodLeft to set the fragment's arguments from the outside
+     *
      * @param arg Bundle holding an ArrayList calles "permissions" holding an app's permissions
-*/
+     * @author Tim
+     */
     @Override
-    public void setArguments(Bundle arg){
-        ArrayList<String> settings= arg.getStringArrayList("settings");
-        settingsArray=settings.toArray(new String[settings.size()]);
+    public void setArguments(Bundle arg) {
+        ArrayList<String> settings = arg.getStringArrayList("settings");
+        settingsArray = settings.toArray(new String[settings.size()]);
         Arrays.sort(settingsArray);
-        }
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         Bundle settingsBundle = new Bundle();                  //Bundle to pass arguments to the Fragment
-        SettingValueFragment fragment =new SettingValueFragment();
+        SettingValueFragment fragment = new SettingValueFragment();
         final PackageManager pm = context.getPackageManager();
 
-                settingsBundle.putString("settingName",settingsArray[position].substring(0,settingsArray[position].indexOf(";")));
-        String preValue =settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
-        settingsBundle.putString("settingValue", preValue.substring(0,preValue.indexOf(";")));
-                settingsBundle.putString("settingOriginalName",preValue.substring(preValue.indexOf(";") + 1, preValue.length()));
+        settingsBundle.putString("settingName", settingsArray[position].substring(0, settingsArray[position].indexOf(";")));
+        String preValue = settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
+        settingsBundle.putString("settingValue", preValue.substring(0, preValue.indexOf(";")));
+        settingsBundle.putString("settingOriginalName", preValue.substring(preValue.indexOf(";") + 1, preValue.length()));
         fragment.setArguments(settingsBundle);
 
 
         //add fragment so the activitys' context
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.permissionFrame,fragment,"permission");
-        transaction=transaction.addToBackStack("permission");
+        transaction.add(R.id.permissionFrame, fragment, "permission");
+        transaction = transaction.addToBackStack("permission");
         transaction.commit();
 
         //make appListFragment and SettingsListFragment invisible after permissionListFragment is created
-        FrameLayout settingFrame= (FrameLayout) getActivity().findViewById(R.id.settingFrame);
-        FrameLayout appFrame= (FrameLayout) getActivity().findViewById(R.id.appFrame);
+        FrameLayout settingFrame = (FrameLayout) getActivity().findViewById(R.id.settingFrame);
+        FrameLayout appFrame = (FrameLayout) getActivity().findViewById(R.id.appFrame);
         settingFrame.setVisibility(View.GONE);
         appFrame.setVisibility(View.GONE);
-        StartScreen a=(StartScreen) getActivity();
+        StartScreen a = (StartScreen) getActivity();
         a.mViewPager.setVisibility(View.GONE);
 
     }
@@ -176,8 +178,8 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
 
             //set the text for the setting's setting
             TextView settingSetting = (TextView) itemView.findViewById(R.id.text_setting_setting);
-            String preValue =settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
-            String value = preValue.substring(0,preValue.indexOf(";"));
+            String preValue = settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
+            String value = preValue.substring(0, preValue.indexOf(";"));
             if (value.equals("0")) value = "OFF";
             if (value.equals("1")) value = "ON";
             settingSetting.setText(value);

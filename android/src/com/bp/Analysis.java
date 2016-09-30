@@ -20,12 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +34,7 @@ public class Analysis extends AppCompatActivity {
 
     /**
      * while all the data is retrieved, a loading symbol will be shown on screen
+     *
      * @param savedInstanceState
      * @author Tim
      * @author Noah
@@ -65,20 +61,21 @@ public class Analysis extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
     }
 
     /**
      * combines two arrays
-     * @param first array
+     *
+     * @param first  array
      * @param second array
      * @return result a new array containing the content of input arrays
      * @author Noah
      */
     public static ContentValues[] combineArraysP2(ContentValues[] first, ContentValues[] second) {
         int length = first.length + second.length;
-        ContentValues[] result = new ContentValues[length+2];
+        ContentValues[] result = new ContentValues[length + 2];
         System.arraycopy(first, 0, result, 0, first.length);
         System.arraycopy(second, 0, result, first.length, second.length);
         return result;
@@ -91,7 +88,7 @@ public class Analysis extends AppCompatActivity {
      * @author Noah
      */
     public void getALL_APPS() {
-        DBHandler dbHandler = new DBHandler(this,null,null,1);
+        DBHandler dbHandler = new DBHandler(this, null, null, 1);
         final PackageManager pm = getPackageManager();
 
         // get a list of installed apps.
@@ -133,9 +130,8 @@ public class Analysis extends AppCompatActivity {
     }
 
 
-
     /**
-     * determine the state of the lock screen
+     * determine the state of the lock screen and writes it into the database
      *
      * @return 0      -none
      * 131072 -pin
@@ -153,38 +149,38 @@ public class Analysis extends AppCompatActivity {
         //In case of APK != M there is a LOCK_PATTERN_UTILS
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             String LOCK_PATTERN_UTILS = "com.android.internal.widget.LockPatternUtils";
-            name="lock_pattern_utils";
+            name = "lock_pattern_utils";
 
             try {
                 Class<?> lockPatternUtilsClass = Class.forName(LOCK_PATTERN_UTILS);
                 Object lockPatternUtils = lockPatternUtilsClass.getConstructor(Context.class).newInstance(this);
                 Method method = lockPatternUtilsClass.getMethod("getActivePasswordQuality");
                 int lockProtectionLevel = Integer.valueOf(String.valueOf(method.invoke(lockPatternUtils)));
-                value= lockProtectionLevel;
+                value = lockProtectionLevel;
                 // Then check if lockProtectionLevel == DevicePolicyManager.TheConstantForWhicheverLevelOfProtectionYouWantToEnforce, and return true if the check passes, false if it fails
             } catch (Exception ex) {
                 ex.printStackTrace();
-                value= 66;
+                value = 66;
             }
         }
         //In case of APK = M there is a KeyguardManager
         else {
-            name="keyguard_manager";
+            name = "keyguard_manager";
             KeyguardManager a = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
             if (a.isDeviceSecure()) {
-                value= 1;
+                value = 1;
             } else {
-                value= 0;
+                value = 0;
             }
         }
-        cv.put(DBHandler.COLUMN_SETTING,name);
-        cv.put(DBHandler.COLUMN_TYPE,2);
-        cv.put(DBHandler.COLUMN_INITIAL,value);
+        cv.put(DBHandler.COLUMN_SETTING, name);
+        cv.put(DBHandler.COLUMN_TYPE, 2);
+        cv.put(DBHandler.COLUMN_INITIAL, value);
         return cv;
     }
 
     /**
-     * determines the status of location mode
+     * determines the status of location mode and writes it into the database
      *
      * @return 0- LOCATION_MODE_OFF
      * 1- LOCATION_MODE_SENSORS_ONLY
@@ -211,7 +207,7 @@ public class Analysis extends AppCompatActivity {
         }
         // If APK >= KITKAT Settings.Secure.LOCATION_MODE
         else {
-            name= "location_mode";
+            name = "location_mode";
 
             try {
                 locationMode = Settings.Secure.getInt(this.getContentResolver(),
@@ -221,11 +217,10 @@ public class Analysis extends AppCompatActivity {
                 locationMode = 0;
             }
         }
-        Log.d("MyApp", Integer.toString(locationMode));
         ContentValues cv = new ContentValues(3);
         cv.put(DBHandler.COLUMN_SETTING, name);
         cv.put(DBHandler.COLUMN_INITIAL, locationMode);
-        cv.put(DBHandler.COLUMN_TYPE,2);
+        cv.put(DBHandler.COLUMN_TYPE, 2);
         return cv;
     }
 
@@ -272,7 +267,7 @@ public class Analysis extends AppCompatActivity {
                 if (!value.equalsIgnoreCase("location_mode")) {
                     tempValue.put(DBHandler.COLUMN_SETTING, name);
                     tempValue.put(DBHandler.COLUMN_INITIAL, value);
-                    Log.d("SETTINGS", name + "\n "+ value+ "\n");
+                    Log.d("SETTINGS", name + "\n " + value + "\n");
                     tempValue.put(DBHandler.COLUMN_TYPE, type);
                     contentValues[counter] = new ContentValues(tempValue);
                     tempValue.clear();
@@ -286,9 +281,14 @@ public class Analysis extends AppCompatActivity {
         return contentValues;
     }
 
-    private void analyse(){
+    /**
+     * fetches all installed apps and the device settings to pass it into the database
+     *
+     * @author Noah
+     */
+    private void analyse() {
         dbHandler = new DBHandler(this, null, null, 1);
-        dbHandler.insertIndividualValue("firstrun","true");
+        dbHandler.insertIndividualValue("firstrun", "true");
 
         // Get all apps
         getALL_APPS();
@@ -301,11 +301,10 @@ public class Analysis extends AppCompatActivity {
         ContentValues[] firstArray = getSETTINGS(uri_global, proj_global);
         ContentValues[] secondArray = getSETTINGS(uri_secure, proj_secure);
         ContentValues[] resultArray = combineArraysP2(firstArray, secondArray);
-        resultArray[resultArray.length-2]=getLOCATION_MODE();
-        resultArray[resultArray.length-1]=getPASSWORT_QUALITY();
+        resultArray[resultArray.length - 2] = getLOCATION_MODE();
+        resultArray[resultArray.length - 1] = getPASSWORT_QUALITY();
 
         dbHandler.addParamColumn(resultArray);
-
 
 
     }
