@@ -1,5 +1,6 @@
 package com.bp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,13 +116,20 @@ public class Quiz4Slide extends QuizSlide {
 
     //displayes the victory or failure text
         if(answer1true==box1.isChecked()&&answer2true==box2.isChecked()&&answer3true==box3.isChecked()&&answer4true==box4.isChecked()){
-        Toast.makeText(getActivity(),rightAnswer, Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(getActivity(), rightAnswer, Toast.LENGTH_LONG);
+            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            v.setBackgroundColor(Color.GREEN);
+            toast.show();
             MethodFactory factory=new MethodFactory(getActivity());
             factory.createMethod("scoreAdd").callClassMethod(points);
 
         }else{
-            Toast.makeText(getActivity(), wrongAnswer,
-                    Toast.LENGTH_LONG).show();
+
+            Toast toast = Toast.makeText(getActivity(), wrongAnswer, Toast.LENGTH_LONG);
+            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            v.setBackgroundColor(Color.RED);
+            toast.show();
+
 
         }
 

@@ -23,7 +23,7 @@ import java.util.HashMap;
  */
 public class ProfilFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
-    ProfilListObject[] profilList={new ProfilListObject("Name","Das ist dein name"),new ProfilListObject("Name","Das ist dein name"),new ProfilListObject("Name","Das ist dein name")};
+    ProfilListObject[] profilList={new ProfilListObject("Name:","Hier kannst du deinen Namen eintragen."),new ProfilListObject("Alter:","Hier kannst du dein Alter eintragen."),new ProfilListObject("Versuchspersonencode:","Trage hier bitte deinen versuchsper")};
     String[] lengthArray;
     Context context;
     private MyListAdapter_permission adapter;
