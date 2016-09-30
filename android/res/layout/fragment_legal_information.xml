@@ -5,16 +5,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp">
 
         <TextView
-            android:text="TextView"
+            android:text="Impressum \n\nDiese App ist im Rahmen der Veranstaltung „Bachelorpraktikum“ an der TU Darmstadt am Fachbereich Informatik entstanden.\n\nDas Projekt entstand im Auftrag von:  Projektgruppe MoPP Department of Computer Science SECUSO - Security, Usability and Society Institut für Psychologie Fachbereich Humanwissenschaften Technische Universität Darmstadt  \n\nVerantwortlich für alle Inhalte und Software ist das Team FoxIT:  \nHannah Drews \nElisa Kirchner \nTim René Schmidt \nNoah Schlegel \nLena Scholz  \nfoxit@tu-darmstadt.de  \nCopyright der Icons \nIcon made by Freepik from www.flaticon.com \nIcon made by Madebyoliver from www.flaticon.com"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/textView8"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="305dp"
-            android:id="@+id/textView8" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_margin="5dp" />
     </RelativeLayout>
 </LinearLayout>

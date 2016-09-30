@@ -36,7 +36,8 @@ import java.util.ArrayList;
  * Created by Tim on 11.06.2016.
  */
 public class FAQFragment extends ListFragment implements AdapterView.OnItemClickListener {
-    String[] questionArray = {"Frage;Antwort","Frage;Antwort","Frage;Antwort","Frage;Antwort","Frage;Antwort"}; //contains the permissions displayed in the listView
+    String[] questionArray = {"Wo kann ich Wünsche oder Verbesserungsvorschläge abgeben?;Du kannst uns gerne unter foxit@tu-darmstadt.de kontaktieren! Wir helfen gerne und sind für alle Anmerkungen dankbar!","Warum ein Fuchs?;Füchse stehen für Intelligenz und Klugheit. Außerdem sind sie neugierig und schnüffeln viel herum. Genau das tun wir auch! Wir schnüffeln in deiner Privatsphäre herum und helfen dir dabei, deine Daten intelligent auszuwerten und aufzubereiten.","Was bringen mir die Einstellungs-und App-Listen?;Im Großen und Ganzen spiegelt sich hier deine Privatsphäre am Smartphone wider. Am Besten schaust du mal in dem Kurs “Rumgeschnüffelt bei dir” vorbei!","Was bedeutet Privacy Paradox?;Das Privacy Paradox beschreibt den Zwiespalt zwischen dem Wunsch nach Privatsphäre und sozialer Entfaltung und Kontakten."};
+
     Context context;
     boolean[] isAnswerVisible;
     private MyListAdapter_permission adapter;
