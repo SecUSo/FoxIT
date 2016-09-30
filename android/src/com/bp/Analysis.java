@@ -288,6 +288,7 @@ public class Analysis extends AppCompatActivity {
 
     private void analyse(){
         dbHandler = new DBHandler(this, null, null, 1);
+        dbHandler.insertIndividualValue("firstrun","true");
 
         // Get all apps
         getALL_APPS();
@@ -304,6 +305,7 @@ public class Analysis extends AppCompatActivity {
         resultArray[resultArray.length-1]=getPASSWORT_QUALITY();
 
         dbHandler.addParamColumn(resultArray);
+
 
 
     }

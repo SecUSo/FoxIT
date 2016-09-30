@@ -31,7 +31,7 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String TABLE_CLASSES = "classes";
     private static final String TABLE_PERMISSIONS = "permissions";
     private static final String TABLE_SETTINGS = "rawdata";
-    private static final String TABLE_PERSONAL = "personalstuff";
+    public static final String TABLE_PERSONAL = "personalstuff";
     //column-names
     static final String COLUMN_APPNAME = "name";
     static final String COLUMN_PERMISSIONS = "permissions";
@@ -63,7 +63,7 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String COLUMN_PERMISSIONNICENAME = "propername";
     private static final String COLUMN_PERMISSIONLEVEL = "plevel";
 
-    private static final String COLUMN_KEY ="key";
+    public static final String COLUMN_KEY ="key";
     private static final String COLUMN_VALUE = "value";
     //file-name
     private static final String DB_NAME = "rawdata.db";
@@ -479,7 +479,7 @@ public class DBHandler extends SQLiteOpenHelper{
      * @param whereclause description of content searched for
      * @return true/false
      */
-    private Boolean checkIfInside(String table, String whereclause) {
+    public Boolean checkIfInside(String table, String whereclause) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+table+" WHERE "+whereclause+";",null);
         if (cursor.getCount()<=0){
@@ -508,7 +508,7 @@ public class DBHandler extends SQLiteOpenHelper{
                     cursor.getString(cursor.getColumnIndex(COLUMN_CONTENT)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_LECTURETYPE)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_DELAY)),
-                    cursor.getInt(cursor.getColumnIndex(COLUMN_FREETIME)),
+                    cursor.getLong(cursor.getColumnIndex(COLUMN_FREETIME)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_EICHELN))));
             cursor.moveToNext();
@@ -665,6 +665,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public void setLectionNextFreeTime(String lectionName, long nextFreeTime){
         SQLiteDatabase db = getWritableDatabase();
         long time = System.currentTimeMillis() + nextFreeTime;
+        Log.d("new time to insert",Long.toString(time));
         db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_FREETIME + " = \'" + time + "\' WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
         db.close();
     }
@@ -789,6 +790,22 @@ public class DBHandler extends SQLiteOpenHelper{
         db.execSQL("UPDATE "+TABLE_PERSONAL+" SET "+COLUMN_VALUE+" = \'"+value+"\' WHERE "+COLUMN_KEY+" = \'"+key+"\';");
         db.close();
     }
+    public void insertIndividualValue(String key,String value){
+        SQLiteDatabase db =getWritableDatabase();
+        db.execSQL("INSERT OR REPLACE INTO "+TABLE_PERSONAL+" VALUES(\'"+key+"\', \'"+value+"\');");
+        db.close();
+    }
+    public String getIndividualValue(String key){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+COLUMN_VALUE+" FROM "+TABLE_PERSONAL+" WHERE "+COLUMN_KEY+" = \'"+key+"\';",null);
+        if (cursor==null) return "notfound";
+        cursor.moveToFirst();
+        String res = cursor.getString(0);
+        cursor.close();
+        db.close();
+        return res;
+    }
+
 
 
 }
