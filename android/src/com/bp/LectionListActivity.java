@@ -198,7 +198,7 @@ public class LectionListActivity extends AppCompatActivity implements  AdapterVi
 
 
         } else {
-            if (lectionObjectList.get(position).getNextfreetime() > (System.currentTimeMillis())%Integer.MAX_VALUE) {
+            if (lectionObjectList.get(position).getNextfreetime() > (System.currentTimeMillis())) {
 
 
             } else {
