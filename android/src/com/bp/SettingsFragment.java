@@ -43,7 +43,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
             "Persönliche Daten",
             "Ergebnisse der initalen Analyse",
             "Hilfe",
-            "Impressum", "App aktualisieren"
+            "Impressum", "App aktualisieren","Rechtliche Informationen"
     };
     HashMap<String, Fragment> fragmentList = new HashMap<>();
 
@@ -65,6 +65,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
         fragmentList.put("Hilfe", new FAQFragment());
         fragmentList.put("Impressum", new LegalInformationFragment());
         fragmentList.put("App aktualisieren", new CSVRefreshFragment());
+        fragmentList.put("Rechtliche Informationen",new LegalInformationFragment_libGDX());
 
         context=getActivity().getApplicationContext();
         List<String> profileList = new ArrayList<>(Arrays.asList(profileListItems));
