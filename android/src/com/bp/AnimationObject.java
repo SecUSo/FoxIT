@@ -17,15 +17,16 @@ boolean unlocked; //whether the animation is already unlocked
      * @param icon
      * @param price
      */
-    public AnimationObject(String name, String toastDescription,int icon, int price){
+    public AnimationObject(String name, String toastDescription,int icon, int price,boolean unlocked){
     this.name=name;
     this.toastDescription=toastDescription;
     this.icon=icon;
     this.price=price;
+        this.unlocked=unlocked;
 
     //fetch the unlocked status form ValueKeeper where it's stored
     ValueKeeper o = ValueKeeper.getInstance();
-    o.addTrophyIfNotContained(name,unlocked);
+    o.addAnimationIfNotContained(name,unlocked);
     unlocked=o.isAnimationUnlocked(name);
 }
 

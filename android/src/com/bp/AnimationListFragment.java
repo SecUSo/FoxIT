@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,18 +49,17 @@ public class AnimationListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
-
         //creating the animationObjects - TODO: make it tidy for more animations to be added
-        AnimationObject[] animationArray = {new AnimationObject("Halt", "Das Füchslein ruht im Walde, so ruhest auch du.", R.mipmap.test_trophy, 5),
-                                            new AnimationObject("Schwanzwedeln", "Erhaben wallt des Fuches Pracht, und doch ganz sacht... ", R.mipmap.badapprating, 10),
-        new AnimationObject("Kopfschütteln", "Kopfschütteln, das Händeschütteln der Einzelgänger.", R.mipmap.badapprating, 30)};
+        AnimationObject[] animationArray = {new AnimationObject("Halt", "Das Füchslein ruht im Walde, so ruhest auch du.", R.mipmap.test_trophy, 5,false),
+                                            new AnimationObject("Schwanzwedeln", "Erhaben wallt des Fuches Pracht, und doch ganz sacht... ", R.mipmap.badapprating, 10,true),
+        new AnimationObject("Kopfschütteln", "Kopfschütteln, das Händeschütteln der Einzelgänger.", R.mipmap.badapprating, 30,false)};
 
-        //check for each animation if it's already unlocked
-        ValueKeeper o = ValueKeeper.getInstance();
-        for (AnimationObject ao : animationArray) {
-            o.addTrophyIfNotContained(ao.getName(), true);
+
+
+       // for (AnimationObject ao : animationArray) {
+         //   o.addAnimationIfNotContained(ao.getName(), false);
             //ao.getUnlocked());
-        }
+        //}
         this.animationArray=animationArray;
         return view;
     }
@@ -89,22 +87,22 @@ public class AnimationListFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(),
                         animationArray[position].getToastDescription(), Toast.LENGTH_LONG).show();
 
+                if(!animationArray[position].getUnlocked()) {
+                    //tell the new TradeRequestFragment what animation is sold
+                    Bundle tradeInfos = new Bundle();
+                    tradeInfos.putInt("price", animationArray[position].getPrice());
+                    tradeInfos.putString("target", animationArray[position].getName());
 
-                //tell the new TradeRequestFragment what animation is sold
-                Bundle tradeInfos = new Bundle();
-                tradeInfos.putInt("price", animationArray[position].getPrice());
-                tradeInfos.putString("target", animationArray[position].getName());
-
-                //add the TradeRequestFragment to the activity's context
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                TradeRequestFragment tradeRequest= new TradeRequestFragment();
-                tradeRequest.setArguments(tradeInfos);
-                //add the fragment to the count_frame RelativeLayout
-                transaction.add(R.id.count_frame, tradeRequest, "count");
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.commit();
-
+                    //add the TradeRequestFragment to the activity's context
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    TradeRequestFragment tradeRequest = new TradeRequestFragment();
+                    tradeRequest.setArguments(tradeInfos);
+                    //add the fragment to the count_frame RelativeLayout
+                    transaction.add(R.id.count_frame, tradeRequest, "count");
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    transaction.commit();
+                }
 
             }
         });

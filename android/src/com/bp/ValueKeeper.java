@@ -49,7 +49,7 @@ public class ValueKeeper {
         return acornCount;
     }
 
-    public boolean addTrophyIfNotContained(String animationName, boolean value){
+    public boolean addAnimationIfNotContained(String animationName, boolean value){
         if(animationList.containsKey(animationName)){
          return true;
         }else{

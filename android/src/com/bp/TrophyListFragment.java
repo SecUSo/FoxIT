@@ -58,7 +58,6 @@ public class TrophyListFragment extends Fragment {
                 new AcornTrophy("Siebenschläfer", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy)
         };
         this.trophyArray = trophyArray;
-        Log.d("TrophyListFragment", "trophyArray created");
 
 
         return view;
