@@ -23,10 +23,11 @@ public class MethodChangeAcornCount extends Method{
         FragmentTransaction transaction = manager.beginTransaction();
         final AcornCountFragment count= new AcornCountFragment();
         //add the fragment to the count_frame RelativeLayout
-        transaction.add(R.id.count_frame, count, "count");
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        transaction.commit();
-
+        if(activity.findViewById(R.id.count_frame)!=null) {
+            transaction.add(R.id.count_frame, count, "count");
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.commit();
+        }
 
         //add the animation
         final Handler handler =new Handler();
@@ -36,19 +37,21 @@ public class MethodChangeAcornCount extends Method{
             public void run() {
                 ValueKeeper observer= ValueKeeper.getInstance();
                 observer.changeAcornCountBy(amount);
-                count.changeText(Integer.toString(ValueKeeper.getInstance().getAcornCount()));
+                if(activity.findViewById(R.id.count_frame)!=null) {
+                count.changeText(Integer.toString(ValueKeeper.getInstance().getAcornCount()));}
             }
         },1250);
-        //after 4000ms the Fragment disappears
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-              FragmentTransaction transaction= manager.beginTransaction();
-            transaction.remove(count);
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.commit();
-            }
-        },4000);
-
+        if(activity.findViewById(R.id.count_frame)!=null) {
+            //after 4000ms the Fragment disappears
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.remove(count);
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    transaction.commit();
+                }
+            }, 4000);
+        }
     };
 }

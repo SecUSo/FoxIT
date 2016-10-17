@@ -29,9 +29,7 @@ public class WebImageSlide extends Slide {
      */
     @Override
     void fillLayout() {
-        new DownloadImageTask((ImageView) view.findViewById(R.id.image_web))
-                .execute("http://java.sogeti.nl/JavaBlog/wp-content/uploads/2009/04/android_icon_256.png");
-
+        new DownloadImageTask((ImageView) view.findViewById(R.id.image_web)).execute(parameter.get("text"));
     }
 
 

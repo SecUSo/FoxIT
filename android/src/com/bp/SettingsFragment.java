@@ -37,14 +37,14 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
     String settingsText; //the setting described by the fragment
     int icon;
     View view;
-    String theAnalysisEntry="Ergebnisse der initalen Analyse";
+    String theAnalysisEntry="Analyse wiederholen";
     Context context;
     String[] profileListItems = {
             "Persönliche Daten",
             "Analyse wiederholen",
             "Hilfe",
             "Impressum",
-            //"App aktualisieren",
+            "App aktualisieren",
             "Rechtliche Informationen"
     };
     HashMap<String, Fragment> fragmentList = new HashMap<>();
@@ -63,10 +63,10 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
         fragmentList.put("Persönliche Daten", new ProfilFragment());
-        fragmentList.put("Ergebnisse der initalen Analyse", new LegalInformationFragment());
+        fragmentList.put("Analyse wiederholen", new LegalInformationFragment());
         fragmentList.put("Hilfe", new FAQFragment());
         fragmentList.put("Impressum", new LegalInformationFragment());
-        //fragmentList.put("App aktualisieren", new CSVRefreshFragment());
+        fragmentList.put("App aktualisieren", new CSVRefreshFragment());
         fragmentList.put("Rechtliche Informationen",new LegalInformationFragment_libGDX());
 
         context=getActivity().getApplicationContext();

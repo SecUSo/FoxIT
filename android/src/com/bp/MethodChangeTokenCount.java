@@ -22,11 +22,12 @@ public class MethodChangeTokenCount extends Method{
         final FragmentManager manager = activity.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         final TokenCountFragment count= new TokenCountFragment();
-        //add the fragment to the count_frame RelativeLayout
-        transaction.add(R.id.count_frame, count, "tokenCount");
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        transaction.commit();
-
+        if(activity.findViewById(R.id.count_frame)!=null) {
+            //add the fragment to the count_frame RelativeLayout
+            transaction.add(R.id.count_frame, count, "tokenCount");
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.commit();
+        }
 
         //add the animation
         final Handler handler =new Handler();
@@ -36,19 +37,21 @@ public class MethodChangeTokenCount extends Method{
             public void run() {
                 ValueKeeper observer= ValueKeeper.getInstance();
                 observer.changeTokenCountBy(amount);
-                count.changeText(Integer.toString(ValueKeeper.getInstance().getTokenCount()));
+                if(activity.findViewById(R.id.count_frame)!=null) {
+                count.changeText(Integer.toString(ValueKeeper.getInstance().getTokenCount()));}
             }
         },1250);
-        //after 4000ms the Fragment disappears
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-              FragmentTransaction transaction= manager.beginTransaction();
-            transaction.remove(count);
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.commitAllowingStateLoss();
-            }
-        },4000);
-
+        if(activity.findViewById(R.id.count_frame)!=null) {
+            //after 4000ms the Fragment disappears
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.remove(count);
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    transaction.commitAllowingStateLoss();
+                }
+            }, 4000);
+        }
     };
 }
