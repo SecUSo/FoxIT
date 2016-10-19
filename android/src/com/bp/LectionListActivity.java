@@ -25,7 +25,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 //Displayes the lections corresponding to a certain course and manages their usage
-public class LectionListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class LectionListActivity extends FoxItActivity implements AdapterView.OnItemClickListener {
 
     //List of lectionDescribtions, send by ClassListActivity
     static String[] lectionStringArray; //has to be static for now

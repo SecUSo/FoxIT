@@ -9,7 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
-public class OnboardingActivity extends AppCompatActivity {
+public class OnboardingActivity extends FoxItActivity {
 
     TapAdapter_onboarding adapter; //defines the content of the tabs, OnboardingFragment-OnboardingFragment4
     ViewPager mViewPager;

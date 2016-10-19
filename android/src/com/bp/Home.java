@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-public class Home extends AppCompatActivity {
+public class Home extends FoxItActivity {
 
     Toolbar toolbar;
 

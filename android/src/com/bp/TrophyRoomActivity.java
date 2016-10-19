@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class TrophyRoomActivity extends AppCompatActivity {
+public class TrophyRoomActivity extends FoxItActivity {
 
     TapAdapter_trophy adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
     ViewPager mViewPager;

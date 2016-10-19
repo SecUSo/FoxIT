@@ -15,6 +15,7 @@
         android:label="@string/app_name"
         android:minSdkVersion="17"
         android:supportsRtl="true"
+        android:name=".FoxItApplication"
         android:theme="@style/AppTheme">
 
         <activity android:name=".Home">
@@ -34,5 +35,6 @@
         <activity android:name=".OnboardingActivity" />
         <activity android:name=".AnimationLauncher" />
         <activity android:name=".SettingsActivity" />
+
     </application>
 </manifest>

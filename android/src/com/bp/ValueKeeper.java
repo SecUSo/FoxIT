@@ -1,5 +1,7 @@
 package com.bp;
 
+import android.util.Log;
+
 import java.util.HashMap;
 
 /**
@@ -16,6 +18,14 @@ public class ValueKeeper {
     private ValueKeeper() {};
     HashMap<String,Boolean> animationList =new HashMap<>();
     HashMap<String,String> profilList=new HashMap<>();
+    HashMap<Long,Long> applicationAccessAndDuration =new HashMap<>();
+    long timeOfLastAccess=0;
+    long timeOfFirstAccess=0;
+    HashMap<Long,Long> applicationStartAndDuration =new HashMap<>();
+    HashMap<Long,Long> applicationStartAndActiveDuration =new HashMap<>();
+
+    Boolean freshlyStartet=true;
+
 
     /**
      * create a new instance of the class at first call, return this instance at every other call
@@ -91,6 +101,40 @@ public class ValueKeeper {
         }
 
     }
+public void setTimeOfLastAccess(long time){
+    timeOfLastAccess=time;
+}
+    public void fillApplicationAccessAndDuration(long time){
+        if(applicationAccessAndDuration.containsKey(timeOfLastAccess)){
+           applicationAccessAndDuration.put(timeOfLastAccess,time-timeOfLastAccess);
+        }else{
+            applicationAccessAndDuration.put(timeOfLastAccess,time-timeOfLastAccess);
+        }
+        Log.d("MyApp",applicationAccessAndDuration.toString());
+    }
 
+    public Boolean getFreshlyStartet() {
+        return freshlyStartet;
+    }
+
+    public void setFreshlyStartet(Boolean freshlyStartet) {
+        this.freshlyStartet = freshlyStartet;
+    }
+    public void fillApplicationStartAndDuration(long time){
+        applicationStartAndDuration.put(timeOfFirstAccess,time-timeOfFirstAccess);
+    Log.d("MyApp","TotalTime:"+applicationStartAndDuration.toString());
+    }
+    public void setTimeOfFirstAccess(long time){
+        timeOfFirstAccess=time;
+    }
+    public void fillApplicationStartAndActiveCDuration(long time){
+        long totalTime=0;
+        for(Long t:applicationAccessAndDuration.values()){
+            totalTime=totalTime+t;
+        }
+
+        applicationStartAndActiveDuration.put(timeOfFirstAccess,totalTime);
+        Log.d("MyApp","ActualTotalTime:"+applicationStartAndActiveDuration.toString());
+    }
 
 }

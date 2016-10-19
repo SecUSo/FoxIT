@@ -1,4 +1,5 @@
 package com.bp;
+import android.app.Application;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Tim on 25.06.2016.

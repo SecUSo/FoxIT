@@ -28,7 +28,7 @@ import java.util.List;
 import com.bp.DBHandler;
 
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends FoxItActivity {
 
     Toolbar toolbar;
 

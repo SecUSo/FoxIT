@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class StartScreen extends AppCompatActivity {
+public class StartScreen extends FoxItActivity {
 
     TapAdapter adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
     public ViewPager mViewPager; //defines the tabView's content

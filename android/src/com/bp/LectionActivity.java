@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 /**
  * manages the visualisation of slides
  */
-public class LectionActivity extends AppCompatActivity {
+public class LectionActivity extends FoxItActivity {
     public LectionObject lection;
     String lectionDescription;
     int slideNumber = 0;
