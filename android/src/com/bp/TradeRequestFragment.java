@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -39,6 +40,12 @@ public class TradeRequestFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trade_request, container, false);
         thisFragment = this;
 
+        LinearLayout button = (LinearLayout) view.findViewById(R.id.whole_frame);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {getActivity().onBackPressed();}
+        });
         //add the yes button's behavior
         Button yesButton = (Button) view.findViewById(R.id.button_yes);
         yesButton.setOnClickListener(new View.OnClickListener() {

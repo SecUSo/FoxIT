@@ -100,6 +100,7 @@ public class AnimationListFragment extends Fragment {
                     tradeRequest.setArguments(tradeInfos);
                     //add the fragment to the count_frame RelativeLayout
                     transaction.add(R.id.count_frame, tradeRequest, "count");
+                    transaction.addToBackStack("animationTradeRequest");
                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     transaction.commit();
                 }

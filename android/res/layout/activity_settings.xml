@@ -11,7 +11,6 @@
         android:id="@+id/second_fragment_frame"
         android:layout_below="@+id/include"
         android:layout_marginTop="55dp">
-
     </RelativeLayout>
 
     <include layout="@layout/toolbar_actionbar"></include>
@@ -28,9 +27,13 @@
 
     </RelativeLayout>
 
-
-
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/request_frame"
+        android:layout_below="@+id/include"
+        android:layout_marginTop="55dp">
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -185,6 +185,7 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
             tradeRequest.setArguments(tradeInfos);
             //add the fragment to the count_frame RelativeLayout
             transaction.add(R.id.count_frame, tradeRequest, "count");
+            transaction.addToBackStack("lectionTradeRequest");
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             transaction.commit();
 

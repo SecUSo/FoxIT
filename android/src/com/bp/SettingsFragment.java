@@ -50,9 +50,6 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
     HashMap<String, Fragment> fragmentList = new HashMap<>();
 
 
-    public SettingsFragment() {
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +80,15 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         if(profileListItems[position].equals(theAnalysisEntry)){
-            Intent i = new Intent(getActivity().getApplicationContext(),Analysis.class);
-            startActivity(i);
+            //add the TradeRequestFragment to the activity's context
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            AnalysisRequestFragment tradeRequest = new AnalysisRequestFragment();
+            //add the fragment to the count_frame RelativeLayout
+            transaction.add(R.id.request_frame, tradeRequest, "count");
+            transaction.addToBackStack("analysisRequest");
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.commit();
         }else{
         Fragment newPage = fragmentList.get(profileListItems[position]);
         if (newPage != null) {
