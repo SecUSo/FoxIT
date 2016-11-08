@@ -47,7 +47,8 @@ public class Analysis extends FoxItActivity {
         //sets our toolbar as the action bar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        analyse();
+        //analyse();
+        new ExternAnalysis(this).execute(this);
         // Timer: Open StartScreen after 7 Seconds
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
@@ -88,7 +89,7 @@ public class Analysis extends FoxItActivity {
      * @author Noah
      */
     public void getALL_APPS() {
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+       // DBHandler dbHandler = new DBHandler(this, null, null, 1);
         final PackageManager pm = getPackageManager();
 
         // get a list of installed apps.
@@ -114,7 +115,7 @@ public class Analysis extends FoxItActivity {
                     bb.append("NULL");
                 }
             } catch (PackageManager.NameNotFoundException e) {
-                Log.d("MyApp", "Error!");
+                Log.d("MyApp", "Error!"+e);
                 e.printStackTrace();
             }
 
@@ -126,7 +127,8 @@ public class Analysis extends FoxItActivity {
             counter++;
             bb.setLength(0);
         }
-        dbHandler.addAppColumn(appValues);
+        new DBWrite(this).execute("addAppColumn",appValues);
+        //dbHandler.addAppColumn(appValues);
     }
 
 
@@ -141,7 +143,7 @@ public class Analysis extends FoxItActivity {
      * 66     -exception
      * @author Tim
      */
-    private ContentValues getPASSWORT_QUALITY() {
+    public ContentValues getPASSWORT_QUALITY() {
         int value;
         String name;
         ContentValues cv = new ContentValues(3);
@@ -267,7 +269,7 @@ public class Analysis extends FoxItActivity {
                 if (!value.equalsIgnoreCase("location_mode")) {
                     tempValue.put(DBHandler.COLUMN_SETTING, name);
                     tempValue.put(DBHandler.COLUMN_INITIAL, value);
-                    Log.d("SETTINGS", name + "\n " + value + "\n");
+                    //Log.d("SETTINGS", name + "\n " + value + "\n");
                     tempValue.put(DBHandler.COLUMN_TYPE, type);
                     contentValues[counter] = new ContentValues(tempValue);
                     tempValue.clear();
@@ -280,33 +282,4 @@ public class Analysis extends FoxItActivity {
         cursor.close();
         return contentValues;
     }
-
-    /**
-     * fetches all installed apps and the device settings to pass it into the database
-     *
-     * @author Noah
-     */
-    private void analyse() {
-        dbHandler = new DBHandler(this, null, null, 1);
-        dbHandler.insertIndividualValue("firstrun", "true");
-
-        // Get all apps
-        getALL_APPS();
-
-        // Get all settings
-        Uri uri_global = Settings.Global.CONTENT_URI;
-        String[] proj_global = new String[]{Settings.Global.NAME, Settings.Global.VALUE};
-        Uri uri_secure = Settings.Secure.CONTENT_URI;
-        String[] proj_secure = new String[]{Settings.Secure.NAME, Settings.Secure.VALUE};
-        ContentValues[] firstArray = getSETTINGS(uri_global, proj_global);
-        ContentValues[] secondArray = getSETTINGS(uri_secure, proj_secure);
-        ContentValues[] resultArray = combineArraysP2(firstArray, secondArray);
-        resultArray[resultArray.length - 2] = getLOCATION_MODE();
-        resultArray[resultArray.length - 1] = getPASSWORT_QUALITY();
-
-        dbHandler.addParamColumn(resultArray);
-
-
-    }
-
 }

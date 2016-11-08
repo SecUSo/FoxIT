@@ -43,9 +43,10 @@ public class LectionActivity extends FoxItActivity {
         //setting the lectionObject, it's used for storing the slides
         lection = new LectionObject(getIntent().getStringExtra("name"), lectionDescription, getIntent().getIntExtra("type", 0), getIntent().getIntExtra("delay", 0), getIntent().getLongExtra("freetime", 0), getIntent().getIntExtra("status", 1), getIntent().getIntExtra("acorn", 3));
 
-        DBHandler db = new DBHandler(this, null, null, 1);
+        //DBHandler db = new DBHandler(this, null, null, 1);
         if (lection.getProcessingStatus() < 2) {
-            db.changeLectionToRead(lection.getLectionName());
+            new DBWrite(this).execute("changeLectionToRead",lection.getLectionName());
+            //db.changeLectionToRead(lection.getLectionName());
         }
 
         //add the first slide to the activities' context
@@ -284,8 +285,9 @@ public class LectionActivity extends FoxItActivity {
         layout.setEnabled(true);
 
         if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3)) {
-            DBHandler db = new DBHandler(this, null, null, 1);
-            db.changeLectionToSolved(lection.getLectionName());
+           // DBHandler db = new DBHandler(this, null, null, 1);
+            new DBWrite(this).execute("changeLectionToSolved",lection.getLectionName());
+            //db.changeLectionToSolved(lection.getLectionName());
 
             MethodFactory factory = new MethodFactory(this);
             Method method = factory.createMethod("changeTokenCount");
@@ -304,9 +306,11 @@ public class LectionActivity extends FoxItActivity {
         } else {
 
             long nextFreeTime = (System.currentTimeMillis() % Integer.MAX_VALUE) + lection.getDelaytime();
-            DBHandler db = new DBHandler(this, null, null, 1);
-            db.setLectionNextFreeTime(lection.getLectionName(), nextFreeTime);
+           // DBHandler db = new DBHandler(this, null, null, 1);
+            //db.setLectionNextFreeTime(lection.getLectionName(), nextFreeTime);
+            new DBWrite(this).execute("setLectionNextFreeTime",lection.getLectionName(),nextFreeTime);
             onBackPressed();
+            //db.close();
         }
     }
 

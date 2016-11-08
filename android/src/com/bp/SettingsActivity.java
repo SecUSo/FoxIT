@@ -113,9 +113,10 @@ public class SettingsActivity extends FoxItActivity {
         } else{
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ","no internet connection");
-            DBHandler dbHandler = new DBHandler(context,null,null,1);
-            dbHandler.updatePermissions(readCSV(R.raw.permissions,context));
-            dbHandler.close();
+            //DBHandler dbHandler = new DBHandler(context,null,null,1);
+            //dbHandler.updatePermissions(readCSV(R.raw.permissions,context));
+            //dbHandler.close();
+            new DBWrite(context).execute("updatePermissions",readCSV(R.raw.permissions,context));
         }
 
     }
@@ -132,10 +133,12 @@ public class SettingsActivity extends FoxItActivity {
         } else {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
-            DBHandler dbHandler = new DBHandler(context, null, null, 1);
-            dbHandler.updateLessions(readCSV(R.raw.lektionen, context));
-            dbHandler.updateClasses(readCSV(R.raw.classes, context));
-            dbHandler.close();
+            //DBHandler dbHandler = new DBHandler(context, null, null, 1);
+            new DBWrite(context).execute("updateLessions",readCSV(R.raw.lektionen, context));
+            //dbHandler.updateLessions(readCSV(R.raw.lektionen, context));
+            new DBWrite(context).execute("updateClasses",readCSV(R.raw.classes, context));
+            //dbHandler.updateClasses(readCSV(R.raw.classes, context));
+            //dbHandler.close();
         }
     }
     public void updateSettings(Context context,ConnectivityManager connMan){
@@ -149,9 +152,10 @@ public class SettingsActivity extends FoxItActivity {
         } else {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
-            DBHandler dbHandler = new DBHandler(context, null, null, 1);
-            dbHandler.updateSettingDescriptions(readCSV(R.raw.settings, context));
-            dbHandler.close();
+            //DBHandler dbHandler = new DBHandler(context, null, null, 1);
+            //dbHandler.updateSettingDescriptions(readCSV(R.raw.settings, context));
+            //dbHandler.close();
+            new DBWrite(context).execute("updateSettingsDescriptions",readCSV(R.raw.settings, context));
         }
     }
 

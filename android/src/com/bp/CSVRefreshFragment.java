@@ -3,6 +3,7 @@ package com.bp;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -40,10 +41,13 @@ public class CSVRefreshFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 refreshClassButton.setBackgroundColor(Color.GREEN);
+                ((SettingsActivity)getActivity()).updateLessions(getActivity(),(ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE));
+                /*
                 DBHandler dbHandler = new DBHandler(getActivity(),null,null,1);
                 dbHandler.updateLessions(((SettingsActivity)getActivity()).readCSV(R.raw.lektionen,getActivity()));
                 dbHandler.updateClasses(((SettingsActivity)getActivity()).readCSV(R.raw.classes,getActivity()));
                 dbHandler.close();
+                */
 
             }
         });
@@ -54,10 +58,14 @@ public class CSVRefreshFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 refreshDescriptionButton.setBackgroundColor(Color.GREEN);
+                ((SettingsActivity)getActivity()).updatePermissions(getActivity(),(ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE));
+                ((SettingsActivity)getActivity()).updateSettings(getActivity(),(ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE));
+
+                /*
                 DBHandler dbHandler = new DBHandler(getActivity(),null,null,1);
                 dbHandler.updatePermissions(((SettingsActivity)getActivity()).readCSV(R.raw.permissions,getActivity()));
-                dbHandler.updateClasses(((SettingsActivity)getActivity()).readCSV(R.raw.settings,getActivity()));
                 dbHandler.close();
+                */
             }
         });
 

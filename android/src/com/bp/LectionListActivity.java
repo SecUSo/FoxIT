@@ -328,9 +328,10 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
                 l.setProcessingStatus(1);
                 //update the listView
                 adapter.notifyDataSetChanged();
-                DBHandler dbHandler = new DBHandler(this, null, null, 1);
-                dbHandler.changeLectionToUnlocked(articleOfCommerce);
-                dbHandler.close();
+                //DBHandler dbHandler = new DBHandler(this, null, null, 1);
+               // dbHandler.changeLectionToUnlocked(articleOfCommerce);
+                //dbHandler.close();
+                new DBWrite(this).execute("changeLectionToUnlocked",articleOfCommerce);
                 return true;
             }
         }
