@@ -3,6 +3,7 @@ package com.bp;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.util.HashMap;
+
 /**
  * manages the visualisation of slides
  */
@@ -22,6 +25,9 @@ public class LectionActivity extends FoxItActivity {
     int slideNumber = 0;
     Toolbar toolbar;
     boolean didEvaluationStart = false;
+    boolean isEvaluation=false; //TODO: find fitting Name
+
+    HashMap<String,String> evaluationResults=new HashMap<>();
 
     /**
      * @author Tim
@@ -44,7 +50,7 @@ public class LectionActivity extends FoxItActivity {
         lection = new LectionObject(getIntent().getStringExtra("name"), lectionDescription, getIntent().getIntExtra("type", 0), getIntent().getIntExtra("delay", 0), getIntent().getLongExtra("freetime", 0), getIntent().getIntExtra("status", 1), getIntent().getIntExtra("acorn", 3));
 
         DBHandler db = new DBHandler(this, null, null, 1);
-        if (lection.getProcessingStatus() < 2) {
+        if (lection.getProcessingStatus() < 2&&lection.getProcessingStatus()!=-99) {
             db.changeLectionToRead(lection.getLectionName());
         }
 
@@ -59,6 +65,13 @@ public class LectionActivity extends FoxItActivity {
         }
         transaction.add(R.id.lection_frame, firstSlide, "slide");
         transaction.commit();
+
+
+        if(lection.getType()==-99){
+            isEvaluation=true;
+            RelativeLayout outerFrame =(RelativeLayout) findViewById(R.id.count_frame);
+            outerFrame.setBackgroundColor(Color.LTGRAY);
+        }
 
         //if the first slide does not have a previous slide, hide the backArrow
         final ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
@@ -88,6 +101,8 @@ public class LectionActivity extends FoxItActivity {
                         setImage("pfeil_rechts");
                     }
                 } else {
+                    if(!(currentSlide instanceof EvaluationSlide)|| ((currentSlide instanceof EvaluationSlide)&& ((EvaluationSlide)currentSlide).evaluation())){
+
                     //if the current slide defines a next slides that's the slideNumberToJumpTo
                     if (currentSlide.next() != null) {
                         slideToJumpTo = Integer.parseInt(currentSlide.next());
@@ -102,7 +117,7 @@ public class LectionActivity extends FoxItActivity {
                         //otherwise close the Activity
                         goBackToLectionList(slideNumber);
                     }
-                }
+                }}
                 ft.commit();
             }
         });
@@ -285,7 +300,12 @@ public class LectionActivity extends FoxItActivity {
 
         if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3)) {
             DBHandler db = new DBHandler(this, null, null, 1);
-            db.changeLectionToSolved(lection.getLectionName());
+            if(lection.getProcessingStatus()!=-99){
+            db.changeLectionToSolved(lection.getLectionName());}else{
+                db.changeEvaluationToSolved(lection.getLectionName());
+                ValueKeeper v=ValueKeeper.getInstance();
+                v.setEvaluationResults(evaluationResults);
+            }
 
             MethodFactory factory = new MethodFactory(this);
             Method method = factory.createMethod("changeTokenCount");
@@ -309,5 +329,11 @@ public class LectionActivity extends FoxItActivity {
             onBackPressed();
         }
     }
+
+
+    public void addEvaluationResult(String question,String answer){
+        evaluationResults.put(question,answer);
+    }
+
 
 }

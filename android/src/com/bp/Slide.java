@@ -34,7 +34,9 @@ public abstract class Slide extends Fragment{
             case "quiz4": return new Quiz4Slide();
             case "certificate": return new CertificateSlide();
             case "webimage": return new WebImageSlide();
-            default: return new TextSlide();
+            case "scalee": return new ScaleEvaluationSlide();
+            case "texte": return new TextEvaluationSlide();
+            default: return new TextEvaluationSlide();
         }
 
     }

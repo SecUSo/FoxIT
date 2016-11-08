@@ -23,7 +23,13 @@ public class ValueKeeper {
     long timeOfFirstAccess=0;
     HashMap<Long,Long> applicationStartAndDuration =new HashMap<>();
     HashMap<Long,Long> applicationStartAndActiveDuration =new HashMap<>();
+    int currentEvaluation;
 
+    public void setEvaluationResults(HashMap<String, String> evaluationResults) {
+        EvaluationResults = evaluationResults;
+    }
+
+    HashMap<String,String> EvaluationResults=new HashMap<>();
     Boolean freshlyStartet=true;
 
 
@@ -94,7 +100,12 @@ public class ValueKeeper {
     public int getTokenCount(){
         return tokenCount;
     }
-
+    public int getCurrentEvaluation(){
+        return currentEvaluation;
+    }
+    public int increaseCurrentEvaluation(){
+     return currentEvaluation++;
+    }
     public void setProfilList(ProfilListObject[] profilList){
         for(ProfilListObject p:profilList){
             this.profilList.put(p.getInputType(),p.getInput());

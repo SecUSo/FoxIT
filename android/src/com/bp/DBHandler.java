@@ -541,10 +541,7 @@ public class DBHandler extends SQLiteOpenHelper{
             if(array.length==4){
                 db.execSQL("INSERT OR REPLACE INTO "+TABLE_PERMISSIONS+" (\'"+COLUMN_PERMISSIONNAME+"\', \'"+COLUMN_PERMISSIONDESCRIPTION+"\', \'"+COLUMN_PERMISSIONNICENAME+"\', \'"+COLUMN_PERMISSIONLEVEL+"\') VALUES(\'"+array[0]+"\', \'"+array[1].replace("'","''")+"\', \'"+array[2].replace("'","''")+"\', \'"+array[3]+"\');");
             }
-
         }
-
-
     }
 
     /**
@@ -631,6 +628,16 @@ public class DBHandler extends SQLiteOpenHelper{
     public void changeLectionToSolved(String lectionName){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 3 WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
+        db.close();
+
+    }
+    /**
+     * change the lection's status from unread (1) or read (2) to solved (3)
+     * @param lectionName name of the lection to be changed
+     */
+    public void changeEvaluationToSolved(String lectionName){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = -98 WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
         db.close();
 
     }

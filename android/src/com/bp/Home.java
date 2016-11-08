@@ -9,6 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.LinkedList;
+
 public class Home extends FoxItActivity {
 
     Toolbar toolbar;
@@ -22,6 +26,23 @@ public class Home extends FoxItActivity {
             dbHandler.close();
             Intent intent = new Intent(getApplicationContext(),OnboardingActivity.class);
             startActivity(intent);
+        }else{
+            if(shouldEvaluationBeDisplayed()){
+                Intent intent = new Intent(getApplicationContext(),LectionActivity.class);
+                String className="Deep Web";
+                int position=getNumberOfCurrentEvaluation();
+                ArrayList<LectionObject> lectionObjectList= dbHandler.getLectionsFromDB(className);
+                intent.putExtra("lection", lectionObjectList.get(position).getContent());
+                intent.putExtra("name", lectionObjectList.get(position).getLectionName());
+                intent.putExtra("type", -99);//lectionObjectList.get(position).getType());
+                intent.putExtra("delay", lectionObjectList.get(position).getDelaytime());
+                intent.putExtra("freetime", lectionObjectList.get(position).getNextfreetime());
+                intent.putExtra("status", lectionObjectList.get(position).getProcessingStatus());
+                intent.putExtra("acorn", lectionObjectList.get(position).getReward());
+                startActivity(intent);
+
+            }
+
         }
         dbHandler.close();
         setContentView(R.layout.activity_home);
@@ -94,6 +115,18 @@ public class Home extends FoxItActivity {
         return true;
     }
 
+
+    public boolean shouldEvaluationBeDisplayed(){
+
+        int[] timeOfEvaluation ={1477829816};
+        Calendar currentTime = Calendar.getInstance();
+        return timeOfEvaluation[getNumberOfCurrentEvaluation()]<currentTime.getTimeInMillis();
+    }
+
+    public int getNumberOfCurrentEvaluation(){
+        ValueKeeper v=ValueKeeper.getInstance();
+        return v.getCurrentEvaluation();
+    }
 
 
 

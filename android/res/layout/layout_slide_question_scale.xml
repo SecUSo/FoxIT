@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/question_text"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:nestedScrollingEnabled="true"
+            android:text="Wie Privacy bist du?"
+            android:background="@android:color/darker_gray"
+            android:padding="10dp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:orientation="horizontal"
+            android:id="@+id/radio_group"
+            android:layout_below="@+id/question_text"
+            android:layout_marginTop="123dp"
+            android:layout_centerInParent="false"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical|center_horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:id="@+id/radioButton1" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="73dp"
+                android:id="@+id/radioButton2" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioButton3" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioButton4" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioButton5" />
+
+        </RadioGroup>
+    </RelativeLayout>
+
+</LinearLayout>

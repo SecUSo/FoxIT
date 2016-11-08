@@ -35,5 +35,20 @@
             android:layout_marginEnd="6dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/image_lection_type"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
+            android:src="@mipmap/stern_leer"
+            android:longClickable="false"
+            android:adjustViewBounds="true"
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+            android:layout_marginLeft="6dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/text_lection_name" />
     </RelativeLayout>
 </LinearLayout>

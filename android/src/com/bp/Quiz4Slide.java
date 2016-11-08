@@ -80,7 +80,7 @@ public class Quiz4Slide extends QuizSlide {
     /**checks if the answer is right
      * @author Tim
      */
-    public void evaluation(){
+    public boolean evaluation(){
         //disables the checkboxes for them not to be changed
         CheckBox box1=(CheckBox) view.findViewById(R.id.checkBox);
         box1.setEnabled(false);
@@ -132,7 +132,7 @@ public class Quiz4Slide extends QuizSlide {
 
 
         }
-
+    return false;
     }
 
 
