@@ -55,7 +55,7 @@ public class CSVRefreshFragment extends Fragment{
             public void onClick(View v) {
                 refreshDescriptionButton.setBackgroundColor(Color.GREEN);
                 DBHandler dbHandler = new DBHandler(getActivity(),null,null,1);
-                dbHandler.updateLessions(((SettingsActivity)getActivity()).readCSV(R.raw.permissions,getActivity()));
+                dbHandler.updatePermissions(((SettingsActivity)getActivity()).readCSV(R.raw.permissions,getActivity()));
                 dbHandler.updateClasses(((SettingsActivity)getActivity()).readCSV(R.raw.settings,getActivity()));
                 dbHandler.close();
             }

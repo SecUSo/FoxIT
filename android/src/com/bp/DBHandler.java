@@ -371,7 +371,6 @@ public class DBHandler extends SQLiteOpenHelper{
                         "\'"+COLUMN_DELAY+"\' = \'"+lessionArray[2]+"\', \'"+COLUMN_LECTURETYPE+"\' = \'"+lessionArray[5]+"\', \'"+COLUMN_EICHELN+"\' = \'"+lessionArray[4]+
                         "\' WHERE "+COLUMN_LECTURENAME+" = \'"+lessionArray[1]+"\';");
             } else {
-                Log.d("db","INSERT INTO "+ TABLE_LESSIONS +" VALUES(\""+lessionArray[1]+"\", \""+lessionArray[3]+"\", \""+lessionArray[0]+"\", \""+lessionString+"\", \""+lessionArray[2]+"\", 1, \""+time+"\", \""+lessionArray[4]+"\");");
                 db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\'"+lessionArray[1]+"\', \'"+lessionArray[3]+"\', \'"+lessionArray[0]+"\', \'"+lessionString+"\', \'"+lessionArray[2]+"\', \'"+lessionArray[5]+"\', \'"+time+"\', \'"+lessionArray[4]+"\');");
             }
         }
@@ -783,6 +782,7 @@ public class DBHandler extends SQLiteOpenHelper{
         } else {
             result.put("leer","leer");
         }
+        cursor.close();
         return result;
     }
     public void changeIndividualValue(String key,String value){

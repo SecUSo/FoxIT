@@ -4,6 +4,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -100,21 +102,57 @@ public class SettingsActivity extends FoxItActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void updatePermissions(Context context){
-        DBHandler dbHandler = new DBHandler(context,null,null,1);
-        dbHandler.updatePermissions(readCSV(R.raw.permissions,context));
-        dbHandler.close();
+    public void updatePermissions(Context context,ConnectivityManager connMan){
+        //checking connectivity to a network
+        NetworkInfo netInfo = connMan.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()){
+            //update from internet resource
+            String URL = "https://seacloud.cc/f/a9bca1b6d7/?raw=1";
+            new CSVDownloadTask(context).execute(URL,"permissions");
+
+        } else{
+            //fallback on local data provided by apk
+            Log.d("SettingsActivity: ","no internet connection");
+            DBHandler dbHandler = new DBHandler(context,null,null,1);
+            dbHandler.updatePermissions(readCSV(R.raw.permissions,context));
+            dbHandler.close();
+        }
+
     }
-    public void updateLessions(Context context){
-        DBHandler dbHandler = new DBHandler(context,null,null,1);
-        dbHandler.updateLessions(readCSV(R.raw.lektionen,context));
-        dbHandler.updateClasses(readCSV(R.raw.classes,context));
-        dbHandler.close();
+    public void updateLessions(Context context,ConnectivityManager connMan){
+        //checking connectivity to a network
+        NetworkInfo netInfo = connMan.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()){
+            //update from internet resource
+            String URL = "https://seacloud.cc/f/1e71b0f043/?raw=1";
+            new CSVDownloadTask(context).execute(URL,"lessions");
+            URL = "https://seacloud.cc/f/aa12cd1062/?raw=1";
+            new CSVDownloadTask(context).execute(URL,"classes");
+
+        } else {
+            //fallback on local data provided by apk
+            Log.d("SettingsActivity: ", "no internet connection");
+            DBHandler dbHandler = new DBHandler(context, null, null, 1);
+            dbHandler.updateLessions(readCSV(R.raw.lektionen, context));
+            dbHandler.updateClasses(readCSV(R.raw.classes, context));
+            dbHandler.close();
+        }
     }
-    public void updateSettings(Context context){
-        DBHandler dbHandler = new DBHandler(context,null,null,1);
-        dbHandler.updateSettingDescriptions(readCSV(R.raw.settings,context));
-        dbHandler.close();
+    public void updateSettings(Context context,ConnectivityManager connMan){
+        //checking connectivity to a network
+        NetworkInfo netInfo = connMan.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()){
+            //update from internet resource
+            String URL = "https://seacloud.cc/f/612848b05c/?raw=1";
+            new CSVDownloadTask(context).execute(URL,"settings");
+
+        } else {
+            //fallback on local data provided by apk
+            Log.d("SettingsActivity: ", "no internet connection");
+            DBHandler dbHandler = new DBHandler(context, null, null, 1);
+            dbHandler.updateSettingDescriptions(readCSV(R.raw.settings, context));
+            dbHandler.close();
+        }
     }
 
 
