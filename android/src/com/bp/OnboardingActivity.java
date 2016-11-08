@@ -1,5 +1,6 @@
 package com.bp;
 
+import android.net.ConnectivityManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
@@ -27,9 +28,15 @@ public class OnboardingActivity extends FoxItActivity {
         mViewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         SettingsActivity sa = new SettingsActivity();
-        sa.updateLessions(this);
-        sa.updatePermissions(this);
-        sa.updateSettings(this);
+        sa.updateLessions(this, (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE));
+        sa.updatePermissions(this, (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE));
+        sa.updateSettings(this, (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE));
     }
 }
