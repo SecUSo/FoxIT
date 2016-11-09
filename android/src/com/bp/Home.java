@@ -1,7 +1,6 @@
 package com.bp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -9,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-public class Home extends FoxItActivity {
+public class Home extends FoxITActivity {
 
     Toolbar toolbar;
 
@@ -18,7 +17,7 @@ public class Home extends FoxItActivity {
         super.onCreate(savedInstanceState);
 
         DBHandler dbHandler = new DBHandler(this,null,null,1);
-        if (!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){
+        if (!dbHandler.checkIfInside(DBHandler.TABLE_PERSONAL, DBHandler.COLUMN_KEY + " = \'firstrun\'")) {
             dbHandler.close();
             Intent intent = new Intent(getApplicationContext(),OnboardingActivity.class);
             startActivity(intent);

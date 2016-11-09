@@ -12,13 +12,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-public class StartScreen extends FoxItActivity {
+public class StartScreen extends FoxITActivity {
 
-    TapAdapter adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
     public ViewPager mViewPager; //defines the tabView's content
-
-    String settingsArray[]; //array with settings fetched from the database
     public PermissionListFragment permissionList;
+    TapAdapter adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
+    String settingsArray[]; //array with settings fetched from the database
     Toolbar toolbar; //reference to the toolbar
 
     @Override

@@ -14,6 +14,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="107dp"
+            android:contentDescription="Tatze"
             android:src="@drawable/paw" />
 
         <ImageView
@@ -22,6 +23,7 @@
             android:layout_height="75dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:contentDescription="3. von 4 Punkten"
             android:src="@mipmap/dots3">
 
         </ImageView>
@@ -40,12 +42,12 @@
             android:id="@+id/LectionDescription"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/GameText"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="Erspiele Punkte in den Lektionen, setzte sie ein, und mach deinen Fuchs zum Privatsphären-Schnüffler!"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
 

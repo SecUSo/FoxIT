@@ -13,9 +13,6 @@ public class ValueKeeper {
 
 
     static ValueKeeper instance;
-    private int acornCount=0; //amount of acorn the player collected
-    private int tokenCount=0; //amount of token the player collected
-    private ValueKeeper() {};
     HashMap<String,Boolean> animationList =new HashMap<>();
     HashMap<String,String> profilList=new HashMap<>();
     HashMap<Long,Long> applicationAccessAndDuration =new HashMap<>();
@@ -23,9 +20,12 @@ public class ValueKeeper {
     long timeOfFirstAccess=0;
     HashMap<Long,Long> applicationStartAndDuration =new HashMap<>();
     HashMap<Long,Long> applicationStartAndActiveDuration =new HashMap<>();
-
     Boolean freshlyStartet=true;
+    private int acornCount = 0; //amount of acorn the player collected
+    private int tokenCount = 0; //amount of token the player collected
 
+    private ValueKeeper() {
+    }
 
     /**
      * create a new instance of the class at first call, return this instance at every other call

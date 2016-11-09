@@ -53,5 +53,5 @@ public class MethodChangeTokenCount extends Method{
                 }
             }, 4000);
         }
-    };
+    }
 }

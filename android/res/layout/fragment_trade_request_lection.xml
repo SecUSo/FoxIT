@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/whole_frame"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:id="@+id/whole_frame">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -14,96 +15,97 @@
         android:background="@color/creme">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@color/creme"
-            android:id="@+id/relativeLayout2">
+            android:layout_gravity="right"
+            android:background="@color/creme">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="für diese Lektion ausgeben?"
                 android:id="@+id/text_product_type"
-                android:layout_gravity="center_horizontal"
-                android:layout_below="@+id/text_amount"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Möchtest du "
+                android:layout_below="@+id/text_amount"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:text="für diese Lektion ausgeben?"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
                 android:id="@+id/textView5"
-                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="false"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Möchtest du "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
+                android:id="@+id/text_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="5"
-                android:id="@+id/text_amount"
-                android:layout_marginEnd="13dp"
                 android:layout_below="@+id/textView5"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="13dp"
                 android:layout_toStartOf="@+id/imageView3"
-                android:layout_marginBottom="10dp" />
+                android:text="5"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView3"
-                android:src="@mipmap/mushroom"
-                android:maxWidth="35dp"
-                android:minHeight="35dp"
-                android:adjustViewBounds="true"
-                android:layout_marginEnd="19dp"
                 android:layout_above="@+id/text_product_type"
                 android:layout_alignEnd="@+id/textView5"
-                android:layout_marginBottom="2dp" />
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="19dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="Pilz"
+                android:maxWidth="35dp"
+                android:minHeight="35dp"
+                android:src="@mipmap/mushroom" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="171dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/creme"
             android:layout_below="@+id/relativeLayout2"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/creme">
 
 
             <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nein"
                 android:id="@+id/button_no"
-                android:singleLine="true"
-                android:minWidth="70dp"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp" />
-
-            <Button
+                style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ja"
-                android:id="@+id/button_yes"
-                android:minWidth="70dp"
-                style="?android:attr/buttonStyleSmall"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="6dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp" />
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:minWidth="70dp"
+                android:singleLine="true"
+                android:text="Nein" />
+
+            <Button
+                android:id="@+id/button_yes"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:minWidth="70dp"
+                android:text="Ja" />
 
         </RelativeLayout>
 

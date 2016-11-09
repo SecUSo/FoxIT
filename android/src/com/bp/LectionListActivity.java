@@ -24,18 +24,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 //Displayes the lections corresponding to a certain course and manages their usage
-public class LectionListActivity extends FoxItActivity implements AdapterView.OnItemClickListener {
+public class LectionListActivity extends FoxITActivity implements AdapterView.OnItemClickListener {
 
     //List of lectionDescribtions, send by ClassListActivity
     static String[] lectionStringArray; //has to be static for now
     static String className;//has to be static for now
     static String classDescriptionText; //Text describing the class currently on display
-    boolean descriptionVisible = false; //true if the classDescription is visible
-    ArrayAdapter<String> adapter;
-
     //list of lectionObjects generated to fill the ListView
     public ArrayList<LectionObject> lectionObjectList = new ArrayList<>();
-
+    boolean descriptionVisible = false; //true if the classDescription is visible
+    ArrayAdapter<String> adapter;
     Toolbar toolbar;
 
     /**
@@ -236,6 +234,26 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
     }
 
     /**
+     * handles the purchase of a lection
+     *
+     * @return if the purchase was successful
+     * @author Tim
+     */
+    public boolean purchase(String articleOfCommerce) {
+        for (LectionObject l : lectionObjectList) {
+            if (l.getLectionName().equals(articleOfCommerce)) {
+                //sets the lections status to unlocked
+                l.setProcessingStatus(1);
+                //update the listView
+                adapter.notifyDataSetChanged();
+                new DBWrite(this).execute("changeLectionToUnlocked", articleOfCommerce);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * class to define the way the settings are displayed in the listView by defining how the content is displayed in the list entries
      *
      * @author Tim
@@ -311,27 +329,6 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
             }
         }
 
-    }
-
-
-    /**
-     * handles the purchase of a lection
-     *
-     * @return if the purchase was successful
-     * @author Tim
-     */
-    public boolean purchase(String articleOfCommerce) {
-        for (LectionObject l : lectionObjectList) {
-            if (l.getLectionName().equals(articleOfCommerce)) {
-                //sets the lections status to unlocked
-                l.setProcessingStatus(1);
-                //update the listView
-                adapter.notifyDataSetChanged();
-                new DBWrite(this).execute("changeLectionToUnlocked",articleOfCommerce);
-                return true;
-            }
-        }
-        return false;
     }
 }
 

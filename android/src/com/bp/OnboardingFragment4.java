@@ -1,12 +1,8 @@
 package com.bp;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +35,6 @@ public class OnboardingFragment4 extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Handler handler =new Handler();
                 analysisButton.setText(null);
                 analysisButton.setVisibility(View.GONE);
                 Intent i = new Intent(getActivity(), Analysis.class);

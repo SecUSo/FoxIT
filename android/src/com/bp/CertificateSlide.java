@@ -28,6 +28,7 @@ public class CertificateSlide extends Slide {
             //receiving how much points are necessary for a victory
             pointsNeeded = Integer.parseInt(parameter.get("pointsNeeded"));
         } catch (NumberFormatException e) {
+            Log.d("CertificateSlide", "NumberformatException" + e);
 
         }
         //if the amount of points is meed set lectionSolved to true

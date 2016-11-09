@@ -25,37 +25,10 @@ import java.util.List;
  * device and user specific content is retrieved and saved in database
  * including installed apps, respective permissions & settings.
  */
-public class Analysis extends FoxItActivity {
+public class Analysis extends FoxITActivity {
 
     DBHandler dbHandler;
     Toolbar toolbar;
-
-    /**
-     * while all the data is retrieved, a loading symbol will be shown on screen
-     *
-     * @param savedInstanceState
-     * @author Tim
-     * @author Noah
-     */
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_analysis);
-        DBHandler dbHandler = new DBHandler(this,null,null,1);
-
-
-        //sets our toolbar as the action bar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
-        //analyse();
-        new ExternAnalysis(this).execute(this);
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     /**
      * combines two arrays
@@ -71,6 +44,31 @@ public class Analysis extends FoxItActivity {
         System.arraycopy(first, 0, result, 0, first.length);
         System.arraycopy(second, 0, result, first.length, second.length);
         return result;
+    }
+
+    /**
+     * while all the data is retrieved, a loading symbol will be shown on screen
+     *
+     * @param savedInstanceState
+     * @author Tim
+     * @author Noah
+     */
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_analysis);
+
+        //sets our toolbar as the action bar
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+        //analyse();
+        new ExternAnalysis(this).execute(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     /**
