@@ -267,7 +267,7 @@ public class DBHandler extends SQLiteOpenHelper{
             }
         }
         //output for User here
-        Log.d("DBHandler","Apps eingefügt: "+i);
+        Log.d("DBHandler","Apps eingefügt: "+i+1);
         db.close();
 
     }
@@ -779,10 +779,10 @@ public class DBHandler extends SQLiteOpenHelper{
             while (!cursor.isAfterLast()){
                 result.put(cursor.getString(0), cursor.getString(1));
             }
+            cursor.close();
         } else {
             result.put("leer","leer");
         }
-        cursor.close();
         return result;
     }
     public void changeIndividualValue(String key,String value){

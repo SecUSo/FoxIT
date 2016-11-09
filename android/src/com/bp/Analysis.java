@@ -4,7 +4,6 @@ import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -12,10 +11,8 @@ import android.database.Cursor;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,24 +37,17 @@ public class Analysis extends FoxItActivity {
      * @author Noah
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
+        DBHandler dbHandler = new DBHandler(this,null,null,1);
+
 
         //sets our toolbar as the action bar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         //analyse();
         new ExternAnalysis(this).execute(this);
-        // Timer: Open StartScreen after 7 Seconds
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(getApplicationContext(), StartScreen.class);
-                startActivity(i);
-            }
-        }, 3000L);
 
     }
 
@@ -241,8 +231,8 @@ public class Analysis extends FoxItActivity {
         String selection = null;
         String[] selectionArguments = null;
         String selectionOrder = null;
-        String name = "";
-        String value = "";
+        String name;
+        String value;
         Cursor cursor = cR.query(uri, projection, selection, selectionArguments, selectionOrder);
         cursor.moveToFirst();
 
@@ -269,7 +259,7 @@ public class Analysis extends FoxItActivity {
                 if (!value.equalsIgnoreCase("location_mode")) {
                     tempValue.put(DBHandler.COLUMN_SETTING, name);
                     tempValue.put(DBHandler.COLUMN_INITIAL, value);
-                    //Log.d("SETTINGS", name + "\n " + value + "\n");
+                    //Log.d("SETTINGS", name + ": " + value + "\n");
                     tempValue.put(DBHandler.COLUMN_TYPE, type);
                     contentValues[counter] = new ContentValues(tempValue);
                     tempValue.clear();

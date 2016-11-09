@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -328,9 +327,6 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
                 l.setProcessingStatus(1);
                 //update the listView
                 adapter.notifyDataSetChanged();
-                //DBHandler dbHandler = new DBHandler(this, null, null, 1);
-               // dbHandler.changeLectionToUnlocked(articleOfCommerce);
-                //dbHandler.close();
                 new DBWrite(this).execute("changeLectionToUnlocked",articleOfCommerce);
                 return true;
             }

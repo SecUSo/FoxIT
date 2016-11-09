@@ -2,7 +2,6 @@ package com.bp;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.Settings;
@@ -19,7 +18,7 @@ import static com.bp.Analysis.combineArraysP2;
  */
 public class ExternAnalysis extends AsyncTask {
 
-    Context analysis;
+    private Context analysis;
 
     public ExternAnalysis(Context con) {
         analysis=con;
@@ -32,9 +31,8 @@ public class ExternAnalysis extends AsyncTask {
      * @author Noah
      */
     protected Object doInBackground(Object[] objects) {
-// Get all apps
+        // Get all apps
         ((Analysis)objects[0]).getALL_APPS();
-
         // Get all settings
         Uri uri_global = Settings.Global.CONTENT_URI;
         String[] proj_global = new String[]{Settings.Global.NAME, Settings.Global.VALUE};
@@ -45,7 +43,7 @@ public class ExternAnalysis extends AsyncTask {
         ContentValues[] resultArray = combineArraysP2(firstArray, secondArray);
         resultArray[resultArray.length - 2] = ((Analysis)objects[0]).getLOCATION_MODE();
         resultArray[resultArray.length - 1] = ((Analysis)objects[0]).getPASSWORT_QUALITY();
-return resultArray;
+        return resultArray;
     }
 
     @Override
@@ -53,7 +51,6 @@ return resultArray;
         super.onPostExecute(o);
         new DBWrite(analysis).execute("addParamColumn",o);
         new DBWrite(analysis).execute("insertIndividualValue","firstrun","true");
-
-
+        new GetSettingsAsync(analysis).execute();
     }
 }
