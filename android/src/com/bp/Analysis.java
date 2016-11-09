@@ -16,6 +16,7 @@ import android.provider.Settings;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -81,6 +82,7 @@ public class Analysis extends FoxItActivity {
     public void getALL_APPS() {
        // DBHandler dbHandler = new DBHandler(this, null, null, 1);
         final PackageManager pm = getPackageManager();
+        final TextView log = (TextView) findViewById(R.id.log);
 
         // get a list of installed apps.
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -91,7 +93,7 @@ public class Analysis extends FoxItActivity {
         ContentValues tempValue = new ContentValues(3);
         int counter = 0;
 
-        for (ApplicationInfo applicationInfo : packages) {
+        for (final ApplicationInfo applicationInfo : packages) {
             try {
                 PackageInfo packageInfo = pm.getPackageInfo(applicationInfo.packageName, PackageManager.GET_PERMISSIONS);
 
@@ -108,6 +110,12 @@ public class Analysis extends FoxItActivity {
                 Log.d("MyApp", "Error!"+e);
                 e.printStackTrace();
             }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    log.append("APP: "+applicationInfo.packageName+"\n");
+                }
+            });
 
             tempValue.put(DBHandler.COLUMN_APPNAME, applicationInfo.packageName);
             tempValue.put(DBHandler.COLUMN_PERMISSIONS, bb.toString());
@@ -241,6 +249,8 @@ public class Analysis extends FoxItActivity {
         int counter = 0;
         int col = 0;
         int type = 0; // type: String
+        final TextView log = (TextView) findViewById(R.id.log);
+
 
         // parse all lines of the table
         while (cursor.moveToNext()) {
@@ -259,6 +269,16 @@ public class Analysis extends FoxItActivity {
                 if (!value.equalsIgnoreCase("location_mode")) {
                     tempValue.put(DBHandler.COLUMN_SETTING, name);
                     tempValue.put(DBHandler.COLUMN_INITIAL, value);
+                    final String namex =name;
+                    final String valuex = value;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            log.append("CONF: "+namex+": "+valuex+"\n");
+
+                        }
+                    });
+
                     //Log.d("SETTINGS", name + ": " + value + "\n");
                     tempValue.put(DBHandler.COLUMN_TYPE, type);
                     contentValues[counter] = new ContentValues(tempValue);
@@ -269,6 +289,17 @@ public class Analysis extends FoxItActivity {
                 counter++;
             }
         }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                log.append("LISTEN AUFSCHREIBEN...\n");
+                log.append("EICHELN SAMMELN...\n");
+                log.append("LEKTIONEN LERNEN...\n");
+                log.append("FUCHS EINLAUFEN...\n");
+                log.append("TROPHÄEN POLIEREN...\n");
+                log.append("PILZE VERTEILEN...\n");
+            }
+        });
         cursor.close();
         return contentValues;
     }
