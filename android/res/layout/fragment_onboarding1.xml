@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.tud.team16.bp_privacyparadox.Home">
+    tools:context="com.bp.Home">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,41 +13,43 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@mipmap/logo"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="107dp" />
+            android:layout_marginTop="107dp"
+            android:contentDescription="FoxIT-Logo"
+            android:src="@mipmap/logo" />
 
         <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:src="@mipmap/dots"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/imageView2">
+            android:contentDescription="4-Punkte-Vortschritt"
+            android:src="@mipmap/dots">
 
         </ImageView>
 
         <TextView
+            android:id="@+id/WelcomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Willkommen bei FoxIt!"
-            android:id="@+id/WelcomeText"
-            android:layout_marginTop="230dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="230dp"
+            android:text="Willkommen bei FoxIt!"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
+            android:id="@+id/WelcomeDescription"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Wir helfen dir, deine Privatsphäre im Alltag zu schützen. Lege gleich los und erfahre mehr!"
-            android:id="@+id/WelcomeDescription"
             android:layout_below="@id/WelcomeText"
-            android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center" />
+            android:layout_marginTop="50dp"
+            android:text="Wir helfen dir, deine Privatsphäre im Alltag zu schützen. Lege gleich los und erfahre mehr!"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
 

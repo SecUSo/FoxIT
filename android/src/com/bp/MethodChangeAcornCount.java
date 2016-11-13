@@ -53,5 +53,5 @@ public class MethodChangeAcornCount extends Method{
                 }
             }, 4000);
         }
-    };
+    }
 }

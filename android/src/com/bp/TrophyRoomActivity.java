@@ -1,16 +1,15 @@
 package com.bp;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.RelativeLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
-public class TrophyRoomActivity extends FoxItActivity {
+public class TrophyRoomActivity extends FoxITActivity {
 
     TapAdapter_trophy adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
     ViewPager mViewPager;

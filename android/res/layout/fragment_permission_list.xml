@@ -20,6 +20,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="5dp"
             android:adjustViewBounds="true"
+            android:contentDescription="Tier-Logo"
             android:longClickable="false"
             android:maxHeight="40dp"
             android:maxWidth="40dp"
@@ -31,28 +32,28 @@
             android:id="@+id/text_app_permissions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             android:layout_marginEnd="17dp"
             android:maxHeight="50dp"
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/text_permission_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_toEndOf="@+id/image_permission_app_icon"
             android:maxHeight="50dp"
             android:maxWidth="230dp"
             android:minHeight="50dp"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/white"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/image_permission_app_icon" />
+            android:textColor="@color/white" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -85,12 +86,12 @@
             android:id="@+id/app_settings_button"
             android:layout_width="wrap_content"
             android:layout_height="62dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:clickable="true"
             android:nestedScrollingEnabled="true"
-            android:text="App Einstellungen"
-            android:layout_alignParentBottom="true"
-            android:backgroundTint="@color/colorPrimaryDark" />
+            android:text="App Einstellungen" />
 
     </RelativeLayout>
 

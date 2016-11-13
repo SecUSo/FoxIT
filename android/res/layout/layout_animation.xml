@@ -8,41 +8,42 @@
     android:weightSum="1">
 
     <RelativeLayout
-        app:layout_widthPercent="100%"
-        android:layout_height="wrap_content"
         android:id="@+id/trophy_frame"
-        android:background="#dad7b4">
+        android:layout_height="wrap_content"
+        android:background="#dad7b4"
+        app:layout_widthPercent="100%">
 
         <ImageView
             android:id="@+id/grid_item_image"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginRight="10px"
-            android:src="@mipmap/test_trophy"
             android:layout_weight="15.50"
             android:adjustViewBounds="true"
+            android:contentDescription="großes Eichelbild"
             android:longClickable="false"
-            android:layout_centerHorizontal="true">
+            android:src="@mipmap/test_trophy">
         </ImageView>
 
         <TextView
+            android:id="@+id/grid_item_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium Text"
-            android:id="@+id/grid_item_label"
-            android:textColor="@color/abc_search_url_text_pressed"
             android:layout_below="@+id/grid_item_image"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:text="Medium Text"
+            android:textColor="@color/abc_search_url_text_pressed" />
 
         <TextView
+            android:id="@+id/text_animation_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Baumhaus Kapitalist"
-            android:id="@+id/text_animation_name"
-            android:textColor="#be0e0e"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:text="Baumhaus Kapitalist"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#be0e0e" />
 
     </RelativeLayout>
 

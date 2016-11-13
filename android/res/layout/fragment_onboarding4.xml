@@ -6,9 +6,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/creme"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:background="@color/creme">
 
         <ImageView
             android:layout_width="100dp"
@@ -16,6 +16,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="107dp"
+            android:contentDescription="Profil-Symbol"
             android:src="@drawable/account" />
 
         <ImageView
@@ -24,6 +25,7 @@
             android:layout_height="75dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:contentDescription="4. von 4 Punkten"
             android:src="@mipmap/dots4">
 
         </ImageView>
@@ -42,21 +44,21 @@
             android:id="@+id/LectionDescription"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/AnalyseText"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="Erfahre alles über die aktuellen Einstellungen und Berechtigungen der Apps, die du gerade verwendest!"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
+            android:id="@+id/button_accept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Los geht's!"
-            android:id="@+id/button_accept"
-            android:backgroundTint="@color/colorPrimaryDark"
             android:layout_above="@+id/imageView2"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Los geht's!" />
 
     </RelativeLayout>
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loading"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,12 +9,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/analysisProgressBar"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="55dp"
         android:background="@color/colorPrimaryDark"
         android:indeterminate="false"
         android:indeterminateDuration="@android:integer/config_mediumAnimTime"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/log" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,5 +36,21 @@
         android:textSize="18sp" />
 
     <include layout="@layout/toolbar_actionbar" />
+
+    <TextView
+        android:text="EIGENSCHAFTEN"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/log"
+        android:textAlignment="viewStart"
+        android:textStyle="normal|bold"
+        android:scrollbars="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:gravity="bottom"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="160dp" />
 
 </RelativeLayout>

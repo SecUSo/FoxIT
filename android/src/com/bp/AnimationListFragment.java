@@ -111,6 +111,24 @@ public class AnimationListFragment extends Fragment {
     }
 
     /**
+     * checks for all displayed animations if they are unlocked and reloads the gridview
+     * @author Tim
+     */
+    public void refreshAllAnimations() {
+        //check if unlocked
+        for (AnimationObject ao : animationArray) {
+            ao.checkUnlocked();
+        }
+
+        //reload the gridView
+        gridView = (GridView) view.findViewById(R.id.grid_trophy);
+        animationViewAdapter i = new animationViewAdapter(getActivity().getApplicationContext());
+        i.notifyDataSetChanged();
+        gridView.setAdapter(i);
+
+    }
+
+    /**
      * fills the gridView
      */
     private class animationViewAdapter extends BaseAdapter {
@@ -138,7 +156,6 @@ public class AnimationListFragment extends Fragment {
             animationArray[position].checkUnlocked();
             if (convertView == null) {
 
-                gridView = new View(context);
 
                 // get the layout for an animation from xml
                 gridView = inflater.inflate(R.layout.layout_animation, null);
@@ -164,7 +181,7 @@ public class AnimationListFragment extends Fragment {
                 }
 
             } else {
-                gridView = (View) convertView;
+                gridView = convertView;
             }
 
             return gridView;
@@ -185,25 +202,6 @@ public class AnimationListFragment extends Fragment {
             return 0;
         }
 
-
-    }
-
-
-    /**
-     * checks for all displayed animations if they are unlocked and reloads the gridview
-     * @author Tim
-     */
-    public void refreshAllAnimations() {
-        //check if unlocked
-        for (AnimationObject ao : animationArray) {
-            ao.checkUnlocked();
-        }
-
-        //reload the gridView
-        gridView = (GridView) view.findViewById(R.id.grid_trophy);
-        animationViewAdapter i = new animationViewAdapter(getActivity().getApplicationContext());
-        i.notifyDataSetChanged();
-        gridView.setAdapter(i);
 
     }
 

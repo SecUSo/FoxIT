@@ -4,7 +4,6 @@ import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -12,13 +11,12 @@ import android.database.Cursor;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -27,43 +25,10 @@ import java.util.List;
  * device and user specific content is retrieved and saved in database
  * including installed apps, respective permissions & settings.
  */
-public class Analysis extends FoxItActivity {
+public class Analysis extends FoxITActivity {
 
     DBHandler dbHandler;
     Toolbar toolbar;
-
-    /**
-     * while all the data is retrieved, a loading symbol will be shown on screen
-     *
-     * @param savedInstanceState
-     * @author Tim
-     * @author Noah
-     */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_analysis);
-
-        //sets our toolbar as the action bar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
-        analyse();
-        // Timer: Open StartScreen after 7 Seconds
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(getApplicationContext(), StartScreen.class);
-                startActivity(i);
-            }
-        }, 3000L);
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     /**
      * combines two arrays
@@ -82,14 +47,40 @@ public class Analysis extends FoxItActivity {
     }
 
     /**
+     * while all the data is retrieved, a loading symbol will be shown on screen
+     *
+     * @param savedInstanceState
+     * @author Tim
+     * @author Noah
+     */
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_analysis);
+
+        //sets our toolbar as the action bar
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+        //analyse();
+        new ExternAnalysis(this).execute(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    /**
      * retrieves the names of installed apps on device as well as additional info, such as requested permissions
      * inserts data into database
      *
      * @author Noah
      */
     public void getALL_APPS() {
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+       // DBHandler dbHandler = new DBHandler(this, null, null, 1);
         final PackageManager pm = getPackageManager();
+        final TextView log = (TextView) findViewById(R.id.log);
 
         // get a list of installed apps.
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -100,7 +91,7 @@ public class Analysis extends FoxItActivity {
         ContentValues tempValue = new ContentValues(3);
         int counter = 0;
 
-        for (ApplicationInfo applicationInfo : packages) {
+        for (final ApplicationInfo applicationInfo : packages) {
             try {
                 PackageInfo packageInfo = pm.getPackageInfo(applicationInfo.packageName, PackageManager.GET_PERMISSIONS);
 
@@ -114,9 +105,15 @@ public class Analysis extends FoxItActivity {
                     bb.append("NULL");
                 }
             } catch (PackageManager.NameNotFoundException e) {
-                Log.d("MyApp", "Error!");
+                Log.d("MyApp", "Error!"+e);
                 e.printStackTrace();
             }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    log.append("APP: "+applicationInfo.packageName+"\n");
+                }
+            });
 
             tempValue.put(DBHandler.COLUMN_APPNAME, applicationInfo.packageName);
             tempValue.put(DBHandler.COLUMN_PERMISSIONS, bb.toString());
@@ -126,7 +123,8 @@ public class Analysis extends FoxItActivity {
             counter++;
             bb.setLength(0);
         }
-        dbHandler.addAppColumn(appValues);
+        new DBWrite(this).execute("addAppColumn",appValues);
+        //dbHandler.addAppColumn(appValues);
     }
 
 
@@ -141,7 +139,7 @@ public class Analysis extends FoxItActivity {
      * 66     -exception
      * @author Tim
      */
-    private ContentValues getPASSWORT_QUALITY() {
+    public ContentValues getPASSWORT_QUALITY() {
         int value;
         String name;
         ContentValues cv = new ContentValues(3);
@@ -239,8 +237,8 @@ public class Analysis extends FoxItActivity {
         String selection = null;
         String[] selectionArguments = null;
         String selectionOrder = null;
-        String name = "";
-        String value = "";
+        String name;
+        String value;
         Cursor cursor = cR.query(uri, projection, selection, selectionArguments, selectionOrder);
         cursor.moveToFirst();
 
@@ -249,6 +247,8 @@ public class Analysis extends FoxItActivity {
         int counter = 0;
         int col = 0;
         int type = 0; // type: String
+        final TextView log = (TextView) findViewById(R.id.log);
+
 
         // parse all lines of the table
         while (cursor.moveToNext()) {
@@ -267,7 +267,17 @@ public class Analysis extends FoxItActivity {
                 if (!value.equalsIgnoreCase("location_mode")) {
                     tempValue.put(DBHandler.COLUMN_SETTING, name);
                     tempValue.put(DBHandler.COLUMN_INITIAL, value);
-                    Log.d("SETTINGS", name + "\n " + value + "\n");
+                    final String namex =name;
+                    final String valuex = value;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            log.append("CONF: "+namex+": "+valuex+"\n");
+
+                        }
+                    });
+
+                    //Log.d("SETTINGS", name + ": " + value + "\n");
                     tempValue.put(DBHandler.COLUMN_TYPE, type);
                     contentValues[counter] = new ContentValues(tempValue);
                     tempValue.clear();
@@ -277,36 +287,18 @@ public class Analysis extends FoxItActivity {
                 counter++;
             }
         }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                log.append("LISTEN AUFSCHREIBEN...\n");
+                log.append("EICHELN SAMMELN...\n");
+                log.append("LEKTIONEN LERNEN...\n");
+                log.append("FUCHS EINLAUFEN...\n");
+                log.append("TROPHÄEN POLIEREN...\n");
+                log.append("PILZE VERTEILEN...\n");
+            }
+        });
         cursor.close();
         return contentValues;
     }
-
-    /**
-     * fetches all installed apps and the device settings to pass it into the database
-     *
-     * @author Noah
-     */
-    private void analyse() {
-        dbHandler = new DBHandler(this, null, null, 1);
-        dbHandler.insertIndividualValue("firstrun", "true");
-
-        // Get all apps
-        getALL_APPS();
-
-        // Get all settings
-        Uri uri_global = Settings.Global.CONTENT_URI;
-        String[] proj_global = new String[]{Settings.Global.NAME, Settings.Global.VALUE};
-        Uri uri_secure = Settings.Secure.CONTENT_URI;
-        String[] proj_secure = new String[]{Settings.Secure.NAME, Settings.Secure.VALUE};
-        ContentValues[] firstArray = getSETTINGS(uri_global, proj_global);
-        ContentValues[] secondArray = getSETTINGS(uri_secure, proj_secure);
-        ContentValues[] resultArray = combineArraysP2(firstArray, secondArray);
-        resultArray[resultArray.length - 2] = getLOCATION_MODE();
-        resultArray[resultArray.length - 1] = getPASSWORT_QUALITY();
-
-        dbHandler.addParamColumn(resultArray);
-
-
-    }
-
 }

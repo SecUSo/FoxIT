@@ -2,52 +2,35 @@ package com.bp;
 
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.database.Cursor;
-import android.support.annotation.IntegerRes;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+public class StartScreen extends FoxITActivity {
 
-public class StartScreen extends FoxItActivity {
-
-    TapAdapter adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
     public ViewPager mViewPager; //defines the tabView's content
-
-    String settingsArray[]; //array with settings fetched from the database
     public PermissionListFragment permissionList;
+    TapAdapter adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
+    String settingsArray[]; //array with settings fetched from the database
     Toolbar toolbar; //reference to the toolbar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-       DBHandler dbHandler = new DBHandler(this,null,null,1);
-       /*  dbHandler.updateSettingDescriptions(readCSV(R.raw.settings));
-        dbHandler.updatePermissions(readCSV(R.raw.permissions));
-        dbHandler.updateLessions(readCSV(R.raw.lektionen));
-        dbHandler.updateClasses(readCSV(R.raw.classes));
-        */
+
         //sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
         //get Settings from DB into ListView
-        settingsArray=dbHandler.getSettingsFromDB();
-        Log.d("settingsArraylength", Integer.toString(settingsArray.length));
+        settingsArray= getIntent().getStringArrayExtra("settings");
 
         //defining the tabs and the tab bar
         adapter=new TapAdapter(getFragmentManager(),this,settingsArray);
@@ -196,27 +179,5 @@ public void onResume(){
             //super.onBackPressed();
         }
     }
-    public ArrayList readCSV(int input){
-        InputStream is = getResources().openRawResource(input);
-        ArrayList result = new ArrayList();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        try{
-            String templine;
-            while ((templine=br.readLine())!=null){
-                String[] csvrow = templine.split(";");
-                result.add(csvrow);
-            }
-        } catch (IOException e){
-            throw new RuntimeException("CSV file couldn't be read properly: "+e);
-        } finally {
-            try {
-                is.close();
-                br.close();
-            } catch (IOException e){
-                throw new RuntimeException("Input Stream couldn't be closed properly: "+e);
-            }
-        }
-        return result;
 
-    }
 }

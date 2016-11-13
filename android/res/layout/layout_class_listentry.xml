@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="false">
+    android:clickable="false"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -10,28 +11,29 @@
         android:clickable="false">
 
         <ImageView
+            android:id="@+id/image_class_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/image_class_icon"
-            android:src="@mipmap/ring"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="5dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="Lektions-Anzeige"
             android:maxHeight="70dp"
             android:maxWidth="70dp"
-            android:adjustViewBounds="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="6dp" />
+            android:src="@mipmap/ring" />
 
         <TextView
+            android:id="@+id/text_class_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/text_class_name"
-            android:minHeight="40dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/image_class_icon" />
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/image_class_icon"
+            android:gravity="center_vertical"
+            android:minHeight="40dp"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </RelativeLayout>
 
 </LinearLayout>

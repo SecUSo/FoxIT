@@ -120,63 +120,6 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
 
     }
 
-
-    /**
-     * class to define the way the apps are displayed in the listView
-     * @author Tim
-     */
-    private class MyListAdapter_app extends ArrayAdapter<ApplicationInfo> {
-        public MyListAdapter_app(){
-            //Here is defined, that the adapter is using our list of apps (apps)
-            //and the R.layout.layout_app-XMLLayout for single listViewItems
-            super(context,R.layout.layout_app,apps);
-        }
-
-        /**
-         * Here ist defined how the XML-Layout is filed by the data stored in the array.
-         * @author Tim
-         * @param position position in the array used
-         * @param convertView variable used for recycling old elements of the listView
-         * @param parent
-         * @return
-         */
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            //convertView has to be filled with layout_app if it's null
-            View itemView = convertView;
-            final PackageManager pm = context.getPackageManager();      //only important for fetching the app info
-            if (itemView == null) {
-                itemView = getActivity().getLayoutInflater().inflate(R.layout.layout_app, parent, false);
-            }
-
-            //the current app is retrieved
-            ApplicationInfo currentApp = apps.get(position);
-            //setting the app's name
-            TextView appName = (TextView) itemView.findViewById(R.id.text_app_name);
-            appName.setText(pm.getApplicationLabel(currentApp).toString());
-
-            //adding an icon describing the risk posed by the app
-            ImageView ratingIcon =(ImageView) itemView.findViewById(R.id.image_permission_rating);
-            int i=getLevelOfDanger(currentApp);
-
-            switch(i){
-                case 0:{ ratingIcon.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.goodapprating));break;}
-                case 1:{ratingIcon.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.mediumapprating));break;}
-                case 2:{ ratingIcon.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.badapprating));break;}
-            }
-
-            //setting the appIcon
-            ImageView icon =(ImageView) itemView.findViewById(R.id.image_app_icon);
-            try {
-                icon.setImageDrawable(pm.getApplicationIcon(currentApp.packageName));
-
-            } catch (PackageManager.NameNotFoundException e) {e.printStackTrace();}
-
-            return itemView;
-        }
-    }
-
-
     /**
      * a totally makeshift methodLeft to determine the dangerLevel of an app, not important to understand
      * @param app
@@ -235,7 +178,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
         ArrayList<String> result=new ArrayList<String>();
         String[] allPermissions={};
 
-        PackageInfo packageInfo = null;
+        PackageInfo packageInfo;
         final PackageManager pm = context.getPackageManager();
         try {
             packageInfo = pm.getPackageInfo(app.packageName, PackageManager.GET_PERMISSIONS);
@@ -298,7 +241,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
                         String leftAppName=pm.getApplicationLabel(lhs).toString();
                         String rightAppName=pm.getApplicationLabel(rhs).toString();
 
-                        if (leftAppName == rightAppName) {
+                        if (leftAppName.equals(rightAppName)) {
                             return 0;
                         }
                         if (leftAppName == null) {
@@ -374,7 +317,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
         ArrayList<String> result=new ArrayList<String>();
         String[] allPermissions={};
 
-        PackageInfo packageInfo = null;  //is actually used
+        PackageInfo packageInfo;  //is actually used
         final PackageManager pm = context.getPackageManager();
         try {
             packageInfo = pm.getPackageInfo(app.packageName, PackageManager.GET_PERMISSIONS);
@@ -446,6 +389,73 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
             result.addAll(otherPermissions);
         }
         return result;
+    }
+
+    /**
+     * class to define the way the apps are displayed in the listView
+     *
+     * @author Tim
+     */
+    private class MyListAdapter_app extends ArrayAdapter<ApplicationInfo> {
+        public MyListAdapter_app() {
+            //Here is defined, that the adapter is using our list of apps (apps)
+            //and the R.layout.layout_app-XMLLayout for single listViewItems
+            super(context, R.layout.layout_app, apps);
+        }
+
+        /**
+         * Here ist defined how the XML-Layout is filed by the data stored in the array.
+         * @author Tim
+         * @param position position in the array used
+         * @param convertView variable used for recycling old elements of the listView
+         * @param parent
+         * @return
+         */
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            //convertView has to be filled with layout_app if it's null
+            View itemView = convertView;
+            final PackageManager pm = context.getPackageManager();      //only important for fetching the app info
+            if (itemView == null) {
+                itemView = getActivity().getLayoutInflater().inflate(R.layout.layout_app, parent, false);
+            }
+
+            //the current app is retrieved
+            ApplicationInfo currentApp = apps.get(position);
+            //setting the app's name
+            TextView appName = (TextView) itemView.findViewById(R.id.text_app_name);
+            appName.setText(pm.getApplicationLabel(currentApp).toString());
+
+            //adding an icon describing the risk posed by the app
+            ImageView ratingIcon = (ImageView) itemView.findViewById(R.id.image_permission_rating);
+            int i = getLevelOfDanger(currentApp);
+
+            switch (i) {
+                case 0: {
+                    ratingIcon.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.goodapprating));
+                    break;
+                }
+                case 1: {
+                    ratingIcon.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.mediumapprating));
+                    break;
+                }
+                case 2: {
+                    ratingIcon.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.badapprating));
+                    break;
+                }
+            }
+
+            //setting the appIcon
+            ImageView icon = (ImageView) itemView.findViewById(R.id.image_app_icon);
+            try {
+                icon.setImageDrawable(pm.getApplicationIcon(currentApp.packageName));
+
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            return itemView;
+        }
     }
 
 }
