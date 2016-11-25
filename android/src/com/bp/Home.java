@@ -29,8 +29,8 @@ public class Home extends FoxItActivity {
         }else{
             if(shouldEvaluationBeDisplayed()){
                 Intent intent = new Intent(getApplicationContext(),LectionActivity.class);
-                String className="Deep Web";
-                int position=getNumberOfCurrentEvaluation();
+                String className="Deep Web";//"Evaluation";
+                int position=0;//getNumberOfCurrentEvaluation();
                 ArrayList<LectionObject> lectionObjectList= dbHandler.getLectionsFromDB(className);
                 intent.putExtra("lection", lectionObjectList.get(position).getContent());
                 intent.putExtra("name", lectionObjectList.get(position).getLectionName());
@@ -120,7 +120,10 @@ public class Home extends FoxItActivity {
 
         int[] timeOfEvaluation ={1477829816};
         Calendar currentTime = Calendar.getInstance();
-        return timeOfEvaluation[getNumberOfCurrentEvaluation()]<currentTime.getTimeInMillis();
+        if(timeOfEvaluation.length>getNumberOfCurrentEvaluation()){
+        return timeOfEvaluation[getNumberOfCurrentEvaluation()]<currentTime.getTimeInMillis();}else{
+            return false;
+        }
     }
 
     public int getNumberOfCurrentEvaluation(){

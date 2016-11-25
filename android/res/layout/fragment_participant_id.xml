@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="#aad4d4d4"
+    android:id="@+id/whole_frame">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120dp"
+        android:layout_weight="0.11"
+        android:background="@color/creme">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/creme"
+            android:id="@+id/relativeLayout2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Bitte gib deinen Versuchspersonencode ein. Dieser setzt sich zusammen aus dem ersten Buchstaben des Nachnamens deines Stofftiers, der Note deines Matheabis und den ersten 16 Ziffern deiner Handynummer. "
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/text_amount"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="15dp"
+                android:layout_margin="10dp"
+                android:maxWidth="240dp"
+                android:id="@+id/instruction_text" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/creme"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_centerHorizontal="true">
+
+
+        </RelativeLayout>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:id="@+id/participant_id_input_text"
+            android:inputType="text"
+            android:gravity="left"
+            android:layout_weight="0.11"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:maxLength="6"
+            android:ems="6" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_check"
+            android:layout_marginEnd="17dp"
+            android:id="@+id/continue_button"
+            android:layout_alignBottom="@+id/participant_id_input_text"
+            android:layout_alignEnd="@+id/relativeLayout2"
+            android:maxHeight="@android:dimen/app_icon_size"
+            android:maxWidth="@android:dimen/app_icon_size"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="15dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -305,6 +305,7 @@ public class LectionActivity extends FoxItActivity {
                 db.changeEvaluationToSolved(lection.getLectionName());
                 ValueKeeper v=ValueKeeper.getInstance();
                 v.setEvaluationResults(evaluationResults);
+                v.increaseCurrentEvaluation();
             }
 
             MethodFactory factory = new MethodFactory(this);

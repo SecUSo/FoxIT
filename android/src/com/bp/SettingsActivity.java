@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
-public class SettingsActivity extends FoxITActivity {
+public class SettingsActivity extends FoxItActivity {
 
     Toolbar toolbar;
 

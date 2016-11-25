@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-public class StartScreen extends FoxITActivity {
+public class StartScreen extends FoxItActivity {
 
     public ViewPager mViewPager; //defines the tabView's content
     public PermissionListFragment permissionList;

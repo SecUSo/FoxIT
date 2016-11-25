@@ -80,7 +80,7 @@ public class TradeRequestFragment extends Fragment {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getFragmentManager().beginTransaction().remove(thisFragment).commit();
+                getActivity().onBackPressed();//getFragmentManager().beginTransaction().remove(thisFragment).commit();
             }
 
         });

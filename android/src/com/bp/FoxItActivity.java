@@ -1,6 +1,7 @@
 package com.bp;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -18,6 +19,11 @@ public class FoxItActivity extends AppCompatActivity {
         FoxItApplication myApp = (FoxItApplication)this.getApplication();
         if(v.getFreshlyStartet()){
             v.setTimeOfFirstAccess(System.currentTimeMillis());
+
+            Intent i=new Intent(this,BackgroundService.class);
+            i.putExtra("BackgroundKey","Value for service" );
+            startService(i);
+
         }
 
 

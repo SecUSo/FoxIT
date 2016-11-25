@@ -23,7 +23,7 @@ public class ValueKeeper {
     long timeOfFirstAccess=0;
     HashMap<Long,Long> applicationStartAndDuration =new HashMap<>();
     HashMap<Long,Long> applicationStartAndActiveDuration =new HashMap<>();
-    int currentEvaluation;
+    int currentEvaluation=0;
 
     public void setEvaluationResults(HashMap<String, String> evaluationResults) {
         EvaluationResults = evaluationResults;

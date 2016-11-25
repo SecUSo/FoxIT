@@ -83,7 +83,8 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
             //add the TradeRequestFragment to the activity's context
             FragmentManager manager = getFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            AnalysisRequestFragment tradeRequest = new AnalysisRequestFragment();
+            //AnalysisRequestFragment tradeRequest = new AnalysisRequestFragment();
+            ParticipantIDFragment tradeRequest=new ParticipantIDFragment();
             //add the fragment to the count_frame RelativeLayout
             transaction.add(R.id.request_frame, tradeRequest, "count");
             transaction.addToBackStack("analysisRequest");
