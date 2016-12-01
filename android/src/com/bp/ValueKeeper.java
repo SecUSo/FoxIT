@@ -3,6 +3,8 @@ package com.bp;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Created by Ich on 12.09.2016.
@@ -24,6 +26,7 @@ public class ValueKeeper {
     HashMap<Long,Long> applicationStartAndDuration =new HashMap<>();
     HashMap<Long,Long> applicationStartAndActiveDuration =new HashMap<>();
     int currentEvaluation=0;
+    String vpnCode;
 
     public void setEvaluationResults(HashMap<String, String> evaluationResults) {
         EvaluationResults = evaluationResults;
@@ -43,6 +46,100 @@ public class ValueKeeper {
             instance=new ValueKeeper();
         }
         return instance;
+    }
+
+
+
+    public void reviveInstance(){
+        Log.d("MyApp","Wiederherstellung abgeschloßenYY");
+        DBHandler db=new DBHandler(FoxItActivity.getAppContext(),null,null,1);
+        HashMap<String,String> data =  db.getIndividualData();
+        Log.d("MyApp","Wiederherstellung abgeschloßenXX");
+        if(data.containsKey("acornCount")) {
+            acornCount = Integer.valueOf(data.get("acornCount"));
+            tokenCount = Integer.valueOf(data.get("tokenCount"));
+            vpnCode = data.get("vpnCode");
+        }
+
+        animationList=new HashMap<>();
+        profilList=new HashMap<>();
+        applicationAccessAndDuration=new HashMap<>();
+        applicationStartAndActiveDuration=new HashMap<>();
+        applicationStartAndActiveDuration=new HashMap<>();
+        for(String e:data.keySet()){
+            if(e.contains("ani:")){
+
+                animationList.put(e,Boolean.getBoolean(data.get(e)));
+
+            }else{
+                if(e.contains("dur:")){
+                    applicationAccessAndDuration.put(Long.getLong(e),Long.getLong(data.get(e)));
+                }else{
+                    if(e.contains("stD:")){
+                        applicationStartAndDuration.put(Long.getLong(e),Long.getLong(data.get(e)));
+                    }else{
+                        if(e.contains("stA:")) {
+                            applicationStartAndActiveDuration.put(Long.getLong(e), Long.getLong(data.get(e)));
+                       }
+                        }
+                    }
+
+               }
+            }
+
+        }
+
+
+
+
+
+
+
+    public void saveInstance(){
+
+
+        DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
+
+        db.insertIndividualValue("acornCount",Integer.toString(acornCount));
+        db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
+
+        for (Map.Entry<String, Boolean> entry : animationList.entrySet()) {
+            String key = entry.getKey();
+            String value = Boolean.toString(entry.getValue());
+        db.insertIndividualValue("ani:"+key,value);
+
+        }
+
+        for (Map.Entry<Long, Long> entry : applicationAccessAndDuration.entrySet()) {
+            Long key = entry.getKey();
+            Long value = entry.getValue();
+            db.insertIndividualValue("dur:"+Long.toString(key),Long.toString(value));
+
+        }
+        for (Map.Entry<Long, Long> entry : applicationStartAndDuration.entrySet()) {
+            Long key = entry.getKey();
+            Long value = entry.getValue();
+            db.insertIndividualValue("stD:"+Long.toString(key),Long.toString(value));
+
+        }
+        for (Map.Entry<Long, Long> entry : applicationStartAndActiveDuration.entrySet()) {
+            Long key = entry.getKey();
+            Long value = entry.getValue();
+            db.insertIndividualValue("stA:"+Long.toString(key),Long.toString(value));
+
+        }
+        db.insertIndividualValue("currentEvaluation",Integer.toString(currentEvaluation));
+        db.insertIndividualValue("vpnCode",vpnCode);
+
+
+
+        for (Map.Entry<String, String> entry : EvaluationResults.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            db.insertIndividualValue("eva:"+key,value);
+
+        }
+
     }
 
 
@@ -146,6 +243,10 @@ public void setTimeOfLastAccess(long time){
 
         applicationStartAndActiveDuration.put(timeOfFirstAccess,totalTime);
         Log.d("MyApp","ActualTotalTime:"+applicationStartAndActiveDuration.toString());
+    }
+
+    public void setVpnCode(String vpnCode) {
+        this.vpnCode = vpnCode;
     }
 
 }

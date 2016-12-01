@@ -1,7 +1,7 @@
 package com.bp;
 
 
-import android.content.Intent;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -11,19 +11,21 @@ import android.util.Log;
  */
 public class FoxItActivity extends AppCompatActivity {
 
+    private static Context context;
+
+
     @Override
     public void onStart()
     {
         super.onResume();
+        FoxItActivity.context = getApplicationContext();
         ValueKeeper v=ValueKeeper.getInstance();
-        FoxItApplication myApp = (FoxItApplication)this.getApplication();
+        FoxItApplication myApp = (FoxItApplication) this.getApplication();
         if(v.getFreshlyStartet()){
+
+           // v.reviveInstance();
+            new reviveValueTask().execute();
             v.setTimeOfFirstAccess(System.currentTimeMillis());
-
-            Intent i=new Intent(this,BackgroundService.class);
-            i.putExtra("BackgroundKey","Value for service" );
-            startService(i);
-
         }
 
 
@@ -45,7 +47,12 @@ public class FoxItActivity extends AppCompatActivity {
         v.fillApplicationAccessAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndActiveCDuration(System.currentTimeMillis());
-        ((FoxItApplication)this.getApplication()).startActivityTransitionTimer();
+        ((FoxItApplication) this.getApplication()).startActivityTransitionTimer();
+        new SavaValueTask().execute();
+    }
+
+    public static Context getAppContext() {
+        return FoxItActivity.context;
     }
 
 }
