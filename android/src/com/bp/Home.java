@@ -32,7 +32,10 @@ public class Home extends FoxItActivity {
                 String className="Deep Web";//"Evaluation";
                 int position=0;//getNumberOfCurrentEvaluation();
                 ArrayList<LectionObject> lectionObjectList= dbHandler.getLectionsFromDB(className);
-                intent.putExtra("lection", lectionObjectList.get(position).getContent());
+                intent.putExtra("lection","[name~Deep und Dark Web Quiz]\n" +
+                        "[0~type~text'text~Im folgenden Quiz wird dein Wissen zum Deep Web und Dark Web abgefragt.\n" +
+                        "Es können mehrere Antworten richtig sein.][solved~false]");
+                        // lectionObjectList.get(position).getContent());
                 intent.putExtra("name", lectionObjectList.get(position).getLectionName());
                 intent.putExtra("type", -99);//lectionObjectList.get(position).getType());
                 intent.putExtra("delay", lectionObjectList.get(position).getDelaytime());
