@@ -785,6 +785,7 @@ public class DBHandler extends SQLiteOpenHelper{
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 result.put(cursor.getString(0), cursor.getString(1));
+                cursor.moveToNext();
             }
             cursor.close();
         } else {
