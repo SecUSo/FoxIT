@@ -27,6 +27,8 @@ public class ValueKeeper {
     HashMap<Long,Long> applicationStartAndActiveDuration =new HashMap<>();
     int currentEvaluation=0;
     String vpnCode;
+    String whichEvaluationShouldBdone="none";
+
 
     public void setEvaluationResults(HashMap<String, String> evaluationResults) {
         EvaluationResults = evaluationResults;
@@ -54,6 +56,7 @@ public class ValueKeeper {
         Log.d("MyApp","Wiederherstellung abgeschloßenYY");
         DBHandler db=new DBHandler(FoxItActivity.getAppContext(),null,null,1);
         HashMap<String,String> data =  db.getIndividualData();
+        Log.d("MyApp","Data:"+data.toString());
         Log.d("MyApp","Wiederherstellung abgeschloßenXX");
         if(data.containsKey("acornCount")) {
             acornCount = Integer.valueOf(data.get("acornCount"));
@@ -69,17 +72,17 @@ public class ValueKeeper {
         for(String e:data.keySet()){
             if(e.contains("ani:")){
 
-                animationList.put(e,Boolean.getBoolean(data.get(e)));
+                animationList.put(e.substring(4),Boolean.parseBoolean(data.get(e)));
 
             }else{
                 if(e.contains("dur:")){
-                    applicationAccessAndDuration.put(Long.getLong(e),Long.getLong(data.get(e)));
+                    applicationAccessAndDuration.put(Long.parseLong(e.substring(4)),Long.parseLong(data.get(e)));
                 }else{
                     if(e.contains("stD:")){
-                        applicationStartAndDuration.put(Long.getLong(e),Long.getLong(data.get(e)));
+                        applicationStartAndDuration.put(Long.parseLong(e.substring(4)),Long.parseLong(data.get(e)));
                     }else{
                         if(e.contains("stA:")) {
-                            applicationStartAndActiveDuration.put(Long.getLong(e), Long.getLong(data.get(e)));
+                            applicationStartAndActiveDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
                        }
                         }
                     }
@@ -218,7 +221,7 @@ public void setTimeOfLastAccess(long time){
         }else{
             applicationAccessAndDuration.put(timeOfLastAccess,time-timeOfLastAccess);
         }
-        Log.d("MyApp",applicationAccessAndDuration.toString());
+       // Log.d("MyApp",applicationAccessAndDuration.toString());
     }
 
     public Boolean getFreshlyStartet() {
@@ -230,7 +233,7 @@ public void setTimeOfLastAccess(long time){
     }
     public void fillApplicationStartAndDuration(long time){
         applicationStartAndDuration.put(timeOfFirstAccess,time-timeOfFirstAccess);
-    Log.d("MyApp","TotalTime:"+applicationStartAndDuration.toString());
+    //Log.d("MyApp","TotalTime:"+applicationStartAndDuration.toString());
     }
     public void setTimeOfFirstAccess(long time){
         timeOfFirstAccess=time;
@@ -242,7 +245,7 @@ public void setTimeOfLastAccess(long time){
         }
 
         applicationStartAndActiveDuration.put(timeOfFirstAccess,totalTime);
-        Log.d("MyApp","ActualTotalTime:"+applicationStartAndActiveDuration.toString());
+        //Log.d("MyApp","ActualTotalTime:"+applicationStartAndActiveDuration.toString());
     }
 
     public void setVpnCode(String vpnCode) {

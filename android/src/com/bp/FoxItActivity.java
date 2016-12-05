@@ -5,6 +5,8 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.Calendar;
+
 /**
  * device and user specific content is retrieved and saved in database
  * including installed apps, respective permissions & settings.
@@ -23,8 +25,15 @@ public class FoxItActivity extends AppCompatActivity {
         FoxItApplication myApp = (FoxItApplication) this.getApplication();
         if(v.getFreshlyStartet()){
 
-           // v.reviveInstance();
-            new reviveValueTask().execute();
+            Log.d("MyApp", "Bevor:"+v.animationList.toString());
+
+            v.reviveInstance();
+
+            Log.d("MyApp","After"+ v.animationList.toString());
+
+
+            //  new reviveValueTask().execute();
+
             v.setTimeOfFirstAccess(System.currentTimeMillis());
         }
 
@@ -53,6 +62,22 @@ public class FoxItActivity extends AppCompatActivity {
 
     public static Context getAppContext() {
         return FoxItActivity.context;
+    }
+
+    public int getNumberOfCurrentEvaluation(){
+        ValueKeeper v=ValueKeeper.getInstance();
+        return v.getCurrentEvaluation();
+    }
+
+
+    public boolean shouldEvaluationBeDisplayed(){
+
+        int[] timeOfEvaluation ={1477829816};
+        Calendar currentTime = Calendar.getInstance();
+        if(timeOfEvaluation.length>getNumberOfCurrentEvaluation()){
+            return timeOfEvaluation[getNumberOfCurrentEvaluation()]<currentTime.getTimeInMillis();}else{
+            return false;
+        }
     }
 
 }

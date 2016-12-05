@@ -32,10 +32,14 @@ public class Home extends FoxItActivity {
                 String className="Deep Web";//"Evaluation";
                 int position=0;//getNumberOfCurrentEvaluation();
                 ArrayList<LectionObject> lectionObjectList= dbHandler.getLectionsFromDB(className);
-                intent.putExtra("lection","[name~Deep und Dark Web Quiz]\n" +
-                        "[0~type~text'text~Im folgenden Quiz wird dein Wissen zum Deep Web und Dark Web abgefragt.\n" +
-                        "Es können mehrere Antworten richtig sein.][solved~false]");
-                        // lectionObjectList.get(position).getContent());
+
+                //[name~EvaluationTest][0~texte'text~Eine Einführuark Net.;scalee_Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]
+//                Evaluation;AppEvaluation;0;1;6;0;scalee_Wir haben bemerkt, dass du in letzter Zeit eine App deinstalliert hast. Wie sehr hatte das mit dem Schutz deiner Privatsphäre zu tun?;;;;;;;
+                String evaluationLection;
+                        if(true){
+                          evaluationLection=  "[name~EvaluationTest][0~type~texte'text~Eine Einführuark Net.][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]";
+                        }
+                intent.putExtra("lection","[name~EvaluationTest][0~type~texte'text~Eine Einführuark Net.][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]");
                 intent.putExtra("name", lectionObjectList.get(position).getLectionName());
                 intent.putExtra("type", -99);//lectionObjectList.get(position).getType());
                 intent.putExtra("delay", lectionObjectList.get(position).getDelaytime());
@@ -119,15 +123,7 @@ public class Home extends FoxItActivity {
     }
 
 
-    public boolean shouldEvaluationBeDisplayed(){
 
-        int[] timeOfEvaluation ={1477829816};
-        Calendar currentTime = Calendar.getInstance();
-        if(timeOfEvaluation.length>getNumberOfCurrentEvaluation()){
-        return timeOfEvaluation[getNumberOfCurrentEvaluation()]<currentTime.getTimeInMillis();}else{
-            return false;
-        }
-    }
 
     public int getNumberOfCurrentEvaluation(){
         ValueKeeper v=ValueKeeper.getInstance();

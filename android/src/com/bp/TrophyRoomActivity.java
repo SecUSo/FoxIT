@@ -51,6 +51,7 @@ public class TrophyRoomActivity extends FoxItActivity {
     public boolean purchase(String articleOfCommerce) {
         ValueKeeper o = ValueKeeper.getInstance();
         //reloads the gridView to be up to date
+        o.unlockAnimation(articleOfCommerce);
         animationListFragment.refreshAllAnimations();
         //unlock the animation
         return o.unlockAnimation(articleOfCommerce);
