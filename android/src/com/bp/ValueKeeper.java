@@ -32,12 +32,16 @@ public class ValueKeeper {
     Boolean notDisplayed=true;
     String vpnCode;
 
+    int numberOfTimesOpenedAtNight=0;
+    int numberOfTimesOpenedAtMorning=0;
+
 
     ArrayList<String> solvedClasses=new ArrayList<>();
+    ArrayList<Long> appStartsTheLastTwoDays= new ArrayList<>();
 
 
-     String[] s={"a","b","c"};
-    ArrayList<String> deinstalledApps=new ArrayList<String>(Arrays.asList(s)); //new Arraylist<>();
+    // String[] s={"a","b","c"};
+    ArrayList<String> deinstalledApps=new ArrayList<>();
     Boolean isEvaluationOutstanding=false;
 
     ArrayList<String> appsBefore;
@@ -75,6 +79,7 @@ public class ValueKeeper {
     public void reviveInstance(){
 
 
+        //HashMap<String,Boolean> trophyList=new HashMap<>();
 
         Log.d("MyApp","Wiederherstellung abgeschloßenYY");
         DBHandler db=new DBHandler(FoxItActivity.getAppContext(),null,null,1);
@@ -89,7 +94,10 @@ public class ValueKeeper {
             vpnCode = data.get("vpnCode");
             notDisplayed=Boolean.getBoolean(data.get("notDisplayed"));
             currentEvaluation=Integer.valueOf(data.get("currentEvaluation"));
-            }
+            if(data.get("numberOfTimesOpenedAtNight")!=null){
+            numberOfTimesOpenedAtNight=numberOfTimesOpenedAtNight+Integer.valueOf(data.get("numberOfTimesOpenedAtNight"));
+            numberOfTimesOpenedAtMorning=numberOfTimesOpenedAtMorning+Integer.valueOf(data.get("numberOfTimesOpenedAtMorning"));}
+        }
 
 
         animationList=new HashMap<>();
@@ -118,6 +126,20 @@ public class ValueKeeper {
                             evaluationResults.put(e.substring(4),data.get(e));}else{
                                 if(e.contains("dap:")){
                                     deinstalledApps.add(data.get(e));
+                                }else{
+                                    if(e.contains("scl:")){
+                                        solvedClasses.add(data.get(e));
+                                }else{
+
+                                        if(e.contains("asd:")){
+                                            appStartsTheLastTwoDays.add(Long.valueOf(data.get(e)));
+                                        }else{
+                                            if(e.contains("tro:")){
+                                                trophyList.put(e.substring(4),Boolean.valueOf(data.get(e)));}
+
+                                        }
+
+                                    }
                                 }
                             }
                         }
@@ -145,6 +167,9 @@ public class ValueKeeper {
         db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
         db.insertIndividualValue("notDisplayed",Boolean.toString(true));
         db.insertIndividualValue("currentEvaluation",Integer.toString(currentEvaluation));
+        db.insertIndividualValue("numberOfTimesOpenedAtMorning",Integer.toString(numberOfTimesOpenedAtMorning));
+        db.insertIndividualValue("numberOfTimesOpenedAtNight",Integer.toString(numberOfTimesOpenedAtNight));
+
 
         Log.d("MyApp","currentEval:"+Integer.toString(currentEvaluation));
         //ArrayList<String> deinstalledApps=new ArrayList<>();
@@ -162,6 +187,12 @@ public class ValueKeeper {
             String key = entry.getKey();
             String value = Boolean.toString(entry.getValue());
         db.insertIndividualValue("ani:"+key,value);
+
+        }
+        for (Map.Entry<String, Boolean> entry : trophyList.entrySet()) {
+            String key = entry.getKey();
+            String value = Boolean.toString(entry.getValue());
+            db.insertIndividualValue("tro:"+key,value);
 
         }
 
@@ -199,6 +230,19 @@ public class ValueKeeper {
         for (String e : deinstalledApps) {
             db.insertIndividualValue("dap:"+Integer.toString(i),e);
             i++;
+        }
+
+        int y=0;
+        // Log.d()
+        for (String e : solvedClasses) {
+            db.insertIndividualValue("scl:"+Integer.toString(i),e);
+            y++;
+        }
+
+           int x=0;
+        for (Long e : appStartsTheLastTwoDays) {
+            db.insertIndividualValue("asd:"+Integer.toString(x),Long.toString(e));
+            x++;
         }
 
         Log.d("MyApp","deinstalBefore"+deinstalledApps.toString());
@@ -340,4 +384,29 @@ public void setTimeOfLastAccess(long time){
         return solvedClasses.size();
     }
 
+    public int increaseNumberNight(){
+        return numberOfTimesOpenedAtNight++;
+    }
+    public int increaseNumberMorning(){
+        return numberOfTimesOpenedAtMorning++;
+    }
+    public int getNumberOfTimesOpenedAtNight(){
+        return numberOfTimesOpenedAtNight;
+    }
+    public int getNumberOfTimesOpenedAtMorning(){
+        return numberOfTimesOpenedAtMorning;
+    }
+
+    public void addAppStarts(Long time){
+        for(int i=0;i<appStartsTheLastTwoDays.size();i++) {
+         if(appStartsTheLastTwoDays.get(i)<time-2*86400000){
+            appStartsTheLastTwoDays.remove(i);
+         }
+            appStartsTheLastTwoDays.add(time);
+        }
+    }
+
+    public int getSizeOfAppStarts(){
+        return appStartsTheLastTwoDays.size();
+    }
 }

@@ -27,6 +27,9 @@ public class FoxItActivity extends AppCompatActivity {
         ValueKeeper v=ValueKeeper.getInstance();
         FoxItApplication myApp = (FoxItApplication) this.getApplication();
         v.reviveInstance();
+        if(v.getSizeOfAppStarts()>1){
+            setTrophyUnlocked("Power User");
+        }
     }
 
 
@@ -44,9 +47,28 @@ public class FoxItActivity extends AppCompatActivity {
             Intent mServiceIntent = new Intent(this, BackgroundService.class);
             startService(mServiceIntent);
             //v.reviveInstance();
+            Calendar c = Calendar.getInstance();
+            int timeOfDay = c.get(Calendar.HOUR_OF_DAY)+2;
+
+
+            if(timeOfDay >= 5 && timeOfDay < 9){
+                v.increaseNumberMorning();
+                if(v.getNumberOfTimesOpenedAtMorning()>4){
+                    setTrophyUnlocked("Early Bird");
+                }
+
+
+            }else{ if(timeOfDay >= 16 || timeOfDay < 5){
+
+                v.increaseNumberNight();
+                if(v.getNumberOfTimesOpenedAtNight()>4){
+                   setTrophyUnlocked("Nachteule");
+                }
+            }}
+
 
             //  new reviveValueTask().execute();
-
+            v.addAppStarts(System.currentTimeMillis());
             v.setTimeOfFirstAccess(System.currentTimeMillis());
         }
 

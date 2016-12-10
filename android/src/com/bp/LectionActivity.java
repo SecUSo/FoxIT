@@ -327,7 +327,7 @@ public class LectionActivity extends FoxItActivity {
 
             if(lection.getProcessingStatus()!=-99){
                 db.changeLectionToSolved(lection.getLectionName());}
-            
+
             MethodFactory factory = new MethodFactory(this);
             Method method = factory.createMethod("changeTokenCount");
             method.callClassMethod("1");
