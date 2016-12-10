@@ -2,6 +2,8 @@ package com.bp;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -15,22 +17,33 @@ public class FoxItActivity extends AppCompatActivity {
 
     private static Context context;
 
+    /**
+     * @author Tim
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FoxItActivity.context = getApplicationContext();
+        ValueKeeper v=ValueKeeper.getInstance();
+        FoxItApplication myApp = (FoxItApplication) this.getApplication();
+        v.reviveInstance();
+    }
+
 
     @Override
     public void onStart()
     {
         super.onResume();
+
+
         FoxItActivity.context = getApplicationContext();
         ValueKeeper v=ValueKeeper.getInstance();
         FoxItApplication myApp = (FoxItApplication) this.getApplication();
         if(v.getFreshlyStartet()){
 
-            Log.d("MyApp", "Bevor:"+v.animationList.toString());
-
-            v.reviveInstance();
-
-            Log.d("MyApp","After"+ v.animationList.toString());
-
+            Intent mServiceIntent = new Intent(this, BackgroundService.class);
+            startService(mServiceIntent);
+            //v.reviveInstance();
 
             //  new reviveValueTask().execute();
 
@@ -57,7 +70,7 @@ public class FoxItActivity extends AppCompatActivity {
         v.fillApplicationStartAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndActiveCDuration(System.currentTimeMillis());
         ((FoxItApplication) this.getApplication()).startActivityTransitionTimer();
-        new SavaValueTask().execute();
+        new SaveValueTask().execute();
     }
 
     public static Context getAppContext() {
@@ -71,13 +84,28 @@ public class FoxItActivity extends AppCompatActivity {
 
 
     public boolean shouldEvaluationBeDisplayed(){
-
-        int[] timeOfEvaluation ={1477829816};
+        ValueKeeper v=ValueKeeper.getInstance();
         Calendar currentTime = Calendar.getInstance();
-        if(timeOfEvaluation.length>getNumberOfCurrentEvaluation()){
-            return timeOfEvaluation[getNumberOfCurrentEvaluation()]<currentTime.getTimeInMillis();}else{
+
+        Log.d("MyApp","currentEvalin Fox:"+Integer.toString(v.getCurrentEvaluation()));
+
+        if(v.timeOfEvaluation.length>v.getCurrentEvaluation()){
+            return v.timeOfEvaluation[v.getCurrentEvaluation()]<currentTime.getTimeInMillis();}else{
             return false;
         }
+    }
+
+
+    public boolean setTrophyUnlocked(String trophyName){
+       ValueKeeper v=ValueKeeper.getInstance();
+        if(v.animationList.containsKey(trophyName)){
+            v.animationList.put(trophyName,true);
+            return true;
+        }else{
+            v.animationList.put(trophyName,true);
+        return false;
+        }
+
     }
 
 }

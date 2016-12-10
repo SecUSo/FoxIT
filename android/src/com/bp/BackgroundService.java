@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -32,7 +33,6 @@ public class BackgroundService extends Service {
 public int onStartCommand(Intent intent,int flags,int startId){
 apps=fetchALL_APPS();
 
-Log.d("MyApp","Service running");
 context =getApplicationContext();
 Timer timer =new Timer();
         timer.schedule(new CheckApps(),0,5000);
@@ -50,10 +50,49 @@ Timer timer =new Timer();
 
     class CheckApps extends TimerTask {
         public void run(){
+            ValueKeeper v=ValueKeeper.getInstance();
+            if(shouldEvaluationBeDisplayed()&&v.notDisplayed){//v.isEvaluationOutstanding==false&&shouldEvaluationBeDisplayed()){
+                v.isEvaluationOutstanding=true;
+                v.notDisplayed=false;
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(context)
+                                .setSmallIcon(R.drawable.paw)
+                                .setContentTitle("Neue Umfrage verfügbar!")
+                                .setContentText("Time test");
+                Intent resultIntent = new Intent(context, Home.class);
+
+
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+// Adds the back stack for the Intent (but not the Intent itself)
+                stackBuilder.addParentStack(Home.class);
+// Adds the Intent that starts the Activity to the top of the stack
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+                mNotificationManager.notify(15, mBuilder.build());
+
+//
+            }
+            //if(v.isEvaluationOutstanding==true&&!shouldEvaluationBeDisplayed()){
+              //  v.isEvaluationOutstanding=false;
+            //}
+
             String isChange= checkForChanges();
             if(!isChange.equals("false")){
                 Log.d("MyApp","Hello World!xxx");
-
+                v.deinstalledApps.add(isChange);
+                Log.d("MyApp",v.deinstalledApps.toString());
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.paw)
@@ -81,8 +120,23 @@ Timer timer =new Timer();
                         (NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
                 mNotificationManager.notify(15, mBuilder.build());
+                apps=fetchALL_APPS();
             }
-        }}
+        }
+
+
+        public boolean shouldEvaluationBeDisplayed(){
+            ValueKeeper v=ValueKeeper.getInstance();
+                Calendar currentTime = Calendar.getInstance();
+                if(v.timeOfEvaluation.length>v.getCurrentEvaluation()){
+                    return v.timeOfEvaluation[v.getCurrentEvaluation()]<currentTime.getTimeInMillis();}else{
+                    return false;
+                }
+            }
+        }
+
+
+
 
 
 
@@ -90,10 +144,10 @@ Timer timer =new Timer();
 
        List<ApplicationInfo> newApps = fetchALL_APPS();
        if (apps.size() <= newApps.size()) {
-           Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size()));
+          // Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size()));
            return "false";
        } else {
-           Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size()));
+           //Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size()));
            final PackageManager pm = context.getPackageManager();
            for(int i=0;i<apps.size();i++){
             if(!pm.getApplicationLabel(apps.get(i)).toString().equals(pm.getApplicationLabel(newApps.get(i)).toString())){
@@ -102,15 +156,7 @@ Timer timer =new Timer();
             }
            }
 
-
-
-
-
-
-
-
-
-           Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size())+"True");
+         //  Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size())+"True");
            return "true";
        }
 

@@ -15,7 +15,7 @@ import java.io.InputStream;
 /**
  * Class to handle the loading of images in an extra task
  */
- class SavaValueTask extends AsyncTask<Void, Void, Void> {
+ class SaveValueTask extends AsyncTask<Void, Void, Void> {
 
 
     /**

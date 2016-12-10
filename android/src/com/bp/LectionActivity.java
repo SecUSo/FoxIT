@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -298,15 +299,30 @@ public class LectionActivity extends FoxItActivity {
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.lection_frame);
         layout.setEnabled(true);
 
-        if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3)) {
-            DBHandler db = new DBHandler(this, null, null, 1);
-            if(lection.getProcessingStatus()!=-99){
-            db.changeLectionToSolved(lection.getLectionName());}else{
-                db.changeEvaluationToSolved(lection.getLectionName());
-                ValueKeeper v=ValueKeeper.getInstance();
+        Log.d("MyApp",lection.getLectionName());
+        ValueKeeper v=ValueKeeper.getInstance();
+        String switc=lection.getLectionName().substring(0,lection.getLectionName().indexOf(":"));
+        Log.d("MyApp",switc);
+        switch (switc) {
+            case "timeEval":
+
+
+
+                v.setIsEvaluationOutstandingFalse();
                 v.setEvaluationResults(evaluationResults);
                 v.increaseCurrentEvaluation();
-            }
+                break;
+            case "appEval":
+
+                v.removeFirstFromAppList();
+                v.setEvaluationResults(evaluationResults);
+                v.increaseCurrentEvaluation();
+                break;}
+
+
+
+        if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3)) {
+            DBHandler db = new DBHandler(this, null, null, 1);
 
             MethodFactory factory = new MethodFactory(this);
             Method method = factory.createMethod("changeTokenCount");
@@ -333,7 +349,15 @@ public class LectionActivity extends FoxItActivity {
 
 
     public void addEvaluationResult(String question,String answer){
-        evaluationResults.put(question,answer);
+
+        Log.d("MyApp","lectionName:"+lection.getLectionName());
+
+
+
+        String prefix=lection.getLectionName().substring(lection.getLectionName().indexOf(":")+1,lection.getLectionName().length());
+        Log.d("MyApp","prefix:"+prefix);
+        evaluationResults.put(prefix+":"+question,answer);
+
     }
 
 

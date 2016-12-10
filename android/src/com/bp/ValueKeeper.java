@@ -2,6 +2,8 @@ package com.bp;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +19,6 @@ public class ValueKeeper {
     static ValueKeeper instance;
     private int acornCount=0; //amount of acorn the player collected
     private int tokenCount=0; //amount of token the player collected
-    private ValueKeeper() {};
     HashMap<String,Boolean> animationList =new HashMap<>();
     HashMap<String,String> profilList=new HashMap<>();
     HashMap<Long,Long> applicationAccessAndDuration =new HashMap<>();
@@ -26,15 +27,23 @@ public class ValueKeeper {
     HashMap<Long,Long> applicationStartAndDuration =new HashMap<>();
     HashMap<Long,Long> applicationStartAndActiveDuration =new HashMap<>();
     int currentEvaluation=0;
+    int[] timeOfEvaluation ={1829816};
+    Boolean notDisplayed=true;
     String vpnCode;
-    String whichEvaluationShouldBdone="none";
+
+     String[] s={"a","b","c"};
+    ArrayList<String> deinstalledApps=new ArrayList<String>(Arrays.asList(s)); //new Arraylist<>();
+    Boolean isEvaluationOutstanding=false;
+
+    ArrayList<String> appsBefore;
 
 
     public void setEvaluationResults(HashMap<String, String> evaluationResults) {
-        EvaluationResults = evaluationResults;
+        this.evaluationResults.putAll(evaluationResults);
+        Log.d("MyApp",this.evaluationResults.toString());
     }
 
-    HashMap<String,String> EvaluationResults=new HashMap<>();
+    HashMap<String,String> evaluationResults =new HashMap<>();
     Boolean freshlyStartet=true;
 
 
@@ -52,23 +61,39 @@ public class ValueKeeper {
 
 
 
+    private ValueKeeper(){
+        super();
+    }
+
+
+
     public void reviveInstance(){
+
+
+
         Log.d("MyApp","Wiederherstellung abgeschloßenYY");
         DBHandler db=new DBHandler(FoxItActivity.getAppContext(),null,null,1);
         HashMap<String,String> data =  db.getIndividualData();
         Log.d("MyApp","Data:"+data.toString());
         Log.d("MyApp","Wiederherstellung abgeschloßenXX");
+
+
         if(data.containsKey("acornCount")) {
             acornCount = Integer.valueOf(data.get("acornCount"));
             tokenCount = Integer.valueOf(data.get("tokenCount"));
             vpnCode = data.get("vpnCode");
-        }
+            notDisplayed=Boolean.getBoolean(data.get("notDisplayed"));
+            currentEvaluation=Integer.valueOf(data.get("currentEvaluation"));
+            }
+
 
         animationList=new HashMap<>();
         profilList=new HashMap<>();
         applicationAccessAndDuration=new HashMap<>();
         applicationStartAndActiveDuration=new HashMap<>();
         applicationStartAndActiveDuration=new HashMap<>();
+        deinstalledApps= new ArrayList<>();
+        evaluationResults=new HashMap<>();
         for(String e:data.keySet()){
             if(e.contains("ani:")){
 
@@ -83,13 +108,21 @@ public class ValueKeeper {
                     }else{
                         if(e.contains("stA:")) {
                             applicationStartAndActiveDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
-                       }
+                       }else{
+                            if(e.contains("evl:")){
+                            evaluationResults.put(e.substring(4),data.get(e));}else{
+                                if(e.contains("dap:")){
+                                    deinstalledApps.add(data.get(e));
+                                }
+                            }
+                        }
                         }
                     }
 
                }
             }
 
+        Log.d("MyApp","deinstalAfter"+deinstalledApps.toString());
         }
 
 
@@ -105,6 +138,20 @@ public class ValueKeeper {
 
         db.insertIndividualValue("acornCount",Integer.toString(acornCount));
         db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
+        db.insertIndividualValue("notDisplayed",Boolean.toString(true));
+        db.insertIndividualValue("currentEvaluation",Integer.toString(currentEvaluation));
+
+        Log.d("MyApp","currentEval:"+Integer.toString(currentEvaluation));
+        //ArrayList<String> deinstalledApps=new ArrayList<>();
+
+
+        for (Map.Entry<String, String> entry : evaluationResults.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            db.insertIndividualValue("evl:"+key,value);
+        }
+
+
 
         for (Map.Entry<String, Boolean> entry : animationList.entrySet()) {
             String key = entry.getKey();
@@ -136,13 +183,20 @@ public class ValueKeeper {
 
 
 
-        for (Map.Entry<String, String> entry : EvaluationResults.entrySet()) {
+        for (Map.Entry<String, String> entry : evaluationResults.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             db.insertIndividualValue("eva:"+key,value);
 
         }
+        int i=0;
+       // Log.d()
+        for (String e : deinstalledApps) {
+            db.insertIndividualValue("dap:"+Integer.toString(i),e);
+            i++;
+        }
 
+        Log.d("MyApp","deinstalBefore"+deinstalledApps.toString());
     }
 
 
@@ -250,6 +304,18 @@ public void setTimeOfLastAccess(long time){
 
     public void setVpnCode(String vpnCode) {
         this.vpnCode = vpnCode;
+    }
+
+    public void setIsEvaluationOutstandingFalse(){
+        isEvaluationOutstanding=false;
+        notDisplayed=true;
+
+    }
+
+    public void removeFirstFromAppList(){
+        Log.d("MyApp","Before:"+Integer.toString(deinstalledApps.size()));
+        deinstalledApps.remove(0);
+        Log.d("MyApp","After:"+Integer.toString(deinstalledApps.size()));
     }
 
 }

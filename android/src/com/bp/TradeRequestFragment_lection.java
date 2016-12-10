@@ -76,7 +76,7 @@ ValueKeeper o= ValueKeeper.getInstance();
                     }
                 }
                 //remove this fragment after the trade is finished
-                getActivity().getFragmentManager().beginTransaction().remove(thisFragment).commit();
+                getActivity().onBackPressed();//getFragmentManager().beginTransaction().remove(thisFragment).commit();
             }
         });
         //remove this fragment if the no button is pressed
@@ -84,7 +84,7 @@ ValueKeeper o= ValueKeeper.getInstance();
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getFragmentManager().beginTransaction().remove(thisFragment).commit();
+                getActivity().onBackPressed();//getFragmentManager().beginTransaction().remove(thisFragment).commit();
             }
 
         });

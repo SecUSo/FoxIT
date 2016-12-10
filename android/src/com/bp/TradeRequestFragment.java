@@ -72,7 +72,7 @@ public class TradeRequestFragment extends Fragment {
                     changeAcornCount.callClassMethod("-" + Integer.toString(price));
                 }
                 //remove this fragment after the trade is finished
-                getActivity().getFragmentManager().beginTransaction().remove(thisFragment).commit();
+                getActivity().onBackPressed();
             }
         });
         //remove this fragment if the no button is pressed
@@ -80,7 +80,7 @@ public class TradeRequestFragment extends Fragment {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();//getFragmentManager().beginTransaction().remove(thisFragment).commit();
+                getActivity().onBackPressed();
             }
 
         });
