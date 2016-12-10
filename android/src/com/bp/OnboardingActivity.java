@@ -40,6 +40,13 @@ public class OnboardingActivity extends FoxItActivity {
 
     }
 
+
+    @Override
+    public boolean setTrophyUnlocked(String trophyName){
+       return super.setTrophyUnlocked(trophyName);
+    }
+
+
     @Override
     public void onStart() {
         super.onStart();

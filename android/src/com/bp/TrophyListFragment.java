@@ -55,8 +55,11 @@ public class TrophyListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
 
         TrophyObject[] trophyArray = {new AcornTrophy("Baumhauskapitalist", 5, "Sammle viele Eicheln.", true, R.mipmap.test_trophy), new AcornTrophy("Goldene Gans", 15, "Geradezu dick vor Eicheln.", true, R.mipmap.test_trophy),
-                new AcornTrophy("Siebenschläfer", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy)
+                new AcornTrophy("Siebenschläfer", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),new AcornTrophy("Schnüffler", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),
+                new AcornTrophy("Neuling", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy)
+        ,new AcornTrophy("Halbzeit", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),new AcornTrophy("Privacy Shield", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy)
         };
+
         this.trophyArray = trophyArray;
 
 
@@ -173,7 +176,8 @@ public class TrophyListFragment extends Fragment {
                 //change the trophy's color whether it's unlocked
                 RelativeLayout trophyFrame = (RelativeLayout) gridView
                         .findViewById(R.id.trophy_frame);
-                if (trophyArray[position].isUnlocked()) {
+                ValueKeeper v=ValueKeeper.getInstance();
+                if (v.isTrophyUnlocked(trophyArray[position].getName())) {
                     // set image based on selected text
                     trophyFrame.setBackgroundColor(Color.GREEN);
                 } else {

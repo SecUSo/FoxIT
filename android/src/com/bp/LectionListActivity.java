@@ -89,6 +89,20 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
             }
         }
 
+        ValueKeeper v=ValueKeeper.getInstance();
+        if(solvedLectionNumber==lectionNumber){
+            v.insertSolvedClass(className);
+        }
+
+        int numberOfSolvedClasses =v.getNumberOfSolvedClasses();
+        if(numberOfSolvedClasses>=1){
+        setTrophyUnlocked("Neuling");}
+        if(numberOfSolvedClasses>=5){
+            setTrophyUnlocked("Halbzeit");}
+        if(numberOfSolvedClasses>=10){
+            setTrophyUnlocked("Privacy Shield");
+        }
+
         TextView solved = (TextView) findViewById(R.id.text_percentage_solved);
         solved.setText(Integer.toString(solvedLectionNumber) + "/" + Integer.toString(lectionNumber));
 
@@ -330,6 +344,14 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
         }
 
     }
+
+    @Override
+    public boolean setTrophyUnlocked(String trophyName){
+
+
+        return super.setTrophyUnlocked(trophyName);
+    }
+
 }
 
 

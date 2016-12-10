@@ -20,6 +20,7 @@ public class ValueKeeper {
     private int acornCount=0; //amount of acorn the player collected
     private int tokenCount=0; //amount of token the player collected
     HashMap<String,Boolean> animationList =new HashMap<>();
+    HashMap<String,Boolean> trophyList=new HashMap<>();
     HashMap<String,String> profilList=new HashMap<>();
     HashMap<Long,Long> applicationAccessAndDuration =new HashMap<>();
     long timeOfLastAccess=0;
@@ -30,6 +31,10 @@ public class ValueKeeper {
     int[] timeOfEvaluation ={1829816};
     Boolean notDisplayed=true;
     String vpnCode;
+
+
+    ArrayList<String> solvedClasses=new ArrayList<>();
+
 
      String[] s={"a","b","c"};
     ArrayList<String> deinstalledApps=new ArrayList<String>(Arrays.asList(s)); //new Arraylist<>();
@@ -316,6 +321,23 @@ public void setTimeOfLastAccess(long time){
         Log.d("MyApp","Before:"+Integer.toString(deinstalledApps.size()));
         deinstalledApps.remove(0);
         Log.d("MyApp","After:"+Integer.toString(deinstalledApps.size()));
+    }
+
+
+    public boolean isTrophyUnlocked(String trophyName){
+        if(trophyList.containsKey(trophyName)){
+            return trophyList.get(trophyName);
+        }
+        return false;
+    }
+
+    public void insertSolvedClass(String className){
+        if(!solvedClasses.contains(className)){
+            solvedClasses.add(className);
+        }
+    }
+    public int getNumberOfSolvedClasses(){
+        return solvedClasses.size();
     }
 
 }

@@ -98,11 +98,11 @@ public class FoxItActivity extends AppCompatActivity {
 
     public boolean setTrophyUnlocked(String trophyName){
        ValueKeeper v=ValueKeeper.getInstance();
-        if(v.animationList.containsKey(trophyName)){
-            v.animationList.put(trophyName,true);
+        if(v.trophyList.containsKey(trophyName)){
+            v.trophyList.put(trophyName,true);
             return true;
         }else{
-            v.animationList.put(trophyName,true);
+            v.trophyList.put(trophyName,true);
         return false;
         }
 

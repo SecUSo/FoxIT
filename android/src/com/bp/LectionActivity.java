@@ -301,29 +301,33 @@ public class LectionActivity extends FoxItActivity {
 
         Log.d("MyApp",lection.getLectionName());
         ValueKeeper v=ValueKeeper.getInstance();
-        String switc=lection.getLectionName().substring(0,lection.getLectionName().indexOf(":"));
-        Log.d("MyApp",switc);
-        switch (switc) {
-            case "timeEval":
+        if(lection.getLectionName().contains(":")) {
+            String switc = lection.getLectionName().substring(0, lection.getLectionName().indexOf(":"));
+            Log.d("MyApp", switc);
+            switch (switc) {
+                case "timeEval":
 
 
+                    v.setIsEvaluationOutstandingFalse();
+                    v.setEvaluationResults(evaluationResults);
+                    v.increaseCurrentEvaluation();
+                    break;
+                case "appEval":
 
-                v.setIsEvaluationOutstandingFalse();
-                v.setEvaluationResults(evaluationResults);
-                v.increaseCurrentEvaluation();
-                break;
-            case "appEval":
-
-                v.removeFirstFromAppList();
-                v.setEvaluationResults(evaluationResults);
-                v.increaseCurrentEvaluation();
-                break;}
+                    v.removeFirstFromAppList();
+                    v.setEvaluationResults(evaluationResults);
+                    v.increaseCurrentEvaluation();
+                    break;
+            }
 
 
-
+        }
         if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3)) {
             DBHandler db = new DBHandler(this, null, null, 1);
 
+            if(lection.getProcessingStatus()!=-99){
+                db.changeLectionToSolved(lection.getLectionName());}
+            
             MethodFactory factory = new MethodFactory(this);
             Method method = factory.createMethod("changeTokenCount");
             method.callClassMethod("1");

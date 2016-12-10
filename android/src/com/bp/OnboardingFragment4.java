@@ -37,6 +37,7 @@ public class OnboardingFragment4 extends Fragment {
             public void onClick(View v) {
                 analysisButton.setText(null);
                 analysisButton.setVisibility(View.GONE);
+                ((FoxItActivity)getActivity()).setTrophyUnlocked("Schnüffler");
                 Intent i = new Intent(getActivity(), Analysis.class);
                 startActivity(i);
             }
