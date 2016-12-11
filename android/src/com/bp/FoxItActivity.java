@@ -26,7 +26,6 @@ public class FoxItActivity extends AppCompatActivity {
         FoxItActivity.context = getApplicationContext();
         ValueKeeper v=ValueKeeper.getInstance();
         FoxItApplication myApp = (FoxItApplication) this.getApplication();
-        v.reviveInstance();
         if(v.getSizeOfAppStarts()>1){
             setTrophyUnlocked("Power User");
         }
@@ -46,7 +45,7 @@ public class FoxItActivity extends AppCompatActivity {
 
             Intent mServiceIntent = new Intent(this, BackgroundService.class);
             startService(mServiceIntent);
-            //v.reviveInstance();
+            v.reviveInstance();
             Calendar c = Calendar.getInstance();
             int timeOfDay = c.get(Calendar.HOUR_OF_DAY)+2;
 
