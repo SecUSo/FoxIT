@@ -49,7 +49,7 @@ public class ValueKeeper {
     ArrayList<String> deinstalledApps=new ArrayList<>();
     Boolean isEvaluationOutstanding=false;
 
-    ArrayList<String> appsBefore;
+    ArrayList<String> appsBefore=new ArrayList<>();
 
 
     public void setEvaluationResults(HashMap<String, String> evaluationResults) {
@@ -112,6 +112,7 @@ public class ValueKeeper {
         applicationStartAndActiveDuration=new HashMap<>();
         deinstalledApps= new ArrayList<>();
         evaluationResults=new HashMap<>();
+        appsBefore=new ArrayList<>();
         for(String e:data.keySet()){
             if(e.contains("ani:")){
 
@@ -175,7 +176,7 @@ public class ValueKeeper {
 
 
         DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
-        db.clearValueKeeper();
+       // db.clearValueKeeper();
 
         db.insertIndividualValue("acornCount",Integer.toString(acornCount));
         db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
@@ -440,8 +441,6 @@ public void setTimeOfLastAccess(long time){
 
     public ArrayList<String> compareAppLists() {
 
-        if (appsBefore != null) {
-
             final PackageManager pm = FoxItActivity.getAppContext().getPackageManager();
             //get a list of installed apps.
             if (pm == null) {
@@ -505,9 +504,7 @@ public void setTimeOfLastAccess(long time){
                 }
             }
             return result;
-        }else{
-            return new ArrayList<String>();
-        }
+
     }
 
     }
