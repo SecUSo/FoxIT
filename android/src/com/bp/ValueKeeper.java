@@ -1,10 +1,15 @@
 package com.bp;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -135,7 +140,12 @@ public class ValueKeeper {
                                             appStartsTheLastTwoDays.add(Long.valueOf(data.get(e)));
                                         }else{
                                             if(e.contains("tro:")){
-                                                trophyList.put(e.substring(4),Boolean.valueOf(data.get(e)));}
+                                                trophyList.put(e.substring(4),Boolean.valueOf(data.get(e)));}else{
+                                                if(e.contains("app:")){
+                                                    appsBefore.add(data.get(e));
+                                                }
+
+                                            }
 
                                         }
 
@@ -147,6 +157,9 @@ public class ValueKeeper {
                     }
 
                }
+
+
+
             }
 
         Log.d("MyApp","deinstalAfter"+deinstalledApps.toString());
@@ -162,6 +175,7 @@ public class ValueKeeper {
 
 
         DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
+        db.clearValueKeeper();
 
         db.insertIndividualValue("acornCount",Integer.toString(acornCount));
         db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
@@ -169,6 +183,7 @@ public class ValueKeeper {
         db.insertIndividualValue("currentEvaluation",Integer.toString(currentEvaluation));
         db.insertIndividualValue("numberOfTimesOpenedAtMorning",Integer.toString(numberOfTimesOpenedAtMorning));
         db.insertIndividualValue("numberOfTimesOpenedAtNight",Integer.toString(numberOfTimesOpenedAtNight));
+        db.insertIndividualValue("vpnCode",vpnCode);
 
 
         Log.d("MyApp","currentEval:"+Integer.toString(currentEvaluation));
@@ -245,7 +260,18 @@ public class ValueKeeper {
             x++;
         }
 
-        Log.d("MyApp","deinstalBefore"+deinstalledApps.toString());
+
+        final PackageManager pm =FoxItActivity.getAppContext().getPackageManager();
+        //get a list of installed apps.
+        if(pm==null){Log.d("MyApp","pm is Null");}
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+        int t=0;
+        for(ApplicationInfo a:packages){
+            db.insertIndividualValue("app:"+Integer.toString(t),pm.getApplicationLabel(a).toString());
+        }
+
+
     }
 
 
@@ -411,4 +437,70 @@ public void setTimeOfLastAccess(long time){
     public int getSizeOfAppStarts(){
         return appStartsTheLastTwoDays.size();
     }
+
+    public ArrayList<String> compareAppLists(){
+
+        final PackageManager pm =FoxItActivity.getAppContext().getPackageManager();
+        //get a list of installed apps.
+        if(pm==null){Log.d("MyApp","pm is Null");}
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+
+            ArrayList<String> appsNow=new ArrayList<>();
+            for(ApplicationInfo n:packages){
+                appsNow.add(pm.getApplicationLabel(n).toString());
+            }
+
+        Collections.sort(appsNow, new Comparator<String>() {
+            @Override
+            public int compare(String lhs, String rhs) {
+
+                if (lhs.equals(rhs)) {
+                    return 0;
+                }
+                if (lhs == null) {
+                    return -1;
+                }
+                if (rhs == null) {
+                    return 1;
+                }
+                return lhs.compareTo(rhs);
+            }
+
+        });
+
+        Collections.sort(appsBefore, new Comparator<String>() {
+            @Override
+            public int compare(String lhs, String rhs) {
+
+                if (lhs.equals(rhs)) {
+                    return 0;
+                }
+                if (lhs == null) {
+                    return -1;
+                }
+                if (rhs == null) {
+                    return 1;
+                }
+                return lhs.compareTo(rhs);
+            }
+
+        });
+
+        ArrayList<String> result=new ArrayList<>();
+
+        if(appsNow.equals(appsBefore)){
+           return result;
+       }else{
+           for(String b:appsBefore){
+
+               if(!appsNow.contains(b)){
+                   result.add(b);
+               }
+           }
+       }
+return result;
+    }
+
+
 }
