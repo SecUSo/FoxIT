@@ -819,4 +819,16 @@ public class DBHandler extends SQLiteOpenHelper{
         db.delete(TABLE_PERSONAL,null,null);
         db.close();
     }
+
+    public String unlockDaily(){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+COLUMN_LECTURENAME+" FROM "+TABLE_LESSIONS+" WHERE "+COLUMN_STATUS+" IS -99",null);
+        if (cursor!=null){
+            cursor.moveToFirst();
+            String name = cursor.getString(0);
+            db.execSQL("UPDATE "+TABLE_LESSIONS+" SET "+COLUMN_STATUS+" = 0 WHERE "+COLUMN_LECTURENAME+" = \'"+name+"\';");
+            return name;
+        }
+        return "There is no new Lession";
+    }
 }
