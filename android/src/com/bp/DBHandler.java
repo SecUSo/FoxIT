@@ -814,6 +814,9 @@ public class DBHandler extends SQLiteOpenHelper{
         return res;
     }
 
-
-
+    public void clearValueKeeper(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_PERSONAL,null,null);
+        db.close();
+    }
 }
