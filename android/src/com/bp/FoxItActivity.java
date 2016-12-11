@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -46,6 +47,9 @@ public class FoxItActivity extends AppCompatActivity {
             Intent mServiceIntent = new Intent(this, BackgroundService.class);
             startService(mServiceIntent);
             v.reviveInstance();
+            ArrayList<String> deletedApps= v.compareAppLists();
+            v.deinstalledApps.addAll(deletedApps);
+
             Calendar c = Calendar.getInstance();
             int timeOfDay = c.get(Calendar.HOUR_OF_DAY)+2;
 
