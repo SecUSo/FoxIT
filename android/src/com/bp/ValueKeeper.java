@@ -142,6 +142,7 @@ public class ValueKeeper {
                                             if(e.contains("tro:")){
                                                 trophyList.put(e.substring(4),Boolean.valueOf(data.get(e)));}else{
                                                 if(e.contains("app:")){
+                                                    Log.d("ValueKeeper","apps!=LSDHFPSIUZFPSEOIFH");
                                                     appsBefore.add(data.get(e));
                                                 }
 
