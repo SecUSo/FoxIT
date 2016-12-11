@@ -438,69 +438,78 @@ public void setTimeOfLastAccess(long time){
         return appStartsTheLastTwoDays.size();
     }
 
-    public ArrayList<String> compareAppLists(){
+    public ArrayList<String> compareAppLists() {
 
-        final PackageManager pm =FoxItActivity.getAppContext().getPackageManager();
-        //get a list of installed apps.
-        if(pm==null){Log.d("MyApp","pm is Null");}
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        if (appsBefore != null) {
+
+            final PackageManager pm = FoxItActivity.getAppContext().getPackageManager();
+            //get a list of installed apps.
+            if (pm == null) {
+                Log.d("MyApp", "pm is Null");
+            }
+            List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
 
-            ArrayList<String> appsNow=new ArrayList<>();
-            for(ApplicationInfo n:packages){
+            ArrayList<String> appsNow = new ArrayList<>();
+            for (ApplicationInfo n : packages) {
                 appsNow.add(pm.getApplicationLabel(n).toString());
             }
 
-        Collections.sort(appsNow, new Comparator<String>() {
-            @Override
-            public int compare(String lhs, String rhs) {
+            Collections.sort(appsNow, new Comparator<String>() {
+                @Override
+                public int compare(String lhs, String rhs) {
 
-                if (lhs.equals(rhs)) {
-                    return 0;
+                    if (lhs.equals(rhs)) {
+                        return 0;
+                    }
+                    if (lhs == null) {
+                        return -1;
+                    }
+                    if (rhs == null) {
+                        return 1;
+                    }
+                    return lhs.compareTo(rhs);
                 }
-                if (lhs == null) {
-                    return -1;
+
+            });
+
+
+            Collections.sort(appsBefore, new Comparator<String>() {
+                @Override
+                public int compare(String lhs, String rhs) {
+
+                    if (lhs.equals(rhs)) {
+                        return 0;
+                    }
+                    if (lhs == null) {
+                        return -1;
+                    }
+                    if (rhs == null) {
+                        return 1;
+                    }
+                    return lhs.compareTo(rhs);
                 }
-                if (rhs == null) {
-                    return 1;
+
+            });
+
+            ArrayList<String> result = new ArrayList<>();
+
+            if (appsNow.equals(appsBefore)) {
+                return result;
+            } else {
+                for (String b : appsBefore) {
+
+                    if (!appsNow.contains(b)) {
+                        result.add(b);
+                    }
                 }
-                return lhs.compareTo(rhs);
             }
+            return result;
+        }else{
+            return new ArrayList<String>();
+        }
+    }
 
-        });
-
-        Collections.sort(appsBefore, new Comparator<String>() {
-            @Override
-            public int compare(String lhs, String rhs) {
-
-                if (lhs.equals(rhs)) {
-                    return 0;
-                }
-                if (lhs == null) {
-                    return -1;
-                }
-                if (rhs == null) {
-                    return 1;
-                }
-                return lhs.compareTo(rhs);
-            }
-
-        });
-
-        ArrayList<String> result=new ArrayList<>();
-
-        if(appsNow.equals(appsBefore)){
-           return result;
-       }else{
-           for(String b:appsBefore){
-
-               if(!appsNow.contains(b)){
-                   result.add(b);
-               }
-           }
-       }
-return result;
     }
 
 
-}
