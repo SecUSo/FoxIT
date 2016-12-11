@@ -6,15 +6,23 @@ package com.bp;
  * @author: Noah
  */
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -376,6 +384,7 @@ public class DBHandler extends SQLiteOpenHelper{
                 db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\'"+lessionArray[1]+"\', \'"+lessionArray[3]+"\', \'"+lessionArray[0]+"\', \'"+lessionString+"\', \'"+lessionArray[2]+"\', \'"+lessionArray[5]+"\', \'"+time+"\', \'"+lessionArray[4]+"\');");
             }
         }
+        db.close();
 
     }
 
@@ -488,6 +497,7 @@ public class DBHandler extends SQLiteOpenHelper{
             return false;
         }
         cursor.close();
+        db.close();
         return true;
     }
 
@@ -543,6 +553,7 @@ public class DBHandler extends SQLiteOpenHelper{
                 db.execSQL("INSERT OR REPLACE INTO "+TABLE_PERMISSIONS+" (\'"+COLUMN_PERMISSIONNAME+"\', \'"+COLUMN_PERMISSIONDESCRIPTION+"\', \'"+COLUMN_PERMISSIONNICENAME+"\', \'"+COLUMN_PERMISSIONLEVEL+"\') VALUES(\'"+array[0]+"\', \'"+array[1].replace("'","''")+"\', \'"+array[2].replace("'","''")+"\', \'"+array[3]+"\');");
             }
         }
+        db.close();
     }
 
     /**
@@ -729,7 +740,7 @@ public class DBHandler extends SQLiteOpenHelper{
             }
         }
         renameEmptySettings();
-
+        db.close();
     }
 
     private void renameEmptySettings(){
@@ -840,5 +851,29 @@ public class DBHandler extends SQLiteOpenHelper{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void exportDB(){
+        Log.d("DBHandler","exporting DB");
+        String user = ValueKeeper.getInstance().getVpnCode();
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        File sd = Environment.getExternalStorageDirectory();
+        File data = Environment.getDataDirectory();
+        FileChannel source = null;
+        FileChannel destination = null;
+        String currentDBPath = "/data/" + "com.bp"+"/databases/"+DB_NAME;
+        String backupDBPath = user+DB_NAME+timestamp;
+        File currentDB = new File(data,currentDBPath);
+        File backupDB = new File(sd,backupDBPath);
+        try {
+            source = new FileInputStream(currentDB).getChannel();
+            destination = new FileOutputStream(backupDB).getChannel();
+            destination.transferFrom(source, 0, source.size());
+            source.close();
+            destination.close();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -355,6 +355,8 @@ public void setTimeOfLastAccess(long time){
         this.vpnCode = vpnCode;
     }
 
+    public String getVpnCode(){return  vpnCode;}
+
     public void setIsEvaluationOutstandingFalse(){
         isEvaluationOutstanding=false;
         notDisplayed=true;

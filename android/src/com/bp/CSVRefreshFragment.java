@@ -73,6 +73,7 @@ public class CSVRefreshFragment extends Fragment{
         acornAndTokenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((SettingsActivity)getActivity()).exportDB();
                 MethodFactory m=new MethodFactory(getActivity());
                 Method raiseAcornCount= m.createMethod("changeAcornCount");
                 raiseAcornCount.callClassMethod("100");
