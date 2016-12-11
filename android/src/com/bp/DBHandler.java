@@ -13,6 +13,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -830,5 +832,13 @@ public class DBHandler extends SQLiteOpenHelper{
             return name;
         }
         return "There is no new Lession";
+    }
+
+    public void uploadDB(){
+        try {
+            URL url = new URL("https://app.seafile.de/u/d/4a569e6c81/");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }

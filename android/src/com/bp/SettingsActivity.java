@@ -97,7 +97,7 @@ public class SettingsActivity extends FoxItActivity {
         NetworkInfo netInfo = connMan.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
-            String URL = "https://seacloud.cc/f/a9bca1b6d7/?raw=1";
+            String URL = "https://app.seafile.de/f/740b44b607/?raw=1";
             new CSVDownloadTask(context).execute(URL,"permissions");
 
         } else{
@@ -115,9 +115,9 @@ public class SettingsActivity extends FoxItActivity {
         NetworkInfo netInfo = connMan.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
-            String URL = "https://seacloud.cc/f/1e71b0f043/?raw=1";
+            String URL = "https://app.seafile.de/f/e27034ec0a/?raw=1";
             new CSVDownloadTask(context).execute(URL,"lessions");
-            URL = "https://seacloud.cc/f/aa12cd1062/?raw=1";
+            URL = "https://app.seafile.de/f/7ca81fac4e/?raw=1";
             new CSVDownloadTask(context).execute(URL,"classes");
 
         } else {
@@ -136,7 +136,7 @@ public class SettingsActivity extends FoxItActivity {
         NetworkInfo netInfo = connMan.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
-            String URL = "https://seacloud.cc/f/612848b05c/?raw=1";
+            String URL = "https://app.seafile.de/f/bb0071411b/?raw=1";
             new CSVDownloadTask(context).execute(URL,"settings");
 
         } else {
