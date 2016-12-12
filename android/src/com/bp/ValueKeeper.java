@@ -37,6 +37,13 @@ public class ValueKeeper {
     Boolean notDisplayed=true;
     String vpnCode;
 
+    //the absolute first start
+    long timeOfFirstStart =0;
+    int dailyLectionsUnlocked=0;
+    boolean valueKeeperAlreadyRefreshed=false;
+
+
+
     int numberOfTimesOpenedAtNight=0;
     int numberOfTimesOpenedAtMorning=0;
 
@@ -93,12 +100,19 @@ public class ValueKeeper {
         Log.d("MyApp","Wiederherstellung abgeschloßenXX");
 
 
+        if(data.containsKey("timeOfFirstStart")){
+            timeOfFirstStart=Long.valueOf(data.get("timeOfFirstStart"));
+        }else{
+            timeOfFirstStart=System.currentTimeMillis();
+        }
+
         if(data.containsKey("acornCount")) {
             acornCount = Integer.valueOf(data.get("acornCount"));
             tokenCount = Integer.valueOf(data.get("tokenCount"));
             vpnCode = data.get("vpnCode");
             notDisplayed=Boolean.getBoolean(data.get("notDisplayed"));
             currentEvaluation=Integer.valueOf(data.get("currentEvaluation"));
+            dailyLectionsUnlocked=Integer.valueOf(data.get("dailyLectionsUnlocked"));
             if(data.get("numberOfTimesOpenedAtNight")!=null){
             numberOfTimesOpenedAtNight=numberOfTimesOpenedAtNight+Integer.valueOf(data.get("numberOfTimesOpenedAtNight"));
             numberOfTimesOpenedAtMorning=numberOfTimesOpenedAtMorning+Integer.valueOf(data.get("numberOfTimesOpenedAtMorning"));}
@@ -163,7 +177,7 @@ public class ValueKeeper {
 
             }
 
-        Log.d("MyApp","deinstalAfter"+deinstalledApps.toString());
+        valueKeeperAlreadyRefreshed=true;
         }
 
 
@@ -176,7 +190,7 @@ public class ValueKeeper {
 
 
         DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
-       // db.clearValueKeeper();
+        db.clearValueKeeper();
 
         db.insertIndividualValue("acornCount",Integer.toString(acornCount));
         db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
@@ -185,6 +199,8 @@ public class ValueKeeper {
         db.insertIndividualValue("numberOfTimesOpenedAtMorning",Integer.toString(numberOfTimesOpenedAtMorning));
         db.insertIndividualValue("numberOfTimesOpenedAtNight",Integer.toString(numberOfTimesOpenedAtNight));
         db.insertIndividualValue("vpnCode",vpnCode);
+        db.insertIndividualValue("dailyLectionsUnlocked",Integer.toString(dailyLectionsUnlocked));
+        db.insertIndividualValue("timeOfFirstStart",Long.toString(timeOfFirstStart));
 
 
         Log.d("MyApp","currentEval:"+Integer.toString(currentEvaluation));
@@ -270,6 +286,7 @@ public class ValueKeeper {
         int t=0;
         for(ApplicationInfo a:packages){
             db.insertIndividualValue("app:"+Integer.toString(t),pm.getApplicationLabel(a).toString());
+            t++;
         }
 
 
@@ -412,7 +429,7 @@ public void setTimeOfLastAccess(long time){
     public int getNumberOfSolvedClasses(){
         return solvedClasses.size();
     }
-
+    public long getTimeOfFirstStart() {return timeOfFirstStart;}
     public int increaseNumberNight(){
         return numberOfTimesOpenedAtNight++;
     }
@@ -491,7 +508,7 @@ public void setTimeOfLastAccess(long time){
 
             });
 
-            ArrayList<String> result = new ArrayList<>();
+            ArrayList<String> result = new ArrayList<String>();
 
             if (appsNow.equals(appsBefore)) {
                 return result;
@@ -502,10 +519,15 @@ public void setTimeOfLastAccess(long time){
                         result.add(b);
                     }
                 }
-            }
             return result;
+            }
 
     }
+
+    public void increaseDailyLectionsUnlocked(){
+        dailyLectionsUnlocked++;
+    }
+
 
     }
 

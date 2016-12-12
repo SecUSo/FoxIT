@@ -122,6 +122,55 @@ Timer timer =new Timer();
                 mNotificationManager.notify(15, mBuilder.build());
                 apps=fetchALL_APPS();
             }
+            if(true){
+            DBHandler db=new DBHandler(FoxItActivity.getAppContext(),null,null,1);
+               Long firstTime=v.getTimeOfFirstStart();
+                Long currentTime=System.currentTimeMillis();
+                Long result=(currentTime-firstTime)/86400000;
+
+                if(result>v.dailyLectionsUnlocked&&v.dailyLectionsUnlocked<15&&v.valueKeeperAlreadyRefreshed) {
+                    String lectionName = "test";//db.unlockDaily();
+                    v.increaseDailyLectionsUnlocked();
+
+                    NotificationCompat.Builder mBuilder =
+                            new NotificationCompat.Builder(context)
+                                    .setSmallIcon(R.mipmap.literature)
+                                    .setContentTitle("Eine neue Lektion ist verfügbar!")
+                                    .setContentText(lectionName);
+                    Intent resultIntent = new Intent(context, Home.class);
+
+
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+// Adds the back stack for the Intent (but not the Intent itself)
+                    stackBuilder.addParentStack(Home.class);
+// Adds the Intent that starts the Activity to the top of the stack
+                    stackBuilder.addNextIntent(resultIntent);
+                    PendingIntent resultPendingIntent =
+                            stackBuilder.getPendingIntent(
+                                    0,
+                                    PendingIntent.FLAG_UPDATE_CURRENT
+                            );
+                    mBuilder.setContentIntent(resultPendingIntent);
+                    NotificationManager mNotificationManager =
+                            (NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+                    mNotificationManager.notify(15, mBuilder.build());
+
+//
+
+
+                }
+
+            }
+            }
+
+
+
+
         }
 
 
@@ -133,7 +182,7 @@ Timer timer =new Timer();
                     return false;
                 }
             }
-        }
+
 
 
 
