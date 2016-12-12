@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +23,9 @@ public class Home extends FoxItActivity {
         super.onCreate(savedInstanceState);
         ValueKeeper v=ValueKeeper.getInstance();
         DBHandler dbHandler = new DBHandler(this,null,null,1);
-        if (!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){
+        if (!dbHandler.checkIfInside(DBHandler.TABLE_PERSONAL,DBHandler.COLUMN_KEY+" = \'firstrun\'")){
             dbHandler.close();
+            Log.d("Home","firstrun not in DB");
             Intent intent = new Intent(getApplicationContext(),OnboardingActivity.class);
             startActivity(intent);
         }else{
@@ -36,9 +38,9 @@ public class Home extends FoxItActivity {
                 //[name~EvaluationTest][0~texte'text~Eine Einführuark Net.;scalee_Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]
 //                Evaluation;AppEvaluation;0;1;6;0;scalee_Wir haben bemerkt, dass du in letzter Zeit eine App deinstalliert hast. Wie sehr hatte das mit dem Schutz deiner Privatsphäre zu tun?;;;;;;;
                 String evaluationLection;
-                        if(true){
+                        if(true){ //TODO
                           evaluationLection=  "[name~EvaluationTest][0~type~texte'text~Eine Einführuark Net.][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]";
-                        }
+                        } //TODO
                 intent.putExtra("lection","[name~EvaluationTest][0~type~texte'text~Eine Einführuark Net.][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]");
                 intent.putExtra("name", "timeEval:"+Integer.toString(v.currentEvaluation));
                 intent.putExtra("type", 0);//lectionObjectList.get(position).getType());
@@ -58,9 +60,9 @@ public class Home extends FoxItActivity {
                     //[name~EvaluationTest][0~texte'text~Eine Einführuark Net.;scalee_Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]
 //                Evaluation;AppEvaluation;0;1;6;0;scalee_Wir haben bemerkt, dass du in letzter Zeit eine App deinstalliert hast. Wie sehr hatte das mit dem Schutz deiner Privatsphäre zu tun?;;;;;;;
                     String evaluationLection;
-                    if(true){
+                    if(true){ //TODO
                         evaluationLection=  "[name~EvaluationTest][0~type~texte'text~Eine Einführuark Net.][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]";
-                    }
+                    } //TODO
                     intent.putExtra("lection","[name~EvaluationTest][0~type~texte'text~"+v.deinstalledApps.get(0)+"][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]");
                     intent.putExtra("name", "appEval:"+v.deinstalledApps.get(0));
                     intent.putExtra("type", -99);//lectionObjectList.get(position).getType());

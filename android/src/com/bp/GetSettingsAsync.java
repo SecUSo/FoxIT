@@ -21,6 +21,7 @@ public class GetSettingsAsync extends AsyncTask<Void,Void,String[]> {
     protected String[] doInBackground(Void... voids) {
         DBHandler dbHandler = new DBHandler(context,null,null,1);
         String[] result = dbHandler.getSettingsFromDB();
+        dbHandler.insertIndividualValue("firstrun","true");
         return result;
     }
 
@@ -36,6 +37,6 @@ public class GetSettingsAsync extends AsyncTask<Void,Void,String[]> {
                 i.putExtra("settings",strings);
                 context.startActivity(i);
             }
-        }, 7000L);
+        }, 3000L);
     }
 }
