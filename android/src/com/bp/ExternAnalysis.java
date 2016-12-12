@@ -50,7 +50,6 @@ public class ExternAnalysis extends AsyncTask {
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
         new DBWrite(analysis).execute("addParamColumn",o);
-        new DBWrite(analysis).execute("insertIndividualValue","firstrun","true");
         new GetSettingsAsync(analysis).execute();
     }
 }

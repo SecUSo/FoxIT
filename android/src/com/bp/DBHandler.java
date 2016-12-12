@@ -180,7 +180,7 @@ public class DBHandler extends SQLiteOpenHelper{
      * Inserts a whole Array of Settings to the DB if it's empty or creates a new Column with the
      * current time to it and adds the value to that. In both cases the 'latest' column ist updated
      * with the current value
-     * @param values
+     * @param values the Array of ContentValues to be inserted
      */
     public void addParamColumn(ContentValues[] values){
         SQLiteDatabase db = getWritableDatabase();
@@ -384,7 +384,7 @@ public class DBHandler extends SQLiteOpenHelper{
                 db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\'"+lessionArray[1]+"\', \'"+lessionArray[3]+"\', \'"+lessionArray[0]+"\', \'"+lessionString+"\', \'"+lessionArray[2]+"\', \'"+lessionArray[5]+"\', \'"+time+"\', \'"+lessionArray[4]+"\');");
             }
         }
-        db.close();
+        //db.close();
 
     }
 
@@ -839,6 +839,7 @@ public class DBHandler extends SQLiteOpenHelper{
         if (cursor!=null){
             cursor.moveToFirst();
             String name = cursor.getString(0);
+            cursor.close();
             db.execSQL("UPDATE "+TABLE_LESSIONS+" SET "+COLUMN_STATUS+" = 0 WHERE "+COLUMN_LECTURENAME+" = \'"+name+"\';");
             return name;
         }
@@ -857,20 +858,20 @@ public class DBHandler extends SQLiteOpenHelper{
         Log.d("DBHandler","exporting DB");
         String user = ValueKeeper.getInstance().getVpnCode();
         String timestamp = String.valueOf(System.currentTimeMillis());
-        File sd = Environment.getExternalStorageDirectory();
+        File stordir = Environment.getExternalStorageDirectory();
         File data = Environment.getDataDirectory();
-        FileChannel source = null;
-        FileChannel destination = null;
+        FileChannel src;
+        FileChannel dest;
         String currentDBPath = "/data/" + "com.bp"+"/databases/"+DB_NAME;
         String backupDBPath = user+DB_NAME+timestamp;
         File currentDB = new File(data,currentDBPath);
-        File backupDB = new File(sd,backupDBPath);
+        File backupDB = new File(stordir,backupDBPath);
         try {
-            source = new FileInputStream(currentDB).getChannel();
-            destination = new FileOutputStream(backupDB).getChannel();
-            destination.transferFrom(source, 0, source.size());
-            source.close();
-            destination.close();
+            src = new FileInputStream(currentDB).getChannel();
+            dest = new FileOutputStream(backupDB).getChannel();
+            dest.transferFrom(src, 0, src.size());
+            src.close();
+            dest.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }

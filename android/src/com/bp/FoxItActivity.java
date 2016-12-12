@@ -114,11 +114,17 @@ public class FoxItActivity extends AppCompatActivity {
     public boolean shouldEvaluationBeDisplayed(){
         ValueKeeper v=ValueKeeper.getInstance();
         Calendar currentTime = Calendar.getInstance();
-
+        DBHandler db=new DBHandler(this,null,null,1);
+        int numberOfEvaluation=0;
+        if(v.getCurrentEvaluation()==0){
+           if(db.getIndividualValue("currentEvaluation")!=null){ numberOfEvaluation=Integer.valueOf(db.getIndividualValue("currentEvaluation"));}
+        }else{
+            numberOfEvaluation=v.getCurrentEvaluation();
+        }
         Log.d("MyApp","currentEvalin Fox:"+Integer.toString(v.getCurrentEvaluation()));
 
-        if(v.timeOfEvaluation.length>v.getCurrentEvaluation()){
-            return v.timeOfEvaluation[v.getCurrentEvaluation()]<currentTime.getTimeInMillis();}else{
+        if(v.timeOfEvaluation.length>numberOfEvaluation){
+            return v.timeOfEvaluation[numberOfEvaluation]<currentTime.getTimeInMillis();}else{
             return false;
         }
     }
@@ -158,18 +164,18 @@ public class FoxItActivity extends AppCompatActivity {
         final Handler handler =new Handler();
         //after 1250ms the old grey text is replaced by the new black acornCount
 
-        if(this.findViewById(R.id.count_frame)!=null) {
+        //if(this.findViewById(R.id.count_frame)!=null) {
             //after 4000ms the Fragment disappears
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.remove(trophyNotification);
-                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    transaction.commit();
-                }
-            }, 8000);
-        }
+          //  handler.postDelayed(new Runnable() {
+            //    @Override
+              //  public void run() {
+                //    FragmentTransaction transaction = manager.beginTransaction();
+                  //  transaction.remove(trophyNotification);
+                  //  transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                  //  transaction.commit();
+               // }
+            //}, 8000);
+        //}
     }
 
 
