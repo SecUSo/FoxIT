@@ -1,9 +1,12 @@
 package com.bp;
 
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -123,6 +126,7 @@ public class FoxItActivity extends AppCompatActivity {
 
     public boolean setTrophyUnlocked(String trophyName){
        ValueKeeper v=ValueKeeper.getInstance();
+        displayTrophyUnlocked(trophyName);
         if(v.trophyList.containsKey(trophyName)){
             v.trophyList.put(trophyName,true);
             return true;
@@ -132,5 +136,41 @@ public class FoxItActivity extends AppCompatActivity {
         }
 
     }
+
+
+    public void displayTrophyUnlocked(String trophyName){
+
+        //add the acornCountFragment to the activity's context
+        final FragmentManager manager = this.getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        final TrophyNotificationFragment trophyNotification= new TrophyNotificationFragment();
+        Bundle name=new Bundle();
+        name.putString("name",trophyName);
+        trophyNotification.setArguments(name);
+        //add the fragment to the count_frame RelativeLayout
+        if(this.findViewById(R.id.count_frame)!=null) {
+            transaction.add(R.id.count_frame, trophyNotification, "trophy");
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.commit();
+        }
+
+        //add the animation
+        final Handler handler =new Handler();
+        //after 1250ms the old grey text is replaced by the new black acornCount
+
+        if(this.findViewById(R.id.count_frame)!=null) {
+            //after 4000ms the Fragment disappears
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.remove(trophyNotification);
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    transaction.commit();
+                }
+            }, 8000);
+        }
+    }
+
 
 }

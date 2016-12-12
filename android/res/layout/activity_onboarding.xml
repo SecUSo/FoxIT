@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartScreen">
+    tools:context=".StartScreen"
+    android:id="@+id/count_frame">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -25,7 +25,7 @@ public class TrophyNotificationFragment extends Fragment{
 
         //and display it
         TextView text=(TextView) view.findViewById(R.id.text_trophy_name);
-                text.setText(name);
+                text.setText(name+" freigeschaltet!");
 
         ImageView trophyIcon=(ImageView) view.findViewById(R.id.image_trophy_symbol);
         switch (name){
