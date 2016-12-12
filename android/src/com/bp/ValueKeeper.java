@@ -157,6 +157,7 @@ public class ValueKeeper {
                                             if(e.contains("tro:")){
                                                 trophyList.put(e.substring(4),Boolean.valueOf(data.get(e)));}else{
                                                 if(e.contains("app:")){
+                                                    Log.d("ValueKeeper","apps!=LSDHFPSIUZFPSEOIFH");
                                                     appsBefore.add(data.get(e));
                                                 }
 
@@ -190,7 +191,7 @@ public class ValueKeeper {
 
 
         DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
-        db.clearValueKeeper();
+        //db.clearValueKeeper();
 
         db.insertIndividualValue("acornCount",Integer.toString(acornCount));
         db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
