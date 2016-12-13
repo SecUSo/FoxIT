@@ -87,7 +87,7 @@ public class Home extends FoxItActivity {
     super.onStart();
         ValueKeeper v=ValueKeeper.getInstance();
         DBHandler dbHandler = new DBHandler(this,null,null,1);
-        if (!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
+        if (!Boolean.valueOf(dbHandler.getIndividualValue("analysisDoneBefore"))){//v.analysisDoneBefore){//!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
             v.wasEvaluationDisplayed=true;
             dbHandler.close();
             Intent intent = new Intent(getApplicationContext(),OnboardingActivity.class);

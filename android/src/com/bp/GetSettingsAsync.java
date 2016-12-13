@@ -21,7 +21,10 @@ public class GetSettingsAsync extends AsyncTask<Void,Void,String[]> {
     protected String[] doInBackground(Void... voids) {
         DBHandler dbHandler = new DBHandler(context,null,null,1);
         String[] result = dbHandler.getSettingsFromDB();
-        dbHandler.insertIndividualValue("firstrun","true");
+        //dbHandler.insertIndividualValue("firstrun","true");
+        ValueKeeper v=ValueKeeper.getInstance().getInstance();
+        dbHandler.insertIndividualValue("analysisDoneBefore",Boolean.toString(true));
+        v.analysisDoneBefore=true;
         return result;
     }
 

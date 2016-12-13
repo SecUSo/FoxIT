@@ -52,12 +52,16 @@ public class ValueKeeper {
     ArrayList<String> solvedClasses=new ArrayList<>();
     ArrayList<Long> appStartsTheLastTwoDays= new ArrayList<>();
 
-
-    // String[] s={"a","b","c"};
     ArrayList<String> deinstalledApps=new ArrayList<>();
     Boolean isEvaluationOutstanding=false;
 
     ArrayList<String> appsBefore=new ArrayList<>();
+
+    Boolean onboardingStartetBefore=false;
+    Boolean analysisDoneBefore=false;
+
+
+
 
 
     public void setEvaluationResults(HashMap<String, String> evaluationResults) {
@@ -108,6 +112,8 @@ public class ValueKeeper {
         }
 
         if(data.containsKey("acornCount")) {
+            analysisDoneBefore=Boolean.valueOf("analysisDoneBefore");
+            onboardingStartetBefore=Boolean.valueOf("onboardingStartetBefore");
             acornCount = Integer.valueOf(data.get("acornCount"));
             tokenCount = Integer.valueOf(data.get("tokenCount"));
             vpnCode = data.get("vpnCode");
@@ -117,6 +123,7 @@ public class ValueKeeper {
             if(data.get("numberOfTimesOpenedAtNight")!=null){
             numberOfTimesOpenedAtNight=numberOfTimesOpenedAtNight+Integer.valueOf(data.get("numberOfTimesOpenedAtNight"));
             numberOfTimesOpenedAtMorning=numberOfTimesOpenedAtMorning+Integer.valueOf(data.get("numberOfTimesOpenedAtMorning"));}
+
         }
 
 
@@ -158,7 +165,6 @@ public class ValueKeeper {
                                             if(e.contains("tro:")){
                                                 trophyList.put(e.substring(4),Boolean.valueOf(data.get(e)));}else{
                                                 if(e.contains("app:")){
-                                                    Log.d("ValueKeeper","apps!=LSDHFPSIUZFPSEOIFH");
                                                     appsBefore.add(data.get(e));
                                                 }
 
@@ -192,8 +198,10 @@ public class ValueKeeper {
 
 
         DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
-        //db.clearValueKeeper();
+        db.clearValueKeeper();
 
+        db.insertIndividualValue("onboardingStartetBefore",Boolean.toString(onboardingStartetBefore));
+        db.insertIndividualValue("analysisDoneBefore",Boolean.toString(analysisDoneBefore));
         db.insertIndividualValue("acornCount",Integer.toString(acornCount));
         db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
         db.insertIndividualValue("notDisplayed",Boolean.toString(true));

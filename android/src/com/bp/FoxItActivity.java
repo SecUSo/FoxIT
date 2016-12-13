@@ -117,7 +117,7 @@ public class FoxItActivity extends AppCompatActivity {
         DBHandler db=new DBHandler(this,null,null,1);
         int numberOfEvaluation=0;
         if(v.getCurrentEvaluation()==0){
-           //if(false){}//db.getIndividualValue("currentEvaluation")!=null){ numberOfEvaluation=Integer.valueOf(db.getIndividualValue("currentEvaluation"));}
+        //   if(db.getIndividualValue("currentEvaluation")!=null){ numberOfEvaluation=Integer.valueOf(db.getIndividualValue("currentEvaluation"));}
         }else{
             numberOfEvaluation=v.getCurrentEvaluation();
         }

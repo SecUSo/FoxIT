@@ -50,9 +50,17 @@ public class OnboardingActivity extends FoxItActivity {
     @Override
     public void onStart() {
         super.onStart();
-        SettingsActivity sa = new SettingsActivity();
-        sa.updateLessions(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
-        sa.updatePermissions(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
-        sa.updateSettings(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
-    }
+        ValueKeeper v=ValueKeeper.getInstance();
+        DBHandler db=new DBHandler(this,null,null,1);
+        if(!Boolean.valueOf(db.getIndividualValue("onboardingStartetBefore"))) {
+            v.onboardingStartetBefore=true;
+            db.insertIndividualValue("onboardingStartetBefore",Boolean.toString(true));
+
+            SettingsActivity sa = new SettingsActivity();
+            sa.updateLessions(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
+            sa.updatePermissions(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
+            sa.updateSettings(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
+        }
+        db.close();
+        }
 }
