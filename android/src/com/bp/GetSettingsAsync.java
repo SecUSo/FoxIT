@@ -22,9 +22,9 @@ public class GetSettingsAsync extends AsyncTask<Void,Void,String[]> {
         DBHandler dbHandler = new DBHandler(context,null,null,1);
         String[] result = dbHandler.getSettingsFromDB();
         //dbHandler.insertIndividualValue("firstrun","true");
-        ValueKeeper v=ValueKeeper.getInstance().getInstance();
-        dbHandler.insertIndividualValue("analysisDoneBefore",Boolean.toString(true));
+        ValueKeeper v=ValueKeeper.getInstance();
         v.analysisDoneBefore=true;
+        dbHandler.insertIndividualValue("analysisDoneBefore",Boolean.toString(true));
         dbHandler.close();
         return result;
     }
@@ -41,6 +41,6 @@ public class GetSettingsAsync extends AsyncTask<Void,Void,String[]> {
                 i.putExtra("settings",strings);
                 context.startActivity(i);
             }
-        }, 3000L);
+        }, 7000L);
     }
 }

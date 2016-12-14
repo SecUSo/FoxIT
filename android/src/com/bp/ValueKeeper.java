@@ -56,7 +56,7 @@ public class ValueKeeper {
 
     ArrayList<String> appsBefore=new ArrayList<>();
 
-    Boolean onboardingStartedBefore =false;
+    Boolean onboardingStartedBefore=false;
     Boolean analysisDoneBefore=false;
 
 
