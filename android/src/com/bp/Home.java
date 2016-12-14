@@ -88,7 +88,7 @@ public class Home extends FoxItActivity {
     super.onStart();
         ValueKeeper v=ValueKeeper.getInstance();
         DBHandler dbHandler = new DBHandler(this,null,null,1);
-        if (!dbHandler.checkIfInside(DBHandler.TABLE_PERSONAL,DBHandler.COLUMN_KEY+" = \'analysisDoneBefore\'")||dbHandler.getIndividualValue("analysisDoneBefore").equals("false")){//v.analysisDoneBefore){//!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
+        if ((!dbHandler.checkIfInside(DBHandler.TABLE_PERSONAL,DBHandler.COLUMN_KEY+" = \'analysisDoneBefore\'")||dbHandler.getIndividualValue("analysisDoneBefore").equals("false"))&&!v.analysisDoneBefore.equals(true)){//v.analysisDoneBefore){//!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
             Log.d("Home","Not analysisDoneBefore");
             v.wasEvaluationDisplayed=true;
             dbHandler.close();

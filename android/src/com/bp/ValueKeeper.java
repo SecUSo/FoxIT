@@ -98,10 +98,13 @@ public class ValueKeeper {
         //HashMap<String,Boolean> trophyList=new HashMap<>();
 
         Log.d("MyApp","Wiederherstellung abgeschloßenYY");
+        analysisDoneBefore=Boolean.valueOf("analysisDoneBefore");
+        onboardingStartedBefore =Boolean.valueOf("onboardingStartedBefore");
         DBHandler db=new DBHandler(FoxItActivity.getAppContext(),null,null,1);
         HashMap<String,String> data =  db.getIndividualData();
         Log.d("MyApp","Data:"+data.toString());
         Log.d("MyApp","Wiederherstellung abgeschloßenXX");
+
 
 
         if(data.containsKey("timeOfFirstStart")){
@@ -111,8 +114,7 @@ public class ValueKeeper {
         }
 
         if(data.containsKey("acornCount")) {
-            analysisDoneBefore=Boolean.valueOf("analysisDoneBefore");
-            onboardingStartedBefore =Boolean.valueOf("onboardingStartedBefore");
+
             acornCount = Integer.valueOf(data.get("acornCount"));
             tokenCount = Integer.valueOf(data.get("tokenCount"));
             vpnCode = data.get("vpnCode");
@@ -198,7 +200,7 @@ public class ValueKeeper {
 
         DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
         db.clearValueKeeper();
-        Log.d("ValueKeeper","saveInstance");
+        Log.d("ValueKeeper","saveInstance, analysis:"+analysisDoneBefore.toString());
 
         db.insertIndividualValue("onboardingStartedBefore",Boolean.toString(onboardingStartedBefore));
         db.insertIndividualValue("analysisDoneBefore",Boolean.toString(analysisDoneBefore));
