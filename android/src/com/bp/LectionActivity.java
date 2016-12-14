@@ -163,41 +163,42 @@ public class LectionActivity extends FoxItActivity {
 
             @Override
             public void onClick(View v) {
-                String nextSlideNumber = lection.slideHashMap.get(Integer.toString(slideNumber)).next();
+                if((!lection.getLectionName().contains(":"))||!(lection.getLectionName().contains("timeEval")||lection.getLectionName().contains("appEval"))) {
+                    String nextSlideNumber = lection.slideHashMap.get(Integer.toString(slideNumber)).next();
 
-                Slide slide = lection.slideHashMap.get(Integer.toString(slideNumber));
-                if (!(didEvaluationStart) && (!(slide instanceof QuizSlide) || ((QuizSlide) slide).getEvaluated())) {
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    int slideToJumpTo; //aka the next SlideNumber
-                    //if the next slide is a quizSlide show the question mark
-                    if (nextSlideNumber != null && nextSlideNumber.equals("quiz")) {
-                        ((QuizSlide) lection.slideHashMap.get(Integer.toString(slideNumber))).evaluation();
-                        //if there is no next slide after the next show the cross
-                        if ((nextSlideNumber == null) && (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null)) {
-                            setImage("kreuz");
-                            //if there is a next slide after the next slide set the arrow
+                    Slide slide = lection.slideHashMap.get(Integer.toString(slideNumber));
+                    if (!(didEvaluationStart) && (!(slide instanceof QuizSlide) || ((QuizSlide) slide).getEvaluated())) {
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        int slideToJumpTo; //aka the next SlideNumber
+                        //if the next slide is a quizSlide show the question mark
+                        if (nextSlideNumber != null && nextSlideNumber.equals("quiz")) {
+                            ((QuizSlide) lection.slideHashMap.get(Integer.toString(slideNumber))).evaluation();
+                            //if there is no next slide after the next show the cross
+                            if ((nextSlideNumber == null) && (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null)) {
+                                setImage("kreuz");
+                                //if there is a next slide after the next slide set the arrow
+                            } else {
+                                setImage("pfeil_rechts");
+                            }
                         } else {
-                            setImage("pfeil_rechts");
+                            //if the current slide defines a next slide that's the slideNumberToJumpTo
+                            if (nextSlideNumber != null) {
+                                slideToJumpTo = Integer.parseInt(nextSlideNumber);
+                            } else {
+                                //otherwise it's the slide with the next higher number
+                                slideToJumpTo = slideNumber + 1;
+                            }
+                            //if the slide with the retrieved number exists, jump to it
+                            if (lection.lectionInfoHashMap.get(Integer.toString(slideToJumpTo)) != null) {
+                                jumpToSlide(Integer.toString(slideToJumpTo));
+                            } else {
+                                //otherwise close the Activity
+                                goBackToLectionList(slideNumber);
+                            }
                         }
-                    } else {
-                        //if the current slide defines a next slide that's the slideNumberToJumpTo
-                        if (nextSlideNumber != null) {
-                            slideToJumpTo = Integer.parseInt(nextSlideNumber);
-                        } else {
-                            //otherwise it's the slide with the next higher number
-                            slideToJumpTo = slideNumber + 1;
-                        }
-                        //if the slide with the retrieved number exists, jump to it
-                        if (lection.lectionInfoHashMap.get(Integer.toString(slideToJumpTo)) != null) {
-                            jumpToSlide(Integer.toString(slideToJumpTo));
-                        } else {
-                            //otherwise close the Activity
-                            goBackToLectionList(slideNumber);
-                        }
+                        ft.commit();
                     }
-                    ft.commit();
-                }
-            }
+                }    }
         });
     }
 
@@ -354,12 +355,7 @@ public class LectionActivity extends FoxItActivity {
 
     public void addEvaluationResult(String question,String answer){
 
-        Log.d("MyApp","lectionName:"+lection.getLectionName());
-
-
-
         String prefix=lection.getLectionName().substring(lection.getLectionName().indexOf(":")+1,lection.getLectionName().length());
-        Log.d("MyApp","prefix:"+prefix);
         evaluationResults.put(prefix+":"+question,answer);
 
     }

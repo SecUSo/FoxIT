@@ -3,6 +3,7 @@ package com.bp;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,6 +47,9 @@ public class FoxItActivity extends AppCompatActivity {
         ValueKeeper v=ValueKeeper.getInstance();
         FoxItApplication myApp = (FoxItApplication) this.getApplication();
         if(v.getFreshlyStartet()){
+
+            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            nm.cancelAll();
 
             Intent mServiceIntent = new Intent(this, BackgroundService.class);
             startService(mServiceIntent);

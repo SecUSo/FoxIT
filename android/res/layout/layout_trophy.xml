@@ -8,43 +8,49 @@
     android:weightSum="1">
 
     <RelativeLayout
-        android:id="@+id/trophy_frame"
-        android:layout_height="wrap_content"
-        android:background="#dad7b4"
-        app:layout_widthPercent="100%">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/grid_item_image"
-            android:layout_width="fill_parent"
+        <RelativeLayout
+            android:id="@+id/trophy_frame"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="10px"
-            android:layout_weight="15.50"
-            android:adjustViewBounds="true"
-            android:contentDescription="große Eichel"
-            android:longClickable="false"
-            android:src="@mipmap/test_trophy">
-        </ImageView>
+            android:background="#dad7b4"
+            app:layout_widthPercent="100%"
+            android:layout_width="match_parent">
 
-        <TextView
-            android:id="@+id/grid_item_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/grid_item_image"
-            android:layout_centerHorizontal="true"
-            android:text="Medium Text"
-            android:textColor="@color/abc_search_url_text_pressed" />
+            <ImageView
+                android:id="@+id/grid_item_image"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="10px"
+                android:layout_weight="15.50"
+                android:adjustViewBounds="true"
+                android:contentDescription="große Eichel"
+                android:longClickable="false"
+                android:src="@mipmap/test_trophy">
+            </ImageView>
 
-        <TextView
-            android:id="@+id/text_trophy_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="Baumhaus Kapitalist"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#be0e0e" />
+            <TextView
+                android:id="@+id/grid_item_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/grid_item_image"
+                android:layout_centerHorizontal="true"
+                android:text="Medium Text"
+                android:textColor="@color/abc_search_url_text_pressed" />
 
+            <TextView
+                android:id="@+id/text_trophy_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Baumhaus Kapitalist"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#be0e0e" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </android.support.percent.PercentRelativeLayout>
