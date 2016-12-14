@@ -25,6 +25,7 @@ public class GetSettingsAsync extends AsyncTask<Void,Void,String[]> {
         ValueKeeper v=ValueKeeper.getInstance().getInstance();
         dbHandler.insertIndividualValue("analysisDoneBefore",Boolean.toString(true));
         v.analysisDoneBefore=true;
+        dbHandler.close();
         return result;
     }
 

@@ -819,7 +819,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public String getIndividualValue(String key){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+COLUMN_VALUE+" FROM "+TABLE_PERSONAL+" WHERE "+COLUMN_KEY+" = \'"+key+"\';",null);
-        if (cursor==null||cursor.isAfterLast()||cursor.isNull(0)) return "notfound";
+        if (cursor==null) return "notfound";
         cursor.moveToFirst();
         String res = cursor.getString(cursor.getColumnIndex(COLUMN_VALUE));
         cursor.close();

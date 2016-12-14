@@ -6,6 +6,9 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+
+import java.util.Objects;
 
 public class OnboardingActivity extends FoxItActivity {
 
@@ -52,10 +55,9 @@ public class OnboardingActivity extends FoxItActivity {
         super.onStart();
         ValueKeeper v=ValueKeeper.getInstance();
         DBHandler db=new DBHandler(this,null,null,1);
-        if(!Boolean.valueOf(db.getIndividualValue("onboardingStartetBefore"))) {
-            v.onboardingStartetBefore=true;
-            db.insertIndividualValue("onboardingStartetBefore",Boolean.toString(true));
-
+        if(db.getIndividualValue("onboardingStartedBefore").equals("false")) {
+            v.onboardingStartedBefore =true;
+            db.changeIndividualValue("onboardingStartedBefore",Boolean.toString(true));
             SettingsActivity sa = new SettingsActivity();
             sa.updateLessions(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
             sa.updatePermissions(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
