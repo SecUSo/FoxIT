@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        android:background="@color/colorPrimary">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/question_text"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            android:nestedScrollingEnabled="true"
-            android:text="Wie Privacy bist du?"
-            android:background="@android:color/holo_blue_bright" />
+            android:layout_height="match_parent"
+            android:background="@color/creme">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            android:layout_below="@+id/question_text"
-            android:layout_alignParentStart="true"
-            android:id="@+id/answer_text_field" />
+            <TextView
+                android:text="Evaluation:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView11"
+                android:padding="10dp"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary" />
 
-    </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/question_text"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:nestedScrollingEnabled="true"
+                android:text="Wie Privacy bist du?"
+                android:padding="10dp"
+                android:layout_below="@+id/textView11"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question_text"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="5dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/answer_text_field"
+                    android:gravity="top"
+                    android:backgroundTint="@color/white"
+                    android:background="@color/white"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="30dp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </FrameLayout>
 
 </LinearLayout>
+
+
+

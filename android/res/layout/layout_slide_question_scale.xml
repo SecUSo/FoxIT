@@ -1,62 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        android:background="@android:color/holo_blue_bright">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/question_text"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            android:nestedScrollingEnabled="true"
-            android:text="Wie Privacy bist du?"
-            android:background="@android:color/darker_gray"
-            android:padding="10dp" />
+            android:layout_height="match_parent"
+            android:background="@color/creme">
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="131dp"
-            android:orientation="horizontal"
-            android:id="@+id/radio_group"
-            android:layout_below="@+id/question_text"
-            android:layout_marginTop="123dp"
-            android:layout_centerInParent="false"
-            android:layout_alignParentStart="true"
-            android:gravity="center_vertical|center_horizontal">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="88dp"
-                android:id="@+id/radioButton1" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="73dp"
-                android:id="@+id/radioButton2" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
+            <TextView
+                android:text="Evaluation:"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton3" />
+                android:id="@+id/textView11"
+                android:padding="10dp"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:background="@android:color/holo_blue_bright" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/radio_group"
+                android:layout_below="@+id/question_text"
+                android:layout_marginTop="123dp"
+                android:layout_centerInParent="false"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_height="60dp">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="88dp"
+                    android:id="@+id/radioButton1"
+                    android:padding="5dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="73dp"
+                    android:id="@+id/radioButton2"
+                    android:padding="5dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton3"
+                    android:padding="5dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton4"
+                    android:padding="5dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton5"
+                    android:padding="5dp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton4" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/question_text"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:nestedScrollingEnabled="true"
+                android:text="Wie Privacy bist du?"
+                android:padding="10dp"
+                android:layout_below="@+id/textView11"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioButton5" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/radio_group"
+                android:layout_centerHorizontal="true">
 
-        </RadioGroup>
-    </RelativeLayout>
+                <TextView
+                    android:text="trifft zu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView17"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="170dp" />
+
+                <TextView
+                    android:text="trifft nicht zu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView18"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_horizontal"
+                    android:paddingLeft="155dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
 
 </LinearLayout>

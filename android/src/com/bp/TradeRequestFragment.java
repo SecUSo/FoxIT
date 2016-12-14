@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Tim on 25.06.2016.
@@ -39,7 +40,6 @@ public class TradeRequestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         view = inflater.inflate(R.layout.fragment_trade_request, container, false);
         thisFragment = this;
-
         LinearLayout button = (LinearLayout) view.findViewById(R.id.whole_frame);
         button.setOnClickListener(new View.OnClickListener()
         {
@@ -51,10 +51,18 @@ public class TradeRequestFragment extends Fragment {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ValueKeeper o=ValueKeeper.getInstance();
                 boolean tradeSuccessful = false;
                 Activity activity = getActivity();
                 //call the purchase callClassMethod of the current activity
+                if(price>o.getAcornCount()){
+                    //display the animation description
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Du hast nicht genügend Eicheln um diese Animation zu kaufen.", Toast.LENGTH_SHORT).show();
+
+
+                }else {
+
                 if (activity instanceof LectionListActivity) {
                     LectionListActivity lectionListActivity = (LectionListActivity) activity;
                     tradeSuccessful = lectionListActivity.purchase(articleOfCommerce);
@@ -70,7 +78,7 @@ public class TradeRequestFragment extends Fragment {
                     MethodFactory mf = new MethodFactory(getActivity());
                     Method changeAcornCount = mf.createMethod("changeAcornCount");
                     changeAcornCount.callClassMethod("-" + Integer.toString(price));
-                }
+                }}
                 //remove this fragment after the trade is finished
                 getActivity().onBackPressed();
             }

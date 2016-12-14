@@ -137,8 +137,8 @@ Timer timer =new Timer();
                                     .setSmallIcon(R.mipmap.literature)
                                     .setContentTitle("Eine neue Lektion ist verfügbar!")
                                     .setContentText(lectionName);
-                    Intent resultIntent = new Intent(context, Home.class);
 
+                    Intent resultIntent = new Intent(context, Home.class);
 
 // The stack builder object will contain an artificial back stack for the
 // started Activity.
