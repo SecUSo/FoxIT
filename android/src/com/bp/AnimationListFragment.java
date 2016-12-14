@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -204,7 +205,20 @@ public class AnimationListFragment extends Fragment {
 
 
     }
+    @Override
+    public void onDestroyView(){
+        try{
+            AcornCountFragment fragment = (AcornCountFragment) getFragmentManager().findFragmentById(R.id.count_frame);
+            FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+            transaction.remove(fragment);
+            transaction.commit();
+        } catch (Exception e){
+            Log.d("AnimationListFragment","onDestroyView: "+e);
+        }
+        super.onDestroyView();
 
+
+    }
 
 }
 

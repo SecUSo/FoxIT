@@ -49,7 +49,7 @@ public class MethodChangeAcornCount extends Method{
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.remove(count);
                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    transaction.commit();
+                    transaction.commitAllowingStateLoss();
                 }
             }, 4000);
         }

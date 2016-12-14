@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,12 +88,14 @@ public class Home extends FoxItActivity {
     super.onStart();
         ValueKeeper v=ValueKeeper.getInstance();
         DBHandler dbHandler = new DBHandler(this,null,null,1);
-        if (!Boolean.valueOf(dbHandler.getIndividualValue("analysisDoneBefore"))){//v.analysisDoneBefore){//!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
+        if (!dbHandler.checkIfInside(DBHandler.TABLE_PERSONAL,DBHandler.COLUMN_KEY+" = \'analysisDoneBefore\'")||dbHandler.getIndividualValue("analysisDoneBefore").equals("false")){//v.analysisDoneBefore){//!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
+            Log.d("Home","Not analysisDoneBefore");
             v.wasEvaluationDisplayed=true;
             dbHandler.close();
             Intent intent = new Intent(getApplicationContext(),OnboardingActivity.class);
             startActivity(intent);
         }else{
+            Log.d("Home","analysisDoneBefore");
             if(shouldEvaluationBeDisplayed()){
                 Intent intent = new Intent(getApplicationContext(),LectionActivity.class);
                 String className="Deep Web";//"Evaluation";

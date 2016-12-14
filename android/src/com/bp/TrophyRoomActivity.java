@@ -25,6 +25,13 @@ public class TrophyRoomActivity extends FoxItActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trophy_room);
 
+        // sets our toolbar as the actionbar
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+        if (toolbar != null) {
+            toolbar.setTitle("Toolbar");
+        }
+
 
         //defining the tabs and the tab bar
         adapter = new TapAdapter_trophy(getFragmentManager(), this);
@@ -89,6 +96,7 @@ public class TrophyRoomActivity extends FoxItActivity {
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
         menu.findItem(R.id.action_options).setVisible(false);
         menu.findItem(R.id.goOn).setVisible(false);
+        menu.findItem(R.id.goBack).setVisible(true);
         return true;
     }
 
@@ -106,6 +114,7 @@ public class TrophyRoomActivity extends FoxItActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }
 

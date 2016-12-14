@@ -215,6 +215,5 @@ public class TrophyListFragment extends Fragment {
 
     }
 
-
 }
 

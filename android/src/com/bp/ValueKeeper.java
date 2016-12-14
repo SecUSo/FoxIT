@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -57,7 +56,7 @@ public class ValueKeeper {
 
     ArrayList<String> appsBefore=new ArrayList<>();
 
-    Boolean onboardingStartetBefore=false;
+    Boolean onboardingStartedBefore =false;
     Boolean analysisDoneBefore=false;
 
 
@@ -113,7 +112,7 @@ public class ValueKeeper {
 
         if(data.containsKey("acornCount")) {
             analysisDoneBefore=Boolean.valueOf("analysisDoneBefore");
-            onboardingStartetBefore=Boolean.valueOf("onboardingStartetBefore");
+            onboardingStartedBefore =Boolean.valueOf("onboardingStartedBefore");
             acornCount = Integer.valueOf(data.get("acornCount"));
             tokenCount = Integer.valueOf(data.get("tokenCount"));
             vpnCode = data.get("vpnCode");
@@ -199,8 +198,9 @@ public class ValueKeeper {
 
         DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
         db.clearValueKeeper();
+        Log.d("ValueKeeper","saveInstance");
 
-        db.insertIndividualValue("onboardingStartetBefore",Boolean.toString(onboardingStartetBefore));
+        db.insertIndividualValue("onboardingStartedBefore",Boolean.toString(onboardingStartedBefore));
         db.insertIndividualValue("analysisDoneBefore",Boolean.toString(analysisDoneBefore));
         db.insertIndividualValue("acornCount",Integer.toString(acornCount));
         db.insertIndividualValue("tokenCount",Integer.toString(tokenCount));
