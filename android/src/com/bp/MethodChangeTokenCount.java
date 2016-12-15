@@ -3,6 +3,7 @@ package com.bp;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Handler;
+import android.util.Log;
 
 /**
  * Created by Ich on 30.07.2016.
@@ -42,16 +43,17 @@ public class MethodChangeTokenCount extends Method{
             }
         },1250);
         if(activity.findViewById(R.id.count_frame)!=null) {
-            //after 4000ms the Fragment disappears
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.remove(count);
-                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    transaction.commitAllowingStateLoss();
-                }
-            }, 4000);
+                //after 4000ms the Fragment disappears
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        transaction.remove(count);
+                        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                        transaction.commitAllowingStateLoss();
+                    }
+                }, 4000);
+
         }
     }
 }

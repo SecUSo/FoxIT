@@ -23,7 +23,7 @@ public class MethodChangeAcornCount extends Method{
         FragmentTransaction transaction = manager.beginTransaction();
         final AcornCountFragment count= new AcornCountFragment();
         //add the fragment to the count_frame RelativeLayout
-        if(activity.findViewById(R.id.count_frame)!=null) {
+        if((activity.findViewById(R.id.count_frame) != null) && !activity.isFinishing()) {
             transaction.add(R.id.count_frame, count, "count");
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             transaction.commit();
@@ -41,7 +41,7 @@ public class MethodChangeAcornCount extends Method{
                 count.changeText(Integer.toString(ValueKeeper.getInstance().getAcornCount()));}
             }
         },1250);
-        if(activity.findViewById(R.id.count_frame)!=null) {
+        if((activity.findViewById(R.id.count_frame)!=null)&&!activity.isFinishing()) {
             //after 4000ms the Fragment disappears
             handler.postDelayed(new Runnable() {
                 @Override

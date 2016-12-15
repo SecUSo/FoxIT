@@ -41,6 +41,6 @@ public class GetSettingsAsync extends AsyncTask<Void,Void,String[]> {
                 i.putExtra("settings",strings);
                 context.startActivity(i);
             }
-        }, 7000L);
+        }, 3000L);
     }
 }
