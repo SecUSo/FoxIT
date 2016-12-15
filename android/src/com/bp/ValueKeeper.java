@@ -98,12 +98,12 @@ public class ValueKeeper {
         //HashMap<String,Boolean> trophyList=new HashMap<>();
 
         Log.d("MyApp","Wiederherstellung abgeschloßenYY");
-        analysisDoneBefore=Boolean.valueOf("analysisDoneBefore");
-        onboardingStartedBefore =Boolean.valueOf("onboardingStartedBefore");
         DBHandler db=new DBHandler(FoxItActivity.getAppContext(),null,null,1);
         HashMap<String,String> data =  db.getIndividualData();
         Log.d("MyApp","Data:"+data.toString());
         Log.d("MyApp","Wiederherstellung abgeschloßenXX");
+        analysisDoneBefore=Boolean.valueOf(data.get("analysisDoneBefore"));
+        onboardingStartedBefore =Boolean.valueOf(data.get("onboardingStartedBefore"));
 
 
 

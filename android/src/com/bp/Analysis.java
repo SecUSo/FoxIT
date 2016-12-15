@@ -27,7 +27,6 @@ import java.util.List;
  */
 public class Analysis extends FoxItActivity {
 
-    DBHandler dbHandler;
     Toolbar toolbar;
 
     /**
@@ -62,6 +61,11 @@ public class Analysis extends FoxItActivity {
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         //analyse();
+        DBHandler dbHandler = new DBHandler(this,null,null,1);
+        dbHandler.insertIndividualValue("analysisDoneBefore","true");
+        ValueKeeper v =ValueKeeper.getInstance();
+        v.analysisDoneBefore=true;
+        dbHandler.close();
         new ExternAnalysis(this).execute(this);
 
     }

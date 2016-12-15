@@ -41,6 +41,7 @@ public class FoxItActivity extends AppCompatActivity {
     public void onStart()
     {
         super.onResume();
+        //TODO ?^
 
 
         FoxItActivity.context = getApplicationContext();

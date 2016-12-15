@@ -829,7 +829,7 @@ public class DBHandler extends SQLiteOpenHelper{
 
     public void clearValueKeeper(){
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_PERSONAL,null,null);
+        db.delete(TABLE_PERSONAL,COLUMN_KEY+" IS NOT \'analysisDoneBefore\' OR \'onboardingStartedBefore\'",null);
         db.close();
     }
 
