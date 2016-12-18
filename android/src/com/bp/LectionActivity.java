@@ -29,6 +29,7 @@ public class LectionActivity extends FoxItActivity {
     boolean isEvaluation=false; //TODO: find fitting Name
 
     HashMap<String,String> evaluationResults=new HashMap<>();
+    Handler handler;
 
     /**
      * @author Tim
@@ -39,6 +40,7 @@ public class LectionActivity extends FoxItActivity {
 
         setContentView(R.layout.activity_lection_activity);
         lectionDescription = getIntent().getStringExtra("lection");
+        handler = new Handler();
 
         // sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -337,7 +339,7 @@ public class LectionActivity extends FoxItActivity {
             Method method2 = factory.createMethod("changeAcornCount");
             method2.callClassMethod(Integer.toString(lection.getReward()));//TODO customisable number
 
-            Handler handler = new Handler();
+
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -361,5 +363,9 @@ public class LectionActivity extends FoxItActivity {
 
     }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacksAndMessages(null);
+    }
 }

@@ -45,24 +45,29 @@ public class QuestionSlide extends Slide {
         text.setText(parameter.get("text"));
 
         //sets the text displayed on the left button
-        Button buttonLeft =(Button) view.findViewById((R.id.button_left));
+        final Button buttonLeft =(Button) view.findViewById((R.id.button_left));
         buttonLeft.setText(parameter.get("buttonText"));
+        //sets the text displayed on the left button
+        final Button buttonRight =(Button) view.findViewById((R.id.button_right));
+        buttonRight.setText(parameter.get("buttonText2"));
         //sets the callClassMethod for the left button
         buttonLeft.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                buttonLeft.setVisibility(View.INVISIBLE);
+                buttonRight.setVisibility(View.INVISIBLE);
                 methodLeft.callClassMethod(parameter.get("methodParameter"));
             }});
 
-        //sets the text displayed on the left button
-        Button buttonRight =(Button) view.findViewById((R.id.button_right));
-        buttonRight.setText(parameter.get("buttonText2"));
+
         //sets the callClassMethod for the right button
         buttonRight.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                buttonLeft.setVisibility(View.INVISIBLE);
+                buttonRight.setVisibility(View.INVISIBLE);
                 methodRight.callClassMethod(parameter.get("methodParameter2"));
             }});
 

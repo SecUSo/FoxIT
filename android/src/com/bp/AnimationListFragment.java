@@ -205,6 +205,7 @@ public class AnimationListFragment extends Fragment {
 
 
     }
+/*
     @Override
     public void onDestroyView(){
         try{
@@ -218,7 +219,7 @@ public class AnimationListFragment extends Fragment {
         super.onDestroyView();
 
 
-    }
+    }*/
 
 }
 

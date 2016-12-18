@@ -200,7 +200,6 @@ public class ValueKeeper {
 
         DBHandler db= new DBHandler(FoxItActivity.getAppContext(),null,null,1);
         db.clearValueKeeper();
-        Log.d("ValueKeeper","saveInstance, analysis:"+analysisDoneBefore.toString());
 
         db.insertIndividualValue("onboardingStartedBefore",Boolean.toString(onboardingStartedBefore));
         db.insertIndividualValue("analysisDoneBefore",Boolean.toString(analysisDoneBefore));
