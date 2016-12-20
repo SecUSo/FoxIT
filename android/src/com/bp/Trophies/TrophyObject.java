@@ -15,15 +15,16 @@ abstract public class TrophyObject {
     boolean visibleScore; //if the progress is displayed (eg. 4/10) or not (???)
     boolean unlocked; //whether the trophy is already unlocked
     int icon; //the trophy's icon resource path
+    int iconSolved;
 
-
-    public TrophyObject(String name, int scoreNeeded, String toastDescription, boolean visibleScore, int icon) {
+    public TrophyObject(String name, int scoreNeeded, String toastDescription, boolean visibleScore, int icon, int iconSolved) {
         this.name = name;
         this.scoreNeeded = scoreNeeded;
         this.toastDescription = toastDescription;
         this.scoreCurrently = scoreCurrently;
         this.visibleScore = visibleScore;
         this.icon = icon;
+        this.iconSolved=iconSolved;
     }
 
     /**check whether the trophy's conditions for unlocking are currently met and unlocks it
@@ -60,5 +61,7 @@ abstract public class TrophyObject {
     public String getToastDescription() {
         return toastDescription;
     }
-
+    public int getIconSolved(){
+        return iconSolved;
+    }
 }

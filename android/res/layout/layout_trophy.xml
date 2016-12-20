@@ -37,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/grid_item_image"
                 android:layout_centerHorizontal="true"
-                android:text="Medium Text"
                 android:textColor="@color/abc_search_url_text_pressed" />
 
             <TextView

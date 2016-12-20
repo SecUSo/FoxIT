@@ -303,9 +303,10 @@ public class LectionActivity extends FoxItActivity {
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.lection_frame);
         layout.setEnabled(true);
 
-        Log.d("MyApp",lection.getLectionName());
         ValueKeeper v=ValueKeeper.getInstance();
+        Boolean isEval=false;
         if(lection.getLectionName().contains(":")) {
+            isEval=true;
             String switc = lection.getLectionName().substring(0, lection.getLectionName().indexOf(":"));
             Log.d("MyApp", switc);
             switch (switc) {
@@ -326,7 +327,7 @@ public class LectionActivity extends FoxItActivity {
 
 
         }
-        if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3)) {
+        if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3&&!isEval)) {
             DBHandler db = new DBHandler(this, null, null, 1);
 
             if(lection.getProcessingStatus()!=-99){

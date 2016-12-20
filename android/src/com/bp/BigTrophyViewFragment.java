@@ -22,7 +22,7 @@ import android.widget.TextView;
  */
 public class BigTrophyViewFragment extends Fragment{
     String trophyName; //the name of the described trophy
-
+    int icon;
     /**
      * @author Tim
      * @param savedInstanceState
@@ -44,6 +44,10 @@ public class BigTrophyViewFragment extends Fragment{
         View view=inflater.inflate(R.layout.fragment_big_trophy_view,container,false);
         TextView trophyName= (TextView) view.findViewById(R.id.text_trophy_name);
         trophyName.setText(this.trophyName);
+
+        ImageView trophyIcon=(ImageView) view.findViewById(R.id.image_acorn_symbol);
+        trophyIcon.setImageResource(icon);
+
         return view;
     }
 
@@ -54,6 +58,7 @@ public class BigTrophyViewFragment extends Fragment{
      */
     public void setArguments(Bundle arg){
         trophyName=arg.getString("trophyName");
+        icon=arg.getInt("icon");
     }
 
 }
