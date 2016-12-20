@@ -1,6 +1,8 @@
 package com.bp;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,18 @@ public class WebImageSlide extends Slide {
      */
     @Override
     void fillLayout() {
-        new DownloadImageTask((ImageView) view.findViewById(R.id.image_web)).execute(parameter.get("text"));
+
+
+        ImageView image=(ImageView) view.findViewById(R.id.image_web);
+        String imageName=parameter.get("text");
+        Log.d("MyApp",imageName);
+        switch(imageName){
+            case "apfel": {image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.ic_hourglass_empty_black_48dp));
+                    break;}
+
+            default: new DownloadImageTask((ImageView) view.findViewById(R.id.image_web)).execute(parameter.get("text"));
+        }
+
     }
 
 

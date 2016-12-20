@@ -114,7 +114,7 @@ public class Home extends FoxItActivity {
                 intent.putExtra("delay", 0);//lectionObjectList.get(position).getDelaytime());
                 intent.putExtra("freetime", 0);//lectionObjectList.get(position).getNextfreetime());
                 intent.putExtra("status", -99);//lectionObjectList.get(position).getProcessingStatus());
-                intent.putExtra("acorn", 9);//lectionObjectList.get(position).getReward());
+                intent.putExtra("acorn", 0);//lectionObjectList.get(position).getReward());
                 startActivity(intent);
 
             }else{
@@ -136,7 +136,7 @@ public class Home extends FoxItActivity {
                     intent.putExtra("delay", 0);//lectionObjectList.get(position).getDelaytime());
                     intent.putExtra("freetime",0.0);// lectionObjectList.get(position).getNextfreetime());
                     intent.putExtra("status",0);// lectionObjectList.get(position).getProcessingStatus());
-                    intent.putExtra("acorn", 9);//lectionObjectList.get(position).getReward());
+                    intent.putExtra("acorn", 0);//lectionObjectList.get(position).getReward());
                     startActivity(intent);
                 }
 

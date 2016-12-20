@@ -16,6 +16,7 @@ public class MethodChangeAcornCount extends Method{
      */
     @Override
     public void callClassMethod(String acornDifference){
+        if(Integer.valueOf(acornDifference)!=0){
         final int amount=Integer.parseInt(acornDifference);
 
         //add the acornCountFragment to the activity's context
@@ -46,12 +47,13 @@ public class MethodChangeAcornCount extends Method{
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    if(!activity.isFinishing()){
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.remove(count);
                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    transaction.commitAllowingStateLoss();
+                    transaction.commitAllowingStateLoss();}
                 }
             }, 4000);
         }
-    }
+    }}
 }
