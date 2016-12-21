@@ -76,7 +76,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public static final String COLUMN_KEY ="key";
     private static final String COLUMN_VALUE = "value";
     //file-name
-    private static final String DB_NAME = "rawdata.db";
+    public static final String DB_NAME = "rawdata.db";
 
     /**
      * Constructor
@@ -376,7 +376,7 @@ public class DBHandler extends SQLiteOpenHelper{
         // db.execSQL("DROP TABLE IF EXISTS "+TABLE_LESSIONS);
         for (String[] lessionArray:theLessions) {
             String lessionString = createLessionString(lessionArray).replace("'","''");
-            if (checkIfInside(TABLE_LESSIONS,COLUMN_LECTURENAME+" = \'"+lessionArray[1]+"\'")){
+            if (checkIfInside(db,TABLE_LESSIONS,COLUMN_LECTURENAME+" = \'"+lessionArray[1]+"\'")){
                 db.execSQL("UPDATE "+ TABLE_LESSIONS +" SET "+COLUMN_CONTENT+" = \'"+lessionString+"\', "+COLUMN_COURSE+" = \'"+lessionArray[0]+"\', " +
                         "\'"+COLUMN_DELAY+"\' = \'"+lessionArray[2]+"\', \'"+COLUMN_LECTURETYPE+"\' = \'"+lessionArray[5]+"\', \'"+COLUMN_EICHELN+"\' = \'"+lessionArray[4]+
                         "\' WHERE "+COLUMN_LECTURENAME+" = \'"+lessionArray[1]+"\';");
@@ -384,7 +384,7 @@ public class DBHandler extends SQLiteOpenHelper{
                 db.execSQL("INSERT INTO "+ TABLE_LESSIONS +" VALUES(\'"+lessionArray[1]+"\', \'"+lessionArray[3]+"\', \'"+lessionArray[0]+"\', \'"+lessionString+"\', \'"+lessionArray[2]+"\', \'"+lessionArray[5]+"\', \'"+time+"\', \'"+lessionArray[4]+"\');");
             }
         }
-        //db.close();
+        db.close();
 
     }
 
@@ -489,15 +489,13 @@ public class DBHandler extends SQLiteOpenHelper{
      * @param whereclause description of content searched for
      * @return true/false
      */
-    public Boolean checkIfInside(String table, String whereclause) {
-        SQLiteDatabase db = getWritableDatabase();
+    public Boolean checkIfInside(SQLiteDatabase db,String table, String whereclause) {
         Cursor cursor = db.rawQuery("SELECT * FROM "+table+" WHERE "+whereclause+";",null);
         if (cursor.getCount()<=0){
             cursor.close();
             return false;
         }
         cursor.close();
-        db.close();
         return true;
     }
 
@@ -693,9 +691,8 @@ public class DBHandler extends SQLiteOpenHelper{
     public void updateSettingDescriptions(ArrayList<String[]> settingsData){
         SQLiteDatabase db = getWritableDatabase();
         for (String[] setting:settingsData){
-            if (checkIfInside(TABLE_SETTINGS,COLUMN_SETTING+" = \'"+setting[0]+"\'")){
-                if (setting.length==1){
-                }else if (setting.length==2){
+            if (checkIfInside(db,TABLE_SETTINGS,COLUMN_SETTING+" = \'"+setting[0]+"\'")){
+                if (setting.length==2){
                     db.execSQL("UPDATE "+TABLE_SETTINGS+" SET "
                             +COLUMN_TYPE+" = "+setting[1]
                             +" WHERE "+COLUMN_SETTING+" = \'"+setting[0]+"\';");
@@ -819,12 +816,20 @@ public class DBHandler extends SQLiteOpenHelper{
     public String getIndividualValue(String key){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+COLUMN_VALUE+" FROM "+TABLE_PERSONAL+" WHERE "+COLUMN_KEY+" = \'"+key+"\';",null);
-        if (cursor==null) return "notfound";
-        cursor.moveToFirst();
-        String res = cursor.getString(cursor.getColumnIndex(COLUMN_VALUE));
+        if (cursor==null){
+            db.close();
+            return "notfound";
+        }
+        if (cursor.getCount()>0) {
+            cursor.moveToFirst();
+            String res = cursor.getString(0);
+            cursor.close();
+            db.close();
+            return res;
+        }
         cursor.close();
         db.close();
-        return res;
+        return "notfound";
     }
 
     public void clearValueKeeper(){

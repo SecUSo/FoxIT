@@ -67,7 +67,7 @@ public class QuestionSlide extends Slide {
             @Override
             public void onClick(View v) {
                 buttonLeft.setVisibility(View.INVISIBLE);
-                buttonRight.setVisibility(View.INVISIBLE);
+                buttonRight.setVisibility(View.INVISIBLE); 
                 methodRight.callClassMethod(parameter.get("methodParameter2"));
             }});
 

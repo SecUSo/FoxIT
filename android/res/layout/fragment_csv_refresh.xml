@@ -47,7 +47,7 @@
             android:layout_centerHorizontal="true" />
 
         <TextView
-            android:text="Eicheln und Tokens geben:"
+            android:text="Die Datenbank exportieren:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -60,7 +60,7 @@
         <Button
             android:layout_width="45dp"
             android:layout_height="wrap_content"
-            android:id="@+id/button_token_acorn"
+            android:id="@+id/button_exportDB"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/button_description_csv"
             android:layout_marginBottom="38dp" />
