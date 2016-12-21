@@ -29,13 +29,11 @@ public class DBUploadTask extends AsyncTask<Activity,Void,String> {
    // String URL ="http://localhost/upload.php";//"gs://foxit-990c7.appspot.com/uploads/dbs/";
     @Override
     protected String doInBackground(Activity... params) {
-        Log.d("DBUpload","started");
         String filepath= "/data/" + "com.bp"+"/databases/"+DBHandler.DB_NAME;;
         String uploadURL="http://192.168.2.4/files/upload.php";
         String user = ValueKeeper.getInstance().getVpnCode();
         String timestamp = String.valueOf(System.currentTimeMillis());
         try{
-
             HttpURLConnection connection;
             DataOutputStream outstream;
             String lineEnd = "\r\n";
@@ -46,12 +44,10 @@ public class DBUploadTask extends AsyncTask<Activity,Void,String> {
             int maxBufferSize = 1024 * 1024;
             File data = Environment.getDataDirectory();
             File outFile = new File(data,filepath);
-            Log.d("DBUpload","outfile?: "+outFile.isFile());
             NetworkInfo netInfo = ((ConnectivityManager) params[0].getSystemService(params[0].CONNECTIVITY_SERVICE))
                     .getActiveNetworkInfo();
 
             if (netInfo != null && netInfo.isConnected()&&outFile.isFile()){
-                Log.d("DBUpload","before 2nd try");
                 try{
                     FileInputStream inStream = new FileInputStream(outFile);
                     URL url = new URL(uploadURL);
@@ -75,10 +71,8 @@ public class DBUploadTask extends AsyncTask<Activity,Void,String> {
                     bufferSize = Math.min(bytesAvailable,maxBufferSize);
                     buffer= new byte[bufferSize];
                     bytesRead= inStream.read(buffer,0,bufferSize);
-                    Log.d("DBUpload","before while");
 
                     while (bytesRead > 0){
-                        Log.d("DBUpload","while...");
                         outstream.write(buffer,0,bufferSize);
                         bytesAvailable=inStream.available();
                         bufferSize = Math.min(bytesAvailable, maxBufferSize);
@@ -90,9 +84,6 @@ public class DBUploadTask extends AsyncTask<Activity,Void,String> {
 
                     int responseCode = connection.getResponseCode();
                     String responseMessage = connection.getResponseMessage();
-                    if (responseCode==200){
-                        Log.i("DBUpload","done");
-                    }
 
                     InputStream is = connection.getInputStream();
                     BufferedReader read = new BufferedReader(new InputStreamReader(is));
