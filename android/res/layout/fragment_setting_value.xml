@@ -13,15 +13,30 @@
         android:layout_below="@+id/setting_headline_frame">
 
         <TextView
+            android:id="@+id/text_setting_value"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/image_app_icon"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:minHeight="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="6dp"
+            android:layout_marginLeft="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Medium Text"
-            android:id="@+id/text_setting_value"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
+            android:id="@+id/text_setting_value_true"
             android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp" />
+            android:layout_marginRight="6dp"
+            android:minHeight="50dp"
+            android:layout_below="@+id/text_setting_value"
+            android:layout_alignStart="@+id/text_setting_value" />
+
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -39,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/image_app_icon"
             android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:minHeight="50dp"
             android:layout_alignParentEnd="true"
             android:background="@color/creme"

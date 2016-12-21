@@ -54,16 +54,15 @@ public class TrophyListFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
 
-        TrophyObject[] trophyArray = {new AcornTrophy("Baumhauskapitalist", 5, "Sammle viele Eicheln.", true, R.mipmap.test_trophy),
-                new AcornTrophy("Goldene Gans", 15, "Geradezu dick vor Eicheln.", true, R.mipmap.test_trophy),
-                new AcornTrophy("Siebenschläfer", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),
-                new AcornTrophy("Schnüffler", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),
-                new AcornTrophy("Neuling", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),
-                new AcornTrophy("Halbzeit", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),
-                new AcornTrophy("Privacy Shield", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),
-                new AcornTrophy("Nachteule", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy), //TODO:Relly strange behavior
-                new AcornTrophy("Early Bird", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy),
-                new AcornTrophy("Power User", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy)
+        TrophyObject[] trophyArray = {
+                new AcornTrophy("Goldene Gans", 15, "Geradezu dick vor Eicheln.", true, R.mipmap.acorn_not,R.mipmap.acorn_finish),
+                new AcornTrophy("Schnüffler", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.fox_not,R.mipmap.fox_finish),
+                new AcornTrophy("Frischling", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.boar_not,R.mipmap.boar_finish),
+                new AcornTrophy("Halbzeit", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy,R.mipmap.test_trophy),
+                new AcornTrophy("Privacy Shield", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.shield_not,R.mipmap.shield_finish),
+                new AcornTrophy("Nachteule", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.owl_not,R.mipmap.owl_finish), //TODO:Relly strange behavior
+                new AcornTrophy("Early Bird", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.bird_not,R.mipmap.bird_finish),
+                new AcornTrophy("Power User", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.rocket_not,R.mipmap.rocket_finish)
 
         };
         this.trophyArray = trophyArray;
@@ -97,11 +96,13 @@ public class TrophyListFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                if (trophyArray[position].isUnlocked()) {
+                ValueKeeper o=ValueKeeper.getInstance();
+                if (o.isTrophyUnlocked(trophyArray[position].getName())) {
                     //Fragment is created
                     BigTrophyViewFragment fragment = new BigTrophyViewFragment();
                     Bundle trophyName = new Bundle();
                     trophyName.putString("trophyName", trophyArray[position].getName());
+                    trophyName.putInt("icon",trophyArray[position].getIconSolved());
                     fragment.setArguments(trophyName);
 
                     //add fragment so the activitys' context
@@ -127,7 +128,6 @@ public class TrophyListFragment extends Fragment {
     /**
      * defines the specifications of the GridView
      *
-     * @param savedInstanceState
      * @author Tim
      */
     private class TrophyViewAdapter extends BaseAdapter {
@@ -169,7 +169,7 @@ public class TrophyListFragment extends Fragment {
                         textView.setText(Integer.toString(trophyArray[position].getScoreCurrently()) + "/" + Integer.toString(trophyArray[position].getScoreNeeded()));
                     }
                 } else {
-                    textView.setText("???");
+                    textView.setText("");
                 }
                 TextView trophyName = (TextView) gridView.findViewById(R.id.text_trophy_name);
                 trophyName.setText(trophyArray[position].getName());
@@ -178,16 +178,18 @@ public class TrophyListFragment extends Fragment {
                 ImageView imageView = (ImageView) gridView
                         .findViewById(R.id.grid_item_image);
 
-                imageView.setImageResource(trophyArray[position].getIcon());
+
                 //change the trophy's color whether it's unlocked
                 RelativeLayout trophyFrame = (RelativeLayout) gridView
                         .findViewById(R.id.trophy_frame);
                 ValueKeeper v=ValueKeeper.getInstance();
                 if (v.isTrophyUnlocked(trophyArray[position].getName())) {
                     // set image based on selected text
-                    trophyFrame.setBackgroundColor(Color.GREEN);
+                    trophyFrame.setBackgroundColor(Color.WHITE);
+                    imageView.setImageResource(trophyArray[position].getIconSolved());
                 } else {
                     trophyFrame.setBackgroundColor(Color.WHITE);
+                    imageView.setImageResource(trophyArray[position].getIcon());
                 }
 
             } else {

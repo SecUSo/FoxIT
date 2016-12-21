@@ -57,8 +57,8 @@ Timer timer =new Timer();
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.paw)
-                                .setContentTitle("Neue Umfrage verfügbar!")
-                                .setContentText("Time test");
+                                .setContentTitle("Neue Evaluation verfügbar!")
+                                .setContentText("");
                 Intent resultIntent = new Intent(context, Home.class);
 
 

@@ -20,6 +20,8 @@ import java.util.Calendar;
  */
 public class FoxItActivity extends AppCompatActivity {
 
+
+
     private static Context context;
 
     /**
@@ -182,6 +184,7 @@ public class FoxItActivity extends AppCompatActivity {
             //}, 8000);
         //}
     }
+
 
 
 }

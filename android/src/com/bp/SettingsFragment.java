@@ -40,7 +40,6 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
     String theAnalysisEntry="Analyse wiederholen";
     Context context;
     String[] profileListItems = {
-            "Persönliche Daten",
             "Analyse wiederholen",
             "Hilfe",
             "Impressum",

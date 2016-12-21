@@ -17,6 +17,7 @@ public class MethodChangeTokenCount extends Method{
      */
     @Override
     public void callClassMethod(String tokenDifference){
+        if(Integer.valueOf(tokenDifference)!=0){
         final int amount=Integer.parseInt(tokenDifference);
 
         //add the acornCountFragment to the activity's context
@@ -47,13 +48,14 @@ public class MethodChangeTokenCount extends Method{
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if(!activity.isFinishing()){
                         FragmentTransaction transaction = manager.beginTransaction();
                         transaction.remove(count);
                         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                        transaction.commitAllowingStateLoss();
+                        transaction.commitAllowingStateLoss();}
                     }
                 }, 4000);
 
         }
-    }
+    }}
 }

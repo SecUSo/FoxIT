@@ -251,17 +251,19 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
             //setting the text for the permission's name
             TextView permissionName = (TextView) itemView.findViewById(R.id.text_permission_name);
             // permissionName.setText(permissionArray[position]);
-            if (!(permissionArray[position].equals("Dangerous:") || permissionArray[position].equals("Normal:") || permissionArray[position].equals("Harmless:"))) {
+            if (!(permissionArray[position].equals("Gefährliche Berechtigungen:") || permissionArray[position].equals("Normale Berechtigungen:") || permissionArray[position].equals("Harmlose Berechtigungen:"))) {
                 //permissionName.setText(permissionArray[position].substring(permissionArray[position].indexOf(".")+1,permissionArray[position].length()));
                 String[] array = permissionArray[position].split("\\.");
                 if (array.length == 3) {
                     permissionName.setText(array[2].replace("_", " "));
-
+                    permissionName.setTextColor(Color.parseColor("#616161"));
                 } else {
                     permissionName.setText(permissionArray[position]);
+                    permissionName.setTextColor(Color.parseColor("#616161"));
                 }
             } else {
                 permissionName.setText(permissionArray[position]);
+               permissionName.setTextColor(Color.BLACK);
             }
 
 

@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:weightSum="1"
     android:background="#aad4d4d4"
-    android:id="@+id/whole_frame">
+    android:id="@+id/whole_frame"
+    android:clickable="true">
 
     <RelativeLayout
         android:layout_width="wrap_content"

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -74,42 +75,6 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
         }
 
 
-        lectionObjectList = dbHandler.getLectionsFromDB(className);
-        Log.d("lectionObjectList=empty", Boolean.toString(lectionObjectList.isEmpty()));
-        lectionStringArray = new String[lectionObjectList.size()];
-
-        TextView name = (TextView) findViewById(R.id.text_class_name);
-        name.setText(className);
-
-        int lectionNumber = lectionObjectList.size();
-        int solvedLectionNumber = 0;
-        for (LectionObject l : lectionObjectList) {
-            if (l.getProcessingStatus() == 3) {
-                solvedLectionNumber++;
-            }
-        }
-
-        ValueKeeper v=ValueKeeper.getInstance();
-        if(solvedLectionNumber==lectionNumber){
-            v.insertSolvedClass(className);
-        }
-
-        int numberOfSolvedClasses =v.getNumberOfSolvedClasses();
-        if(numberOfSolvedClasses>=1){
-        setTrophyUnlocked("Neuling");}
-        if(numberOfSolvedClasses>=5){
-            setTrophyUnlocked("Halbzeit");}
-        if(numberOfSolvedClasses>=10){
-            setTrophyUnlocked("Privacy Shield");
-        }
-
-        TextView solved = (TextView) findViewById(R.id.text_percentage_solved);
-        solved.setText(Integer.toString(solvedLectionNumber) + "/" + Integer.toString(lectionNumber));
-
-        TextView description = (TextView) findViewById(R.id.description_text);
-        description.setText(classDescriptionText);
-
-
         /**
          * Display the descriptionText if the headline is pressed
          * @author Tim
@@ -150,6 +115,8 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
 
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -204,6 +171,11 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
         } else {
             if (lectionObjectList.get(position).getNextfreetime() > (System.currentTimeMillis())) {
 
+                //display the animation description
+                Toast.makeText(getApplicationContext(),
+                        "Diese Lektion ist erst wieder in "+Long.toString((lectionObjectList.get(position).getNextfreetime()-System.currentTimeMillis())/60000)+" Minuten verfügbar.", Toast.LENGTH_LONG).show();
+
+
 
             } else {
 
@@ -239,6 +211,43 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
     @Override
     public void onResume() {
         ListView lectionList = (ListView) findViewById(R.id.headline_frame);
+        DBHandler db=new DBHandler(this,null,null,1);
+        lectionObjectList= db.getLectionsFromDB(className);
+
+        lectionStringArray = new String[lectionObjectList.size()];
+
+        TextView name = (TextView) findViewById(R.id.text_class_name);
+        name.setText(className);
+
+        int lectionNumber = lectionObjectList.size();
+        int solvedLectionNumber = 0;
+        for (LectionObject l : lectionObjectList) {
+            if (l.getProcessingStatus() == 3) {
+                solvedLectionNumber++;
+            }
+        }
+
+        ValueKeeper v=ValueKeeper.getInstance();
+        if(solvedLectionNumber==lectionNumber){
+            v.insertSolvedClass(className);
+        }
+
+        int numberOfSolvedClasses =v.getNumberOfSolvedClasses();
+        if(numberOfSolvedClasses>=1){
+            setTrophyUnlocked("Neuling");}
+        if(numberOfSolvedClasses>=5){
+            setTrophyUnlocked("Halbzeit");}
+        if(numberOfSolvedClasses>=10){
+            setTrophyUnlocked("Privacy Shield");
+        }
+
+        TextView solved = (TextView) findViewById(R.id.text_percentage_solved);
+        solved.setText(Integer.toString(solvedLectionNumber) + "/" + Integer.toString(lectionNumber));
+
+        TextView description = (TextView) findViewById(R.id.description_text);
+        description.setText(classDescriptionText);
+
+
         //creates the listView
         adapter = new MyListAdapter_lection();
         lectionList.setAdapter(adapter);
@@ -259,6 +268,7 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
                 //sets the lections status to unlocked
                 l.setProcessingStatus(1);
                 //update the listView
+
                 adapter.notifyDataSetChanged();
                 new DBWrite(this).execute("changeLectionToUnlocked", articleOfCommerce);
                 return true;
