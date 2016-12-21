@@ -76,7 +76,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public static final String COLUMN_KEY ="key";
     private static final String COLUMN_VALUE = "value";
     //file-name
-    private static final String DB_NAME = "rawdata.db";
+    public static final String DB_NAME = "rawdata.db";
 
     /**
      * Constructor
@@ -694,8 +694,7 @@ public class DBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         for (String[] setting:settingsData){
             if (checkIfInside(TABLE_SETTINGS,COLUMN_SETTING+" = \'"+setting[0]+"\'")){
-                if (setting.length==1){
-                }else if (setting.length==2){
+                if (setting.length==2){
                     db.execSQL("UPDATE "+TABLE_SETTINGS+" SET "
                             +COLUMN_TYPE+" = "+setting[1]
                             +" WHERE "+COLUMN_SETTING+" = \'"+setting[0]+"\';");
