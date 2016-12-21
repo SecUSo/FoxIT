@@ -822,7 +822,7 @@ public class DBHandler extends SQLiteOpenHelper{
             db.close();
             return "notfound";
         }
-        if (cursor.getColumnCount()>0) {
+        if (cursor.getCount()>0) {
             cursor.moveToFirst();
             String res = cursor.getString(0);
             cursor.close();
