@@ -58,7 +58,7 @@ public class TrophyListFragment extends Fragment {
                 new AcornTrophy("Goldene Gans", 15, "Geradezu dick vor Eicheln.", true, R.mipmap.acorn_not,R.mipmap.acorn_finish),
                 new AcornTrophy("Schnüffler", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.fox_not,R.mipmap.fox_finish),
                 new AcornTrophy("Frischling", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.boar_not,R.mipmap.boar_finish),
-                new AcornTrophy("Halbzeit", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.test_trophy,R.mipmap.test_trophy),
+                new AcornTrophy("Halbzeit", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.clock_not,R.mipmap.clock_finish),
                 new AcornTrophy("Privacy Shield", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.shield_not,R.mipmap.shield_finish),
                 new AcornTrophy("Nachteule", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.owl_not,R.mipmap.owl_finish), //TODO:Relly strange behavior
                 new AcornTrophy("Early Bird", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.bird_not,R.mipmap.bird_finish),
