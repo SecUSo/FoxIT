@@ -46,8 +46,8 @@ public class ParticipantIDFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(participantID.getText().toString().matches("[A-Za-z][A-Za-z]\\d\\d[A-Za-z][A-Za-z]")) {
-                    ValueKeeper vc=ValueKeeper.getInstance();
-                    vc.setVpnCode(participantID.getText().toString());
+                    ValueKeeper vk=ValueKeeper.getInstance();
+                    vk.setVpnCode(participantID.getText().toString());
                     getActivity().getFragmentManager().beginTransaction().remove(thisFragment).commit();
 
                 } else{

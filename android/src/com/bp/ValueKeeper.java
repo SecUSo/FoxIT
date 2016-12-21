@@ -199,22 +199,32 @@ public class ValueKeeper {
     public void saveInstance() {
 
         Log.d("MyApp", "SavedInstance");
+        HashMap<String,String> values= new HashMap<String, String>();
+        values.put("onboardingStartedBefore", Boolean.toString(onboardingStartedBefore));
+        values.put("analysisDoneBefore", Boolean.toString(analysisDoneBefore));
+        values.put("acornCount", Integer.toString(acornCount));
+        values.put("tokenCount", Integer.toString(tokenCount));
+        values.put("notDisplayed", Boolean.toString(true));
+        values.put("currentEvaluation", Integer.toString(currentEvaluation));
+        values.put("numberOfTimesOpenedAtMorning", Integer.toString(numberOfTimesOpenedAtMorning));
+        values.put("numberOfTimesOpenedAtNight", Integer.toString(numberOfTimesOpenedAtNight));
+        values.put("vpnCode", vpnCode);
+        values.put("dailyLectionsUnlocked", Integer.toString(dailyLectionsUnlocked));
+        values.put("timeOfFirstStart", Long.toString(timeOfFirstStart));
+        /*
 
-        DBHandler db = new DBHandler(FoxItActivity.getAppContext(), null, null, 1);
-        db.clearValueKeeper();
-
-        db.insertIndividualValue("onboardingStartedBefore", Boolean.toString(onboardingStartedBefore));
-        db.insertIndividualValue("analysisDoneBefore", Boolean.toString(analysisDoneBefore));
-        db.insertIndividualValue("acornCount", Integer.toString(acornCount));
-        db.insertIndividualValue("tokenCount", Integer.toString(tokenCount));
-        db.insertIndividualValue("notDisplayed", Boolean.toString(true));
-        db.insertIndividualValue("currentEvaluation", Integer.toString(currentEvaluation));
-        db.insertIndividualValue("numberOfTimesOpenedAtMorning", Integer.toString(numberOfTimesOpenedAtMorning));
-        db.insertIndividualValue("numberOfTimesOpenedAtNight", Integer.toString(numberOfTimesOpenedAtNight));
-        db.insertIndividualValue("vpnCode", vpnCode);
-        db.insertIndividualValue("dailyLectionsUnlocked", Integer.toString(dailyLectionsUnlocked));
-        db.insertIndividualValue("timeOfFirstStart", Long.toString(timeOfFirstStart));
-
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        db.insertIndividualValue();
+        */
 
         Log.d("MyApp", "currentEval:" + Integer.toString(currentEvaluation));
         //ArrayList<String> deinstalledApps=new ArrayList<>();
@@ -223,68 +233,68 @@ public class ValueKeeper {
         for (Map.Entry<String, String> entry : evaluationResults.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            db.insertIndividualValue("evl:" + key, value);
+            values.put("evl:" + key, value);
         }
 
 
         for (Map.Entry<String, Boolean> entry : animationList.entrySet()) {
             String key = entry.getKey();
             String value = Boolean.toString(entry.getValue());
-            db.insertIndividualValue("ani:" + key, value);
+            values.put("ani:" + key, value);
 
         }
         for (Map.Entry<String, Boolean> entry : trophyList.entrySet()) {
             String key = entry.getKey();
             String value = Boolean.toString(entry.getValue());
-            db.insertIndividualValue("tro:" + key, value);
+           values.put("tro:" + key, value);
 
         }
 
         for (Map.Entry<Long, Long> entry : applicationAccessAndDuration.entrySet()) {
             Long key = entry.getKey();
             Long value = entry.getValue();
-            db.insertIndividualValue("dur:" + Long.toString(key), Long.toString(value));
+            values.put("dur:" + Long.toString(key), Long.toString(value));
 
         }
         for (Map.Entry<Long, Long> entry : applicationStartAndDuration.entrySet()) {
             Long key = entry.getKey();
             Long value = entry.getValue();
-            db.insertIndividualValue("stD:" + Long.toString(key), Long.toString(value));
+            values.put("stD:" + Long.toString(key), Long.toString(value));
 
         }
         for (Map.Entry<Long, Long> entry : applicationStartAndActiveDuration.entrySet()) {
             Long key = entry.getKey();
             Long value = entry.getValue();
-            db.insertIndividualValue("stA:" + Long.toString(key), Long.toString(value));
+            values.put("stA:" + Long.toString(key), Long.toString(value));
 
         }
-        db.insertIndividualValue("currentEvaluation", Integer.toString(currentEvaluation));
-        db.insertIndividualValue("vpnCode", vpnCode);
+        values.put("currentEvaluation", Integer.toString(currentEvaluation));
+        values.put("vpnCode", vpnCode);
 
 
         for (Map.Entry<String, String> entry : evaluationResults.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            db.insertIndividualValue("eva:" + key, value);
+            values.put("eva:" + key, value);
 
         }
         int i = 0;
         // Log.d()
         for (String e : deinstalledApps) {
-            db.insertIndividualValue("dap:" + Integer.toString(i), e);
+            values.put("dap:" + Integer.toString(i), e);
             i++;
         }
 
         int y = 0;
         // Log.d()
         for (String e : solvedClasses) {
-            db.insertIndividualValue("scl:" + Integer.toString(i), e);
+            values.put("scl:" + Integer.toString(i), e);
             y++;
         }
 
         int x = 0;
         for (Long e : appStartsTheLastTwoDays) {
-            db.insertIndividualValue("asd:" + Integer.toString(x), Long.toString(e));
+            values.put("asd:" + Integer.toString(x), Long.toString(e));
             x++;
         }
 
@@ -298,14 +308,17 @@ public class ValueKeeper {
 
         int t = 0;
         for (ApplicationInfo a : packages) {
-            db.insertIndividualValue("app:" + Integer.toString(t), pm.getApplicationLabel(a).toString());
+            values.put("app:" + Integer.toString(t), pm.getApplicationLabel(a).toString());
             t++;
         }
+        new DBWrite(FoxItActivity.getAppContext()).execute("clearAndSetValueKeeper",values);
+        DBHandler db = new DBHandler(FoxItActivity.getAppContext(), null, null, 1);
 
         HashMap<String, String> data = db.getIndividualData();
         Log.d("MyApp", "SavedData:" + data.toString());
 
     }
+
 
 
     /**
@@ -514,7 +527,7 @@ public class ValueKeeper {
                 if (lhs.equals(rhs)) {
                     return 0;
                 }
-                if (lhs == null) {
+                if (lhs == null) { //TODO ist immer falsch, weil vorher equals darauf aufgerufen wurde. entweder mit == vergleichen oben, anders anordnen oder was weiß ich was das machen soll :D
                     return -1;
                 }
                 if (rhs == null) {
@@ -533,7 +546,7 @@ public class ValueKeeper {
                 if (lhs.equals(rhs)) {
                     return 0;
                 }
-                if (lhs == null) {
+                if (lhs == null) {//TODO ist immer falsch, weil vorher equals darauf aufgerufen wurde. entweder mit == vergleichen oben, anders anordnen oder was weiß ich was das machen soll :D
                     return -1;
                 }
                 if (rhs == null) {
