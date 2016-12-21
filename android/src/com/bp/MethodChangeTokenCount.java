@@ -43,7 +43,7 @@ public class MethodChangeTokenCount extends Method{
                 count.changeText(Integer.toString(ValueKeeper.getInstance().getTokenCount()));}
             }
         },1250);
-        if(activity.findViewById(R.id.count_frame)!=null) {
+        if(activity.findViewById(R.id.count_frame)!=null&&!activity.isFinishing()&&!(activity instanceof LectionActivity)) {
                 //after 4000ms the Fragment disappears
                 handler.postDelayed(new Runnable() {
                     @Override

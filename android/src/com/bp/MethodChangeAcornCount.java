@@ -38,11 +38,13 @@ public class MethodChangeAcornCount extends Method{
             public void run() {
                 ValueKeeper observer= ValueKeeper.getInstance();
                 observer.changeAcornCountBy(amount);
+                if(observer.getAcornCount()>=40){
+                ((FoxItActivity) activity).setTrophyUnlocked("Baumhaus Kapitalist");}
                 if(activity.findViewById(R.id.count_frame)!=null) {
                 count.changeText(Integer.toString(ValueKeeper.getInstance().getAcornCount()));}
             }
         },1250);
-        if((activity.findViewById(R.id.count_frame)!=null)&&!activity.isFinishing()) {
+        if((activity.findViewById(R.id.count_frame)!=null)&&!activity.isFinishing()&&!(activity instanceof LectionActivity)) {
             //after 4000ms the Fragment disappears
             handler.postDelayed(new Runnable() {
                 @Override

@@ -28,7 +28,7 @@ public class TrophyNotificationFragment extends Fragment{
                 text.setText(name+" freigeschaltet!");
 
         ImageView trophyIcon=(ImageView) view.findViewById(R.id.image_trophy_symbol);
-        trophyIcon.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.mipmap.stern_voll2));
+        //trophyIcon.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.mipmap.stern_voll2));
 
         //switch (name){
           //  case "Neuling": trophyIcon.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.goodapprating));

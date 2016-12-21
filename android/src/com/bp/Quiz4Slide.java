@@ -93,22 +93,22 @@ public class Quiz4Slide extends QuizSlide {
     nextSlide=null;
         evaluated=true;
         //shows which answers are right or wrong
-       if(answer1true){
+       if((answer1true&&box1.isChecked())||(!answer1true&&!box1.isChecked())){
            box1.setBackgroundResource(R.color.rightAnswer);
        }else{
            box1.setBackgroundResource(R.color.wrongAnswer);
        }
-        if(answer2true){
+        if((answer2true&&box2.isChecked())||(!answer2true&&!box2.isChecked())){
             box2.setBackgroundResource(R.color.rightAnswer);
         }else{
             box2.setBackgroundResource(R.color.wrongAnswer);
         }
-        if(answer3true){
+        if((answer3true&&box3.isChecked())||(!answer3true&&!box3.isChecked())){
             box3.setBackgroundResource(R.color.rightAnswer);
         }else{
             box3.setBackgroundResource(R.color.wrongAnswer);
         }
-        if(answer4true){
+        if((answer4true&&box4.isChecked())||(!answer4true&&!box4.isChecked())){
             box4.setBackgroundResource(R.color.rightAnswer);
         }else{
             box4.setBackgroundResource(R.color.wrongAnswer);

@@ -98,6 +98,10 @@ public class Home extends FoxItActivity {
         }else{
             Log.d("Home","analysisDoneBefore");
             if(shouldEvaluationBeDisplayed()){
+
+                DBUploadTask upload=new DBUploadTask();
+                upload.execute();
+
                 Intent intent = new Intent(getApplicationContext(),LectionActivity.class);
                 String className="Deep Web";//"Evaluation";
                 int position=0;//getNumberOfCurrentEvaluation();
@@ -106,15 +110,15 @@ public class Home extends FoxItActivity {
                 //[name~EvaluationTest][0~texte'text~Eine Einführuark Net.;scalee_Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]
 //                Evaluation;AppEvaluation;0;1;6;0;scalee_Wir haben bemerkt, dass du in letzter Zeit eine App deinstalliert hast. Wie sehr hatte das mit dem Schutz deiner Privatsphäre zu tun?;;;;;;;
                 String evaluationLection;
-                if(true){
-                    //TODO: ^ and \/ (if von true und never used?!)
-                    evaluationLection=  "[name~EvaluationTest][0~type~texte'text~Eine Einführuark Net.][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]";
-                }
-                intent.putExtra("lection","[name~EvaluationTest][0~type~texte'text~Eine Einführuark Net.][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]");
+                intent.putExtra("lection","[name~EvaluationTest][0~type~text'text~Da du unsere App jetzt ein bisschen benutzt hast, möchten wir dir ein paar Fragen stellen.][1~type~scalee'text~Ich fühle mich vor digitalen Angriffen sicher.\n" +
+                        "][2~type~scalee'text~Ich finde das Thema digitale Privatsphäre sehr interessant.\n" +
+                        "][3~type~scalee'text~Ich weiß, wie ich meine digitale Privatsphäre schützen kann.\t\n" +
+                        "][4~type~scalee'text~Ich versuche die Privatheitsbedingungen auf meinem Smartphone zu verbessern.\n" +
+                        "][5~type~texte'text~Hier kannst du Verbesserungsvorschläge für die App loswerden.][solved~false]");
                 intent.putExtra("name", "timeEval:"+Integer.toString(v.currentEvaluation));
                 intent.putExtra("type", 0);//lectionObjectList.get(position).getType());
                 intent.putExtra("delay", 0);//lectionObjectList.get(position).getDelaytime());
-                intent.putExtra("freetime", 0);//lectionObjectList.get(position).getNextfreetime());
+                intent.putExtra("freetime", 0L);//lectionObjectList.get(position).getNextfreetime());
                 intent.putExtra("status", -99);//lectionObjectList.get(position).getProcessingStatus());
                 intent.putExtra("acorn", 0);//lectionObjectList.get(position).getReward());
                 startActivity(intent);
@@ -128,16 +132,12 @@ public class Home extends FoxItActivity {
 
                     //[name~EvaluationTest][0~texte'text~Eine Einführuark Net.;scalee_Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]
 //                Evaluation;AppEvaluation;0;1;6;0;scalee_Wir haben bemerkt, dass du in letzter Zeit eine App deinstalliert hast. Wie sehr hatte das mit dem Schutz deiner Privatsphäre zu tun?;;;;;;;
-                    String evaluationLection;
-                    if(true){
-                        //TODO: ^ and \/ (if von true und never used?!)
-                        evaluationLection=  "[name~EvaluationTest][0~type~texte'text~Eine Einführuark Net.][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]";
-                    }
-                    intent.putExtra("lection","[name~EvaluationTest][0~type~texte'text~"+v.deinstalledApps.get(0)+"][1~type~scalee'text~Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]");
+
+                    intent.putExtra("lection","[name~EvaluationTest][0~type~text'text~Wir haben bemerkt, dass du die App '"+v.deinstalledApps.get(0)+"' deinstalliert hast.][1~type~scalee'text~Hast du die App gelöscht um deine Privatsphäre besser zu schützen?][2~type~texte'text~Was hat dich an der deinstallierten App gestört?][solved~false]");
                     intent.putExtra("name", "appEval:"+v.deinstalledApps.get(0));
                     intent.putExtra("type", -99);//lectionObjectList.get(position).getType());
                     intent.putExtra("delay", 0);//lectionObjectList.get(position).getDelaytime());
-                    intent.putExtra("freetime",0.0);// lectionObjectList.get(position).getNextfreetime());
+                    intent.putExtra("freetime",0L);// lectionObjectList.get(position).getNextfreetime());
                     intent.putExtra("status",0);// lectionObjectList.get(position).getProcessingStatus());
                     intent.putExtra("acorn", 0);//lectionObjectList.get(position).getReward());
                     startActivity(intent);

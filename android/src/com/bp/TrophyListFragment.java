@@ -55,7 +55,7 @@ public class TrophyListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
 
         TrophyObject[] trophyArray = {
-                new AcornTrophy("Goldene Gans", 15, "Geradezu dick vor Eicheln.", true, R.mipmap.acorn_not,R.mipmap.acorn_finish),
+                new AcornTrophy("Baumhaus Kapitalist", 40, "Geradezu dick vor Eicheln.", true, R.mipmap.acorn_not,R.mipmap.acorn_finish),
                 new AcornTrophy("Schnüffler", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.fox_not,R.mipmap.fox_finish),
                 new AcornTrophy("Frischling", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.boar_not,R.mipmap.boar_finish),
                 new AcornTrophy("Halbzeit", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.clock_not,R.mipmap.clock_finish),
@@ -149,7 +149,7 @@ public class TrophyListFragment extends Fragment {
 
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+            ValueKeeper v=ValueKeeper.getInstance();
             View gridView;
             trophyArray[position].checkScore();
             if (convertView == null) {
@@ -161,7 +161,7 @@ public class TrophyListFragment extends Fragment {
 
                 // set trophy status in textView
                 TextView textView = (TextView) gridView.findViewById(R.id.grid_item_label);
-                if (trophyArray[position].isVisibleScore()) {
+                if (trophyArray[position].isVisibleScore()&&!v.isTrophyUnlocked(trophyArray[position].getName())) {
                     // limits amount of the left number with the amount of right number (eg. 30/30)
                     if (trophyArray[position].getScoreCurrently() > trophyArray[position].getScoreNeeded()) {
                         textView.setText(Integer.toString(trophyArray[position].getScoreNeeded()) + "/" + Integer.toString(trophyArray[position].getScoreNeeded()));
@@ -182,7 +182,7 @@ public class TrophyListFragment extends Fragment {
                 //change the trophy's color whether it's unlocked
                 RelativeLayout trophyFrame = (RelativeLayout) gridView
                         .findViewById(R.id.trophy_frame);
-                ValueKeeper v=ValueKeeper.getInstance();
+
                 if (v.isTrophyUnlocked(trophyArray[position].getName())) {
                     // set image based on selected text
                     trophyFrame.setBackgroundColor(Color.WHITE);

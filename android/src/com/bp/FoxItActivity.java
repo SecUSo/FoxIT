@@ -45,14 +45,13 @@ public class FoxItActivity extends AppCompatActivity {
         super.onResume();
         //TODO ?^
 
+        NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.cancelAll();
 
         FoxItActivity.context = getApplicationContext();
         ValueKeeper v=ValueKeeper.getInstance();
         FoxItApplication myApp = (FoxItApplication) this.getApplication();
         if(v.getFreshlyStartet()){
-
-            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            nm.cancelAll();
 
             Intent mServiceIntent = new Intent(this, BackgroundService.class);
             startService(mServiceIntent);
@@ -139,7 +138,9 @@ public class FoxItActivity extends AppCompatActivity {
 
     public boolean setTrophyUnlocked(String trophyName){
        ValueKeeper v=ValueKeeper.getInstance();
-        displayTrophyUnlocked(trophyName);
+        if(!(v.trophyList.containsKey(trophyName)&&v.trophyList.get(trophyName))) {
+            displayTrophyUnlocked(trophyName);
+        }
         if(v.trophyList.containsKey(trophyName)){
             v.trophyList.put(trophyName,true);
             return true;
