@@ -43,7 +43,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
             "Analyse wiederholen",
             "Hilfe",
             "Impressum",
-            "App aktualisieren",
+            "Debugging",
             "Rechtliche Informationen"
     };
     HashMap<String, Fragment> fragmentList = new HashMap<>();
@@ -62,7 +62,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
         fragmentList.put("Analyse wiederholen", new LegalInformationFragment());
         fragmentList.put("Hilfe", new FAQFragment());
         fragmentList.put("Impressum", new LegalInformationFragment());
-        fragmentList.put("App aktualisieren", new CSVRefreshFragment());
+        fragmentList.put("Debugging", new CSVRefreshFragment());
         fragmentList.put("Rechtliche Informationen",new LegalInformationFragment_libGDX());
 
         context=getActivity().getApplicationContext();

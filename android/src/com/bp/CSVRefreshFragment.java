@@ -1,11 +1,9 @@
 package com.bp;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +39,7 @@ public class CSVRefreshFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 refreshClassButton.setBackgroundColor(Color.GREEN);
-                ((SettingsActivity)getActivity()).updateLessions(getActivity(),(ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE));
+                ((SettingsActivity) getActivity()).updateLessions(getActivity(), (ConnectivityManager) getActivity().getSystemService(android.app.Activity.CONNECTIVITY_SERVICE));
                 /*
                 DBHandler dbHandler = new DBHandler(getActivity(),null,null,1);
                 dbHandler.updateLessions(((SettingsActivity)getActivity()).readCSV(R.raw.lektionen,getActivity()));
@@ -58,8 +56,8 @@ public class CSVRefreshFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 refreshDescriptionButton.setBackgroundColor(Color.GREEN);
-                ((SettingsActivity)getActivity()).updatePermissions(getActivity(),(ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE));
-                ((SettingsActivity)getActivity()).updateSettings(getActivity(),(ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE));
+                ((SettingsActivity) getActivity()).updatePermissions(getActivity(), (ConnectivityManager) getActivity().getSystemService(android.app.Activity.CONNECTIVITY_SERVICE));
+                ((SettingsActivity) getActivity()).updateSettings(getActivity(), (ConnectivityManager) getActivity().getSystemService(android.app.Activity.CONNECTIVITY_SERVICE));
 
                 /*
                 DBHandler dbHandler = new DBHandler(getActivity(),null,null,1);
@@ -69,16 +67,16 @@ public class CSVRefreshFragment extends Fragment{
             }
         });
 
-        Button acornAndTokenButton = (Button) view.findViewById(R.id.button_token_acorn);
+        Button acornAndTokenButton = (Button) view.findViewById(R.id.button_exportDB);
         acornAndTokenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((SettingsActivity)getActivity()).exportDB();
-                MethodFactory m=new MethodFactory(getActivity());
-                Method raiseAcornCount= m.createMethod("changeAcornCount");
-                raiseAcornCount.callClassMethod("100");
-                Method raiseTokenCount =m.createMethod("changeTokenCount");
-                raiseTokenCount.callClassMethod("100");
+                //  MethodFactory m=new MethodFactory(getActivity());
+                //  Method raiseAcornCount= m.createMethod("changeAcornCount");
+                //  raiseAcornCount.callClassMethod("100");
+                //  Method raiseTokenCount =m.createMethod("changeTokenCount");
+                // raiseTokenCount.callClassMethod("100");
             }
         });
 
