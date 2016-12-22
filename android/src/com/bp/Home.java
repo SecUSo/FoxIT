@@ -99,8 +99,8 @@ public class Home extends FoxItActivity {
             Log.d("Home","analysisDoneBefore");
             if(shouldEvaluationBeDisplayed()){
 
-                DBUploadTask upload=new DBUploadTask();
-                upload.execute();
+                //Upload DB
+                new DBUploadTask().execute(this);
 
                 Intent intent = new Intent(getApplicationContext(),LectionActivity.class);
                 String className="Deep Web";//"Evaluation";
@@ -175,10 +175,4 @@ public class Home extends FoxItActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new DBUploadTask().execute(this);
-
-    }
 }

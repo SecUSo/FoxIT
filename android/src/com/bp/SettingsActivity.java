@@ -176,11 +176,14 @@ public class SettingsActivity extends FoxItActivity {
     }
 
     public void exportDB(){
+        new DBUploadTask().execute(this);
+        Toast.makeText(getApplicationContext(),"DB wurde hochgeladen.",Toast.LENGTH_SHORT).show();
         int allowed=0;
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
             DBHandler dbHandler = new DBHandler(this, null,null,1);
             dbHandler.exportDB();
             dbHandler.close();
+            Toast.makeText(getApplicationContext(),"DB wurde in den Speicher exportiert.",Toast.LENGTH_LONG).show();
         }else{
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},allowed);
         }
