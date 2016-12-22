@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Bitte gib deinen Versuchspersonencode ein. Dieser setzt sich zusammen aus dem ersten Buchstaben des Nachnamens deines Stofftiers, der Note deines Matheabis und den ersten 16 Ziffern deiner Handynummer. "
+                android:text="Bitte gib deinen Versuchspersonencode ein. Dieser setzt sich zusammen aus den beiden letzten Buchstaben des Vornamens deines Vaters, den letzten zwei Ziffern deiner Handynummer und dem \n3. + 4. Buchstaben des Vornamens deiner Mutter."
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@+id/text_amount"
                 android:layout_marginLeft="6dp"
@@ -55,7 +55,6 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
             android:id="@+id/participant_id_input_text"
             android:inputType="text"
             android:gravity="left"
@@ -67,7 +66,8 @@
             android:background="@color/white"
             android:padding="5dp"
             android:maxLength="6"
-            android:ems="6" />
+            android:ems="6"
+            android:hint="6 Zeichen" />
 
         <ImageButton
             android:layout_width="wrap_content"
