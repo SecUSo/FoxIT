@@ -28,9 +28,9 @@ public class TrophyRoomActivity extends FoxItActivity {
         // sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        if (toolbar != null) {
-            toolbar.setTitle("Toolbar");
-        }
+        //if (toolbar != null) {
+         //   toolbar.setTitle("Toolbar");
+        //}
 
 
         //defining the tabs and the tab bar
