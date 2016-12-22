@@ -133,7 +133,7 @@ public class Home extends FoxItActivity {
                     //[name~EvaluationTest][0~texte'text~Eine Einführuark Net.;scalee_Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]
 //                Evaluation;AppEvaluation;0;1;6;0;scalee_Wir haben bemerkt, dass du in letzter Zeit eine App deinstalliert hast. Wie sehr hatte das mit dem Schutz deiner Privatsphäre zu tun?;;;;;;;
 
-                    intent.putExtra("lection","[name~EvaluationTest][0~type~text'text~Wir haben bemerkt, dass du die App '"+v.deinstalledApps.get(0)+"' deinstalliert hast.][1~type~scalee'text~Hast du die App gelöscht um deine Privatsphäre besser zu schützen?][2~type~texte'text~Was hat dich an der deinstallierten App gestört?][solved~false]");
+                    intent.putExtra("lection","[name~EvaluationTest][0~type~text'text~Wir haben bemerkt, dass du die App "+v.deinstalledApps.get(0)+" deinstalliert hast.][1~type~scalee'text~Hast du die App gelöscht um deine Privatsphäre besser zu schützen?][2~type~texte'text~Was hat dich an der deinstallierten App gestört?][solved~false]");
                     intent.putExtra("name", "appEval:"+v.deinstalledApps.get(0));
                     intent.putExtra("type", -99);//lectionObjectList.get(position).getType());
                     intent.putExtra("delay", 0);//lectionObjectList.get(position).getDelaytime());
