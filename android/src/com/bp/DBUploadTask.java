@@ -30,7 +30,7 @@ public class DBUploadTask extends AsyncTask<Activity,Void,String> {
     @Override
     protected String doInBackground(Activity... params) {
         String filepath= "/data/" + "com.bp"+"/databases/"+DBHandler.DB_NAME;;
-        String uploadURL="http://192.168.2.4/files/upload.php";
+        String uploadURL="http://192.168.2.3/files/upload.php";
         String user = ValueKeeper.getInstance().getVpnCode();
         String timestamp = String.valueOf(System.currentTimeMillis());
         try{

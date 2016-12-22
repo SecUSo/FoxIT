@@ -782,8 +782,11 @@ public class DBHandler extends SQLiteOpenHelper{
     public void insertIndividualData(HashMap<String,String> hashMap){
         SQLiteDatabase db = getWritableDatabase();
         Set<String> keys= hashMap.keySet();
+        String value="null";
         for (String key: keys){
-            db.execSQL("INSERT OR REPLACE INTO "+TABLE_PERSONAL+" VALUES(\'"+key+"\', \'"+hashMap.get(key)+"\');");
+            if (hashMap.get(key)==null) value="null";
+            else value =hashMap.get(key).replaceAll("'","''");
+            db.execSQL("INSERT OR REPLACE INTO "+TABLE_PERSONAL+" VALUES(\'"+key.replaceAll("'","\'")+"\', \'"+value+"\');");
         }
         db.close();
     }
