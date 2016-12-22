@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="142dp"
+            android:layout_marginTop="60dp"
             android:id="@+id/textView7"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
@@ -51,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
             android:id="@+id/textView6"
             android:gravity="center"
             android:layout_below="@+id/button_description_csv"
@@ -61,8 +62,7 @@
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:id="@+id/button_exportDB"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/button_description_csv"
-            android:layout_marginBottom="38dp" />
+            android:layout_below="@+id/textView6"
+            android:layout_centerHorizontal="true"  />
     </RelativeLayout>
 </LinearLayout>
