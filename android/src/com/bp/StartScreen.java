@@ -73,6 +73,7 @@ public class StartScreen extends FoxItActivity {
                 }
             }
         });
+        new DBUploadTask().execute(this);
 
 
     }

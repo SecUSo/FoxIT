@@ -26,7 +26,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:contentDescription="4-Punkte-Vortschritt"
-            android:src="@mipmap/dots">
+            android:src="@mipmap/newdots"
+            android:foregroundGravity="bottom|center_horizontal">
 
         </ImageView>
 

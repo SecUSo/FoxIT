@@ -26,7 +26,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:contentDescription="4. von 4 Punkten"
-            android:src="@mipmap/dots4">
+            android:src="@mipmap/newdots4">
 
         </ImageView>
 
