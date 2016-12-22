@@ -305,4 +305,8 @@ public class Analysis extends FoxItActivity {
         cursor.close();
         return contentValues;
     }
+    @Override
+    public void onBackPressed() {
+
+    }
 }

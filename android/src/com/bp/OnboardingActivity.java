@@ -66,5 +66,10 @@ public class OnboardingActivity extends FoxItActivity {
 
 
         db.close();
-        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
