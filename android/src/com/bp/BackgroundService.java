@@ -90,14 +90,14 @@ Timer timer =new Timer();
 
             String isChange= checkForChanges();
             if(!isChange.equals("false")){
-                Log.d("MyApp","Hello World!xxx");
+                Log.d("Service","Hello World!xxx");
                 v.deinstalledApps.add(isChange);
-                Log.d("MyApp",v.deinstalledApps.toString());
+                Log.d("Service",v.deinstalledApps.toString());
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.paw)
                                 .setContentTitle("Neue Umfrage verfügbar!")
-                                .setContentText("App"+isChange +" wurde deinstalliert");
+                                .setContentText("App "+isChange +" wurde deinstalliert");
 // Creates an explicit intent for an Activity in your app
                 Intent resultIntent = new Intent(context, Home.class);
 

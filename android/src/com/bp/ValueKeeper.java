@@ -191,6 +191,7 @@ public class ValueKeeper {
 
 
         }
+        Log.d("ValueKeeper","revived appsize: "+appsBefore.size());
 
         valueKeeperAlreadyRefreshed = true;
     }
@@ -315,7 +316,8 @@ public class ValueKeeper {
         DBHandler db = new DBHandler(FoxItActivity.getAppContext(), null, null, 1);
 
         HashMap<String, String> data = db.getIndividualData();
-        Log.d("MyApp", "SavedData:" + data.toString());
+        Log.d("ValueKeeper","applications: "+packages.size());
+        Log.d("ValueKeeper", "SavedData:" + data.toString());
 
     }
 
@@ -449,9 +451,9 @@ public class ValueKeeper {
     }
 
     public void removeFirstFromAppList() {
-        Log.d("MyApp", "Before:" + Integer.toString(deinstalledApps.size()));
+        Log.d("ValueKeeper", "remove1stfromapplistBefore:" + Integer.toString(deinstalledApps.size()));
         deinstalledApps.remove(0);
-        Log.d("MyApp", "After:" + Integer.toString(deinstalledApps.size()));
+        Log.d("ValueKeeper", "remove1stfromapplistAfter:" + Integer.toString(deinstalledApps.size()));
     }
 
 

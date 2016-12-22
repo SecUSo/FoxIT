@@ -122,7 +122,9 @@ public class Home extends FoxItActivity {
                 startActivity(intent);
 
             }else{
+                Log.d("Home","analysis done & no evaluation");
                 if(v.deinstalledApps.size()>0){
+                    Log.d("Home","deinstalled >0");
                     Intent intent = new Intent(getApplicationContext(),LectionActivity.class);
                     String className="Deep Web";//"Evaluation";
                     int position=0;//getNumberOfCurrentEvaluation();

@@ -33,9 +33,11 @@
             >
         </service>
         <activity android:name=".Analysis" />
-        <activity android:name=".StartScreen" />
+        <activity android:name=".StartScreen"
+            android:screenOrientation="portrait"/>
         <activity android:name=".LectionActivity"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:screenOrientation="portrait"/>
         <activity android:name=".LectionListActivity" />
         <activity android:name=".ClassListActivity" />
         <activity android:name=".TrophyRoomActivity" />
