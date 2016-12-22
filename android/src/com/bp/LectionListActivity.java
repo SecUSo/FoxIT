@@ -172,6 +172,8 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
             if (lectionObjectList.get(position).getNextfreetime() > (System.currentTimeMillis())) {
 
                 //display the animation description
+                Log.d("nextfreetime: ",lectionObjectList.get(position).getNextfreetime()+" ");
+                Log.d("currenttime :",System.currentTimeMillis()+" ");
                 Toast.makeText(getApplicationContext(),
                         "Diese Lektion ist erst wieder in "+Long.toString((lectionObjectList.get(position).getNextfreetime()-System.currentTimeMillis())/60000)+" Minuten verfügbar.", Toast.LENGTH_LONG).show();
 
@@ -190,6 +192,7 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
                 Log.d("thenameis", lectionObjectList.get(position).getLectionName());
 
                 Log.d("thecontentis", lectionObjectList.get(position).getContent());
+                Log.d("the freetime is",Long.toString(lectionObjectList.get(position).getDelaytime()));
                 intent.putExtra("lection", lectionObjectList.get(position).getContent());
                 intent.putExtra("name", lectionObjectList.get(position).getLectionName());
                 intent.putExtra("type", lectionObjectList.get(position).getType());

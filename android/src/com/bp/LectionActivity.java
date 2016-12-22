@@ -349,7 +349,9 @@ public class LectionActivity extends FoxItActivity {
             }, 4250);
         } else {
 
-            long nextFreeTime = (System.currentTimeMillis() % Integer.MAX_VALUE) + lection.getDelaytime();
+            long nextFreeTime = (System.currentTimeMillis() % Long.MAX_VALUE) + lection.getDelaytime();
+            Log.d("getbacktolist","nextfreetime: "+nextFreeTime);
+            Log.d("getbacktolist","delaytime: "+lection.getDelaytime());
             DBHandler db = new DBHandler(this, null, null, 1);
             db.setLectionNextFreeTime(lection.getLectionName(), nextFreeTime);
             onBackPressed();

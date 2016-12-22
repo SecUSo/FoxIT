@@ -25,7 +25,7 @@
             android:layout_height="75dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:contentDescription="4-Punkte-Vortschritt"
+            android:contentDescription="4-Punkte-Fortschritt"
             android:src="@mipmap/newdots"
             android:foregroundGravity="bottom|center_horizontal">
 

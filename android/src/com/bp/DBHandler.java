@@ -373,6 +373,8 @@ public class DBHandler extends SQLiteOpenHelper{
     public void updateLessions(ArrayList<String[]> theLessions){
         SQLiteDatabase db = getWritableDatabase();
         long time = System.currentTimeMillis();
+        Log.d("updateLessions",Long.toString(time));
+        Log.d("system: ",Long.toString(System.currentTimeMillis()));
         // db.execSQL("DROP TABLE IF EXISTS "+TABLE_LESSIONS);
         for (String[] lessionArray:theLessions) {
             String lessionString = createLessionString(lessionArray).replace("'","''");
@@ -681,9 +683,7 @@ public class DBHandler extends SQLiteOpenHelper{
      */
     public void setLectionNextFreeTime(String lectionName, long nextFreeTime){
         SQLiteDatabase db = getWritableDatabase();
-        long time = System.currentTimeMillis() + nextFreeTime;
-        Log.d("new time to insert",Long.toString(time));
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_FREETIME + " = \'" + time + "\' WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
+        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_FREETIME + " = \'" + nextFreeTime + "\' WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
         db.close();
     }
 
