@@ -54,8 +54,8 @@ public class OnboardingActivity extends FoxItActivity {
     public void onStart() {
         super.onStart();
         ValueKeeper v=ValueKeeper.getInstance();
-        DBHandler db=new DBHandler(this,null,null,1);
-        if(db.getIndividualValue("onboardingStartedBefore").equals("false")) {
+        //DBHandler db=new DBHandler(this,null,null,1);
+        if(v.onboardingStartedBefore==false) {
             v.onboardingStartedBefore =true;
             //db.changeIndividualValue("onboardingStartedBefore",Boolean.toString(true));
             SettingsActivity sa = new SettingsActivity();
@@ -65,7 +65,7 @@ public class OnboardingActivity extends FoxItActivity {
         }
 
 
-        db.close();
+        //db.close();
     }
 
     @Override
