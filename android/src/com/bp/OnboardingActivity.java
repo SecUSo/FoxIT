@@ -58,7 +58,7 @@ public class OnboardingActivity extends FoxItActivity {
         Log.d("onStart()1",db.getIndividualValue("onboardingStartedBefore"));
         if(db.getIndividualValue("onboardingStartedBefore").equals("false")) {
             v.onboardingStartedBefore =true;
-            db.changeIndividualValue("onboardingStartedBefore",Boolean.toString(true));
+            //db.changeIndividualValue("onboardingStartedBefore",Boolean.toString(true));
             SettingsActivity sa = new SettingsActivity();
             sa.updateLessions(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
             sa.updatePermissions(this, (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));

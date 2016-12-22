@@ -150,7 +150,7 @@ public class SettingsActivity extends FoxItActivity {
             //DBHandler dbHandler = new DBHandler(context, null, null, 1);
             //dbHandler.updateSettingDescriptions(readCSV(R.raw.settings, context));
             //dbHandler.close();
-            new DBWrite(context).execute("updateSettingsDescriptions",readCSV(R.raw.settings, context));
+            new DBWrite(context).execute("updateSettingDescriptions",readCSV(R.raw.settings, context));
         }
     }
 
