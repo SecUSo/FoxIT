@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Bitte gib deinen Versuchspersonencode ein. Dieser setzt sich zusammen aus den beiden letzten Buchstaben des Vornamens deines Vaters, den letzten zwei Ziffern deiner Handynummer und dem \n3. + 4. Buchstaben des Vornamens deiner Mutter."
+                android:text="Bitte gib deinen Versuchspersonencode ein. Dieser setzt sich zusammen aus den beiden letzten Buchstaben des Vornamens deines Vaters, den letzten zwei Ziffern deiner Handynummer und den letzten 2 Buchstaben des Vornamens deiner Mutter."
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@+id/text_amount"
                 android:layout_marginLeft="6dp"
