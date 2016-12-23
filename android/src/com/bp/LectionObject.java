@@ -36,7 +36,7 @@ public class LectionObject {
      */
     public LectionObject(String name,String content,int type,int delay, long freetime, int status, int acorn) {
         //filling the lectionInfoHashMap by spliting the lectionDescriptionString
-        Log.d("the freetime",Long.toString(freetime));
+
         String[] s = content.replace("[", "").split("]");
         for (int i = 0; i < s.length && !s[i].isEmpty(); i++) {
             String key = s[i].substring(0, s[i].indexOf("~"));
