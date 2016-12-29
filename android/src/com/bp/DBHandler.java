@@ -372,9 +372,8 @@ public class DBHandler extends SQLiteOpenHelper{
      */
     public void updateLessions(ArrayList<String[]> theLessions){
         SQLiteDatabase db = getWritableDatabase();
+
         long time = System.currentTimeMillis();
-        Log.d("updateLessions",Long.toString(time));
-        Log.d("system: ",Long.toString(System.currentTimeMillis()));
         // db.execSQL("DROP TABLE IF EXISTS "+TABLE_LESSIONS);
         for (String[] lessionArray:theLessions) {
             String lessionString = createLessionString(lessionArray).replace("'","''");
@@ -441,10 +440,12 @@ public class DBHandler extends SQLiteOpenHelper{
      * @return the needed String
      */
     private String createLessionString(String[] lessionArray){
+        Log.d("createLessionString",lessionArray[1]+lessionArray[0]);
         StringBuffer sb = new StringBuffer();
         sb.append("[name~" + lessionArray[1]+"]");
         //iterates over the parts of the Array which contains the actual slides
         for(int i=6;i<lessionArray.length;i++){
+            Log.d("slide:",lessionArray[i]);
             String[] slides = lessionArray[i].split("_");
             slides[0]=slides[0].toLowerCase();
             sb.append("[" + (i - 6) + "~type~" + slides[0] + "\'");

@@ -54,9 +54,15 @@ public class SettingsActivity extends FoxItActivity {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         try{
             String templine;
+            String csvrow="";
             while ((templine=br.readLine())!=null){
-                String[] csvrow = templine.split(";");
-                result.add(csvrow);
+                csvrow  +=templine;
+                if(templine.matches(".*;;;")) {
+                    String[] rowarray = csvrow.split(";");
+                    result.add(rowarray);
+                    Log.d("SettingsActivity","row: "+csvrow);
+                    csvrow="";
+                }
             }
         } catch (IOException e){
             throw new RuntimeException("CSV file couldn't be read properly: "+e);

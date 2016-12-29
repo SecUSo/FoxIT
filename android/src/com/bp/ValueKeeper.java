@@ -316,8 +316,8 @@ public class ValueKeeper {
         DBHandler db = new DBHandler(FoxItActivity.getAppContext(), null, null, 1);
 
         HashMap<String, String> data = db.getIndividualData();
-        Log.d("ValueKeeper","applications: "+packages.size());
-        Log.d("ValueKeeper", "SavedData:" + data.toString());
+        //Log.d("ValueKeeper","applications: "+packages.size());
+        //Log.d("ValueKeeper", "SavedData:" + data.toString());
 
     }
 
@@ -572,7 +572,7 @@ public class ValueKeeper {
                 }
             }
 
-            Log.d("MyApp", result.toString());
+            //Log.d("MyApp", result.toString());
             return result;
         }
 
