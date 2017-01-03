@@ -67,7 +67,7 @@ public abstract class Slide extends Fragment{
         //splits the name~text part again and fills them into a hashmap:  key-name, value-text
         for(int i=0;i<s.length&&!s[i].isEmpty();i++){
             String key=s[i].substring(0, s[i].indexOf("~"));
-            String value =s[i].substring(s[i].indexOf("~")+1,s[i].length());
+            String value = insertBreaks(s[i].substring(s[i].indexOf("~")+1,s[i].length()));
             result.put(key,value);
         }
         return result;
@@ -84,6 +84,16 @@ public abstract class Slide extends Fragment{
      return true;
     }
     abstract void fillLayout();
+
+    private static String insertBreaks(String oldstring){
+        String[] array = oldstring.split("-lb-");
+        String result="";
+        for (int i =0;i<array.length-1;i++){
+            result+=array[i]+System.getProperty("line.separator");
+        }
+        result+=array[array.length-1];
+        return result;
+    }
 
 
 }
