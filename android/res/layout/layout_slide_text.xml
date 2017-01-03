@@ -3,14 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/text"
-        android:layout_gravity="right"
-        android:layout_weight="1.01"
-        android:nestedScrollingEnabled="true" />
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/text"
+            android:layout_gravity="right"
+            android:layout_weight="1.01"
+            android:nestedScrollingEnabled="true" />
+
+
+    </ScrollView>
+
 
 </LinearLayout>
