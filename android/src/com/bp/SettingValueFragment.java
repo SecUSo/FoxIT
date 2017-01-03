@@ -24,6 +24,7 @@ public class SettingValueFragment extends Fragment{
     String settingName; //the setting described by the fragment
     String settingValue;
     String settingOriginalName;
+    String settingDescription;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -39,6 +40,10 @@ public class SettingValueFragment extends Fragment{
         settingNameTextView.setText(settingName);
         TextView settingValueTextView = (TextView) view.findViewById(R.id.text_setting_value);
         settingValueTextView.setText(settingValue);
+        TextView settingDescriptionTextView = (TextView) view.findViewById(R.id.text_setting_description);
+        settingDescriptionTextView.setText(settingDescription);
+        TextView settingOriginalTextView = (TextView) view.findViewById(R.id.text_setting_original);
+        settingOriginalTextView.setText(settingOriginalName);
         //TextView settingOriginalNameTextView= (TextView) view.findViewById(R.id.text_setting_original_name);
        // settingOriginalNameTextView.setText(settingOriginalName);
 
@@ -69,6 +74,7 @@ public class SettingValueFragment extends Fragment{
         settingName=arg.getString("settingName");
         settingValue=arg.getString("settingValue");
         settingOriginalName=arg.getString("settingOriginalName");
+        settingDescription=arg.getString("settingDescription");
     }
 
 

@@ -768,11 +768,11 @@ public class DBHandler extends SQLiteOpenHelper{
         settingsArray = new String[count.getInt(0)];
         count.close();
         //fill array with DB-entries
-        Cursor c  =getWritableDatabase().rawQuery("SELECT "+COLUMN_GOODNAME+", "+COLUMN_LATEST+", "+COLUMN_SETTING+" FROM "+TABLE_SETTINGS +" WHERE "+COLUMN_LATEST+" IS NOT '-99';",null);
+        Cursor c  =getWritableDatabase().rawQuery("SELECT "+COLUMN_GOODNAME+", "+COLUMN_LATEST+", "+COLUMN_SETTING+", "+COLUMN_SETTINGDESCRIPTION+" FROM "+TABLE_SETTINGS +" WHERE "+COLUMN_LATEST+" IS NOT '-99';",null);
         if (c!=null) c.moveToFirst();
         int i=0;
         while (c!=null&&!c.isAfterLast()){
-            settingsArray[i]=(c.getString(c.getColumnIndex(COLUMN_GOODNAME))+";"+c.getString(c.getColumnIndex(COLUMN_LATEST))+";"+c.getString(c.getColumnIndex(COLUMN_SETTING)));
+            settingsArray[i]=(c.getString(c.getColumnIndex(COLUMN_GOODNAME))+";"+c.getString(c.getColumnIndex(COLUMN_LATEST))+";"+c.getString(c.getColumnIndex(COLUMN_SETTING))+";"+c.getString(c.getColumnIndex(COLUMN_SETTINGDESCRIPTION)));
             i++;
             c.moveToNext();
         }

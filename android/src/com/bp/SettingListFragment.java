@@ -116,7 +116,9 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
         settingsBundle.putString("settingName", settingsArray[position].substring(0, settingsArray[position].indexOf(";")));
         String preValue = settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
         settingsBundle.putString("settingValue", preValue.substring(0, preValue.indexOf(";")));
-        settingsBundle.putString("settingOriginalName", preValue.substring(preValue.indexOf(";") + 1, preValue.length()));
+        preValue= preValue.substring(preValue.indexOf(";")+1,preValue.length());
+        settingsBundle.putString("settingOriginalName", "original: "+preValue.substring(0, preValue.indexOf(";")));
+        settingsBundle.putString("settingDescription",preValue.substring(preValue.indexOf(";") + 1, preValue.length()));
         fragment.setArguments(settingsBundle);
 
         //add fragment so the activitys' context

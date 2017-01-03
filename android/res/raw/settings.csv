@@ -1,8 +1,8 @@
-accessibility_display_magnification_auto_update;1;Eingabehilfe: Display-Zoom kontinuierlich;Spezielle Einstellung, ob die Display Vergrößerung automatische upgedatet werden soll.
+accessibility_display_magnification_auto_update;1;Eingabehilfe: Display-Zoom kontinuierlich;Spezielle Einstellung, ob die Display Vergrößerung automatisch aktualisiert werden soll.
 accessibility_display_magnification_enabled;1;Eingabehilfe: Display-Zoom;Ist die Display-Vergrößerung an oder aus.
 dasistgarantiertnichtdrin;0;ichbinschöner;hierkeineordentlichebeschreibung
-accessibility_display_magnification_scale;2;Eingabehilfe: Display-Zoom-Faktor;Es fehlt leider eine Beschreibung.
-accessibility_script_injection;1;Eingabehilfe: individuelle Skripte einfügen;Es fehlt leider eine Beschreibung.
+accessibility_display_magnification_scale;2;Eingabehilfe: Display-Zoom-Faktor;Der Zoom-Faktor bei eingeschalteter Display-Vergrößerung. Dies ist eine Eigenschaft der Eingabehilfen.
+accessibility_script_injection;1;Eingabehilfe: individuelle Skripte einfügen;Für Eingabehilfen kann man individualisierte Skripte zur leichteren Handhabung einfügen.
 airplane_mode_on;1;Flugmodus;Es fehlt leider eine Beschreibung.
 airplane_mode_radios;0;Bei Flugmodus deaktivierte Funktionen;Es fehlt leider eine Beschreibung.
 accessibility_script_injection_url;0;Eingabehilfe: Skript-Adresse;Es fehlt leider eine Beschreibung.
