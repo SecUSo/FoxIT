@@ -34,13 +34,13 @@ import java.util.TimeZone;
 public class DBHandler extends SQLiteOpenHelper{
 
     //DB-Version is updated, when changes in structur apply
-    private static final int DB_VERSION = 27;
+    private static final int DB_VERSION = 28;
     //table-names
     private static final String TABLE_APPS = "apps";
     private static final String TABLE_LESSIONS = "lessions";
     private static final String TABLE_CLASSES = "classes";
     private static final String TABLE_PERMISSIONS = "permissions";
-    private static final String TABLE_SETTINGS = "rawdata";
+    private static final String TABLE_SETTINGS = "settings";
     public static final String TABLE_PERSONAL = "personalstuff";
     //column-names
     static final String COLUMN_APPNAME = "name";
@@ -702,13 +702,14 @@ public class DBHandler extends SQLiteOpenHelper{
                             +COLUMN_TYPE+" = "+setting[1]+", "
                             +COLUMN_GOODNAME+" = \'"+setting[2]+"\' "
                             +"WHERE "+COLUMN_SETTING+" = \'"+setting[0]+"\';");
-                }else
-                    db.execSQL("UPDATE "+TABLE_SETTINGS+" SET "
-                            +COLUMN_TYPE+" = "+setting[1]+", "
-                            +COLUMN_GOODNAME+" = \'"+setting[2]+"\', "
-                            +COLUMN_SETTINGDESCRIPTION+" = \'"
-                            +setting[3]+"\' " +
-                            "WHERE "+COLUMN_SETTING+" = \'"+setting[0]+"\';");
+                }else if (setting.length>=4) {
+                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET "
+                            + COLUMN_TYPE + " = " + setting[1] + ", "
+                            + COLUMN_GOODNAME + " = \'" + setting[2] + "\', "
+                            + COLUMN_SETTINGDESCRIPTION + " = \'"
+                            + setting[3] + "\' " +
+                            "WHERE " + COLUMN_SETTING + " = \'" + setting[0] + "\';");
+                }
             }else{
                 if (setting.length==1){
                     db.execSQL("INSERT INTO "+TABLE_SETTINGS+"("

@@ -54,6 +54,30 @@ public class SettingsActivity extends FoxItActivity {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         try{
             String templine;
+            while ((templine=br.readLine())!=null){
+                String[] csvrow = templine.split(";");
+                result.add(csvrow);
+            }
+        } catch (IOException e){
+            throw new RuntimeException("CSV file couldn't be read properly: "+e);
+        } finally {
+            try {
+                is.close();
+                br.close();
+            } catch (IOException e){
+                throw new RuntimeException("Input Stream couldn't be closed properly: "+e);
+            }
+        }
+        return result;
+
+    }
+
+    public ArrayList readLessionCSV(int input, Context context){
+        InputStream is = context.getResources().openRawResource(input);
+        ArrayList result = new ArrayList();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        try{
+            String templine;
             String csvrow="";
             while ((templine=br.readLine())!=null){
                 csvrow  +=templine;
@@ -114,9 +138,6 @@ public class SettingsActivity extends FoxItActivity {
         } else{
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ","no internet connection");
-            //DBHandler dbHandler = new DBHandler(context,null,null,1);
-            //dbHandler.updatePermissions(readCSV(R.raw.permissions,context));
-            //dbHandler.close();
             new DBWrite(context).execute("updatePermissions",readCSV(R.raw.permissions,context));
         }
 
@@ -135,7 +156,7 @@ public class SettingsActivity extends FoxItActivity {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
             //DBHandler dbHandler = new DBHandler(context, null, null, 1);
-            new DBWrite(context).execute("updateLessions",readCSV(R.raw.lektionen, context));
+            new DBWrite(context).execute("updateLessions",readLessionCSV(R.raw.lektionen, context));
             //dbHandler.updateLessions(readCSV(R.raw.lektionen, context));
             new DBWrite(context).execute("updateClasses",readCSV(R.raw.classes, context));
             //dbHandler.updateClasses(readCSV(R.raw.classes, context));
@@ -153,9 +174,6 @@ public class SettingsActivity extends FoxItActivity {
         } else {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
-            //DBHandler dbHandler = new DBHandler(context, null, null, 1);
-            //dbHandler.updateSettingDescriptions(readCSV(R.raw.settings, context));
-            //dbHandler.close();
             new DBWrite(context).execute("updateSettingDescriptions",readCSV(R.raw.settings, context));
         }
     }
