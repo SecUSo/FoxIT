@@ -772,7 +772,7 @@ public class DBHandler extends SQLiteOpenHelper{
         if (c!=null) c.moveToFirst();
         int i=0;
         while (c!=null&&!c.isAfterLast()){
-            settingsArray[i]=(c.getString(c.getColumnIndex(COLUMN_GOODNAME))+";"+c.getString(c.getColumnIndex(COLUMN_LATEST))+";"+c.getString(c.getColumnIndex(COLUMN_SETTING))+";"+c.getString(c.getColumnIndex(COLUMN_SETTINGDESCRIPTION)));
+            settingsArray[i]=(c.getString(c.getColumnIndex(COLUMN_GOODNAME))+"|t1|"+c.getString(c.getColumnIndex(COLUMN_LATEST))+"|t2|"+c.getString(c.getColumnIndex(COLUMN_SETTING))+"|t3|"+c.getString(c.getColumnIndex(COLUMN_SETTINGDESCRIPTION)));
             i++;
             c.moveToNext();
         }
