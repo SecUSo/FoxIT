@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by noah on 11/8/16.
  */
 
-public class CSVDownloadTask extends AsyncTask<String,Void,Void> {
+public class CSVDownloadTask extends AsyncTask<Object,Void,Integer> {
     private Context thecontext;
 
     public CSVDownloadTask(Context context) {
@@ -26,22 +26,38 @@ public class CSVDownloadTask extends AsyncTask<String,Void,Void> {
     }
 
     @Override
-    protected Void doInBackground(String... strings) {
-        String url = strings[0];
-        if (strings[1]!=null){
+    protected Integer doInBackground(Object... objects) {
+        String url = (String)objects[0];
+        if (objects[1]!=null){
             DBHandler dbHandler = new DBHandler(thecontext,null, null,0);
-            Log.d("CSVUpdater",strings[1]);
-            if (strings[1].equals("permissions")) dbHandler.updatePermissions(readStream(getStream(url)));
-            if (strings[1].equals("lessions")) dbHandler.updateLessions(readStream(getStream(url)));
-            if (strings[1].equals("classes")) dbHandler.updateClasses(readStream(getStream(url)));
-            if (strings[1].equals("settings")) dbHandler.updateSettingDescriptions(readStream(getStream(url)));
+            Log.d("CSVUpdater",(String)objects[1]);
+            InputStream is=null;
+            try{
+                is = getStream(url);
+            }catch (Exception e){
+                Log.d("CSVDownTask","inputStream not valid"+e);
+            }
+            if (is!=null){
+                if (objects[1].equals("permissions")) dbHandler.updatePermissions(readStream(is));
+                if (objects[1].equals("lessions")) dbHandler.updateLessions(readStream(is));
+                if (objects[1].equals("classes")) dbHandler.updateClasses(readStream(is));
+                if (objects[1].equals("settings")) dbHandler.updateSettingDescriptions(readStream(is));
+                dbHandler.close();
+                return 0;
+            } else{
+                Log.d("CSVDownTask","InputStream null, Internet Failure.");
+                if (objects[1].equals("permissions")) dbHandler.updatePermissions((ArrayList)objects[2]);
+                if (objects[1].equals("lessions")) dbHandler.updateLessions((ArrayList)objects[2]);
+                if (objects[1].equals("classes")) dbHandler.updateClasses((ArrayList)objects[2]);
+                if (objects[1].equals("settings")) dbHandler.updateSettingDescriptions((ArrayList)objects[2]);
+                dbHandler.close();
 
-            dbHandler.close();
+                return -1;
+            }
         }
+        return -2;
+  }
 
-
-        return null;
-    }
 
     private InputStream getStream(String url) {
         InputStream is = null;
@@ -90,6 +106,5 @@ public class CSVDownloadTask extends AsyncTask<String,Void,Void> {
         return result;
 
     }
-
 
 }

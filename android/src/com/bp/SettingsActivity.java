@@ -133,7 +133,7 @@ public class SettingsActivity extends FoxItActivity {
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
             String URL = "http://192.168.2.3/files/csvs/permissions.csv";//"https://app.seafile.de/f/740b44b607/?raw=1";
-            new CSVDownloadTask(context).execute(URL,"permissions");
+            new CSVDownloadTask(context).execute(URL,"permissions",readCSV(R.raw.permissions,context));
 
         } else{
             //fallback on local data provided by apk
@@ -148,9 +148,9 @@ public class SettingsActivity extends FoxItActivity {
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
             String URL = "http://192.168.2.3/files/csvs/lektionen.csv";//"https://app.seafile.de/f/e27034ec0a/?raw=1";
-            new CSVDownloadTask(context).execute(URL,"lessions");
+            new CSVDownloadTask(context).execute(URL,"lessions",readLessionCSV(R.raw.lektionen, context));
             URL = "http://192.168.2.3/files/csvs/classes.csv";//"https://app.seafile.de/f/7ca81fac4e/?raw=1";
-            new CSVDownloadTask(context).execute(URL,"classes");
+            new CSVDownloadTask(context).execute(URL,"classes",readCSV(R.raw.classes, context));
 
         } else {
             //fallback on local data provided by apk
@@ -169,7 +169,7 @@ public class SettingsActivity extends FoxItActivity {
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
             String URL = "http://192.168.2.3/files/csvs/settings.csv";//"https://app.seafile.de/f/bb0071411b/?raw=1";
-            new CSVDownloadTask(context).execute(URL,"settings");
+            new CSVDownloadTask(context).execute(URL,"settings",readCSV(R.raw.settings, context));
 
         } else {
             //fallback on local data provided by apk
