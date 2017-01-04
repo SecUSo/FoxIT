@@ -95,6 +95,7 @@ public class ValueKeeper {
 
         DBHandler db = new DBHandler(FoxItActivity.getAppContext(), null, null, 1);
         HashMap<String, String> data = db.getIndividualData();
+        db.close();
         Log.d("MyApp", "Data:" + data.toString());
         analysisDoneBefore = Boolean.valueOf(data.get("analysisDoneBefore"));
         onboardingStartedBefore = Boolean.valueOf(data.get("onboardingStartedBefore"));
@@ -212,20 +213,9 @@ public class ValueKeeper {
         values.put("vpnCode", vpnCode);
         values.put("dailyLectionsUnlocked", Integer.toString(dailyLectionsUnlocked));
         values.put("timeOfFirstStart", Long.toString(timeOfFirstStart));
-        /*
 
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        db.insertIndividualValue();
-        */
+
+
 
         Log.d("MyApp", "currentEval:" + Integer.toString(currentEvaluation));
         //ArrayList<String> deinstalledApps=new ArrayList<>();
@@ -313,11 +303,7 @@ public class ValueKeeper {
             t++;
         }
         new DBWrite(FoxItActivity.getAppContext()).execute("clearAndSetValueKeeper",values);
-        DBHandler db = new DBHandler(FoxItActivity.getAppContext(), null, null, 1);
 
-        HashMap<String, String> data = db.getIndividualData();
-        //Log.d("ValueKeeper","applications: "+packages.size());
-        //Log.d("ValueKeeper", "SavedData:" + data.toString());
 
     }
 

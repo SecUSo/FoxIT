@@ -44,7 +44,6 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lection_list);
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
 
         // sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -216,6 +215,7 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
         ListView lectionList = (ListView) findViewById(R.id.headline_frame);
         DBHandler db=new DBHandler(this,null,null,1);
         lectionObjectList= db.getLectionsFromDB(className);
+        db.close();
 
         lectionStringArray = new String[lectionObjectList.size()];
 

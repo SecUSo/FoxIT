@@ -75,6 +75,7 @@ public class ClassListActivity extends FoxItActivity implements AdapterView.OnIt
 
         //classObjectList.add(test);
         classObjectList=dbHandler.getClasses();
+        dbHandler.close();
 
     }
 

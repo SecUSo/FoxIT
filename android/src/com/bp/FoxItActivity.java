@@ -117,22 +117,18 @@ public class FoxItActivity extends AppCompatActivity {
     }
 
 
-    public boolean shouldEvaluationBeDisplayed(){
-        ValueKeeper v=ValueKeeper.getInstance();
+    public boolean shouldEvaluationBeDisplayed() {
+        ValueKeeper v = ValueKeeper.getInstance();
         Calendar currentTime = Calendar.getInstance();
-        DBHandler db=new DBHandler(this,null,null,1);
-        int numberOfEvaluation=0;
-        if(v.getCurrentEvaluation()==0){
-        //   if(db.getIndividualValue("currentEvaluation")!=null){ numberOfEvaluation=Integer.valueOf(db.getIndividualValue("currentEvaluation"));}
-        }else{
-            numberOfEvaluation=v.getCurrentEvaluation();
+        int numberOfEvaluation = 0;
+        if (v.getCurrentEvaluation() == 0) {
+            //   if(db.getIndividualValue("currentEvaluation")!=null){ numberOfEvaluation=Integer.valueOf(db.getIndividualValue("currentEvaluation"));}
+        } else {
+            numberOfEvaluation = v.getCurrentEvaluation();
         }
-        Log.d("MyApp","currentEvalin Fox:"+Integer.toString(v.getCurrentEvaluation()));
+        Log.d("MyApp", "currentEvalin Fox:" + Integer.toString(v.getCurrentEvaluation()));
 
-        if(v.timeOfEvaluation.length>numberOfEvaluation){
-            return v.timeOfEvaluation[numberOfEvaluation]<currentTime.getTimeInMillis();}else{
-            return false;
-        }
+        return v.timeOfEvaluation.length > numberOfEvaluation && v.timeOfEvaluation[numberOfEvaluation] < currentTime.getTimeInMillis();
     }
 
 
