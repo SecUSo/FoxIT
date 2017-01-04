@@ -138,17 +138,20 @@ public class ClassListActivity extends FoxItActivity implements AdapterView.OnIt
                 return R.mipmap.onion;
             case "Erstes Tapsen":
                 return R.mipmap.literature;
-            case "facebook":
+            case "Facebook":
                 return R.mipmap.class_facebook;
-            case "google":
+            case "Google":
                 return R.mipmap.class_google;
             case "root":
                 return R.mipmap.class_hashtag;
             case "Die Gesellschaft":
                 return R.mipmap.class_lighthouse;
-            case "passwort":
+            case "Passwörter":
                 return R.mipmap.class_passwort;
-
+            case "Datenschutzgesetze":
+                return R.mipmap.literature;   //nicht final
+            case "Daily Lections":
+            return R.mipmap.literature;  //nicht final
             default:
                 return R.mipmap.ring;
 
