@@ -108,7 +108,7 @@ public class Home extends FoxItActivity {
                 //[name~EvaluationTest][0~texte'text~Eine Einführuark Net.;scalee_Allgemein lässt sich einteilen: Surface Web und Deep Web.][solved~false]
 //                Evaluation;AppEvaluation;0;1;6;0;scalee_Wir haben bemerkt, dass du in letzter Zeit eine App deinstalliert hast. Wie sehr hatte das mit dem Schutz deiner Privatsphäre zu tun?;;;;;;;
                 String evaluationLection;
-                intent.putExtra("lection","[name~EvaluationTest][0~type~text'text~Da du unsere App jetzt ein bisschen benutzt hast, möchten wir dir ein paar Fragen stellen.][1~type~scalee'text~Ich fühle mich vor digitalen Angriffen sicher.\n" +
+                intent.putExtra("lection","[name~EvaluationTest][0~type~text'text~Da du unsere App jetzt ein bisschen benutzt hast, möchten wir dir ein paar Fragen stellen.][1~type~scalee'text~Ich fühle mich vor Datendiebstahl sicher.\n" +
                         "][2~type~scalee'text~Ich finde das Thema digitale Privatsphäre sehr interessant.\n" +
                         "][3~type~scalee'text~Ich weiß, wie ich meine digitale Privatsphäre schützen kann.\t\n" +
                         "][4~type~scalee'text~Ich versuche die Privatheitsbedingungen auf meinem Smartphone zu verbessern.\n" +

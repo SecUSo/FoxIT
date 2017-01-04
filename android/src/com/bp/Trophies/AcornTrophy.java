@@ -6,8 +6,8 @@ import com.bp.ValueKeeper;
  */
 public class AcornTrophy extends TrophyObject {
 
-    public AcornTrophy(String name, int scoreNeeded, String toastDescription, boolean visibleScore, int icon,int iconSolved) {
-        super(name, scoreNeeded, toastDescription, visibleScore, icon,iconSolved);
+    public AcornTrophy(String name, int scoreNeeded, String toastDescription,String trophyDescribtion, boolean visibleScore, int icon,int iconSolved) {
+        super(name, scoreNeeded, toastDescription,trophyDescribtion, visibleScore, icon,iconSolved);
     }
 
 

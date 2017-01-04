@@ -17,11 +17,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Ich on 25.06.2016.
  */
 public class BigTrophyViewFragment extends Fragment{
     String trophyName; //the name of the described trophy
+    String trophyDescription;
     int icon;
     /**
      * @author Tim
@@ -45,6 +48,9 @@ public class BigTrophyViewFragment extends Fragment{
         TextView trophyName= (TextView) view.findViewById(R.id.text_trophy_name);
         trophyName.setText(this.trophyName);
 
+        TextView trophyText=(TextView) view.findViewById(R.id.text_trophy_describtion);
+        trophyText.setText(trophyDescription);
+
         ImageView trophyIcon=(ImageView) view.findViewById(R.id.image_acorn_symbol);
         trophyIcon.setImageResource(icon);
 
@@ -59,6 +65,7 @@ public class BigTrophyViewFragment extends Fragment{
     public void setArguments(Bundle arg){
         trophyName=arg.getString("trophyName");
         icon=arg.getInt("icon");
+        trophyDescription=arg.getString("trophyDescribtion");
     }
 
 }

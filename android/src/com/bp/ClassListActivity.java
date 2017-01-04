@@ -143,7 +143,7 @@ public class ClassListActivity extends FoxItActivity implements AdapterView.OnIt
                 return R.mipmap.class_google;
             case "root":
                 return R.mipmap.class_hashtag;
-            case "Geselschaft":
+            case "Die Gesellschaft":
                 return R.mipmap.class_lighthouse;
             case "passwort":
                 return R.mipmap.class_passwort;

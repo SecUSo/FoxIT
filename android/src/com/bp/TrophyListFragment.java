@@ -55,14 +55,14 @@ public class TrophyListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
 
         TrophyObject[] trophyArray = {
-                new AcornTrophy("Baumhaus Kapitalist", 40, "Geradezu dick vor Eicheln.", true, R.mipmap.acorn_not,R.mipmap.acorn_finish),
-                new AcornTrophy("Schnüffler", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.fox_not,R.mipmap.fox_finish),
-                new AcornTrophy("Frischling", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.boar_not,R.mipmap.boar_finish),
-                new AcornTrophy("Halbzeit", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.clock_not,R.mipmap.clock_finish),
-                new AcornTrophy("Privacy Shield", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.shield_not,R.mipmap.shield_finish),
-                new AcornTrophy("Nachteule", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.owl_not,R.mipmap.owl_finish), //TODO:Relly strange behavior
-                new AcornTrophy("Early Bird", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.bird_not,R.mipmap.bird_finish),
-                new AcornTrophy("Power User", 50, "Na? Wer kommt denn da nicht aus den Federn?", false, R.mipmap.rocket_not,R.mipmap.rocket_finish)
+                new AcornTrophy("Baumhaus Kapitalist", 40, "Das Kapital ist scharf auf Nüsse.","Du hattest zu einem Zeitpunkt 40 Eicheln.", true, R.mipmap.acorn_not,R.mipmap.acorn_finish),
+                new AcornTrophy("Schnüffler", 50, "Die hast du schon bekommen.","Diese Trophee hast du bekommen weil wir dich gern haben. Fühl dich geknuddelt. :)", false, R.mipmap.fox_not,R.mipmap.fox_finish),
+                new AcornTrophy("Frischling", 50, "Aus kleinem Anfang entspringen alle Dinge.","Du hast einen Kurs komplett bearbeitet.", false, R.mipmap.boar_not,R.mipmap.boar_finish),
+                new AcornTrophy("Halbzeit", 50, "Auf halben Weg zum Privatsphäre-Profi!","Du hast die Hälfte der Kurse bearbeitet.", false, R.mipmap.clock_not,R.mipmap.clock_finish),
+                new AcornTrophy("Privacy Shield", 50, "Wenn du richtig gut bist...","Du hast alle Kurse bearbeitet. Du bist super! :)", false, R.mipmap.shield_not,R.mipmap.shield_finish),
+                new AcornTrophy("Nachteule", 50, "Nachts wenn alles schläft...","Du hast die App 5 mal in der Nacht geöffnet.", false, R.mipmap.owl_not,R.mipmap.owl_finish), //TODO:Relly strange behavior
+                new AcornTrophy("Early Bird", 50, "Wer den Fuchs fangen will, muss mit den Hühnern aufstehen.","Du hast die App 5 mal am Morgen geöffnet.", false, R.mipmap.bird_not,R.mipmap.bird_finish),
+                new AcornTrophy("Power User", 50, "Dem fleißigen Hamster schadet der Winter nichts.","Du hast die App 5 mal in 2 Tagen geöffnet.", false, R.mipmap.rocket_not,R.mipmap.rocket_finish)
 
         };
         this.trophyArray = trophyArray;
@@ -103,6 +103,7 @@ public class TrophyListFragment extends Fragment {
                     Bundle trophyName = new Bundle();
                     trophyName.putString("trophyName", trophyArray[position].getName());
                     trophyName.putInt("icon",trophyArray[position].getIconSolved());
+                    trophyName.putString("trophyDescribtion",trophyArray[position].getTrophyDescribtion());
                     fragment.setArguments(trophyName);
 
                     //add fragment so the activitys' context
@@ -117,7 +118,7 @@ public class TrophyListFragment extends Fragment {
                     bigTrophyFrame.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(),
-                            trophyArray[position].getToastDescription(), Toast.LENGTH_SHORT).show();
+                            trophyArray[position].getToastDescription(), Toast.LENGTH_LONG).show();
 
                 }
             }

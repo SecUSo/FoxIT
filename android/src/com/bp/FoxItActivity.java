@@ -76,12 +76,16 @@ public class FoxItActivity extends AppCompatActivity {
                 if(v.getNumberOfTimesOpenedAtNight()>4){
                    setTrophyUnlocked("Nachteule");
                 }
-            }}
+            }
+
+
+            }
 
 
             //  new reviveValueTask().execute();
             v.addAppStarts(System.currentTimeMillis());
             v.setTimeOfFirstAccess(System.currentTimeMillis());
+
         }
 
 

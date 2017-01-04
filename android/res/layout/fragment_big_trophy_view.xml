@@ -20,14 +20,14 @@
 
             <RelativeLayout
                 android:layout_width="330dp"
-                android:layout_height="290dp"
                 android:layout_gravity="center"
-                android:background="@color/creme">
+                android:background="@color/creme"
+                android:layout_height="310dp">
 
                 <ImageView
                     android:id="@+id/image_acorn_symbol"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_above="@+id/text_acorn_count"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
@@ -36,23 +36,35 @@
                     android:layout_marginRight="10dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Der Baumhaus Kapitalist"
-                    android:src="@mipmap/test_trophy" />
+                    android:src="@mipmap/test_trophy"
+                    android:layout_marginTop="10dp" />
 
                 <TextView
                     android:id="@+id/text_trophy_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:gravity="top|center"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:text="Baumhaus Kapitalist"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/material_deep_teal_200"
+                    android:textColor="#65bbb3"
                     android:textSize="28dp"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_below="@+id/image_acorn_symbol"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text_trophy_name"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/text_trophy_describtion"
+                    android:textColor="@color/material_deep_teal_200"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="5dp" />
             </RelativeLayout>
         </FrameLayout>
     </RelativeLayout>
