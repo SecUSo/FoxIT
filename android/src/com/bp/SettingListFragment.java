@@ -112,11 +112,12 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
         Bundle settingsBundle = new Bundle(); //Bundle to pass arguments to the Fragment
         SettingValueFragment fragment = new SettingValueFragment();
         final PackageManager pm = context.getPackageManager();
+        String settings= settingsArray[position];
 
-        settingsBundle.putString("settingName", settingsArray[position].substring(0, settingsArray[position].indexOf(";")));
-        String preValue = settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
-        settingsBundle.putString("settingValue", preValue.substring(0, preValue.indexOf(";")));
-        settingsBundle.putString("settingOriginalName", preValue.substring(preValue.indexOf(";") + 1, preValue.length()));
+        settingsBundle.putString("settingName", settings.substring(0, settings.indexOf("|t1|")));
+        settingsBundle.putString("settingValue", settings.substring(settings.indexOf("|t1|")+4, settings.indexOf("|t2|")));
+        settingsBundle.putString("settingOriginalName", "original: "+settings.substring(settings.indexOf("|t2|")+4, settings.indexOf("|t3|")));
+        settingsBundle.putString("settingDescription",settings.substring(settings.indexOf("|t3|") + 4, settings.length()));
         fragment.setArguments(settingsBundle);
 
         //add fragment so the activitys' context
@@ -171,12 +172,12 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
 
             //set the text for setting type
             TextView settingType = (TextView) itemView.findViewById(R.id.text_setting_type);
-            settingType.setText(settingsArray[position].substring(0, settingsArray[position].indexOf(";")) + ":");
+            settingType.setText(settingsArray[position].substring(0, settingsArray[position].indexOf("|t1|")) + ":");
 
             //set the text for the setting's setting
             TextView settingSetting = (TextView) itemView.findViewById(R.id.text_setting_setting);
-            String preValue = settingsArray[position].substring(settingsArray[position].indexOf(";") + 1, settingsArray[position].length());
-            String value = preValue.substring(0, preValue.indexOf(";"));
+            String preValue = settingsArray[position].substring(settingsArray[position].indexOf("|t1|") + 4, settingsArray[position].length());
+            String value = preValue.substring(0, preValue.indexOf("|t2|"));
             if (value.equals("0")) value = "OFF";
             if (value.equals("1")) value = "ON";
             settingSetting.setText(value);

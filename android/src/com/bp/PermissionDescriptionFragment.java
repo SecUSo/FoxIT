@@ -63,9 +63,10 @@ public class PermissionDescriptionFragment extends Fragment{
 
         DBHandler dbHandler = new DBHandler(this.getActivity(),null,null,1);
 
+        //entering the permissionDescription
         TextView permissionDescriptionTextView = (TextView) view.findViewById(R.id.text_permission_description);
         permissionDescriptionTextView.setText(dbHandler.getPermissionDescription(shortPermissionName));
-
+        dbHandler.close();
 
         //entering the permissionIcon into the headline
         Drawable drawable = getPermissionDrawable(permissionName);
@@ -73,8 +74,7 @@ public class PermissionDescriptionFragment extends Fragment{
         appIcon.setImageDrawable(drawable);
 
 
-        //entering the permissionDescription
-        TextView permissionDescription= (TextView) view.findViewById(R.id.text_permission_description);
+
 
         //links the onClickEvent for returning to PermissionListFragment to the headline
         RelativeLayout button = (RelativeLayout) view.findViewById(R.id.permission_headline_frame);

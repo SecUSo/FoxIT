@@ -1,88 +1,88 @@
-accessibility_display_magnification_auto_update;1;Eingabehilfe: Display-Zoom kontinuierlich;Spezielle Einstellung, ob die Display Vergrößerung automatische upgedatet werden soll.
+accessibility_display_magnification_auto_update;1;Eingabehilfe: Display-Zoom kontinuierlich;Spezielle Einstellung, ob die Display Vergrößerung automatisch aktualisiert werden soll.
 accessibility_display_magnification_enabled;1;Eingabehilfe: Display-Zoom;Ist die Display-Vergrößerung an oder aus.
 dasistgarantiertnichtdrin;0;ichbinschöner;hierkeineordentlichebeschreibung
-accessibility_display_magnification_scale;2;Eingabehilfe: Display-Zoom-Faktor;Es fehlt leider eine Beschreibung.
-accessibility_script_injection;1;Eingabehilfe: individuelle Skripte einfügen;Es fehlt leider eine Beschreibung.
-airplane_mode_on;1;Flugmodus;Es fehlt leider eine Beschreibung.
-airplane_mode_radios;0;Bei Flugmodus deaktivierte Funktionen;Es fehlt leider eine Beschreibung.
-accessibility_script_injection_url;0;Eingabehilfe: Skript-Adresse;Es fehlt leider eine Beschreibung.
-accessibility_web_content_key_bindings;0;Eingabehilfe: Tastenzuweisung bei Webinhalten;Es fehlt leider eine Beschreibung.
-airplane_mode_toggleable_radios;0;Bei Flugmodus schaltbare Funktionen;Es fehlt leider eine Beschreibung.
-android_id;2;Android ID (systemeigen);Es fehlt leider eine Beschreibung.
-app_idle_constants;0;Erlaubter Leerlauf einer App;Es fehlt leider eine Beschreibung.
-assisted_gps_enabled;1;Netzwerkunterstütztes GPS;Es fehlt leider eine Beschreibung.
-audio_safe_volume_state;1;Anzeige von Hörschädigungshinweis;Es fehlt leider eine Beschreibung.
-auto_time;1;Automatischer Abruf von Zeit/Datum;Es fehlt leider eine Beschreibung.
-auto_time_zone;1;Automatischer Abruf der Zeitzone;Es fehlt leider eine Beschreibung.
-bluetooth_on;1;Bluetooth;Es fehlt leider eine Beschreibung.
-call_auto_retry;1;Automatische Wahlwiederholung;Es fehlt leider eine Beschreibung.
-car_dock_sound;0;Auto-Dockingstations-Ton;Es fehlt leider eine Beschreibung.
-car_undock_sound;0;Auto-Dockingstation-Endton;Es fehlt leider eine Beschreibung.
-cdma_cell_broadcast_sms;1;SMS-Broadcast per CDMA erhalten;Es fehlt leider eine Beschreibung.
-backup_enabled;1;System-Backup aktiviert;Es fehlt leider eine Beschreibung.
-data_roaming;1;Daten-Roaming;Es fehlt leider eine Beschreibung.
-default_install_location;0;Standard App-Speicherort;Es fehlt leider eine Beschreibung.
-desk_dock_sound;0;Dockingstation-Anschlusston;Es fehlt leider eine Beschreibung.
-desk_undock_sound;0;Dockingstation-Trennton;Es fehlt leider eine Beschreibung.
-device_name;0;Gerätename;Es fehlt leider eine Beschreibung.
-device_provisioned;1;Sperre bei mehreren Nutzern;Es fehlt leider eine Beschreibung.
-dock_audio_media_enabled;1;Medienwiedergabe über Dockingstation;Es fehlt leider eine Beschreibung.
-dock_sounds_enabled;1;Tonwiedergabe über Dockingstation;Es fehlt leider eine Beschreibung.
-double_tap_to_wake;1;Aufwecken des Bildschirms durch doppeltes Tippen;Es fehlt leider eine Beschreibung.
-dropbox:data_app_anr;0;Dropbox-ANR;Es fehlt leider eine Beschreibung.
-dropbox:data_app_crash;0;Dropbox-Crash;Es fehlt leider eine Beschreibung.
-dropbox:data_app_wtf;0;Dropbox-WTF;Es fehlt leider eine Beschreibung.
-emergency_tone;1;Notfall-Ton;Es fehlt leider eine Beschreibung.
-facelock_detection_threshold;0;Gesichtsentsperrungsschwelle;Es fehlt leider eine Beschreibung.
-facelock_liveliness_recognition_threshold;0;Gesichtsentsperrungsschwelle bei Bewegung;Es fehlt leider eine Beschreibung.
-facelock_max_center_movement;0;Gesichtsentsperrungsschwelle bei Bewegung in der Mitte;Es fehlt leider eine Beschreibung.
-guest_user_enabled;1;Gastprofil aktiviert;Es fehlt leider eine Beschreibung.
-heads_up_notifications_enabled;1;Heads-up Benachrichtigungen;Es fehlt leider eine Beschreibung.
-immersive_mode_confirmations;1;Bestätigung für Vollbildmodus;Es fehlt leider eine Beschreibung.
-input_methods_subtype_history;1;Historie für Eingabemethoden;Es fehlt leider eine Beschreibung.
-install_non_market_apps;1;Apps unbekannter Quellen installieren;Es fehlt leider eine Beschreibung.
-locationPackagePrefixWhitelist;0;Erlaubnisliste für Ortungsprogramm;Es fehlt leider eine Beschreibung.
-locationPackagePrefixBlacklist;0;Ausschlussliste für Ortungsprogramm;Es fehlt leider eine Beschreibung.
-location_providers_allowed;0;Aktivierte Ortungsdienste;Es fehlt leider eine Beschreibung.
-lock_screen_allow_private_notifications;1;Sensible Benachrichtigungsinhalte auf dem Sperrbildschirm;Es fehlt leider eine Beschreibung.
-lock_screen_owner_info_enabled;1;Besitzerinformationen auf Sperrbildschirm;Es fehlt leider eine Beschreibung.
-lock_sound;0;Ton bei Bildschirmsperre;Es fehlt leider eine Beschreibung.
-lockscreen.disabled;1;Sperrbildschirm deaktiviert;Es fehlt leider eine Beschreibung.
-lockscreen.options;0;Aktivierte Sperrbildschirm-Optionen;Es fehlt leider eine Beschreibung.
-long_press_timeout;2;Erkennung von gedrückt halten (ms);Es fehlt leider eine Beschreibung.
-low_battery_sound;0;Ton bei niedrigem Akkustand;Es fehlt leider eine Beschreibung.
-masterLocationPackagePrefixBlacklist;0;Ausschlussliste für Hauptortungsprogramm;Es fehlt leider eine Beschreibung.
-masterLocationPackagePrefixWhitelist;0;Erlaubnisliste für Hauptortungsprogramm;Es fehlt leider eine Beschreibung.
-adb_enabled;1;Android Debug Funktion;Es fehlt leider eine Beschreibung.
-bluetooth_adress;0;Bluetooth-Adresse;Es fehlt leider eine Beschreibung.
-bluetooth_name;0;Bluetooth Anzeigename;Es fehlt leider eine Beschreibung.
-ble_scan_always_enabled;1;Durchgehender Bluetooth Low Energy Scan;Es fehlt leider eine Beschreibung.
-bluetooth_addr_valid;1;Valide Bluetooth-Adresse;Es fehlt leider eine Beschreibung.
-development_settings_enabled;1;Entwickleroptionen;Es fehlt leider eine Beschreibung.
-doze_enabled;1;Atmungseffekt bei ausgeschaltetem Bildschirm und Nachricht;Es fehlt leider eine Beschreibung.
-enable_accessability_global_gesture_enabled;1;Eingabehilfe: Gesten überall;Es fehlt leider eine Beschreibung.
-lock_screen_lock_after_timeout;2;Sperrbildschirm aktivierung nach (ms);Es fehlt leider eine Beschreibung.
-low_power_trigger_level;2;Kritischer Akkustand bei (%);Es fehlt leider eine Beschreibung.
-mobile_data;1;Mobiler Datenverkehr;Es fehlt leider eine Beschreibung.
-mock_location;1;Falsche Standorte;Es fehlt leider eine Beschreibung.
-mode_ringer;2;Benachrichtigungs-Modus;Es fehlt leider eine Beschreibung.
-multi_sim_data_call;1;VoIP mit MultiSIM;Es fehlt leider eine Beschreibung.
-multi_sim_sms;1;SMS mit MultiSIM;Es fehlt leider eine Beschreibung.
-multi_sim_sms_prompt;1;Abfrage bei SMS mit MultiSIM;Es fehlt leider eine Beschreibung.
-multi_sim_voice_call;1;Anrufe mit MultiSIM;Es fehlt leider eine Beschreibung.
-netstats_enabled;1;Netzwerkstatistiken;Es fehlt leider eine Beschreibung.
+accessibility_display_magnification_scale;2;Eingabehilfe: Display-Zoom-Faktor;Der Zoom-Faktor bei eingeschalteter Display-Vergrößerung. Dies ist eine Eigenschaft der Eingabehilfen.
+accessibility_script_injection;1;Eingabehilfe: individuelle Skripte einfügen;Für Eingabehilfen kann man individualisierte Skripte zur leichteren Handhabung einfügen.
+airplane_mode_on;1;Flugmodus;Der Flugmodus deaktiviert standardmäßig alle Datenverbindungen des Smartphones (Bluetooth, WLAN, NFC und die Kommunikation der SIM-Karte mit Funktürmen). Nützlich zum nicht gestört werden oder Energiesparen.
+airplane_mode_radios;0;Bei Flugmodus deaktivierte Funktionen;Diese Kommunikationsschnittstellen werden beim Einschalten des Flugmodus‘ alle deaktiviert.
+accessibility_script_injection_url;0;Eingabehilfe: Skript-Adresse;Wenn ein spezielles Skript zur Eingabehilfe genutzt wird, dann wird dies unter diesem Pfad abgerufen.
+accessibility_web_content_key_bindings;0;Eingabehilfe: Tastenzuweisung bei Webinhalten;Eine Einstellung der Eingabehilfen. Bestimmte Tasten werden an Funktionen gebunden, um in Webinhalten einfach navigieren zu können.
+airplane_mode_toggleable_radios;0;Bei Flugmodus schaltbare Funktionen;Diese Kommunikationsschnittstellen können nach Einschalten des Flugmodus‘ weiterhin ein- oder ausgeschaltet werden. Standardmäßig sind das WLAN, Bluetooth und NFC (wenn vorhanden).
+android_id;2;Android ID (systemeigen);Diese ID wird bei der Installation des Android-Systemes erzeugt und ist eindeutig dem Handy zugeordnet. Durch installieren eines neuen Systemes würde sie sich ändern. Sie kann leicht genutzt werden, um ein Telefon über lange Zeit oder mehrere Apps hinweg zu identifizieren. 
+app_idle_constants;0;Erlaubter Leerlauf einer App;Hier werden Konstanten aufgeführt, die zur Bestimmung dienen, ob eine App inaktiv ist.  z.B „idle_duration“: Wenn eine App länger als diese Zeit (vermutlich Millisekunden) im Leerlauf ist, wird sie nicht mehr als aktive App gezählt.
+assisted_gps_enabled;1;Netzwerkunterstütztes GPS;Dies gibt an, ob die Ortung über Netzverbindungen mit den Funkmasten aktiviert ist.
+audio_safe_volume_state;1;Anzeige von Hörschädigungshinweis;Auf vielen Telefonen wird bei eingestecktem Kopfhörer-Kabel ein Warnhinweis gezeigt, wenn man eine gewisse Lautstärke überschreitet. Ob dieser aktiviert ist oder nicht, steht hier.
+auto_time;1;Automatischer Abruf von Zeit/Datum;Hat man eine Internetverbindung, dann kann die Zeit und das Datum entsprechend zur eingestellten Zeitzone regelmäßig automatisch aktualisiert werden.
+auto_time_zone;1;Automatischer Abruf der Zeitzone;Soll die aktuelle Zeitzone automatisch erkannt werden durch Netzwerkverbindungen/Standorte, so muss dieser Wert an sein.
+bluetooth_on;1;Bluetooth;Dieser Wert sagt ganz einfach aus, ob das Bluetooth-Funkmodul des Handys aktiviert ist.
+call_auto_retry;1;Automatische Wahlwiederholung;Android bietet die Funktion der automatischen Wahlwiederholung (dies muss ggf. durch den Netzbetreiber auch unterstützt werden). Hier ist angegeben, ob dies aktiviert ist.
+car_dock_sound;0;Auto-Dockingstations-Ton;Steckt man sein Smartphone auf eine Dockingstation für‘s Auto, wird der Ton unter diesem Pfad abgespielt.
+car_undock_sound;0;Auto-Dockingstation-Endton;Entfernt man sein Smartphone von einer Dockingstation für‘s Auto, wird der Ton unter diesem Pfad abgespielt.
+cdma_cell_broadcast_sms;1;SMS-Broadcast per CDMA erhalten;Diese Funktion bezeichnet Notfall-Broadcast-Nachrichten, die über ein bestimmtes Netzprotokoll (CDMA) verschickt werden. Ist sie aktiviert, kann das Telefon diese Nachrichten erhalten.
+backup_enabled;1;Daten-Backup aktiviert;Google kann hiermit eine Menge Daten speichern, die im Falle eines Verlustes oder Zurücksetzen des Handys wiederhergestellt werden können. Dazu gehören z.B. eingespeicherte WLAN-Passwörter, App-Daten (wie Spielstände oder Einstellungen in Apps) oder auch Kontakte, Bilder und Nachrichten.
+data_roaming;1;Daten-Roaming;Daten Roaming bezeichnet das Nutzen fremder Netze für Internetzugang. Je nach Vertrag mit dem eigenen Netzanbieter kann das kostenlos sein oder teuer. Dass man in anderen Netzen als dem eigenen Internet aktivieren muss ist meist im Ausland der Fall, jedoch gibt es auch durch die Zusammenlegung der Netze von O2 und Eplus Fälle, bei denen das im Inland sinnvoll sein kann.
+default_install_location;0;Standard App-Speicherort;Der Standardort, wohin Apps im Normalfall installiert werden. Wir sind uns noch nicht ganz sicher, ob es angibt, ob der Standartort aktiviert ist oder ob es einen Hinweis auf den Ort gibt.
+desk_dock_sound;0;Dockingstation-Anschlusston;Dieser Ton wird abgespielt, wenn das Smartphone an einen Dockingstation angeschlossen wird.
+desk_undock_sound;0;Dockingstation-Trennton;Dieser Ton wird abgespielt, wenn das Smartphone von einer Dockingstation getrennt wird.
+device_name;0;Gerätename;Die Technische Bezeichnung des Gerätes, also die Modellbeschreibung des Herstellers.
+device_provisioned;1;Sperre bei mehreren Nutzern;Auf Multinutzer-Geräten mit System-Nutzer wird das Gerät gesperrt, sobald der Wert auf 1 steht. Weitere Aktionen über diesen Nutzer können nur gestartet werden, wenn sie über der Tastensperre gezeigt werden können.
+dock_audio_media_enabled;1;Medienwiedergabe über Dockingstation;Gibt an, ob über Dockingstationen Audio-Medien wiedergegeben werden können.
+dock_sounds_enabled;1;Tonwiedergabe über Dockingstation;Gibt an, ob die Dockingstation-Töne aktiviert sind.
+double_tap_to_wake;1;Aufwecken des Bildschirms durch doppeltes Tippen;Auf einigen Telefonen kann der Bildschirm durch doppeltes Tippen aktiviert werden. Dieser Wert kann 1 oder 0 sein.
+dropbox:data_app_anr;0;Dropbox-ANR;Eine Einstellung, die mit dem Speichern von Log-Dateien und Absturzberichten zu tun hat. Dieser Wert hat nichts mit dem DropBox-Dienst zu tun. App-ANR bezieht sich auf die App-Not-Responding Ereignisse, hier wird also der Logging-Status dieser angezeigt.
+dropbox:data_app_crash;0;Dropbox-Crash;Eine Einstellung, die mit dem Speichern von Log-Dateien und Absturzberichten zu tun hat. Dieser Wert hat nichts mit dem DropBox-Dienst zu tun. App-Crash  bezieht sich auf App-Abstürze, hier wird also der Logging-Status dieser angezeigt.
+dropbox:data_app_wtf;0;Dropbox-WTF;Eine Einstellung, die mit dem Speichern von Log-Dateien und Absturzberichten zu tun hat. Dieser Wert hat nichts mit dem DropBox-Dienst zu tun. WTF steht vermutlich für Write-to-File oder etwas ähnliches, da der DropBox-Service von Android zum Loggen von Dateien und anderem als Text gedacht ist.
+emergency_tone;1;Notfall-Ton;Ein Ton, der bei erhaltenem Gefahren-Broadcast abgespielt wird, also wenn eine mögliche Bedrohung in der Nähe ist. Er kann aktiviert oder deaktiviert sein.
+facelock_detection_threshold;0;Gesichtsentsperrungsschwelle;Numerische Schwelle, die bei der Erkennung für die Gesichtsentsperrung relevant ist.
+facelock_liveliness_recognition_threshold;0;Gesichtsentsperrungsschwelle bei Bewegung;Numerische Schwelle, die bei der Erkennung für die Gesichtsentsperrung relevant ist. Speziell für sich bewegende Aufnahmen.
+facelock_max_center_movement;0;Gesichtsentsperrungsschwelle bei Bewegung in der Mitte;Numerische Schwelle, die bei der Erkennung für die Gesichtsentsperrung relevant ist. Speziell für die Bewegung in der Mitte des Bildes.
+guest_user_enabled;1;Gastprofil aktiviert;In den neueren Android-Versionen kann man verschiedene Nutzer aktivieren und so auch einen Gast-Account, um mal den Kollegen telefonieren zu lassen ohne um die Bilder Sorge zu haben zum Beispiel. Dieser kann aktiviert sein oder deaktiviert.
+heads_up_notifications_enabled;1;Heads-up Benachrichtigungen;Head-Up Benachrichtigungen schieben sich von oben in den Bildschirm, wenn es eine Neuigkeit gibt. Diese können deaktiviert werden.
+immersive_mode_confirmations;1;Bestätigung für Vollbildmodus;Der Immersive Mode ist quasi der Vollbildmodus für eine App. Wenn man beim Einschalten dieses eine Bestätigung abgeben muss, ist dies hier zu sehen.
+input_methods_subtype_history;1;Historie für Eingabemethoden;Hier werden die letzten Eingabemethoden aufgelistet, subtype bedeutet vermutlich, dass noch differenzierter gelistet wird.
+install_non_market_apps;1;Apps unbekannter Quellen installieren;Unter „Sicherheit“ kann man in den Einstellungen bestimmen, ob auch Apps, die nicht aus dem PlayStore kommen, installiert werden können sollen. Häufig ist das sinnvoll, zum Beispiel wenn man selbst eine App schreibt oder sich außerhalb des PlayStores eine App gekauft hat. Jedoch kann man dann auch mit Malware infizierte Apps installieren (die man sich irgendwo aus dem Internet geladen hat z.B…)
+locationPackagePrefixWhitelist;0;Erlaubnisliste für Ortungsprogramm;Hier werden die Dienste aufgelistet, die als Lieferant von Positionsdaten erlaubt sind. Prefix bedeutet, dass auch Apps, die so beginnen wie die hier gelisteten, darunter fallen.
+locationPackagePrefixBlacklist;0;Ausschlussliste für Ortungsprogramm;Hier werden die Dienste aufgelistet, die als Lieferant von Positionsdaten verboten sind. Prefix bedeutet, dass auch Apps, die so beginnen wie die hier gelisteten, darunter fallen.
+location_providers_allowed;0;Erlaubte Ortungsdienste;Dies sind die konkreten Dienste, die für die Ortung erlaubt sind.
+lock_screen_allow_private_notifications;1;Sensible Benachrichtigungsinhalte auf dem Sperrbildschirm;Für Benachrichtigungen auf dem Sperrbildschirm kann man einstellen, dass keine konkreten Inhalten angezeigt werden, um Fremden auch den Zugang dazu zu verwehren. 
+lock_screen_owner_info_enabled;1;Besitzerinformationen auf Sperrbildschirm;Name, Adresse, Telefonnummer oder was auch immer man möchte kann man auf dem Sperrbildschirm anzeigen lassen, um dem eventuellen Finder bei der Rückgabe zu helfen. Diese Nachricht kann man ein- oder ausstellen.
+lock_sound;0;Ton bei Bildschirmsperre;Die simple Angabe, ob beim sperren des Bildschirms ein Ton abgespielt wird.
+lockscreen.disabled;1;Sperrbildschirm deaktiviert;Angabe, ob der Bildschirm nicht gesperrt wird nach längerer Untätigkeit. (Nicht zu empfehlen, da bei Diebstahl oder Verlust alle Daten dem Dieb direkt zur Verfügung stehen.)
+lockscreen.options;0;Sperrbildschirm-Optionen;Hier finden sich die Optionen, die für den Sperrbildschirm zur Verfügung stehen. Zum Beispiel könnte dort facelock aufgeführt sein.
+long_press_timeout;2;Erkennung von gedrückt halten (ms);Die Zeitspanne in Millisekunden, bis ein gedrückt halten des Bildschirms als langes Drücken erkannt wird.
+low_battery_sound;0;Ton bei niedrigem Akkustand;Ist der Akku bald leer, wird der Ton abgespielt, der durch diesen Pfad spezifiziert wird.
+masterLocationPackagePrefixBlacklist;0;Ausschlussliste für Hauptortungsprogramm;Hier werden die Dienste aufgelistet, die als Hauptlieferant von Positionsdaten verboten sind. Prefix bedeutet, dass auch Apps, die so beginnen wie die hier gelisteten, darunter fallen.
+masterLocationPackagePrefixWhitelist;0;Erlaubnisliste für Hauptortungsprogramm;Hier werden die Dienste aufgelistet, die als Hauptlieferant von Positionsdaten erlaubt sind. Prefix bedeutet, dass auch Apps, die so beginnen wie die hier gelisteten, darunter fallen.
+adb_enabled;1;Android Debug Funktion;ADB ist eine Schnittstelle für Entwickler, über die viele nützliche Funktionen laufen. Normalerweise braucht man dies aber nicht und es empfiehlt sich, dies deaktiviert zu lassen, damit die Schnittstelle nicht von Malware missbraucht werden kann.
+bluetooth_adress;0;Bluetooth-Adresse;Die Bluetooth Adresse ist für die Verbindung im Bluetooth-Netz relevant und eindeutig.
+bluetooth_name;0;Bluetooth Anzeigename;Den Bluetooth-Namen kann man unter Bluetooth einstellen, unter diesem Namen kann das Telefon von anderen Bluetooth-Geräten gefunden werden.
+ble_scan_always_enabled;1;Durchgehender Bluetooth Low Energy Scan;Bluetooth Low Energy ist eine Erweiterung der normalen Bluetooth Dienste und für lange Verbindugen wie zum Beispiel Smartwatches wichtig, da diese sonst zu viel Strom verbrauchen würden. Diese Einstellung beschreibt, ob permanent nach BLE Geräten gesucht wird.
+bluetooth_addr_valid;1;Valide Bluetooth-Adresse;Angabe, ob das Telefon eine valide Bluetooth Adresse besitzt. 
+development_settings_enabled;1;Entwickleroptionen;Unter Android kann man die sogenannten Entwickleroptionen aktivieren, die für Entwickler logischerweise sehr praktisch sind. ADB ist zum Beispiel eine davon. 
+doze_enabled;1;Atmungseffekt bei ausgeschaltetem Bildschirm und Nachricht;Doze ist ein Bildschirmeffekt, durch den der Bildschirm sanft aufleuchtet und wieder verdunkelt, wenn bei abgeschaltetem Bildschirm neue Benachrichtigungen auftreten.
+enable_accessability_global_gesture_enabled;1;Eingabehilfe: Gesten überall;Bei dieser Eingabehilfe geht es um spezielle Gesten, die Funktionen mit sich führen. Diese können überall aktiviert sein oder nur in bestimmten Bereichen der Eingabe.
+lock_screen_lock_after_timeout;2;Sperrbildschirm aktivierung nach (ms);Die Zeitspanne in Millisekunden, bis sich der Bildschirm bei Inaktivität abschaltet.
+low_power_trigger_level;2;Kritischer Akkustand bei (%);Die Schwelle, ab der der Akkustand als kritisch bezeichnet wird. An diesem Punkt können gegebenenfalls Aktionen eintreten wie der Energiesparmodus oder ein Signal.
+mobile_data;1;Mobiler Datenverkehr;Ist Internet über das mobile Netz aktiviert.
+mock_location;1;Falsche Standorte;Eine Entwickleroption. Möchte man einer App vorgaukeln, ganz woanders zu sein, benötigt man diese Option zusammen mit einer kontrollierenden App, die den falschen Standort einstellt.
+mode_ringer;2;Benachrichtigungs-Modus;Im Benachrichtigungsmodus gibt es standardmäßig die Vibration, das Klingeln oder komplette Stille. Neuerdings auch einen „Nicht stören“ Modus, in dem nur Alarme und mehrmalige Anrufe durchgelassen werden. Probier doch mal aus, welcher zu welcher Zahl zugeordnet ist!
+multi_sim_data_call;1;VoIP mit MultiSIM;Hier ist beschrieben, ob Internettelefonie bei mehreren SIM-Karten aktiviert ist.
+multi_sim_sms;1;SMS mit MultiSIM;Hier ist beschrieben, ob SMS-Nachrichten bei mehreren SIM-Karten aktiviert ist.
+multi_sim_sms_prompt;1;Abfrage bei SMS mit MultiSIM;Hier ist beschrieben, ob bei mehreren SIM-Karten nachgefragt wird, von welcher eine SMS geschickt werden soll.
+multi_sim_voice_call;1;Anrufe mit MultiSIM;Hier ist beschrieben, ob bei mehreren SIM-Karten Anfrufe aktiviert sind.
+netstats_enabled;1;Netzwerkstatistiken;Auf einigen Handys kann man sich die aktuellen Datenübertragungsraten in der Statusleiste anzeigen lassen. Hier steht, ob das aktiviert ist.
 network_scoring_provisioned;1;Beschränkte Netzwerkzählung;Es fehlt leider eine Beschreibung.
-nfc_default_route;0;NFC Standard Modus;Es fehlt leider eine Beschreibung.
-package_verifier_enable;1;App-Verifizierung;Es fehlt leider eine Beschreibung.
-package_verifier_user_consent;1;App-Verifizierung nach Nutzer-Einwilligung;Es fehlt leider eine Beschreibung.
-power_sounds_enabled;1;Töne für Akkustand und Laden;Es fehlt leider eine Beschreibung.
-preferred_network_mode1;2;Bevorzugte mobile Netze;Es fehlt leider eine Beschreibung.
-preferred_network_mode;2;Bevorzugte mobile Netze;Es fehlt leider eine Beschreibung.
-screensaver_activate_on_dock;1;Bildschirmschoner in Dockingstation aktivieren;Es fehlt leider eine Beschreibung.
-screensaver_activate_on_sleep;1;Bildschirmschoner bei Inaktivität aktivieren;Es fehlt leider eine Beschreibung.
-screensaver_enabled;1;Bildschirmschoner;Es fehlt leider eine Beschreibung.
-selected_input_method_subtype;2;Untereinstellung der aktuellen Eingabemethode;Es fehlt leider eine Beschreibung.
-send_action_app_error;1;Einen App-Fehler melden;Es fehlt leider eine Beschreibung.
+nfc_default_route;0;NFC Standard Modus;Near Field Communication wurde im Zuge der RFID-Chips erfunden um die schnelle Übertragungsgeschwindigkeit und passive Funktion der Chips zu nutzen.  Es gibt viele Systeme, welche sie einsetzen, zum Beispiel kann man an der TU-Darmstadt seine Mensa-Karte damit auslesen. Auch mobiles Bezahlen mit den Apps von Paypal oder Google funktioniert damit. Der Default-Modus meint die NFC-Card emulation, bei der über ein Sicherheitselement oder direkt durch den Prozessor eine NFC-Karte für ein Terminal emuliert wird.
+package_verifier_enable;1;App-Verifizierung;Wenn Apps installiert werden, kann ihr Paket verifiziert werden, um sicherzugehen, dass eine einwandfreie App installiert wird und keine Malware.
+package_verifier_user_consent;1;App-Verifizierung nach Nutzer-Einwilligung;Die Verifizierung von Apps bei deren Installation kann auch erst nach Einwilligung des Nutzers geschehen.
+power_sounds_enabled;1;Töne für Akkustand und Laden;Hier ist angegeben, ob beim Anstecken und Laden Töne wiedergegeben werden.
+preferred_network_mode1;2;Bevorzugte mobile Netze;Diese Zahl ist ein Code dafür, welche Netzwerkprotokolle genutzt oder bevorzugt genutzt werden.
+preferred_network_mode;2;Bevorzugte mobile Netze;Diese Zahl ist ein Code dafür, welche Netzwerkprotokolle genutzt oder bevorzugt genutzt werden.
+screensaver_activate_on_dock;1;Bildschirmschoner in Dockingstation aktivieren;Einstellung ob in Dockingstationen ein Bildschirmschoner angezeigt werden soll.
+screensaver_activate_on_sleep;1;Bildschirmschoner bei Inaktivität aktivieren;Einstellung ob ein Bildschirmschoner angezeigt werden soll, wenn das Telefon längere Zeit inaktiv war (quasi statt Bildschirm aus).
+screensaver_enabled;1;Bildschirmschoner;Grundsätzliche Aktivierung oder Deaktivierung des Bildschirmschoners.
+selected_input_method_subtype;2;Untereinstellung der aktuellen Eingabemethode;Die aktuell ausgewählten Sprach- oder Moduseinstellungen der Eingabemethode.
+send_action_app_error;1;Einen App-Fehler melden;Soll automatisch eine Nachricht an den Google-Store geschickt werden, wenn eine App abstürzt.
 serial_blacklist;0;Ausschlussliste für Seriennummern;Es fehlt leider eine Beschreibung.
 set_install_location;1;Den App-Installationsort setzen;Es fehlt leider eine Beschreibung.
 show_note_about_notification_hiding;1;Nachricht bei Verstecken von Benachrichtigungen anzeigen;Es fehlt leider eine Beschreibung.
@@ -94,16 +94,16 @@ speak_password;1;Eingabehilfen: Passwörter aussprechen;Es fehlt leider eine Bes
 ssl_session_cache;0;Modus des SSL-Caches;Es fehlt leider eine Beschreibung.
 stay_on_while_plugged_in;1;Display anlassen, wenn Strom angeschlossen ist.;Es fehlt leider eine Beschreibung.
 usb_mass_storage_enabled;1;USB-Massenspeicher;Es fehlt leider eine Beschreibung.
-use_google_mail;1;Gmail-Referenzen werden zu Google aufgelöst;Es fehlt leider eine Beschreibung.
+use_google_mail;1;Gmail-Referenzen werden zu Google aufgelöst;Google hat vor einigen Jahren ihr googlemail zu gmail umbenannt. Um dem gewöhnten Nutzer Unannehmlichkeiten zu ersparen, kann dies automatisch ersetzt werden.
 wifi_max_dhcp_retry_count;2;Maximale Anzahl von Versuchen eine Verbindung aufzubauen;Es fehlt leider eine Beschreibung.
 wifi_mobile_data_transition_wakelock_timeout_ms;2;Maximale Dauer zum Aufbau einer mobilen Datenverbindung vor dem Übergang in den Sleep-Modus (ms);Es fehlt leider eine Beschreibung.
 wifi_networks_available_notification_on;1;Wiederholte Meldung verfügbarer Netze;Es fehlt leider eine Beschreibung.
 wifi_networks_available_repeat_delay;2;Zeit zur wiederholten Meldung verfügbarer Netze (s);Es fehlt leider eine Beschreibung.
 wifi_num_open_networks_kept;2;Anzahl gespeicherter Wifi-Access-Points;Es fehlt leider eine Beschreibung.
-wifi_on;1;WiFi;Es fehlt leider eine Beschreibung.
+wifi_on;1;WiFi;WLAN-Gerät aktiviert.
 wifi_sleep_policy_default;2;Default-Einstellung für den Wifi-Sleep-Modus;Es fehlt leider eine Beschreibung.
-wifi_sleep_policy;2;Aktiver Wifi-Sleep-Modus;Es fehlt leider eine Beschreibung.
-wifi_sleep_policy_never;2;Wifi-Sleep-Modus immer aus;Es fehlt leider eine Beschreibung.
-wifi_sleep_policy_never_while_plugged;1;Wifi-Sleep-Modus beim Aufladen des Handys aus;Es fehlt leider eine Beschreibung.
-wifi_watchdog_on;1;Regelmäßige Wifi-Suche;Es fehlt leider eine Beschreibung.
+wifi_sleep_policy;2;Aktiver Wifi-Sleep-Modus;Die aktuelle Einstellung des WLAN-Stromsparmodus‘.
+wifi_sleep_policy_never;2;Wifi-Sleep-Modus immer aus;Ausschalten des WLAN-Stromsparemodus‘ zum nutzen der vollen Konnektivität auf Kosten der Akkulaufzeit.
+wifi_sleep_policy_never_while_plugged;1;Wifi-Sleep-Modus beim Aufladen des Handys aus;WLAN-Stromsparen wird hier beim Laden des Telefons ausgeschaltet, um bei genügend Strom die beste Erreichbarkeit zu gewährleisten.
+wifi_watchdog_on;1;Regelmäßige Wifi-Suche;Es kann dauerhaft nach WLAN gesucht werden, auch wenn es nicht direkt aktiviert ist.
 window_animation_scale;0;Faktor zum Skalieren normaler Animationen;Es fehlt leider eine Beschreibung.

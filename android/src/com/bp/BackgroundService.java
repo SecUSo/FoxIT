@@ -30,12 +30,12 @@ public class BackgroundService extends Service {
     List<ApplicationInfo> apps;
 
     @Override
-public int onStartCommand(Intent intent,int flags,int startId){
-apps=fetchALL_APPS();
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        apps = fetchALL_APPS();
 
-context =getApplicationContext();
-Timer timer =new Timer();
-        timer.schedule(new CheckApps(),0,5000);
+        context = getApplicationContext();
+        Timer timer = new Timer();
+        timer.schedule(new CheckApps(), 0, 5000);
 
 
         return Service.START_NOT_STICKY;
@@ -49,11 +49,11 @@ Timer timer =new Timer();
     }
 
     class CheckApps extends TimerTask {
-        public void run(){
-            ValueKeeper v=ValueKeeper.getInstance();
-            if(shouldEvaluationBeDisplayed()&&v.notDisplayed){//v.isEvaluationOutstanding==false&&shouldEvaluationBeDisplayed()){
-                v.isEvaluationOutstanding=true;
-                v.notDisplayed=false;
+        public void run() {
+            ValueKeeper v = ValueKeeper.getInstance();
+            if (shouldEvaluationBeDisplayed() && v.notDisplayed) {//v.isEvaluationOutstanding==false&&shouldEvaluationBeDisplayed()){
+                v.isEvaluationOutstanding = true;
+                v.notDisplayed = false;
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.paw)
@@ -85,19 +85,19 @@ Timer timer =new Timer();
 //
             }
             //if(v.isEvaluationOutstanding==true&&!shouldEvaluationBeDisplayed()){
-              //  v.isEvaluationOutstanding=false;
+            //  v.isEvaluationOutstanding=false;
             //}
 
-            String isChange= checkForChanges();
-            if(!isChange.equals("false")){
-                Log.d("Service","Hello World!xxx");
+            String isChange = checkForChanges();
+            if (!isChange.equals("false")) {
+                Log.d("Service", "Hello World!xxx");
                 v.deinstalledApps.add(isChange);
-                Log.d("Service",v.deinstalledApps.toString());
+                Log.d("Service", v.deinstalledApps.toString());
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.paw)
                                 .setContentTitle("Neue Umfrage verfügbar!")
-                                .setContentText("App "+isChange +" wurde deinstalliert");
+                                .setContentText("App " + isChange + " wurde deinstalliert");
 // Creates an explicit intent for an Activity in your app
                 Intent resultIntent = new Intent(context, Home.class);
 
@@ -106,9 +106,9 @@ Timer timer =new Timer();
 // This ensures that navigating backward from the Activity leads out of
 // your application to the Home screen.
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-// Adds the back stack for the Intent (but not the Intent itself)
+    // Adds the back stack for the Intent (but not the Intent itself)
                 stackBuilder.addParentStack(Home.class);
-// Adds the Intent that starts the Activity to the top of the stack
+    // Adds the Intent that starts the Activity to the top of the stack
                 stackBuilder.addNextIntent(resultIntent);
                 PendingIntent resultPendingIntent =
                         stackBuilder.getPendingIntent(
@@ -118,17 +118,16 @@ Timer timer =new Timer();
                 mBuilder.setContentIntent(resultPendingIntent);
                 NotificationManager mNotificationManager =
                         (NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);
-// mId allows you to update the notification later on.
+            // mId allows you to update the notification later on.
                 mNotificationManager.notify(15, mBuilder.build());
-                apps=fetchALL_APPS();
+                apps = fetchALL_APPS();
             }
-            if(true){
-            DBHandler db=new DBHandler(FoxItActivity.getAppContext(),null,null,1);
-               Long firstTime=v.getTimeOfFirstStart();
-                Long currentTime=System.currentTimeMillis();
-                Long result=(currentTime-firstTime)/86400000;
+            if (true) { //TODO DAFÜQ?!
+                Long firstTime = v.getTimeOfFirstStart();
+                Long currentTime = System.currentTimeMillis();
+                Long result = (currentTime - firstTime) / 86400000;
 
-                if(result>v.dailyLectionsUnlocked&&v.dailyLectionsUnlocked<15&&v.valueKeeperAlreadyRefreshed) {
+                if (result > v.dailyLectionsUnlocked && v.dailyLectionsUnlocked < 15 && v.valueKeeperAlreadyRefreshed) {
                     String lectionName = "test";//db.unlockDaily();
                     v.increaseDailyLectionsUnlocked();
 
@@ -166,76 +165,71 @@ Timer timer =new Timer();
                 }
 
             }
-            }
-
-
-
-
         }
 
 
-        public boolean shouldEvaluationBeDisplayed(){
-            ValueKeeper v=ValueKeeper.getInstance();
-                Calendar currentTime = Calendar.getInstance();
-                if(v.timeOfEvaluation.length>v.getCurrentEvaluation()){
-                    return v.timeOfEvaluation[v.getCurrentEvaluation()]<currentTime.getTimeInMillis();}else{
-                    return false;
+    }
+
+
+    public boolean shouldEvaluationBeDisplayed() {
+        ValueKeeper v = ValueKeeper.getInstance();
+        Calendar currentTime = Calendar.getInstance();
+        return v.timeOfEvaluation.length > v.getCurrentEvaluation() && v.timeOfEvaluation[v.getCurrentEvaluation()] < currentTime.getTimeInMillis();
+    }
+
+
+    public String checkForChanges() {
+
+        List<ApplicationInfo> newApps = fetchALL_APPS();
+        if (apps.size() <= newApps.size()) {
+            // Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size()));
+            return "false";
+        } else {
+            //Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size()));
+            final PackageManager pm = context.getPackageManager();
+            for (int i = 0; i < apps.size(); i++) {
+                if (!pm.getApplicationLabel(apps.get(i)).toString().equals(pm.getApplicationLabel(newApps.get(i)).toString())) {
+
+                    return pm.getApplicationLabel(apps.get(i)).toString();
                 }
             }
 
+            //  Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size())+"True");
+            return "true";
+        }
 
-
-
-
-
-
-   public String checkForChanges() {
-
-       List<ApplicationInfo> newApps = fetchALL_APPS();
-       if (apps.size() <= newApps.size()) {
-          // Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size()));
-           return "false";
-       } else {
-           //Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size()));
-           final PackageManager pm = context.getPackageManager();
-           for(int i=0;i<apps.size();i++){
-            if(!pm.getApplicationLabel(apps.get(i)).toString().equals(pm.getApplicationLabel(newApps.get(i)).toString())){
-
-                return pm.getApplicationLabel(apps.get(i)).toString();
-            }
-           }
-
-         //  Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size())+"True");
-           return "true";
-       }
-
-   }
+    }
 
     /**
      * methodLeft to retrieve all apps without entering the database
-     * @author Tim
+     *
      * @return list of retrieved apps
+     * @author Tim
      */
-    public List<ApplicationInfo> fetchALL_APPS(){
-        if(context==null){Log.d("MyApp","context is Null");}
+    public List<ApplicationInfo> fetchALL_APPS() {
+        if (context == null) {
+            Log.d("MyApp", "context is Null");
+        }
         final PackageManager pm = getApplicationContext().getPackageManager();
         //get a list of installed apps.
-        if(pm==null){Log.d("MyApp","pm is Null");}
+        if (pm == null) {
+            Log.d("MyApp", "pm is Null");
+        }
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
         Collections.sort(packages, new Comparator<ApplicationInfo>() {
             @Override
             public int compare(ApplicationInfo lhs, ApplicationInfo rhs) {
 
-                String leftAppName=pm.getApplicationLabel(lhs).toString();
-                String rightAppName=pm.getApplicationLabel(rhs).toString();
+                String leftAppName = pm.getApplicationLabel(lhs).toString();
+                String rightAppName = pm.getApplicationLabel(rhs).toString();
 
                 if (leftAppName.equals(rightAppName)) {
                     return 0;
                 }
-                if (leftAppName == null) {
+                if (leftAppName == null) {//TODO dat bringt nix
                     return -1;
                 }
-                if (rightAppName == null) {
+                if (rightAppName == null) {//TODO dat bringt nix
                     return 1;
                 }
                 return leftAppName.compareTo(rightAppName);
@@ -245,9 +239,6 @@ Timer timer =new Timer();
 
         return packages;
     }
-
-
-
 
 
 }

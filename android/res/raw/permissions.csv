@@ -134,7 +134,7 @@ UPDATE_DEVICE_STATS;Allows an application to update device statistics.;;
 USE_CREDENTIALS;Erlaubt einer Anwendung, Authentifizierungs-Token anzufordern.;Authentifizierungsberechtigungen füt Konto verwenden;
 USE_SIP;Allows an application to use SIP service;Internetanrufe tätigen/annehmen;
 VIBRATE;Hiermit kann die Anwendung die Vibrationsfunktion steuern. ;Vibrationsfnktion steuern;
-WAKE_LOCK;Hiermit kann eine Anwendung verhinder, dass das Telefon in den Standy-Modus wechselt. ;Standby-Modus verhindern;
+WAKE_LOCK;Hiermit kann eine Anwendung verhindern, dass das Telefon in den Standby-Modus wechselt und laufende Services angehalten werden.;Standby-Modus verhindern;
 WRITE_APN_SETTINGS;Allows applications to write the apn settings.;;
 WRITE_CALENDAR;Lässt zu, dass Anwendungen Ereignisse, die Sie auf Ihrem Gerät ändern können, hinzufügen, entfernen oder ändern, einschließlich der Ereignisse Ihrer Freunde oder Kollegen. Dies kann berechtigen, Nachrichten zu senden, die aussehen, als kämen sie von Kalendereigentümern, oder Ereignisse ohne Wissen des Eigentümers zu ändern. ;Ohne Wissen des Hosts Kalenderereignisse hinzufügen oder ändern und E-Mails an Gäste senden;
 WRITE_CALL_LOG;Ermöglicht der App, das Anrufprotokoll Ihres Telefons zu ändern, einschlie´lich der Daten über ein- und ausgehende Anrufe. Schädliche Apps können so Ihr Anrufprotokoll löschen oder ändern. ;Anrufprotokoll schreiben;

@@ -72,6 +72,36 @@ public class SettingsActivity extends FoxItActivity {
 
     }
 
+    public ArrayList readLessionCSV(int input, Context context){
+        InputStream is = context.getResources().openRawResource(input);
+        ArrayList result = new ArrayList();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        try{
+            String templine;
+            String csvrow="";
+            while ((templine=br.readLine())!=null){
+                csvrow  +=templine;
+                if(templine.matches(".*;;;")) {
+                    String[] rowarray = csvrow.split(";");
+                    result.add(rowarray);
+                    Log.d("SettingsActivity","row: "+csvrow);
+                    csvrow="";
+                }
+            }
+        } catch (IOException e){
+            throw new RuntimeException("CSV file couldn't be read properly: "+e);
+        } finally {
+            try {
+                is.close();
+                br.close();
+            } catch (IOException e){
+                throw new RuntimeException("Input Stream couldn't be closed properly: "+e);
+            }
+        }
+        return result;
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -103,14 +133,11 @@ public class SettingsActivity extends FoxItActivity {
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
             String URL = "http://192.168.2.3/files/csvs/permissions.csv";//"https://app.seafile.de/f/740b44b607/?raw=1";
-            new CSVDownloadTask(context).execute(URL,"permissions");
+            new CSVDownloadTask(context).execute(URL,"permissions",readCSV(R.raw.permissions,context));
 
         } else{
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ","no internet connection");
-            //DBHandler dbHandler = new DBHandler(context,null,null,1);
-            //dbHandler.updatePermissions(readCSV(R.raw.permissions,context));
-            //dbHandler.close();
             new DBWrite(context).execute("updatePermissions",readCSV(R.raw.permissions,context));
         }
 
@@ -121,15 +148,15 @@ public class SettingsActivity extends FoxItActivity {
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
             String URL = "http://192.168.2.3/files/csvs/lektionen.csv";//"https://app.seafile.de/f/e27034ec0a/?raw=1";
-            new CSVDownloadTask(context).execute(URL,"lessions");
+            new CSVDownloadTask(context).execute(URL,"lessions",readLessionCSV(R.raw.lektionen, context));
             URL = "http://192.168.2.3/files/csvs/classes.csv";//"https://app.seafile.de/f/7ca81fac4e/?raw=1";
-            new CSVDownloadTask(context).execute(URL,"classes");
+            new CSVDownloadTask(context).execute(URL,"classes",readCSV(R.raw.classes, context));
 
         } else {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
             //DBHandler dbHandler = new DBHandler(context, null, null, 1);
-            new DBWrite(context).execute("updateLessions",readCSV(R.raw.lektionen, context));
+            new DBWrite(context).execute("updateLessions",readLessionCSV(R.raw.lektionen, context));
             //dbHandler.updateLessions(readCSV(R.raw.lektionen, context));
             new DBWrite(context).execute("updateClasses",readCSV(R.raw.classes, context));
             //dbHandler.updateClasses(readCSV(R.raw.classes, context));
@@ -142,14 +169,11 @@ public class SettingsActivity extends FoxItActivity {
         if (netInfo != null && netInfo.isConnected()){
             //update from internet resource
             String URL = "http://192.168.2.3/files/csvs/settings.csv";//"https://app.seafile.de/f/bb0071411b/?raw=1";
-            new CSVDownloadTask(context).execute(URL,"settings");
+            new CSVDownloadTask(context).execute(URL,"settings",readCSV(R.raw.settings, context));
 
         } else {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
-            //DBHandler dbHandler = new DBHandler(context, null, null, 1);
-            //dbHandler.updateSettingDescriptions(readCSV(R.raw.settings, context));
-            //dbHandler.close();
             new DBWrite(context).execute("updateSettingDescriptions",readCSV(R.raw.settings, context));
         }
     }

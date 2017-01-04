@@ -144,11 +144,12 @@ public class Home extends FoxItActivity {
                 }
 
             }
+            dbHandler.close();
 
         }
 
 
-        dbHandler.close();
+
     }
 
 

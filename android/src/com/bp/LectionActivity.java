@@ -53,11 +53,13 @@ public class LectionActivity extends FoxItActivity {
         long l = 0;
         lection = new LectionObject(getIntent().getStringExtra("name"), lectionDescription, getIntent().getIntExtra("type", 0), getIntent().getIntExtra("delay", 0), getIntent().getLongExtra("freetime", l), getIntent().getIntExtra("status", 1), getIntent().getIntExtra("acorn", 3));
 
-        DBHandler db = new DBHandler(this, null, null, 1);
-        if (lection.getProcessingStatus() < 2&&lection.getProcessingStatus()!=-99) {
-            db.changeLectionToRead(lection.getLectionName());
-        }
 
+        if (lection.getProcessingStatus() < 2&&lection.getProcessingStatus()!=-99) {
+            DBHandler db = new DBHandler(this, null, null, 1);
+            db.changeLectionToRead(lection.getLectionName());
+            db.close();
+
+        }
         //add the first slide to the activities' context
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -105,7 +107,7 @@ public class LectionActivity extends FoxItActivity {
                         setImage("pfeil_rechts");
                     }
                 } else {
-                    if(!(currentSlide instanceof EvaluationSlide)|| ((currentSlide instanceof EvaluationSlide)&& ((EvaluationSlide)currentSlide).evaluation())){
+                    if(!(currentSlide instanceof EvaluationSlide)|| ((EvaluationSlide)currentSlide).evaluation()){
 
                     //if the current slide defines a next slides that's the slideNumberToJumpTo
                     if (currentSlide.next() != null) {
@@ -177,7 +179,7 @@ public class LectionActivity extends FoxItActivity {
                         if (nextSlideNumber != null && nextSlideNumber.equals("quiz")) {
                             ((QuizSlide) lection.slideHashMap.get(Integer.toString(slideNumber))).evaluation();
                             //if there is no next slide after the next show the cross
-                            if ((nextSlideNumber == null) && (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null)) {
+                            if (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null) {
                                 setImage("kreuz");
                                 //if there is a next slide after the next slide set the arrow
                             } else {
@@ -339,6 +341,7 @@ public class LectionActivity extends FoxItActivity {
             //raise the acornCount on success
             Method method2 = factory.createMethod("changeAcornCount");
             method2.callClassMethod(Integer.toString(lection.getReward()));//TODO customisable number
+            db.close();
 
 
             handler.postDelayed(new Runnable() {
@@ -347,15 +350,16 @@ public class LectionActivity extends FoxItActivity {
                     onBackPressed();
                 }
             }, 4250);
-        } else {
+        } else if (lection.getProcessingStatus() != 3){
 
             long nextFreeTime = (System.currentTimeMillis() % Long.MAX_VALUE) + lection.getDelaytime();
             Log.d("getbacktolist","nextfreetime: "+nextFreeTime);
             Log.d("getbacktolist","delaytime: "+lection.getDelaytime());
             DBHandler db = new DBHandler(this, null, null, 1);
             db.setLectionNextFreeTime(lection.getLectionName(), nextFreeTime);
+            db.close();
             onBackPressed();
-        }
+        } else onBackPressed();
     }
 
 
