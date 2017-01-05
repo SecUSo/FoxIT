@@ -151,7 +151,7 @@ public class ClassListActivity extends FoxItActivity implements AdapterView.OnIt
             case "Datenschutzgesetze":
                 return R.mipmap.literature;   //nicht final
             case "Daily Lections":
-            return R.mipmap.literature;  //nicht final
+            return R.mipmap.class_daily;  //nicht final
             default:
                 return R.mipmap.ring;
 

@@ -128,7 +128,8 @@ public class BackgroundService extends Service {
                 Long result = (currentTime - firstTime) / 86400000;
 
                 if (result > v.dailyLectionsUnlocked && v.dailyLectionsUnlocked < 15 && v.valueKeeperAlreadyRefreshed) {
-                    String lectionName = "test";//db.unlockDaily();
+                    DBHandler db=new DBHandler(context,null,null,2);
+                    String lectionName = db.unlockDaily();
                     v.increaseDailyLectionsUnlocked();
 
                     NotificationCompat.Builder mBuilder =
