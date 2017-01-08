@@ -231,7 +231,7 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
         }
 
         ValueKeeper v=ValueKeeper.getInstance();
-        if(solvedLectionNumber==lectionNumber){
+        if(solvedLectionNumber==lectionNumber&&lectionNumber!=0){
             v.insertSolvedClass(className);
         }
 

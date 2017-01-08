@@ -1,6 +1,7 @@
 package com.bp;
 import android.app.Fragment;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -28,12 +29,21 @@ public class TrophyNotificationFragment extends Fragment{
                 text.setText(name+" freigeschaltet!");
 
         ImageView trophyIcon=(ImageView) view.findViewById(R.id.image_trophy_symbol);
-        //trophyIcon.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.mipmap.stern_voll2));
+        Drawable image;
+        switch (name){
+            case "Baumhaus Kapitalist": image =ContextCompat.getDrawable(getActivity(),R.mipmap.acorn_finish);
+            case "Schnüffler": image =ContextCompat.getDrawable(getActivity(),R.mipmap.fox_finish);
+            case "Frischling":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.boar_finish);
+            case "Halbzeit":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.clock_finish);
+            case "Privacy Shield":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.shield_finish);
+            case "Nachteule":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.owl_finish);
+            case "Early Bird":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.bird_finish);
+            case "Power User":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.rocket_finish);
+            default: image= ContextCompat.getDrawable(getActivity(),R.mipmap.stern_voll2);
+        }
 
-        //switch (name){
-          //  case "Neuling": trophyIcon.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.goodapprating));
+        trophyIcon.setImageDrawable(image);
 
-        //}
     }
 
     @Override

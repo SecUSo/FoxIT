@@ -118,7 +118,7 @@ public class ValueKeeper {
             vpnCode = data.get("vpnCode");
         }
         if (data.containsKey("notDisplayed")) {
-            notDisplayed = Boolean.getBoolean(data.get("notDisplayed"));
+            notDisplayed = Boolean.valueOf(data.get("notDisplayed"));
         }
         if (data.containsKey("currentEvaluation")) {
             currentEvaluation = Integer.valueOf(data.get("currentEvaluation"));
