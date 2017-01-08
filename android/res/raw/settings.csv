@@ -8,7 +8,7 @@ airplane_mode_radios;0;Bei Flugmodus deaktivierte Funktionen;Diese Kommunikation
 accessibility_script_injection_url;0;Eingabehilfe: Skript-Adresse;Wenn ein spezielles Skript zur Eingabehilfe genutzt wird, dann wird dies unter diesem Pfad abgerufen.
 accessibility_web_content_key_bindings;0;Eingabehilfe: Tastenzuweisung bei Webinhalten;Eine Einstellung der Eingabehilfen. Bestimmte Tasten werden an Funktionen gebunden, um in Webinhalten einfach navigieren zu können.
 airplane_mode_toggleable_radios;0;Bei Flugmodus schaltbare Funktionen;Diese Kommunikationsschnittstellen können nach Einschalten des Flugmodus‘ weiterhin ein- oder ausgeschaltet werden. Standardmäßig sind das WLAN, Bluetooth und NFC (wenn vorhanden).
-android_id;2;Android ID (systemeigen);Diese ID wird bei der Installation des Android-Systemes erzeugt und ist eindeutig dem Handy zugeordnet. Durch installieren eines neuen Systemes würde sie sich ändern. Sie kann leicht genutzt werden, um ein Telefon über lange Zeit oder mehrere Apps hinweg zu identifizieren. 
+android_id;2;Android ID (systemeigen);Diese ID wird bei der Installation des Android-Systemes erzeugt und ist eindeutig dem Handy zugeordnet. Durch installieren eines neuen Systemes würde sie sich ändern. Sie kann leicht genutzt werden, um ein Telefon über lange Zeit oder mehrere  Apps hinweg zu identifizieren. Wird das Telefon von mehreren Nutzern verwendet, haben sie jeweils eine eigene ID.
 app_idle_constants;0;Erlaubter Leerlauf einer App;Hier werden Konstanten aufgeführt, die zur Bestimmung dienen, ob eine App inaktiv ist.  z.B „idle_duration“: Wenn eine App länger als diese Zeit (vermutlich Millisekunden) im Leerlauf ist, wird sie nicht mehr als aktive App gezählt.
 assisted_gps_enabled;1;Netzwerkunterstütztes GPS;Dies gibt an, ob die Ortung über Netzverbindungen mit den Funkmasten aktiviert ist.
 audio_safe_volume_state;1;Anzeige von Hörschädigungshinweis;Auf vielen Telefonen wird bei eingestecktem Kopfhörer-Kabel ein Warnhinweis gezeigt, wenn man eine gewisse Lautstärke überschreitet. Ob dieser aktiviert ist oder nicht, steht hier.
@@ -21,7 +21,7 @@ car_undock_sound;0;Auto-Dockingstation-Endton;Entfernt man sein Smartphone von e
 cdma_cell_broadcast_sms;1;SMS-Broadcast per CDMA erhalten;Diese Funktion bezeichnet Notfall-Broadcast-Nachrichten, die über ein bestimmtes Netzprotokoll (CDMA) verschickt werden. Ist sie aktiviert, kann das Telefon diese Nachrichten erhalten.
 backup_enabled;1;Daten-Backup aktiviert;Google kann hiermit eine Menge Daten speichern, die im Falle eines Verlustes oder Zurücksetzen des Handys wiederhergestellt werden können. Dazu gehören z.B. eingespeicherte WLAN-Passwörter, App-Daten (wie Spielstände oder Einstellungen in Apps) oder auch Kontakte, Bilder und Nachrichten.
 data_roaming;1;Daten-Roaming;Daten Roaming bezeichnet das Nutzen fremder Netze für Internetzugang. Je nach Vertrag mit dem eigenen Netzanbieter kann das kostenlos sein oder teuer. Dass man in anderen Netzen als dem eigenen Internet aktivieren muss ist meist im Ausland der Fall, jedoch gibt es auch durch die Zusammenlegung der Netze von O2 und Eplus Fälle, bei denen das im Inland sinnvoll sein kann.
-default_install_location;0;Standard App-Speicherort;Der Standardort, wohin Apps im Normalfall installiert werden. Wir sind uns noch nicht ganz sicher, ob es angibt, ob der Standartort aktiviert ist oder ob es einen Hinweis auf den Ort gibt.
+default_install_location;0;Standard App-Speicherort;Der Standardort, wohin Apps im Normalfall installiert werden. 0 = auto, 1 = interner Speicher, 2 = SD-Karte.
 desk_dock_sound;0;Dockingstation-Anschlusston;Dieser Ton wird abgespielt, wenn das Smartphone an einen Dockingstation angeschlossen wird.
 desk_undock_sound;0;Dockingstation-Trennton;Dieser Ton wird abgespielt, wenn das Smartphone von einer Dockingstation getrennt wird.
 device_name;0;Gerätename;Die Technische Bezeichnung des Gerätes, also die Modellbeschreibung des Herstellers.
@@ -71,7 +71,7 @@ multi_sim_sms;1;SMS mit MultiSIM;Hier ist beschrieben, ob SMS-Nachrichten bei me
 multi_sim_sms_prompt;1;Abfrage bei SMS mit MultiSIM;Hier ist beschrieben, ob bei mehreren SIM-Karten nachgefragt wird, von welcher eine SMS geschickt werden soll.
 multi_sim_voice_call;1;Anrufe mit MultiSIM;Hier ist beschrieben, ob bei mehreren SIM-Karten Anfrufe aktiviert sind.
 netstats_enabled;1;Netzwerkstatistiken;Auf einigen Handys kann man sich die aktuellen Datenübertragungsraten in der Statusleiste anzeigen lassen. Hier steht, ob das aktiviert ist.
-network_scoring_provisioned;1;Beschränkte Netzwerkzählung;Es fehlt leider eine Beschreibung.
+network_scoring_provisioned;1;Netzwerkzählung initialisiert;Gibt an, ob der Service zur Auzeichnung der Netzwerkstatistiken bereits inital gestartet wurde.
 nfc_default_route;0;NFC Standard Modus;Near Field Communication wurde im Zuge der RFID-Chips erfunden um die schnelle Übertragungsgeschwindigkeit und passive Funktion der Chips zu nutzen.  Es gibt viele Systeme, welche sie einsetzen, zum Beispiel kann man an der TU-Darmstadt seine Mensa-Karte damit auslesen. Auch mobiles Bezahlen mit den Apps von Paypal oder Google funktioniert damit. Der Default-Modus meint die NFC-Card emulation, bei der über ein Sicherheitselement oder direkt durch den Prozessor eine NFC-Karte für ein Terminal emuliert wird.
 package_verifier_enable;1;App-Verifizierung;Wenn Apps installiert werden, kann ihr Paket verifiziert werden, um sicherzugehen, dass eine einwandfreie App installiert wird und keine Malware.
 package_verifier_user_consent;1;App-Verifizierung nach Nutzer-Einwilligung;Die Verifizierung von Apps bei deren Installation kann auch erst nach Einwilligung des Nutzers geschehen.
@@ -83,27 +83,27 @@ screensaver_activate_on_sleep;1;Bildschirmschoner bei Inaktivität aktivieren;Ei
 screensaver_enabled;1;Bildschirmschoner;Grundsätzliche Aktivierung oder Deaktivierung des Bildschirmschoners.
 selected_input_method_subtype;2;Untereinstellung der aktuellen Eingabemethode;Die aktuell ausgewählten Sprach- oder Moduseinstellungen der Eingabemethode.
 send_action_app_error;1;Einen App-Fehler melden;Soll automatisch eine Nachricht an den Google-Store geschickt werden, wenn eine App abstürzt.
-serial_blacklist;0;Ausschlussliste für Seriennummern;Es fehlt leider eine Beschreibung.
-set_install_location;1;Den App-Installationsort setzen;Es fehlt leider eine Beschreibung.
-show_note_about_notification_hiding;1;Nachricht bei Verstecken von Benachrichtigungen anzeigen;Es fehlt leider eine Beschreibung.
-show_processes;1;Laufende Prozesse anzeigen;Es fehlt leider eine Beschreibung.
-sleep_timeout;2;Verzögerung, bis der Prozessor in den Schlaf-Modus geht;Es fehlt leider eine Beschreibung.
-sms_outgoing_check_interval_ms;2;Zeitintervall, in dem die Menge ausgehender SMS geprüft wird;Es fehlt leider eine Beschreibung.
-sms_outgoing_check_max_count;2;Menge an SMS, die in dem Intervall gesendet werden dürfen;Es fehlt leider eine Beschreibung.
-speak_password;1;Eingabehilfen: Passwörter aussprechen;Es fehlt leider eine Beschreibung.
+serial_blacklist;0;Ausschlussliste für Seriennummern;Eine Liste, auf der Serials stehen, von denen keine SSL-Zertifikate aktzeptiert werden sollen. SSL-Zertifikate sind beim Browsen im Internet relevant. Dadurch können Seiten als unsicher erkannt werden, obwohl sie ein (nicht gerechtfertigtes) Sicherheitszertifikat haben.
+set_install_location;1;Standard App-Installationsort;Hier steht, wohin Apps standardmäßig installiert werden. 0 steht dafür, dass das System den besten Ort aussucht, bei 1 wird ausschließlich auf dem internen Speicher installiert und 2 steht dafür, dass die SD-Karte präferiert wird.
+show_note_about_notification_hiding;1;Nachricht bei Verstecken von Benachrichtigungen anzeigen;Eine variable, die angibt, ob der Hinweis dafür noch gezeigt wird, dass Nachrichten auf dem Sperrbildschirm nicht angezeigt werden (logischerweise, wenn das eingeschaltet ist).
+show_processes;1;Laufende Prozesse anzeigen;Es gibt in den Entwickleroptionen die Funktion, sich alle laufenden Prozesse und deren Belastung für das System anzeigen zu lassen.
+sleep_timeout;2;Verzögerung, bis der Prozessor in den Schlaf-Modus geht;Um Strom zu sparen, geht das System in den „sleep“-Modus, wenn die angegebene Zeit lang keine Interaktion vom Nutzer einging. Ist dies deaktiviert, steht der Wert auf -1.
+sms_outgoing_check_interval_ms;2;Zeitintervall, in dem die Menge ausgehender SMS geprüft wird;Um Missbrauch durch Maleware oder ähnliches zu vermeiden, wird die Menge an ausgehenden SMS gezählt und bei Überschreiten einer Grenze in einer bestimmten Zeit der Nutzer um Einwilligung gefragt. Hier steht, wie lang das Intervall ist  (in Millisekunden).
+sms_outgoing_check_max_count;2;Menge an SMS, die in dem Intervall gesendet werden dürfen;Um Missbrauch durch Maleware oder ähnliches zu vermeiden, wird die Menge an ausgehenden SMS gezählt und bei Überschreiten einer Grenze in einer bestimmten Zeit der Nutzer um Einwilligung gefragt. Hier steht, nach wie vielen SMS in dem Zeitintervall nachgefragt wird.
+speak_password;1;Eingabehilfen: Passwörter aussprechen;Angabe, ob Passwörter ausgesprochen werden, wenn Eingabehilfen aktiviert sind.
 ssl_session_cache;0;Modus des SSL-Caches;Es fehlt leider eine Beschreibung.
-stay_on_while_plugged_in;1;Display anlassen, wenn Strom angeschlossen ist.;Es fehlt leider eine Beschreibung.
-usb_mass_storage_enabled;1;USB-Massenspeicher;Es fehlt leider eine Beschreibung.
+stay_on_while_plugged_in;1;Display anlassen, wenn Strom angeschlossen ist.;Man kann einstellen, wann das Display ausgehen soll, wenn man das Handy nicht benutzt. In den Entwickleroptionen kann man dies auch gänzlich deaktivieren, wenn man ein permanent aktives Bild haben möchte (solange es an USB angeschlossen ist).
+usb_mass_storage_enabled;1;USB-Massenspeicher;Ist der Betrieb von USB-Massenspeichergeräten aktiviert.
 use_google_mail;1;Gmail-Referenzen werden zu Google aufgelöst;Google hat vor einigen Jahren ihr googlemail zu gmail umbenannt. Um dem gewöhnten Nutzer Unannehmlichkeiten zu ersparen, kann dies automatisch ersetzt werden.
-wifi_max_dhcp_retry_count;2;Maximale Anzahl von Versuchen eine Verbindung aufzubauen;Es fehlt leider eine Beschreibung.
-wifi_mobile_data_transition_wakelock_timeout_ms;2;Maximale Dauer zum Aufbau einer mobilen Datenverbindung vor dem Übergang in den Sleep-Modus (ms);Es fehlt leider eine Beschreibung.
-wifi_networks_available_notification_on;1;Wiederholte Meldung verfügbarer Netze;Es fehlt leider eine Beschreibung.
-wifi_networks_available_repeat_delay;2;Zeit zur wiederholten Meldung verfügbarer Netze (s);Es fehlt leider eine Beschreibung.
-wifi_num_open_networks_kept;2;Anzahl gespeicherter Wifi-Access-Points;Es fehlt leider eine Beschreibung.
+wifi_max_dhcp_retry_count;2;Maximale Anzahl von Versuchen eine Verbindung aufzubauen;Die Anzahl an Versuchen, zu einem WLAN-Netzwerkgerät zu verbinden, wenn keine IP-Adresse durch DHCP (eine Adressverteilungstechnik) erhalten werden konnte.
+wifi_mobile_data_transition_wakelock_timeout_ms;2;Maximale Dauer zum Aufbau einer mobilen Datenverbindung vor dem Übergang in den Sleep-Modus (ms);Wenn die Verbindung zu einem WLAN-Netzwerk abgebrochen wurde, wird das Telefon eine Zeit lang aktiv gehalten (geht nicht in den „sleep“-Modus), um Mobiles Netzwerk aktivieren zu können. Hier wird dies Zeitspanne angegeben (in Millisekunden).
+wifi_networks_available_notification_on;1;Wiederholte Meldung verfügbarer Netze;Für offene WLAN-Netze ohne Passwort kann man sich anzeigen lassen, wenn eines in der Nähe verfügbar ist (nur wenn man nicht schon mit einem WLAN verbunden ist).
+wifi_networks_available_repeat_delay;2;Zeit zur wiederholten Meldung verfügbarer Netze (s);Hat man die Benachrichtigung zu offenen WLAN-Netzen aktiviert, dann wird nach diesem Zeitintervall erneut eine Benachrichtigung angezeigt, nachdem die letzte ausgeblendet wurde.
+wifi_num_open_networks_kept;2;Anzahl gespeicherter offener Wifi-Access-Points;Wenn mehr als hier angegebene offene WLAN-Netze gespeichert sind, werden diejenigen gelöscht, deren Nutzung am längsten zurückliegt.
 wifi_on;1;WiFi;WLAN-Gerät aktiviert.
 wifi_sleep_policy_default;2;Default-Einstellung für den Wifi-Sleep-Modus;Es fehlt leider eine Beschreibung.
-wifi_sleep_policy;2;Aktiver Wifi-Sleep-Modus;Die aktuelle Einstellung des WLAN-Stromsparmodus‘.
-wifi_sleep_policy_never;2;Wifi-Sleep-Modus immer aus;Ausschalten des WLAN-Stromsparemodus‘ zum nutzen der vollen Konnektivität auf Kosten der Akkulaufzeit.
-wifi_sleep_policy_never_while_plugged;1;Wifi-Sleep-Modus beim Aufladen des Handys aus;WLAN-Stromsparen wird hier beim Laden des Telefons ausgeschaltet, um bei genügend Strom die beste Erreichbarkeit zu gewährleisten.
+wifi_sleep_policy;2;Aktiver Wifi-Sleep-Modus;Die aktuelle Einstellung des WLAN-Stromsparmodus‘. 0 steht für Default (bei eintreten des „sleep“-Modus‘ ausschalten), 1 für nicht ausschalten, wenn das Smartphone an der Stromzufuhr hängt und 2 dafür, dass das WLAN nie in den Schlafmodus gehen soll.
+wifi_sleep_policy_never;2;Wifi-Sleep-Modus immer aus;Konstante: Ausschalten des WLAN-Stromsparemodus‘ zum nutzen der vollen Konnektivität auf Kosten der Akkulaufzeit.
+wifi_sleep_policy_never_while_plugged;1;Wifi-Sleep-Modus beim Aufladen des Handys aus;Konstante: WLAN-Stromsparen wird hier beim Laden des Telefons ausgeschaltet, um bei genügend Strom die beste Erreichbarkeit zu gewährleisten.
 wifi_watchdog_on;1;Regelmäßige Wifi-Suche;Es kann dauerhaft nach WLAN gesucht werden, auch wenn es nicht direkt aktiviert ist.
-window_animation_scale;0;Faktor zum Skalieren normaler Animationen;Es fehlt leider eine Beschreibung.
+window_animation_scale;0;Faktor zum Skalieren normaler Animationen;Gewöhnliche Übergänge in Android haben kurze Animationen. Hier ist angegeben, in welcher Geschwindigkeit diese skaliert werden.
