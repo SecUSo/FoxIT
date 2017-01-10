@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.foxyourprivacy.f0x1t.AsyncTasks.SaveValueTask;
 import com.foxyourprivacy.f0x1t.BackgroundService;
-import com.foxyourprivacy.f0x1t.FoxItApplication;
+import com.foxyourprivacy.f0x1t.FoxITApplication;
 import com.foxyourprivacy.f0x1t.Fragments.TrophyNotificationFragment;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
@@ -42,7 +42,7 @@ public class FoxItActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FoxItActivity.context = getApplicationContext();
         ValueKeeper v = ValueKeeper.getInstance();
-        FoxItApplication myApp = (FoxItApplication) this.getApplication();
+        FoxITApplication myApp = (FoxITApplication) this.getApplication();
         if (v.getSizeOfAppStarts() > 1) {
             setTrophyUnlocked("Power User");
         }
@@ -58,7 +58,7 @@ public class FoxItActivity extends AppCompatActivity {
 
         FoxItActivity.context = getApplicationContext();
         ValueKeeper v = ValueKeeper.getInstance();
-        FoxItApplication myApp = (FoxItApplication) this.getApplication();
+        FoxITApplication myApp = (FoxITApplication) this.getApplication();
         Log.d("FITActivity","freshlystarted: "+v.getFreshlyStarted());
         if (v.getFreshlyStarted()) {
 
@@ -115,7 +115,7 @@ public class FoxItActivity extends AppCompatActivity {
         v.fillApplicationAccessAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndActiveCDuration(System.currentTimeMillis());
-        ((FoxItApplication) this.getApplication()).startActivityTransitionTimer();
+        ((FoxITApplication) this.getApplication()).startActivityTransitionTimer();
         new SaveValueTask().execute();
     }
 

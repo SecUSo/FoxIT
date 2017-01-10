@@ -11,7 +11,7 @@
 
 
     <application
-        android:name=".FoxItApplication"
+        android:name=".FoxITApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo_scaled_medium_s"
         android:label="@string/app_name"

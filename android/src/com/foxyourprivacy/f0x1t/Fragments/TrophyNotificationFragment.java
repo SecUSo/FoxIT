@@ -65,7 +65,7 @@ public class TrophyNotificationFragment extends Fragment {
                 break;
 
             default:
-                image = ContextCompat.getDrawable(getActivity(), R.mipmap.stern_voll2);
+                image =null;
                 break;
 
         }

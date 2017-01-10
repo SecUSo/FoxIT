@@ -9,7 +9,7 @@ import java.util.TimerTask;
  * Created by Ich on 18.10.2016.
  */
 
-public class FoxItApplication extends Application {
+public class FoxITApplication extends Application {
 
     private final long MAX_ACTIVITY_TRANSITION_TIME_MS = 10000;
     public boolean wasInBackground;
@@ -20,7 +20,7 @@ public class FoxItApplication extends Application {
         this.mActivityTransitionTimer = new Timer();
         this.mActivityTransitionTimerTask = new TimerTask() {
             public void run() {
-                FoxItApplication.this.wasInBackground = true;
+                FoxITApplication.this.wasInBackground = true;
             }
         };
 

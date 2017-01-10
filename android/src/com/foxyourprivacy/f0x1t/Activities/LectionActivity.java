@@ -36,6 +36,7 @@ public class LectionActivity extends FoxItActivity {
     Toolbar toolbar;
     boolean didEvaluationStart = false;
     boolean isEvaluation = false; //TODO: find fitting Name
+    String className="nothing";
 
     HashMap<String, String> evaluationResults = new HashMap<>();
     Handler handler;
@@ -49,6 +50,7 @@ public class LectionActivity extends FoxItActivity {
 
         setContentView(R.layout.activity_lection_activity);
         lectionDescription = getIntent().getStringExtra("lection");
+        className=getIntent().getStringExtra("classname");
         handler = new Handler();
 
         // sets our toolbar as the actionbar
@@ -349,8 +351,11 @@ public class LectionActivity extends FoxItActivity {
             }
 
             MethodFactory factory = new MethodFactory(this);
-            Method method = factory.createMethod("changeTokenCount");
-            method.callClassMethod("1");
+            if(className!=null&&!className.equals("nothing")&&!className.equals("Daily Lections")) {
+                Method method = factory.createMethod("changeTokenCount");
+                method.callClassMethod("1");
+            }
+
             //raise the acornCount on success
             Method method2 = factory.createMethod("changeAcornCount");
             method2.callClassMethod(Integer.toString(lection.getReward()));//TODO customisable number
