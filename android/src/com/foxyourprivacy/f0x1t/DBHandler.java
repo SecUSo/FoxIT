@@ -377,14 +377,19 @@ public class DBHandler extends SQLiteOpenHelper {
         long time = System.currentTimeMillis();
         // db.execSQL("DROP TABLE IF EXISTS "+TABLE_LESSIONS);
         for (String[] lessionArray : theLessions) {
-            String lessionString = createLessionString(lessionArray).replace("'", "''");
-            if (checkIfInside(db, TABLE_LESSIONS, COLUMN_LECTURENAME + " = \'" + lessionArray[1] + "\'")) {
-                db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_CONTENT + " = \'" + lessionString + "\', " + COLUMN_COURSE + " = \'" + lessionArray[0] + "\', " +
-                        "\'" + COLUMN_DELAY + "\' = \'" + lessionArray[2] + "\', \'" + COLUMN_LECTURETYPE + "\' = \'" + lessionArray[5] + "\', \'" + COLUMN_EICHELN + "\' = \'" + lessionArray[4] +
-                        "\' WHERE " + COLUMN_LECTURENAME + " = \'" + lessionArray[1] + "\';");
-            } else {
-                db.execSQL("INSERT INTO " + TABLE_LESSIONS + " VALUES(\'" + lessionArray[1] + "\', \'" + lessionArray[3] + "\', \'" + lessionArray[0] + "\', \'" + lessionString + "\', \'" + lessionArray[2] + "\', \'" + lessionArray[5] + "\', \'" + time + "\', \'" + lessionArray[4] + "\');");
+            try{
+                String lessionString = createLessionString(lessionArray).replace("'", "''");
+                if (checkIfInside(db, TABLE_LESSIONS, COLUMN_LECTURENAME + " = \'" + lessionArray[1] + "\'")) {
+                    db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_CONTENT + " = \'" + lessionString + "\', " + COLUMN_COURSE + " = \'" + lessionArray[0] + "\', " +
+                            "\'" + COLUMN_DELAY + "\' = \'" + lessionArray[2] + "\', \'" + COLUMN_LECTURETYPE + "\' = \'" + lessionArray[5] + "\', \'" + COLUMN_EICHELN + "\' = \'" + lessionArray[4] +
+                            "\' WHERE " + COLUMN_LECTURENAME + " = \'" + lessionArray[1] + "\';");
+                } else {
+                    db.execSQL("INSERT INTO " + TABLE_LESSIONS + " VALUES(\'" + lessionArray[1] + "\', \'" + lessionArray[3] + "\', \'" + lessionArray[0] + "\', \'" + lessionString + "\', \'" + lessionArray[2] + "\', \'" + lessionArray[5] + "\', \'" + time + "\', \'" + lessionArray[4] + "\');");
+                }
+            }catch (IndexOutOfBoundsException ioobe){
+                Log.e("DBHandler","Fehler in Lektion: "+lessionArray[1]);
             }
+
         }
         db.close();
 
@@ -442,7 +447,7 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param lessionArray Array with content of one lession
      * @return the needed String
      */
-    private String createLessionString(String[] lessionArray) {
+    private String createLessionString(String[] lessionArray) throws IndexOutOfBoundsException{
         Log.d("createLessionString", lessionArray[1] + lessionArray[0]);
         StringBuilder sb = new StringBuilder();
         sb.append("[name~" + lessionArray[1] + "]");

@@ -51,7 +51,7 @@ public class ValueKeeper {
     Boolean isEvaluationOutstanding = false;
     ArrayList<String> appsBefore = new ArrayList<>();
     HashMap<String, String> evaluationResults = new HashMap<>();
-    Boolean freshlyStartet = true;
+    Boolean freshlyStarted = true;
     private int acornCount = 0; //amount of acorn the player collected
     private int tokenCount = 0; //amount of token the player collected
 
@@ -381,12 +381,12 @@ public class ValueKeeper {
         // Log.d("MyApp",applicationAccessAndDuration.toString());
     }
 
-    public Boolean getFreshlyStartet() {
-        return freshlyStartet;
+    public Boolean getFreshlyStarted() {
+        return freshlyStarted;
     }
 
-    public void setFreshlyStartet(Boolean freshlyStartet) {
-        this.freshlyStartet = freshlyStartet;
+    public void setFreshlyStarted(Boolean freshlyStartet) {
+        this.freshlyStarted = freshlyStartet;
     }
 
     public void fillApplicationStartAndDuration(long time) {

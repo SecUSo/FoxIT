@@ -59,7 +59,8 @@ public class FoxItActivity extends AppCompatActivity {
         FoxItActivity.context = getApplicationContext();
         ValueKeeper v = ValueKeeper.getInstance();
         FoxItApplication myApp = (FoxItApplication) this.getApplication();
-        if (v.getFreshlyStartet()) {
+        Log.d("FITActivity","freshlystarted: "+v.getFreshlyStarted());
+        if (v.getFreshlyStarted()) {
 
             Intent mServiceIntent = new Intent(this, BackgroundService.class);
             startService(mServiceIntent);
@@ -98,9 +99,9 @@ public class FoxItActivity extends AppCompatActivity {
         }
 
 
-        if (myApp.wasInBackground || v.getFreshlyStartet()) {
+        if (myApp.wasInBackground || v.getFreshlyStarted()) {
             Log.d("MyApp", "Was in Background");
-            v.setFreshlyStartet(false);
+            v.setFreshlyStarted(false);
             v.setTimeOfLastAccess(System.currentTimeMillis());
         }
 
