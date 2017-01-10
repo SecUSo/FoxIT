@@ -237,7 +237,7 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
 
         int numberOfSolvedClasses =v.getNumberOfSolvedClasses();
         if(numberOfSolvedClasses>=1){
-            setTrophyUnlocked("Neuling");}
+            setTrophyUnlocked("Frischling");}
         if(numberOfSolvedClasses>=5){
             setTrophyUnlocked("Halbzeit");}
         if(numberOfSolvedClasses>=10){
