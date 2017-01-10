@@ -199,6 +199,7 @@ public class LectionListActivity extends FoxItActivity implements AdapterView.On
                 intent.putExtra("freetime", lectionObjectList.get(position).getNextfreetime());
                 intent.putExtra("status", lectionObjectList.get(position).getProcessingStatus());
                 intent.putExtra("acorn", lectionObjectList.get(position).getReward());
+                intent.putExtra("classname",className);
                 startActivity(intent);
             }
         }

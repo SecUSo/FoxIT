@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class TrophyNotificationFragment extends Fragment{
 
         ImageView trophyIcon=(ImageView) view.findViewById(R.id.image_trophy_symbol);
         Drawable image;
+        Log.d("MyApp",name);
         switch (name){
             case "Baumhaus Kapitalist": image =ContextCompat.getDrawable(getActivity(),R.mipmap.acorn_finish);
             case "Schnüffler": image =ContextCompat.getDrawable(getActivity(),R.mipmap.fox_finish);
@@ -39,7 +41,7 @@ public class TrophyNotificationFragment extends Fragment{
             case "Nachteule":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.owl_finish);
             case "Early Bird":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.bird_finish);
             case "Power User":  image =ContextCompat.getDrawable(getActivity(),R.mipmap.rocket_finish);
-            default: image= ContextCompat.getDrawable(getActivity(),R.mipmap.stern_voll2);
+            default: image= null;//ContextCompat.getDrawable(getActivity(),R.mipmap.stern_voll2);
         }
 
         trophyIcon.setImageDrawable(image);

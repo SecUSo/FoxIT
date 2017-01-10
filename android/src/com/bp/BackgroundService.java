@@ -127,7 +127,7 @@ public class BackgroundService extends Service {
                 Long currentTime = System.currentTimeMillis();
                 Long result = (currentTime - firstTime) / 86400000;
 
-                if (result > v.dailyLectionsUnlocked && v.dailyLectionsUnlocked < 15 && v.valueKeeperAlreadyRefreshed) {
+                if (result >= v.dailyLectionsUnlocked && v.dailyLectionsUnlocked < 15 && v.valueKeeperAlreadyRefreshed) {
                     DBHandler db=new DBHandler(context,null,null,2);
                     String lectionName = db.unlockDaily();
                     v.increaseDailyLectionsUnlocked();
