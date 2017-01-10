@@ -15,7 +15,7 @@ android {
         instrumentTest.setRoot('tests')
     }
     defaultConfig {
-        applicationId "com.bp"
+        applicationId "com.foxyourprivacy.f0x1t"
         minSdkVersion 17
         targetSdkVersion 24
     }
@@ -65,7 +65,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.bp/AnimationLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.foxyourprivacy.f0x1t/AnimationLauncher'
 }
 // sets up the Android Eclipse project, using the old Ant based build.
 eclipse {
@@ -122,7 +122,7 @@ idea {
 dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:support-v13:24.2.1'
-    compile 'com.android.support:percent:23.0.0'
+    compile 'com.android.support:percent:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:appcompat-v7:24.2.1'
