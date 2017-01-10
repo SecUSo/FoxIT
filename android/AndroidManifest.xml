@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bp"
+    package="com.foxyourprivacy.f0x1t"
     android:versionCode="1"
     android:versionName="1.0">
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Home">
+        <activity android:name=".Activities.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,18 +32,21 @@
             android:label="@string/app_name"
             >
         </service>
-        <activity android:name=".Analysis" />
-        <activity android:name=".StartScreen"
+
+        <activity android:name=".Activities.Analysis" />
+        <activity
+            android:name=".Activities.StartScreen"
             android:screenOrientation="portrait"/>
-        <activity android:name=".LectionActivity"
+        <activity
+            android:name=".Activities.LectionActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"/>
-        <activity android:name=".LectionListActivity" />
-        <activity android:name=".ClassListActivity" />
-        <activity android:name=".TrophyRoomActivity" />
-        <activity android:name=".OnboardingActivity" />
+        <activity android:name=".Activities.LectionListActivity" />
+        <activity android:name=".Activities.ClassListActivity" />
+        <activity android:name=".Activities.TrophyRoomActivity" />
+        <activity android:name=".Activities.OnboardingActivity" />
         <activity android:name=".AnimationLauncher" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".Activities.SettingsActivity" />
 
     </application>
 </manifest>

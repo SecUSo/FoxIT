@@ -3,23 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity">
+    tools:context=".Activities.SettingsActivity">
 
     <RelativeLayout
+        android:id="@+id/second_fragment_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/second_fragment_frame"
         android:layout_below="@+id/include"
         android:layout_marginTop="55dp">
     </RelativeLayout>
 
-    <include layout="@layout/toolbar_actionbar"></include>
+    <include layout="@layout/toolbar_actionbar" />
 
     <RelativeLayout
+        android:id="@+id/first_fragment_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:id="@+id/first_fragment_frame"
         android:layout_below="@+id/include"
         android:layout_marginTop="55dp">
 
@@ -28,9 +28,9 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/request_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/request_frame"
         android:layout_below="@+id/include"
         android:layout_marginTop="55dp">
     </RelativeLayout>
