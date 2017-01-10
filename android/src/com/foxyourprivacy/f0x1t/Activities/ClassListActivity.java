@@ -154,7 +154,7 @@ public class ClassListActivity extends FoxItActivity implements AdapterView.OnIt
                 return R.mipmap.class_passwort;
             case "Datenschutzgesetze":
                 return R.mipmap.class_law;
-            case "Daily Lections":
+            case "Daily Lessions":
                 return R.mipmap.class_daily;
             case "Verschlüsselung":
                 return R.mipmap.class_verschlusselung;

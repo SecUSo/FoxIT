@@ -351,7 +351,7 @@ public class LectionActivity extends FoxItActivity {
             }
 
             MethodFactory factory = new MethodFactory(this);
-            if(className!=null&&!className.equals("nothing")&&!className.equals("Daily Lections")) {
+            if(className!=null&&!className.equals("nothing")&&!className.equals("Daily Lessions")) {
                 Method method = factory.createMethod("changeTokenCount");
                 method.callClassMethod("1");
             }
