@@ -31,7 +31,7 @@ import java.util.List;
  * device and user specific content is retrieved and saved in database
  * including installed apps, respective permissions & settings.
  */
-public class Analysis extends FoxItActivity {
+public class Analysis extends FoxITActivity {
 
     Toolbar toolbar;
 

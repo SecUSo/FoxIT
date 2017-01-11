@@ -1,4 +1,4 @@
-package com.foxyourprivacy.f0x1t;
+package com.foxyourprivacy.f0x1t.Animation;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

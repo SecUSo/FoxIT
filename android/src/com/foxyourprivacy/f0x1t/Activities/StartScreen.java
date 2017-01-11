@@ -17,7 +17,7 @@ import com.foxyourprivacy.f0x1t.Fragments.PermissionListFragment;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.TapAdapter;
 
-public class StartScreen extends FoxItActivity {
+public class StartScreen extends FoxITActivity {
 
     public ViewPager mViewPager; //defines the tabView's content
     public PermissionListFragment permissionList;

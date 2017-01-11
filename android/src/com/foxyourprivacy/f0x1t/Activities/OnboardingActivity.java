@@ -12,7 +12,7 @@ import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.TapAdapter_onboarding;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 
-public class OnboardingActivity extends FoxItActivity {
+public class OnboardingActivity extends FoxITActivity {
 
     TapAdapter_onboarding adapter; //defines the content of the tabs, OnboardingFragment-OnboardingFragment4
     ViewPager mViewPager;

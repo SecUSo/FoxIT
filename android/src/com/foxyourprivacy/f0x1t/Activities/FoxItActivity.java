@@ -25,13 +25,13 @@ import java.util.Calendar;
  * device and user specific content is retrieved and saved in database
  * including installed apps, respective permissions & settings.
  */
-public class FoxItActivity extends AppCompatActivity {
+public class FoxITActivity extends AppCompatActivity {
 
 
     private static Context context;
 
     public static Context getAppContext() {
-        return FoxItActivity.context;
+        return FoxITActivity.context;
     }
 
     /**
@@ -40,7 +40,7 @@ public class FoxItActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FoxItActivity.context = getApplicationContext();
+        FoxITActivity.context = getApplicationContext();
         ValueKeeper v = ValueKeeper.getInstance();
         FoxITApplication myApp = (FoxITApplication) this.getApplication();
         if (v.getSizeOfAppStarts() > 1) {
@@ -56,7 +56,7 @@ public class FoxItActivity extends AppCompatActivity {
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancelAll();
 
-        FoxItActivity.context = getApplicationContext();
+        FoxITActivity.context = getApplicationContext();
         ValueKeeper v = ValueKeeper.getInstance();
         FoxITApplication myApp = (FoxITApplication) this.getApplication();
         Log.d("FITActivity","freshlystarted: "+v.getFreshlyStarted());

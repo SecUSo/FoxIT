@@ -23,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by Tim on 01.08.2016.
  */
-public class ClassListActivity extends FoxItActivity implements AdapterView.OnItemClickListener {
+public class ClassListActivity extends FoxITActivity implements AdapterView.OnItemClickListener {
 
     public ArrayList<ClassObject> classObjectList = new ArrayList<>();
 

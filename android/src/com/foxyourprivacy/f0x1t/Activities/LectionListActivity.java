@@ -32,7 +32,7 @@ import com.foxyourprivacy.f0x1t.ValueKeeper;
 import java.util.ArrayList;
 
 //Displayes the lections corresponding to a certain course and manages their usage
-public class LectionListActivity extends FoxItActivity implements AdapterView.OnItemClickListener {
+public class LectionListActivity extends FoxITActivity implements AdapterView.OnItemClickListener {
 
     //List of lectionDescribtions, send by ClassListActivity
     static String[] lectionStringArray; //has to be static for now
