@@ -3,17 +3,24 @@ package com.foxyourprivacy.f0x1t;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
+import com.foxyourprivacy.f0x1t.Animation.AnimationTale;
+import com.foxyourprivacy.f0x1t.Animation.CircularViewPagerHandler;
+import com.foxyourprivacy.f0x1t.Animation.SwipeAdapter;
+import com.foxyourprivacy.f0x1t.R;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.foxyourprivacy.f0x1t.R.id.view_pager;
 
 /**
  * kicks off the animation
@@ -22,7 +29,7 @@ import static android.view.View.VISIBLE;
 public class AnimationLauncher extends ActionBarActivity implements AndroidFragmentApplication.Callbacks {
 
     Toolbar toolbar;
-
+    ViewPager viewPager;
     /**
      * start animation via static fragment implementation
      * show android toolbar
@@ -33,23 +40,30 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
+
+
+        viewPager = (ViewPager) findViewById(view_pager);
+        SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(swipeAdapter);
+        viewPager.addOnPageChangeListener(new CircularViewPagerHandler(viewPager));
+
         getWindow().getDecorView().setBackgroundColor(Color.WHITE);
         // show toolbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
+        AnimationTale f_tale = new AnimationTale();
+        assignFragment(R.id.tale, f_tale, "animationHead");
 
-        android.widget.ImageButton buttonTale = (android.widget.ImageButton) findViewById(R.id.button_tale);
-        buttonTale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimationTale f_tale = new AnimationTale();
-                assignFragment(R.id.tale, f_tale, "animationHead");
-                findViewById(R.id.tale).setVisibility(View.VISIBLE);
-                findViewById(R.id.head).setVisibility(View.GONE);
-                findViewById(R.id.hide).setVisibility(View.GONE);
-            }
-        });
+//        Button button = (Button) findViewById(R.id.button_animation);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                findViewById(R.id.tale).setVisibility(View.VISIBLE);
+//                findViewById(R.id.head).setVisibility(View.GONE);
+//                findViewById(R.id.hide).setVisibility(View.GONE);
+//            }
+//        });
     }
 
 //		HashMap<String, Boolean> unlockedAnimations = ValueKeeper.getInstance().animationList;

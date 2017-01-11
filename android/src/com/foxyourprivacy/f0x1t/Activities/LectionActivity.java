@@ -29,7 +29,7 @@ import java.util.HashMap;
 /**
  * manages the visualisation of slides
  */
-public class LectionActivity extends FoxItActivity {
+public class LectionActivity extends FoxITActivity {
     public LectionObject lection;
     String lectionDescription;
     int slideNumber = 0;

@@ -4,7 +4,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import com.foxyourprivacy.f0x1t.Activities.FoxItActivity;
+import com.foxyourprivacy.f0x1t.Activities.FoxITActivity;
 import com.foxyourprivacy.f0x1t.AsyncTasks.DBWrite;
 
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public class ValueKeeper {
 
         //HashMap<String,Boolean> trophyList=new HashMap<>();
 
-        DBHandler db = new DBHandler(FoxItActivity.getAppContext(), null, null, 1);
+        DBHandler db = new DBHandler(FoxITActivity.getAppContext(), null, null, 1);
         HashMap<String, String> data = db.getIndividualData();
         db.close();
         Log.d("MyApp", "Data:" + data.toString());
@@ -277,7 +277,7 @@ public class ValueKeeper {
         }
 
 
-        final PackageManager pm = FoxItActivity.getAppContext().getPackageManager();
+        final PackageManager pm = FoxITActivity.getAppContext().getPackageManager();
         //get a list of installed apps.
         if (pm == null) {
             Log.d("MyApp", "pm is Null");
@@ -289,7 +289,7 @@ public class ValueKeeper {
             values.put("app:" + Integer.toString(t), pm.getApplicationLabel(a).toString());
             t++;
         }
-        new DBWrite(FoxItActivity.getAppContext()).execute("clearAndSetValueKeeper", values);
+        new DBWrite(FoxITActivity.getAppContext()).execute("clearAndSetValueKeeper", values);
 
 
     }
@@ -481,7 +481,7 @@ public class ValueKeeper {
 
     public ArrayList<String> compareAppLists() {
 
-        final PackageManager pm = FoxItActivity.getAppContext().getPackageManager();
+        final PackageManager pm = FoxITActivity.getAppContext().getPackageManager();
         //get a list of installed apps.
         if (pm == null) {
             Log.d("MyApp", "pm is Null");

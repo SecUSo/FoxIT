@@ -4,7 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Handler;
 
-import com.foxyourprivacy.f0x1t.Activities.FoxItActivity;
+import com.foxyourprivacy.f0x1t.Activities.FoxITActivity;
 import com.foxyourprivacy.f0x1t.Activities.LectionActivity;
 import com.foxyourprivacy.f0x1t.Fragments.AcornCountFragment;
 import com.foxyourprivacy.f0x1t.R;
@@ -46,7 +46,7 @@ public class MethodChangeAcornCount extends Method {
                     ValueKeeper observer = ValueKeeper.getInstance();
                     observer.changeAcornCountBy(amount);
                     if (observer.getAcornCount() >= 40) {
-                        ((FoxItActivity) activity).setTrophyUnlocked("Baumhaus Kapitalist");
+                        ((FoxITActivity) activity).setTrophyUnlocked("Baumhaus Kapitalist");
                     }
                     if (activity.findViewById(R.id.count_frame) != null) {
                         count.changeText(Integer.toString(ValueKeeper.getInstance().getAcornCount()));

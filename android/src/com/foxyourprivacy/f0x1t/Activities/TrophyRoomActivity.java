@@ -14,7 +14,7 @@ import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.TapAdapter_trophy;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 
-public class TrophyRoomActivity extends FoxItActivity {
+public class TrophyRoomActivity extends FoxITActivity {
 
     TapAdapter_trophy adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
     ViewPager mViewPager;

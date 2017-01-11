@@ -48,81 +48,13 @@
         app:tabGravity="fill"
         app:tabMode="fixed" />
 
-    <ImageButton
-        android:id="@+id/button_hide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/button_head"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/button_entenkacke"
-        android:contentDescription="Buuh!"
-        android:minHeight="0dp"
-        app:srcCompat="@drawable/button_entenkacke" />
 
-    <ImageButton
-        android:id="@+id/button_head"
+    <!--VIEW PAGER WIDGET-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_height="100dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button_tale"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/button_entenkacke"
-        android:contentDescription="Huhu!"
-        android:minHeight="0dp"
-        app:srcCompat="@drawable/button_entenkacke" />
+        android:layout_alignParentBottom="true"/>
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="6dp"
-        android:text="Huhu!"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="normal|bold" />
-
-    <ImageButton
-        android:id="@+id/button_tale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView13"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/button_blau"
-        android:contentDescription="Wedeln!"
-        android:minHeight="0dp"
-        app:srcCompat="@drawable/button_blau" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="6dp"
-        android:text="Wedeln!"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="normal|bold" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="6dp"
-        android:text="Buhhh!"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="normal|bold" />
 
 </RelativeLayout>

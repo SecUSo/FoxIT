@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
-public class SettingsActivity extends FoxItActivity {
+public class SettingsActivity extends FoxITActivity {
 
     Toolbar toolbar;
 

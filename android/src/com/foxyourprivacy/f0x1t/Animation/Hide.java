@@ -1,4 +1,4 @@
-package com.foxyourprivacy.f0x1t;
+package com.foxyourprivacy.f0x1t.Animation;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-public class Head implements ApplicationListener {
+public class Hide implements ApplicationListener {
 
     private float width;
     private float height;
@@ -24,7 +24,7 @@ public class Head implements ApplicationListener {
 
         // animation
         batch = new SpriteBatch();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("head/atlas_tale.atlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("hide/atlas_tale.atlas"));
         animation = new Animation(1/15f, textureAtlas.getRegions());
     }
 

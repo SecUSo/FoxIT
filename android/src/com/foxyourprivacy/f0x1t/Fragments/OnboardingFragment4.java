@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.foxyourprivacy.f0x1t.Activities.Analysis;
-import com.foxyourprivacy.f0x1t.Activities.FoxItActivity;
+import com.foxyourprivacy.f0x1t.Activities.FoxITActivity;
 import com.foxyourprivacy.f0x1t.R;
 
 /**
@@ -42,7 +42,7 @@ public class OnboardingFragment4 extends Fragment {
             public void onClick(View v) {
                 analysisButton.setText(null);
                 analysisButton.setVisibility(View.GONE);
-                ((FoxItActivity) getActivity()).setTrophyUnlocked("Schnüffler");
+                ((FoxITActivity) getActivity()).setTrophyUnlocked("Schnüffler");
                 Intent i = new Intent(getActivity(), Analysis.class);
                 startActivity(i);
             }
