@@ -35,16 +35,26 @@ public class ButtonFragment extends Fragment {
 
                 switch (label) {
                     case "HIDE":
-                        getActivity().findViewById(R.id.tale).setVisibility(View.VISIBLE);
+                        AnimationTale tail = new AnimationTale();
+                        startAnimation(R.id.tale, tail, "animationTale");
+
+                        //TODO für alle cases, entweder hardgecoded alle anderen Views auf Gone setzen jeweils oder vielleicht ist das auch garnicht nötig, wenn das visible setzen es schon in den vordergrund holt (eventuell einfach in den Vordergrund holen); oder halt eine Logik die alle anderen Views gone setzt.
+
                         getActivity().findViewById(R.id.head).setVisibility(View.GONE);
                         getActivity().findViewById(R.id.hide).setVisibility(View.GONE);
 //                        button.setText("Hide2");
                         break;
                     case "PLAY":
                         button.setText("Play2");
+                        //AnimationPlay play = new AnimationPlay();
+                        //startAnimation(R.id.play,play,"animationPlay");
+                        //TODO siehe oben
                         break;
                     case "LAUGH":
                         button.setText("LAUGH2");
+                        //AnimationLaugh laugh = new AnimationLaugh();
+                        //startAnimation(R.id.laugh,laugh,"animationLaugh");
+                        //TODO siehe oben
                         break;
                     case "Activity4":
                         //...
@@ -58,6 +68,13 @@ public class ButtonFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    void startAnimation(int id, Fragment fragment, String name) {
+        android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(id, fragment, name);
+        transaction.commit();
+        getActivity().findViewById(id).setVisibility(View.VISIBLE);
     }
 
 
