@@ -38,12 +38,13 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        AnimationTale f_tale = new AnimationTale();
-        assignFragment(R.id.tale, f_tale, "animationHead");
+
         android.widget.ImageButton buttonTale = (android.widget.ImageButton) findViewById(R.id.button_tale);
         buttonTale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AnimationTale f_tale = new AnimationTale();
+                assignFragment(R.id.tale, f_tale, "animationHead");
                 findViewById(R.id.tale).setVisibility(View.VISIBLE);
                 findViewById(R.id.head).setVisibility(View.GONE);
                 findViewById(R.id.hide).setVisibility(View.GONE);
@@ -157,5 +158,14 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
      */
     @Override
     public void exit() {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+       // findViewById(R.id.tale).setVisibility(View.VISIBLE);
+        //findViewById(R.id.head).setVisibility(View.GONE);
+        //findViewById(R.id.hide).setVisibility(View.GONE);
+        super.onBackPressed();
     }
 }
