@@ -1,4 +1,4 @@
-package com.foxyourprivacy.f0x1t;
+package com.foxyourprivacy.f0x1t.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,8 +8,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
