@@ -41,8 +41,28 @@ public class WebImageSlide extends Slide {
         String imageName = parameter.get("text");
         Log.d("MyApp", imageName);
         switch (imageName) {
-            case "apfel": {
-                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.ic_hourglass_empty_black_48dp));
+            case "https://www.deepdotweb.com/wp-content/uploads/2015/06/deep-web-300x1971.jpg": {
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_deepweb_1));
+                break;
+            }
+            case "http://www.hilfe-im-netz.com/wp-content/uploads/2013/09/gmx-passwort-vergessen.jpg": {
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_passwort_passwort));
+                break;
+            }
+            case "http://www.puravidamultimedia.com/wp-content/uploads/2014/04/funny-password-meme-6.jpg": {
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_password_meme));
+                break;
+            }
+            case "http://www.wordstream.com/images/difficult-captcha.jpg": {
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_passwort_captcha));
+                break;
+            }
+            case "https://de.toonpool.com/user/65/files/datenschutz_2076665.jpg": {
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_facebook_1));
+                break;
+            }
+            case "https://upload.wikimedia.org/wikipedia/commons/a/ac/Presidio-modelo2.JPG": {
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_deepweb_1));
                 break;
             }
 

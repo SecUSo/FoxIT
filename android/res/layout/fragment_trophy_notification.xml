@@ -28,12 +28,13 @@
                 android:layout_alignTop="@+id/image_acorn_symbol"
                 android:layout_toStartOf="@+id/image_trophy_symbol"
                 android:gravity="top|center"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="Schnüfler unlocked!"
+                android:maxLines="2"
+                android:singleLine="false"
+                android:text="Schnüffler unlocked!"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/background_dark"
-                android:textSize="28dp" />
+                android:textSize="24sp"
+                android:paddingTop="2dp" />
 
             <ImageView
                 android:id="@+id/image_trophy_symbol"
