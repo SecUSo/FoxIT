@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activities.AnimationLauncher">
+        <activity android:name=".Activities.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,7 +45,7 @@
         <activity android:name=".Activities.ClassListActivity" />
         <activity android:name=".Activities.TrophyRoomActivity" />
         <activity android:name=".Activities.OnboardingActivity" />
-        <activity android:name=".Activities.Home" />
+        <activity android:name=".Activities.AnimationLauncher" />
         <activity android:name=".Activities.SettingsActivity" />
 
     </application>
