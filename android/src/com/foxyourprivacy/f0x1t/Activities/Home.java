@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.foxyourprivacy.f0x1t.AnimationLauncher;
 import com.foxyourprivacy.f0x1t.AsyncTasks.DBUploadTask;
 import com.foxyourprivacy.f0x1t.DBHandler;
 import com.foxyourprivacy.f0x1t.LectionObject;
