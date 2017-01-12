@@ -50,7 +50,8 @@ public class FoxITActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
-        super.onStart();
+        super.onResume();
+        //TODO ?^
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancelAll();
@@ -188,6 +189,5 @@ public class FoxITActivity extends AppCompatActivity {
         //}, 8000);
         //}
     }
-
 
 }

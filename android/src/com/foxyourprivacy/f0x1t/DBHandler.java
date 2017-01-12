@@ -412,7 +412,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //repeat over all rows
         while (!cursor.isAfterLast()) {
             if (cursor.getString(cursor.getColumnIndex(COLUMN_COURSE)) != null) {
-                db.execSQL("INSERT OR IGNORE INTO " + TABLE_CLASSES + " VALUES(\'" + cursor.getString(cursor.getColumnIndex(COLUMN_COURSE)) + "\', \'no description\');");
+                db.execSQL("INSERT OR IGNORE INTO " + TABLE_CLASSES + " VALUES(\'" + cursor.getString(cursor.getColumnIndex(COLUMN_COURSE)) + "\', \'keine Beschreibung vorhanden\');");
             }
             cursor.moveToNext();
         }

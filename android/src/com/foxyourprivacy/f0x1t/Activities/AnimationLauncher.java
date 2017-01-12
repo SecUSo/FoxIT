@@ -2,15 +2,11 @@ package com.foxyourprivacy.f0x1t.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
 import com.foxyourprivacy.f0x1t.Animation.AnimationTale;
@@ -18,7 +14,6 @@ import com.foxyourprivacy.f0x1t.Animation.CircularViewPagerHandler;
 import com.foxyourprivacy.f0x1t.Animation.SwipeAdapter;
 import com.foxyourprivacy.f0x1t.R;
 
-import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.foxyourprivacy.f0x1t.R.id.view_pager;
 
@@ -30,6 +25,7 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 
     Toolbar toolbar;
     ViewPager viewPager;
+
     /**
      * start animation via static fragment implementation
      * show android toolbar
@@ -52,8 +48,14 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        AnimationTale f_tale = new AnimationTale();
-        assignFragment(R.id.tale, f_tale, "animationHead");
+
+        //erste Animation bereits beim starten anzeigen
+        AnimationTale tail = new AnimationTale();
+        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.tale, tail, "animationTail");
+        transaction.commit();
+        findViewById(R.id.tale).setVisibility(VISIBLE);
+
 
 //        Button button = (Button) findViewById(R.id.button_animation);
 //        button.setOnClickListener(new View.OnClickListener() {
@@ -116,19 +118,6 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 //		}
 //	}
 
-    public void assignFragment(int id, Fragment fragment, String name) {
-        //add fragment so the activity's context
-        RelativeLayout layout = (RelativeLayout) findViewById(id);
-        if (id == R.id.hide) {
-            layout.setVisibility(VISIBLE);
-        } else {
-            layout.setVisibility(GONE);
-        }
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(id, fragment, name);
-        transaction.commit();
-    }
 
     /**
      * show back button
@@ -172,5 +161,12 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
      */
     @Override
     public void exit() {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
     }
 }
