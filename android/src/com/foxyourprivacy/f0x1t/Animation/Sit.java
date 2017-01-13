@@ -37,7 +37,7 @@ public class Sit implements ApplicationListener {
 
         // animation
         batch = new SpriteBatch();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("sit/sit.atlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("sit/Sutit.atlas"));
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         // background
