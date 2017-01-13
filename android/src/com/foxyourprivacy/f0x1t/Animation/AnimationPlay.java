@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
  * Created by Lena on 28.09.2016.
  * initiates animation and forwards to core project
  */
-public class AnimationHide extends AndroidFragmentApplication {
+public class AnimationPlay extends AndroidFragmentApplication {
 
     /**
      * start animating
@@ -26,7 +26,7 @@ public class AnimationHide extends AndroidFragmentApplication {
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return initializeForView(new Hide());
+        return initializeForView(new Play());
     }
 
     @Override
