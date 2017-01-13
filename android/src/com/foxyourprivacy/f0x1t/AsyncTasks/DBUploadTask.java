@@ -30,8 +30,8 @@ public class DBUploadTask extends AsyncTask<Activity, Void, String> {
     // String URL ="http://localhost/upload.php";//"gs://foxit-990c7.appspot.com/uploads/dbs/";
     @Override
     protected String doInBackground(Activity... params) {
-        String filepath = "/data/" + "com.bp" + "/databases/" + DBHandler.DB_NAME;
-        String uploadURL = "http://192.168.2.3/files/upload.php";
+        String filepath = "/data/" + "com.foxyourprivacy.f0x1t" + "/databases/" + DBHandler.DB_NAME;
+        String uploadURL = "http://foxit.secuso.org/php/upload.php";
         String user = ValueKeeper.getInstance().getVpnCode();
         String timestamp = String.valueOf(System.currentTimeMillis());
         try {

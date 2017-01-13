@@ -41,7 +41,7 @@ public class CSVDownloadTask extends AsyncTask<Object, Void, Integer> {
             }
             if (is != null) {
                 if (objects[1].equals("permissions")) dbHandler.updatePermissions(readStream(is));
-                if (objects[1].equals("lessions")) dbHandler.updateLessions(readStream(is));
+                if (objects[1].equals("lessions")) dbHandler.updateLessions(readLessionStream(is));
                 if (objects[1].equals("classes")) dbHandler.updateClasses(readStream(is));
                 if (objects[1].equals("settings"))
                     dbHandler.updateSettingDescriptions(readStream(is));
@@ -100,6 +100,35 @@ public class CSVDownloadTask extends AsyncTask<Object, Void, Integer> {
             }
         } catch (IOException e) {
             throw new RuntimeException("Input Stream couldn't be read properly: " + e);
+        } finally {
+            try {
+                is.close();
+                br.close();
+            } catch (IOException e) {
+                throw new RuntimeException("Input Stream couldn't be closed properly: " + e);
+            }
+        }
+        return result;
+
+    }
+
+    public ArrayList readLessionStream(InputStream is) {
+        ArrayList result = new ArrayList();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        try {
+            String templine;
+            String csvrow = "";
+            while ((templine = br.readLine()) != null) {
+                csvrow += templine;
+                if (templine.matches(".*;;;")) {
+                    String[] rowarray = csvrow.split(";");
+                    result.add(rowarray);
+                    Log.d("SettingsActivity", "row: " + csvrow);
+                    csvrow = "";
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Lession stream couldn't be read properly: " + e);
         } finally {
             try {
                 is.close();

@@ -387,7 +387,13 @@ public class DBHandler extends SQLiteOpenHelper {
                     db.execSQL("INSERT INTO " + TABLE_LESSIONS + " VALUES(\'" + lessionArray[1] + "\', \'" + lessionArray[3] + "\', \'" + lessionArray[0] + "\', \'" + lessionString + "\', \'" + lessionArray[2] + "\', \'" + lessionArray[5] + "\', \'" + time + "\', \'" + lessionArray[4] + "\');");
                 }
             }catch (IndexOutOfBoundsException ioobe){
-                Log.e("DBHandler","Fehler in Lektion: "+lessionArray[1]);
+                if (lessionArray.length > 1)
+                    Log.e("DBHandler", "Fehler in Lektion: " + lessionArray[1]);
+                else if (lessionArray.length == 1)
+                    Log.e("DBHandler", "Fehler in Lektion: " + lessionArray[0]);
+                else
+                    Log.e("DBHandler", "Fehler in Lektion, Länge des lessionArrays: " + lessionArray.length);
+                ioobe.printStackTrace();
             }
 
         }
@@ -894,7 +900,7 @@ public class DBHandler extends SQLiteOpenHelper {
         File data = Environment.getDataDirectory();
         FileChannel src;
         FileChannel dest;
-        String currentDBPath = "/data/" + "com.bp" + "/databases/" + DB_NAME;
+        String currentDBPath = "/data/" + "com.foxyourprivacy.f0x1t" + "/databases/" + DB_NAME;
         String backupDBPath = user + DB_NAME + timestamp;
         File currentDB = new File(data, currentDBPath);
         File backupDB = new File(stordir, backupDBPath);

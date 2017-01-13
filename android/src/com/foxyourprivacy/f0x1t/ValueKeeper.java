@@ -26,7 +26,7 @@ public class ValueKeeper {
     static ValueKeeper instance;
     public HashMap<String, Boolean> trophyList = new HashMap<>();
     public int currentEvaluation = 0;
-    public long[] timeOfEvaluation = {1484715600000L, 1485061200000L, 1485320400000L};
+    public long[] timeOfEvaluation = {1484715600000L, 1485061200000L, 1485320400000L, 1485666000000L};
     public Boolean wasEvaluationDisplayed = false;
     public ArrayList<String> deinstalledApps = new ArrayList<>();
     public Boolean onboardingStartedBefore = false;
