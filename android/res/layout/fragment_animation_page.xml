@@ -17,7 +17,7 @@
         android:id="@+id/button_animation"
         style="@style/button_text"
         android:background="@drawable/button_animation"
-        android:textSize="60dp"
+        android:textSize="30dp"
         android:text="Test"/>
 
 </RelativeLayout>

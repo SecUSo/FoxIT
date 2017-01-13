@@ -19,7 +19,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/head"
+        android:id="@+id/sit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
@@ -28,7 +28,25 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/hide"
+        android:id="@+id/vanish"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/tabs"
+        android:layout_marginBottom="100dp">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/tabs"
+        android:layout_marginBottom="100dp">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/play"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"

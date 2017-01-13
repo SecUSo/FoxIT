@@ -31,7 +31,7 @@ public class ValueKeeper {
     public ArrayList<String> deinstalledApps = new ArrayList<>();
     public Boolean onboardingStartedBefore = false;
     public Boolean analysisDoneBefore = false;
-    HashMap<String, Boolean> animationList = new HashMap<>();
+    public HashMap<String, Boolean> animationList = new HashMap<>();
     HashMap<String, String> profilList = new HashMap<>();
     HashMap<Long, Long> applicationAccessAndDuration = new HashMap<>();
     long timeOfLastAccess = 0;
