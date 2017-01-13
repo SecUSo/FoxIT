@@ -3,12 +3,17 @@ package com.foxyourprivacy.f0x1t.Animation;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.foxyourprivacy.f0x1t.R;
+import com.foxyourprivacy.f0x1t.ValueKeeper;
+
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -17,6 +22,20 @@ import com.foxyourprivacy.f0x1t.R;
 public class ButtonFragment extends Fragment {
     Button button;
     String label;
+
+    // UNLOCKING
+    HashMap<String, Boolean> unlockedAnimations = ValueKeeper.getInstance().animationList;
+
+    public boolean isUnlocked(String anim){
+        return true;
+//        boolean unlocked;
+//        for (String s : unlockedAnimations.keySet()) {
+//            unlocked = unlockedAnimations.get(s);
+//            if (s.equals(anim) && unlocked) return true;
+//        }
+//        return false;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,33 +53,35 @@ public class ButtonFragment extends Fragment {
             public void onClick(View v) {
 
                 switch (label) {
-                    case "HIDE":
-                        AnimationTale tail = new AnimationTale();
-                        startAnimation(R.id.tale, tail, "animationTale");
-
-                        //TODO für alle cases, entweder hardgecoded alle anderen Views auf Gone setzen jeweils oder vielleicht ist das auch garnicht nötig, wenn das visible setzen es schon in den vordergrund holt (eventuell einfach in den Vordergrund holen); oder halt eine Logik die alle anderen Views gone setzt.
-
-                        getActivity().findViewById(R.id.head).setVisibility(View.GONE);
-                        getActivity().findViewById(R.id.hide).setVisibility(View.GONE);
-//                        button.setText("Hide2");
+                    case "Wedel mal!":
+                        if (isUnlocked("")) {
+                            AnimationTale tail = new AnimationTale();
+                            startAnimation(R.id.tale, tail, "animationTale");
+                        }
                         break;
-                    case "PLAY":
-                        button.setText("Play2");
-                        //AnimationPlay play = new AnimationPlay();
-                        //startAnimation(R.id.play,play,"animationPlay");
-                        //TODO siehe oben
+                    case "Kick den Ball!":
+                        if (isUnlocked("")) {
+                            AnimationPlay play = new AnimationPlay();
+                            startAnimation(R.id.play, play, "animationPlay");
+                        }
                         break;
-                    case "LAUGH":
-                        button.setText("LAUGH2");
-                        //AnimationLaugh laugh = new AnimationLaugh();
-                        //startAnimation(R.id.laugh,laugh,"animationLaugh");
-                        //TODO siehe oben
+                    case "Sitz!":
+                        if (isUnlocked("")) {
+                            AnimationSit sit = new AnimationSit();
+                            startAnimation(R.id.sit, sit, "animationSit");
+                        }
                         break;
-                    case "Activity4":
-                        //...
+                    case "Versteck dich!":
+                        if (isUnlocked("")) {
+                            AnimationVanish vanish = new AnimationVanish();
+                            startAnimation(R.id.vanish, vanish, "animationVanish");
+                        }
                         break;
-                    case "Activity5":
-                        //...
+                    case "Flieg!":
+                        if (isUnlocked("")) {
+                            AnimationFly fly = new AnimationFly();
+                            startAnimation(R.id.fly, fly, "animationFly");
+                        }
                         break;
                     default:
                         //...
@@ -72,6 +93,18 @@ public class ButtonFragment extends Fragment {
 
     void startAnimation(int id, Fragment fragment, String name) {
         android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        List<Fragment> all = getFragmentManager().getFragments();
+        String tag;
+        Log.d("df", all.toString());
+        for (Fragment frag : all) {
+            if (frag != null) {
+                tag = frag.getTag();
+                if (tag.equals("animationSit") || tag.equals("animationPlay") || tag.equals("animationTale")
+                || tag.equals("animationVanish") || tag.equals("animationFly")) {
+                    transaction.remove(frag);
+                }
+            }
+        }
         transaction.add(id, fragment, name);
         transaction.commit();
         getActivity().findViewById(id).setVisibility(View.VISIBLE);

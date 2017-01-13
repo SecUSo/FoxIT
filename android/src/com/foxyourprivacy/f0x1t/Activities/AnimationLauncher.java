@@ -2,17 +2,24 @@ package com.foxyourprivacy.f0x1t.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
+import com.foxyourprivacy.f0x1t.Animation.AnimationPlay;
+import com.foxyourprivacy.f0x1t.Animation.AnimationSit;
 import com.foxyourprivacy.f0x1t.Animation.AnimationTale;
 import com.foxyourprivacy.f0x1t.Animation.CircularViewPagerHandler;
 import com.foxyourprivacy.f0x1t.Animation.SwipeAdapter;
 import com.foxyourprivacy.f0x1t.R;
+import com.foxyourprivacy.f0x1t.ValueKeeper;
+
+import java.util.HashMap;
 
 import static android.view.View.VISIBLE;
 import static com.foxyourprivacy.f0x1t.R.id.view_pager;
@@ -52,71 +59,11 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
         //erste Animation bereits beim starten anzeigen
         AnimationTale tail = new AnimationTale();
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.tale, tail, "animationTail");
+        transaction.add(R.id.tale, tail, "animationTale");
         transaction.commit();
         findViewById(R.id.tale).setVisibility(VISIBLE);
 
-
-//        Button button = (Button) findViewById(R.id.button_animation);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                findViewById(R.id.tale).setVisibility(View.VISIBLE);
-//                findViewById(R.id.head).setVisibility(View.GONE);
-//                findViewById(R.id.hide).setVisibility(View.GONE);
-//            }
-//        });
     }
-
-//		HashMap<String, Boolean> unlockedAnimations = ValueKeeper.getInstance().animationList;
-//		boolean unlocked = false;
-//		for (String s : unlockedAnimations.keySet()) {
-//			unlocked = unlockedAnimations.get(s);
-//			if(unlocked) {
-//
-//				if(s.equalsIgnoreCase("Kopfschütteln")) {
-//					AnimationHead f_head = new AnimationHead();
-//					assignFragment(R.id.head, f_head, "animationHead");
-//					android.widget.ImageButton buttonHead = (android.widget.ImageButton) findViewById(R.id.button_head);
-//					buttonHead.setOnClickListener(new View.OnClickListener() {
-//						@Override
-//						public void onClick(View v) {
-//							findViewById(R.id.head).setVisibility(View.VISIBLE);
-//							findViewById(R.id.tale).setVisibility(View.GONE);
-//							findViewById(R.id.hide).setVisibility(View.GONE);
-//						}
-//					});
-//				}
-//				if(s.equalsIgnoreCase("Schwanzwedeln")) {
-//
-//					AnimationTale f_tale = new AnimationTale();
-//					assignFragment(R.id.tale, f_tale, "animationTale");
-//					android.widget.ImageButton buttonTale = (android.widget.ImageButton) findViewById(R.id.button_tale);
-//					buttonTale.setOnClickListener(new View.OnClickListener() {
-//						@Override
-//						public void onClick(View v) {
-//							findViewById(R.id.tale).setVisibility(VISIBLE);
-//							findViewById(R.id.head).setVisibility(View.GONE);
-//							findViewById(R.id.hide).setVisibility(View.GONE);
-//						}
-//					});
-//				}
-//				if(s.equalsIgnoreCase("Halt")) {
-//					AnimationHide f_hide = new AnimationHide();
-//					assignFragment(R.id.hide, f_hide, "animationHide");
-//					android.widget.ImageButton buttonHide = (android.widget.ImageButton) findViewById(R.id.button_hide);
-//					buttonHide.setOnClickListener(new View.OnClickListener() {
-//						@Override
-//						public void onClick(View v) {
-//							findViewById(R.id.hide).setVisibility(View.VISIBLE);
-//							findViewById(R.id.head).setVisibility(View.GONE);
-//							findViewById(R.id.tale).setVisibility(View.GONE);
-//						}
-//					});
-//				}
-//			}
-//		}
-//	}
 
 
     /**
@@ -169,4 +116,5 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 
         super.onBackPressed();
     }
+
 }

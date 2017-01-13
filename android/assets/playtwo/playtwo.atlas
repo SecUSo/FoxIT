@@ -1,0 +1,690 @@
+
+playtwo.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0091
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0092
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0093
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0094
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0095
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0096
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0097
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0098
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0099
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0100
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0101
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0102
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0103
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0104
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0105
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0106
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0107
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0108
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0109
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0110
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0111
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0112
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0113
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0114
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0115
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0116
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0117
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0118
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0119
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0120
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0121
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0122
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0123
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0124
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0125
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0126
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0127
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0128
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0129
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0130
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0131
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0132
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0133
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0134
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0135
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo7.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0136
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0137
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0138
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0139
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0140
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0141
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0142
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0143
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0144
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0145
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0146
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0147
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo9.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0148
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0149
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0150
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0151
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0152
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0153
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0154
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0155
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0156
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0157
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0158
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0159
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0160
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0161
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0162
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0163
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0164
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0165
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+playtwo12.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0166
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0167
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0168
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0169
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0170
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0171
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0172
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0173
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0174
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0175
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0176
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0177
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0178
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0179
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0180
+  rotate: false
+  xy: 1085, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1

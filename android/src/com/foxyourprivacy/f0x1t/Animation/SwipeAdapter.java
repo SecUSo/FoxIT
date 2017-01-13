@@ -21,20 +21,20 @@ public class SwipeAdapter extends FragmentPagerAdapter {
         Bundle bundle = new Bundle();
         switch (position) {
             case 0:
-                bundle.putString("button", "HIDE");
+                bundle.putString("button", "Sitz!");
                 break;
             case 1:
-                bundle.putString("button", "PLAY");
+                bundle.putString("button", "Wedel mal!");
                 break;
             case 2:
-                bundle.putString("button", "LAUGH");
+                bundle.putString("button", "Kick den Ball!");
                 break;
-            case 3: bundle.putString("button", "HIDE");
+            case 3: bundle.putString("button", "Versteck dich!");
                 break;
-            case 4: bundle.putString("button", "HIDE");
+            case 4: bundle.putString("button", "Flieg!");
                 break;
             default:
-                bundle.putString("button", "HIDE");
+                bundle.putString("button", "NOTHING");
                 break;
         }
 
@@ -45,7 +45,7 @@ public class SwipeAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 5;
     }
 
 }
