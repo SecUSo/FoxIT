@@ -575,6 +575,10 @@ public class ValueKeeper {
         this.timeOfLastServerAccess = System.currentTimeMillis();
     }
 
+    public void setTimeOfNextServerAccess(long nextTime) {
+        this.timeOfLastServerAccess = nextTime - 259200000;
+    }
+
 
 }
 

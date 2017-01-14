@@ -6,11 +6,14 @@ import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.foxyourprivacy.f0x1t.AsyncTasks.CSVUpdateTask;
 import com.foxyourprivacy.f0x1t.AsyncTasks.SaveValueTask;
 import com.foxyourprivacy.f0x1t.BackgroundService;
 import com.foxyourprivacy.f0x1t.FoxITApplication;
@@ -108,7 +111,18 @@ public class FoxITActivity extends AppCompatActivity {
         }
 
         if(v.getTimeOfLastServerAccess()+259200000<System.currentTimeMillis()){
-            v.setTimeOfThisServerAccess();
+            NetworkInfo netInfo = ((ConnectivityManager) getSystemService(android.app.Activity.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/permissions.csv", "permissions");
+                new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/lektionen.csv", "lessions");
+                new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/classes.csv", "classes");
+                new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/sdescription.csv", "settings");
+                v.setTimeOfThisServerAccess();
+            } else {
+                //retry in one day
+                v.setTimeOfNextServerAccess(System.currentTimeMillis() + 86400000);
+            }
+
 
 
         }
@@ -137,7 +151,7 @@ public class FoxITActivity extends AppCompatActivity {
         ValueKeeper v = ValueKeeper.getInstance();
         Calendar currentTime = Calendar.getInstance();
         int numberOfEvaluation = 0;
-        if (v.getCurrentEvaluation() == 0) {
+        if (v.getCurrentEvaluation() == 0) { //TODO soll das so?
             //   if(db.getIndividualValue("currentEvaluation")!=null){ numberOfEvaluation=Integer.valueOf(db.getIndividualValue("currentEvaluation"));}
         } else {
             numberOfEvaluation = v.getCurrentEvaluation();

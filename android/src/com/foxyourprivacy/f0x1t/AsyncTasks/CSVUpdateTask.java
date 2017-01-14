@@ -20,10 +20,10 @@ import java.util.ArrayList;
  * Created by noah on 11/8/16.
  */
 
-public class CSVDownloadTask extends AsyncTask<Object, Void, Integer> {
+public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
     private Context thecontext;
 
-    public CSVDownloadTask(Context context) {
+    public CSVUpdateTask(Context context) {
         thecontext = context;
     }
 
@@ -47,7 +47,7 @@ public class CSVDownloadTask extends AsyncTask<Object, Void, Integer> {
                     dbHandler.updateSettingDescriptions(readStream(is));
                 dbHandler.close();
                 return 0;
-            } else {
+            } else if (objects.length > 2 && objects[2] != null) {
                 Log.d("CSVDownTask", "InputStream null, Internet Failure.");
                 if (objects[1].equals("permissions"))
                     dbHandler.updatePermissions((ArrayList) objects[2]);
@@ -77,14 +77,14 @@ public class CSVDownloadTask extends AsyncTask<Object, Void, Integer> {
             //start of the connection
             con.connect();
             int resCode = con.getResponseCode();
-            Log.d("CSVDownloadTask", "con response is: " + resCode);
+            Log.d("CSVUpdateTask", "con response is: " + resCode);
             is = con.getInputStream();
         } catch (MalformedURLException e) {
-            Log.d("CSVDownloadTask:", "URL misformed! " + e);
+            Log.d("CSVUpdateTask:", "URL misformed! " + e);
         } catch (ProtocolException e) {
-            Log.d("CSVDownloadTask:", "protocol error! " + e);
+            Log.d("CSVUpdateTask:", "protocol error! " + e);
         } catch (IOException e) {
-            Log.d("CSVDownloadTask:", "input stream not valid! " + e);
+            Log.d("CSVUpdateTask:", "input stream not valid! " + e);
         }
         return is;
     }

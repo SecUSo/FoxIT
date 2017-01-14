@@ -18,7 +18,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.foxyourprivacy.f0x1t.AsyncTasks.CSVDownloadTask;
+import com.foxyourprivacy.f0x1t.AsyncTasks.CSVUpdateTask;
 import com.foxyourprivacy.f0x1t.AsyncTasks.DBUploadTask;
 import com.foxyourprivacy.f0x1t.AsyncTasks.DBWrite;
 import com.foxyourprivacy.f0x1t.DBHandler;
@@ -141,7 +141,7 @@ public class SettingsActivity extends FoxITActivity {
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
             String URL = "http://foxit.secuso.org/CSVs/raw/permissions.csv";//"https://app.seafile.de/f/740b44b607/?raw=1";
-            new CSVDownloadTask(context).execute(URL, "permissions", readCSV(R.raw.permissions, context));
+            new CSVUpdateTask(context).execute(URL, "permissions", readCSV(R.raw.permissions, context));
 
         } else {
             //fallback on local data provided by apk
@@ -157,9 +157,9 @@ public class SettingsActivity extends FoxITActivity {
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
             String URL = "http://foxit.secuso.org/CSVs/raw/lektionen.csv";//"https://app.seafile.de/f/e27034ec0a/?raw=1";
-            new CSVDownloadTask(context).execute(URL, "lessions", readLessionCSV(R.raw.lektionen, context));
+            new CSVUpdateTask(context).execute(URL, "lessions", readLessionCSV(R.raw.lektionen, context));
             URL = "http://foxit.secuso.org/CSVs/raw/classes.csv";//"https://app.seafile.de/f/7ca81fac4e/?raw=1";
-            new CSVDownloadTask(context).execute(URL, "classes", readCSV(R.raw.classes, context));
+            new CSVUpdateTask(context).execute(URL, "classes", readCSV(R.raw.classes, context));
 
         } else {
             //fallback on local data provided by apk
@@ -179,7 +179,7 @@ public class SettingsActivity extends FoxITActivity {
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
             String URL = "http://foxit.secuso.org/CSVs/raw/sdescription.csv";//"https://app.seafile.de/f/bb0071411b/?raw=1";
-            new CSVDownloadTask(context).execute(URL, "settings", readCSV(R.raw.sdescription, context));
+            new CSVUpdateTask(context).execute(URL, "settings", readCSV(R.raw.sdescription, context));
 
         } else {
             //fallback on local data provided by apk
