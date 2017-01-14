@@ -35,7 +35,7 @@ public class LectionActivity extends FoxITActivity {
     int slideNumber = 0;
     Toolbar toolbar;
     boolean didEvaluationStart = false;
-    boolean isEvaluation = false; //TODO: find fitting Name
+    boolean isEvaluation = false;
     String className="nothing";
 
     HashMap<String, String> evaluationResults = new HashMap<>();
@@ -358,7 +358,7 @@ public class LectionActivity extends FoxITActivity {
 
             //raise the acornCount on success
             Method method2 = factory.createMethod("changeAcornCount");
-            method2.callClassMethod(Integer.toString(lection.getReward()));//TODO customisable number
+            method2.callClassMethod(Integer.toString(lection.getReward()));
             db.close();
 
 

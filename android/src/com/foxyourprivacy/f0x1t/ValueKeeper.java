@@ -300,9 +300,10 @@ public class ValueKeeper {
             t++;
         }
 
-        //Log.d("ValuesTest","Saved Values:\n" + values.toString()+"\nValues Size: "+Integer.toString(values.size()));
-        new DBWrite(FoxITActivity.getAppContext()).execute("clearAndSetValueKeeper", values);
-
+        DBHandler db=new DBHandler(FoxITActivity.getAppContext(),null,null,2);
+        db.clearValueKeeper();
+        db.insertIndividualData((HashMap<String, String>) values);
+        db.close();
 
     }
 
