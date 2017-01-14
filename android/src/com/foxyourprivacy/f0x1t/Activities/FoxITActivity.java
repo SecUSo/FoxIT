@@ -54,7 +54,6 @@ public class FoxITActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        //TODO ?^
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancelAll();
@@ -141,7 +140,7 @@ public class FoxITActivity extends AppCompatActivity {
         v.fillApplicationStartAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndActiveCDuration(System.currentTimeMillis());
         ((FoxITApplication) this.getApplication()).startActivityTransitionTimer();
-        new SaveValueTask().execute();
+        v.saveInstance();
     }
 
     public int getNumberOfCurrentEvaluation() {

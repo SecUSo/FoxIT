@@ -257,15 +257,19 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
                 String leftAppName = pm.getApplicationLabel(lhs).toString();
                 String rightAppName = pm.getApplicationLabel(rhs).toString();
 
+                if (leftAppName == null) {
+                    return -1;
+                }
+
+                if (rightAppName == null) {
+                    return 1;
+                }
+
                 if (leftAppName.equals(rightAppName)) {
                     return 0;
                 }
-                if (leftAppName == null) { //TODO immer false, wat soll das? :D
-                    return -1;
-                }
-                if (rightAppName == null) { //TODO same
-                    return 1;
-                }
+
+
                 return leftAppName.compareTo(rightAppName);
             }
 

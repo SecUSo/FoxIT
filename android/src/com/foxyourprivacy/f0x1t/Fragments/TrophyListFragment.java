@@ -62,7 +62,7 @@ public class TrophyListFragment extends Fragment {
                 new AcornTrophy("Frischling", 50, "Aus kleinem Anfang entspringen alle Dinge.", "Du hast einen Kurs komplett bearbeitet.", false, R.mipmap.boar_not, R.mipmap.boar_finish),
                 new AcornTrophy("Halbzeit", 50, "Auf halben Weg zum Privatsphäre-Profi!", "Du hast die Hälfte der Kurse bearbeitet.", false, R.mipmap.clock_not, R.mipmap.clock_finish),
                 new AcornTrophy("Privacy Shield", 50, "Wenn du richtig gut bist...", "Du hast alle Kurse bearbeitet. Du bist super! :)", false, R.mipmap.shield_not, R.mipmap.shield_finish),
-                new AcornTrophy("Nachteule", 50, "Nachts wenn alles schläft...", "Du hast die App 5 mal in der Nacht geöffnet.", false, R.mipmap.owl_not, R.mipmap.owl_finish), //TODO:Relly strange behavior
+                new AcornTrophy("Nachteule", 50, "Nachts wenn alles schläft...", "Du hast die App 5 mal in der Nacht geöffnet.", false, R.mipmap.owl_not, R.mipmap.owl_finish),
                 new AcornTrophy("Early Bird", 50, "Wer den Fuchs fangen will, muss mit den Hühnern aufstehen.", "Du hast die App 5 mal am Morgen geöffnet.", false, R.mipmap.bird_not, R.mipmap.bird_finish),
                 new AcornTrophy("Power User", 50, "Dem fleißigen Hamster schadet der Winter nichts.", "Du hast die App 5 mal in 2 Tagen geöffnet.", false, R.mipmap.rocket_not, R.mipmap.rocket_finish)
 

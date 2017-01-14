@@ -63,7 +63,6 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
         //retrieve the lectionDescriptions
         if (getIntent().getStringArrayExtra("lection") != null) {
             lectionStringArray = getIntent().getStringArrayExtra("lection");
-            //lectionStringArray = createLessionsString(readCSV()); //get from CSV  TODO: klären welchen von beiden richtig ist
         }
 
         //retrieve the className

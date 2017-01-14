@@ -101,15 +101,17 @@ public class BackgroundService extends Service {
                 String leftAppName = pm.getApplicationLabel(lhs).toString();
                 String rightAppName = pm.getApplicationLabel(rhs).toString();
 
+                if (leftAppName == null) {
+                    return -1;
+                }
+                if (rightAppName == null) {
+                    return 1;
+                }
+
                 if (leftAppName.equals(rightAppName)) {
                     return 0;
                 }
-                if (leftAppName == null) {//TODO dat bringt nix
-                    return -1;
-                }
-                if (rightAppName == null) {//TODO dat bringt nix
-                    return 1;
-                }
+
                 return leftAppName.compareTo(rightAppName);
             }
 
@@ -192,7 +194,7 @@ public class BackgroundService extends Service {
                 mNotificationManager.notify(15, mBuilder.build());
                 apps = fetchALL_APPS();
             }
-            if (true) { //TODO DAFÜQ?!
+
                 Long firstTime = v.getTimeOfFirstStart();
                 Long currentTime = System.currentTimeMillis();
                 Long result = (currentTime - firstTime) / 86400000;
@@ -233,7 +235,7 @@ public class BackgroundService extends Service {
 //
 
 
-                }
+
 
             }
         }
