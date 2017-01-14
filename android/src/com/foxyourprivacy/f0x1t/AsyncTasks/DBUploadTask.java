@@ -21,6 +21,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by noah on 11.12.16.
  */
@@ -63,6 +65,16 @@ public class DBUploadTask extends AsyncTask<Activity, Void, String> {
                     connection.setRequestProperty("uploaded_file", user + "_" + timestamp + DBHandler.DB_NAME);
 
                     outstream = new DataOutputStream(connection.getOutputStream());
+
+                    //upload password
+                    outstream.writeBytes(twoHyphens + boundary + lineEnd);
+                    outstream.writeBytes("Content-Disposition: form-data; name=\"pass\""+lineEnd);
+                    outstream.writeBytes("Content-Type: text/plain; charset=US-ASCII"+lineEnd);
+                    outstream.writeBytes("Content-Transfer-Encoding: 8bit"+lineEnd);
+                    outstream.writeBytes(lineEnd);
+                    outstream.writeBytes("4451f14b86cb62b6e262fb2b959f0b5bf1997850be8c1f497b846d6d5fa903fe"+lineEnd);
+
+                    //upload file with description
                     outstream.writeBytes(twoHyphens + boundary + lineEnd);
                     outstream.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
                             + user + "_" + timestamp + DBHandler.DB_NAME + "\"" + lineEnd);
