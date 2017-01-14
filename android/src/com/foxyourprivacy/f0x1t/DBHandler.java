@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
@@ -379,12 +380,12 @@ public class DBHandler extends SQLiteOpenHelper {
         for (String[] lessionArray : theLessions) {
             try{
                 String lessionString = createLessionString(lessionArray).replace("'", "''");
-                if (checkIfInside(db, TABLE_LESSIONS, COLUMN_LECTURENAME + " = \'" + lessionArray[1] + "\'")) {
-                    db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_CONTENT + " = \'" + lessionString + "\', " + COLUMN_COURSE + " = \'" + lessionArray[0] + "\', " +
+                if (checkIfInside(db, TABLE_LESSIONS, COLUMN_LECTURENAME + " = \'" + escapeQuote(lessionArray[1]) + "\'")) {
+                    db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_CONTENT + " = \'" + lessionString + "\', " + COLUMN_COURSE + " = \'" + escapeQuote(lessionArray[0]) + "\', " +
                             "\'" + COLUMN_DELAY + "\' = \'" + lessionArray[2] + "\', \'" + COLUMN_LECTURETYPE + "\' = \'" + lessionArray[5] + "\', \'" + COLUMN_EICHELN + "\' = \'" + lessionArray[4] +
-                            "\' WHERE " + COLUMN_LECTURENAME + " = \'" + lessionArray[1] + "\';");
+                            "\' WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lessionArray[1]) + "\';");
                 } else {
-                    db.execSQL("INSERT INTO " + TABLE_LESSIONS + " VALUES(\'" + lessionArray[1] + "\', \'" + lessionArray[3] + "\', \'" + lessionArray[0] + "\', \'" + lessionString + "\', \'" + lessionArray[2] + "\', \'" + lessionArray[5] + "\', \'" + time + "\', \'" + lessionArray[4] + "\');");
+                    db.execSQL("INSERT INTO " + TABLE_LESSIONS + " VALUES(\'" + escapeQuote(lessionArray[1]) + "\', \'" + lessionArray[3] + "\', \'" + escapeQuote(lessionArray[0]) + "\', \'" + lessionString + "\', \'" + lessionArray[2] + "\', \'" + escapeQuote(lessionArray[5]) + "\', \'" + time + "\', \'" + lessionArray[4] + "\');");
                 }
             }catch (IndexOutOfBoundsException ioobe){
                 if (lessionArray.length > 1)
@@ -394,11 +395,18 @@ public class DBHandler extends SQLiteOpenHelper {
                 else
                     Log.e("DBHandler", "Fehler in Lektion, Länge des lessionArrays: " + lessionArray.length);
                 ioobe.printStackTrace();
+            } catch (SQLiteException sqle) {
+                Log.d("DBH.updateLessions", "There was an SQLiteExcption. Please review escaping of relevant fields. Lession was: " + lessionArray[1] + " in Class " + lessionArray[0]);
+                sqle.printStackTrace();
             }
 
         }
         db.close();
 
+    }
+
+    private String escapeQuote(String input) {
+        return input.replaceAll("'", "''");
     }
 
     /**
@@ -408,7 +416,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //insert all the classes from the file
         SQLiteDatabase db = getWritableDatabase();
         for (String[] clas : classesList) {
-            db.execSQL("INSERT OR REPLACE INTO " + TABLE_CLASSES + " VALUES(\'" + clas[0] + "\', \'" + clas[1] + "\');");
+            db.execSQL("INSERT OR REPLACE INTO " + TABLE_CLASSES + " VALUES(\'" + escapeQuote(clas[0]) + "\', \'" + escapeQuote(clas[1]) + "\');");
         }
 
         //safety-measure: inserting all classes that are specified from a lession in the DB,
@@ -560,13 +568,13 @@ public class DBHandler extends SQLiteOpenHelper {
                 db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\') VALUES(\'" + array[0] + "\');");
             }
             if (array.length == 2) {
-                db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\', \'" + COLUMN_PERMISSIONDESCRIPTION + "\') VALUES(\'" + array[0] + "\', \'" + array[1].replace("'", "''") + "\');");
+                db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\', \'" + COLUMN_PERMISSIONDESCRIPTION + "\') VALUES(\'" + escapeQuote(array[0]) + "\', \'" + array[1].replace("'", "''") + "\');");
             }
             if (array.length == 3) {
-                db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\', \'" + COLUMN_PERMISSIONDESCRIPTION + "\', \'" + COLUMN_PERMISSIONNICENAME + "\') VALUES(\'" + array[0] + "\', \'" + array[1].replace("'", "''") + "\', \'" + array[2].replace("'", "''") + "\');");
+                db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\', \'" + COLUMN_PERMISSIONDESCRIPTION + "\', \'" + COLUMN_PERMISSIONNICENAME + "\') VALUES(\'" + escapeQuote(array[0]) + "\', \'" + array[1].replace("'", "''") + "\', \'" + array[2].replace("'", "''") + "\');");
             }
             if (array.length == 4) {
-                db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\', \'" + COLUMN_PERMISSIONDESCRIPTION + "\', \'" + COLUMN_PERMISSIONNICENAME + "\', \'" + COLUMN_PERMISSIONLEVEL + "\') VALUES(\'" + array[0] + "\', \'" + array[1].replace("'", "''") + "\', \'" + array[2].replace("'", "''") + "\', \'" + array[3] + "\');");
+                db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\', \'" + COLUMN_PERMISSIONDESCRIPTION + "\', \'" + COLUMN_PERMISSIONNICENAME + "\', \'" + COLUMN_PERMISSIONLEVEL + "\') VALUES(\'" + escapeQuote(array[0]) + "\', \'" + array[1].replace("'", "''") + "\', \'" + array[2].replace("'", "''") + "\', \'" + array[3] + "\');");
             }
         }
         db.close();
@@ -808,7 +816,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void insertIndividualData(HashMap<String, String> hashMap) {
         SQLiteDatabase db = getWritableDatabase();
         Set<String> keys = hashMap.keySet();
-        String value = "null";
+        String value;
         for (String key : keys) {
             if (hashMap.get(key) == null) value = "null";
             else value = hashMap.get(key).replaceAll("'", "''");

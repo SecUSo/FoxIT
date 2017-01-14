@@ -118,9 +118,12 @@ public class FoxITActivity extends AppCompatActivity {
                 new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/classes.csv", "classes");
                 new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/sdescription.csv", "settings");
                 v.setTimeOfThisServerAccess();
+                Log.d("FoxITActivity", "started an update of CSV files form server");
             } else {
                 //retry in one day
                 v.setTimeOfNextServerAccess(System.currentTimeMillis() + 86400000);
+                Log.d("FoxITActivity", "delayed an update of CSV files form server");
+
             }
 
 
