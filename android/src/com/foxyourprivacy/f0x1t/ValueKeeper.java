@@ -55,6 +55,11 @@ public class ValueKeeper {
     private int acornCount = 0; //amount of acorn the player collected
     private int tokenCount = 0; //amount of token the player collected
 
+
+
+    private long timeOfLastServerAccess =0;
+
+
     private ValueKeeper() {
         super();
     }
@@ -84,8 +89,8 @@ public class ValueKeeper {
 
         DBHandler db = new DBHandler(FoxITActivity.getAppContext(), null, null, 1);
         HashMap<String, String> data = db.getIndividualData();
+        //Log.d("ValuesTest","Revived Data:\n" + data.toString()+"\nData size: "+Integer.toString(data.size()));
         db.close();
-        Log.d("MyApp", "Data:" + data.toString());
         analysisDoneBefore = Boolean.valueOf(data.get("analysisDoneBefore"));
         onboardingStartedBefore = Boolean.valueOf(data.get("onboardingStartedBefore"));
 
@@ -95,6 +100,11 @@ public class ValueKeeper {
         } else {
             timeOfFirstStart = System.currentTimeMillis();
         }
+
+        if(data.containsKey("timeOfLastServerAccess")){
+            timeOfLastServerAccess=Long.valueOf(data.get("timeOfLastServerAccess"));
+        }
+
 
         if (data.containsKey("acornCount")) {
 
@@ -189,7 +199,6 @@ public class ValueKeeper {
 
     public void saveInstance() {
 
-        Log.d("MyApp", "SavedInstance");
         HashMap<String, String> values = new HashMap<String, String>();
         values.put("onboardingStartedBefore", Boolean.toString(onboardingStartedBefore));
         values.put("analysisDoneBefore", Boolean.toString(analysisDoneBefore));
@@ -202,6 +211,7 @@ public class ValueKeeper {
         values.put("vpnCode", vpnCode);
         values.put("dailyLectionsUnlocked", Integer.toString(dailyLectionsUnlocked));
         values.put("timeOfFirstStart", Long.toString(timeOfFirstStart));
+        values.put("timeOfLastServerAccess",Long.toString(timeOfLastServerAccess));
 
 
         Log.d("MyApp", "currentEval:" + Integer.toString(currentEvaluation));
@@ -289,6 +299,8 @@ public class ValueKeeper {
             values.put("app:" + Integer.toString(t), pm.getApplicationLabel(a).toString());
             t++;
         }
+
+        //Log.d("ValuesTest","Saved Values:\n" + values.toString()+"\nValues Size: "+Integer.toString(values.size()));
         new DBWrite(FoxITActivity.getAppContext()).execute("clearAndSetValueKeeper", values);
 
 
@@ -552,6 +564,15 @@ public class ValueKeeper {
 
     public void increaseDailyLectionsUnlocked() {
         dailyLectionsUnlocked++;
+    }
+
+
+    public long getTimeOfLastServerAccess() {
+        return timeOfLastServerAccess;
+    }
+
+    public void setTimeOfThisServerAccess() {
+        this.timeOfLastServerAccess = System.currentTimeMillis();
     }
 
 

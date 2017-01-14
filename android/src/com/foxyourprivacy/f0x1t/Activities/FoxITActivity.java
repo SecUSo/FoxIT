@@ -96,6 +96,8 @@ public class FoxITActivity extends AppCompatActivity {
             v.addAppStarts(System.currentTimeMillis());
             v.setTimeOfFirstAccess(System.currentTimeMillis());
 
+
+
         }
 
 
@@ -103,6 +105,12 @@ public class FoxITActivity extends AppCompatActivity {
             Log.d("MyApp", "Was in Background");
             v.setFreshlyStarted(false);
             v.setTimeOfLastAccess(System.currentTimeMillis());
+        }
+
+        if(v.getTimeOfLastServerAccess()+259200000<System.currentTimeMillis()){
+            v.setTimeOfThisServerAccess();
+
+
         }
 
         myApp.stopActivityTransitionTimer();
