@@ -339,6 +339,7 @@ public class LectionActivity extends FoxITActivity {
                     v.setEvaluationResults(evaluationResults);
                     v.increaseCurrentEvaluation();
                     break;
+                default: isEval=false;
             }
 
 

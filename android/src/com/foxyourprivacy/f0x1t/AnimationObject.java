@@ -1,5 +1,7 @@
 package com.foxyourprivacy.f0x1t;
 
+import android.util.Log;
+
 /**
  * Created by Ich on 18.09.2016.
  */
@@ -22,12 +24,13 @@ public class AnimationObject {
         this.toastDescription = toastDescription;
         this.icon = icon;
         this.price = price;
-        this.unlocked = unlocked;
+        ValueKeeper v=ValueKeeper.getInstance();
+        this.unlocked = v.isAnimationUnlocked(name);
 
         //fetch the unlocked status form ValueKeeper where it's stored
         ValueKeeper o = ValueKeeper.getInstance();
         o.addAnimationIfNotContained(name, unlocked);
-        unlocked = o.isAnimationUnlocked(name);
+
     }
 
     /**

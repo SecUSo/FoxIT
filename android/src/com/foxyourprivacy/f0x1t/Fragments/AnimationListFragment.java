@@ -54,7 +54,7 @@ public class AnimationListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
         //creating the animationObjects - TODO: make it tidy for more animations to be added
         AnimationObject[] animationArray = {new AnimationObject("Halt", "Das Füchslein ruht im Walde, so ruhest auch du.", R.mipmap.test_trophy, 5, false),
-                new AnimationObject("Schwanzwedeln", "Erhaben wallt des Fuches Pracht, und doch ganz sacht... ", R.mipmap.badapprating, 10, true),
+                new AnimationObject("Tale", "Erhaben wallt des Fuches Pracht, und doch ganz sacht... ", R.mipmap.badapprating, 10, false),
                 new AnimationObject("Kopfschütteln", "Kopfschütteln, das Händeschütteln der Einzelgänger.", R.mipmap.badapprating, 30, false)};
 
 
@@ -77,6 +77,7 @@ public class AnimationListFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         context = getActivity().getApplicationContext();
+
         //creating the gridView
         gridView = (GridView) view.findViewById(R.id.grid_trophy);
         gridView.setAdapter(new animationViewAdapter(getActivity().getApplicationContext()));

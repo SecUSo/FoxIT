@@ -134,6 +134,7 @@ public class ValueKeeper {
 
 
         animationList = new HashMap<>();
+
         profilList = new HashMap<>();
         applicationAccessAndDuration = new HashMap<>();
         applicationStartAndActiveDuration = new HashMap<>();
@@ -191,7 +192,7 @@ public class ValueKeeper {
 
 
         }
-        Log.d("ValueKeeper", "revived appsize: " + appsBefore.size());
+        animationList.put("Tale",true);
 
         valueKeeperAlreadyRefreshed = true;
     }
