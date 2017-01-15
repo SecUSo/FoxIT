@@ -65,7 +65,19 @@ public class WebImageSlide extends Slide {
                 image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_deepweb_1));
                 break;
             }
-
+            case "https://lh3.googleusercontent.com/tfY9-PhmOZXzuVL-mOYtqIWqlevIJSei829aGlzIBHZFdmFAiKOCqR-bDWSLCkEn3bSd=w300":{
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_threema));
+                break;}
+            case "https://lh5.ggpht.com/jKZCC5NR0uU01scYefDjUICueE59pEpamDz3J3LDAg3X-6DupmpsDysbFUc8WUFDgfk=w300":{
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_signal));
+                break;}
+            case "telegram" :{
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_telegram));
+                break;
+            }
+            case "wire":{
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_wire));
+                break;}
             default:
                 new DownloadImageTask((ImageView) view.findViewById(R.id.image_web)).execute(parameter.get("text"));
         }

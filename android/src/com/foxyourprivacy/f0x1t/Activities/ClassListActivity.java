@@ -160,6 +160,8 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
                 return R.mipmap.class_verschlusselung;
             case "Berechtigungen":
                 return R.mipmap.class_berechtigungen;
+            case "Messaging-Apps":
+                return R.mipmap.class_messanging;
             default:
                 return R.mipmap.ring;
 

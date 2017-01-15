@@ -91,7 +91,7 @@
                 android:layout_centerHorizontal="true">
 
                 <TextView
-                    android:text="trifft zu"
+                    android:text="trifft nicht zu    "
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView17"
@@ -101,7 +101,7 @@
                     android:paddingRight="170dp" />
 
                 <TextView
-                    android:text="trifft nicht zu"
+                    android:text="  trifft zu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView18"
