@@ -886,7 +886,7 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
             String name = cursor.getString(0);
             cursor.close();
-            db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 0 WHERE " + COLUMN_LECTURENAME + " = \'" + name + "\';");
+            db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 1 WHERE " + COLUMN_LECTURENAME + " = \'" + name + "\';");
             return name;
         }
         return "There is no new Lession";
