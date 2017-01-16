@@ -462,12 +462,12 @@ public class DBHandler extends SQLiteOpenHelper {
      * @return the needed String
      */
     private String createLessionString(String[] lessionArray) throws IndexOutOfBoundsException{
-        Log.d("createLessionString", lessionArray[1] + lessionArray[0]);
+        //Log.d("createLessionString", lessionArray[1] + lessionArray[0]);
         StringBuilder sb = new StringBuilder();
         sb.append("[name~" + lessionArray[1] + "]");
         //iterates over the parts of the Array which contains the actual slides
         for (int i = 6; i < lessionArray.length; i++) {
-            Log.d("slide:", lessionArray[i]);
+            //Log.d("slide:", lessionArray[i]);
             String[] slides = lessionArray[i].split("_");
             slides[0] = slides[0].toLowerCase();
             sb.append("[" + (i - 6) + "~type~" + slides[0] + "\'");

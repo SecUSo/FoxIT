@@ -91,7 +91,7 @@ public class SettingsActivity extends FoxITActivity {
                 if (templine.matches(".*;;;")) {
                     String[] rowarray = csvrow.split(";");
                     result.add(rowarray);
-                    Log.d("SettingsActivity", "row: " + csvrow);
+                    // Log.d("SettingsActivity", "row: " + csvrow);
                     csvrow = "";
                 }
             }
