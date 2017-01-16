@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.foxyourprivacy.f0x1t.AsyncTasks.CSVUpdateTask;
-import com.foxyourprivacy.f0x1t.AsyncTasks.SaveValueTask;
 import com.foxyourprivacy.f0x1t.BackgroundService;
 import com.foxyourprivacy.f0x1t.FoxITApplication;
 import com.foxyourprivacy.f0x1t.Fragments.TrophyNotificationFragment;
@@ -112,10 +111,10 @@ public class FoxITActivity extends AppCompatActivity {
         if(v.getTimeOfLastServerAccess()+259200000<System.currentTimeMillis()){
             NetworkInfo netInfo = ((ConnectivityManager) getSystemService(android.app.Activity.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
-                new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/permissions.csv", "permissions");
-                new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/lektionen.csv", "lessions");
-                new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/classes.csv", "classes");
-                new CSVUpdateTask(this).execute("http://foxit.secuso.org/CSVs/raw/sdescription.csv", "settings");
+                new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/permissions.csv", "permissions");
+                new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/lektionen.csv", "lessions");
+                new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/classes.csv", "classes");
+                new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/sdescription.csv", "settings");
                 v.setTimeOfThisServerAccess();
                 Log.d("FoxITActivity", "started an update of CSV files form server");
             } else {

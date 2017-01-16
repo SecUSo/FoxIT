@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.foxyourprivacy.f0x1t.Activities.FoxITActivity;
-import com.foxyourprivacy.f0x1t.AsyncTasks.DBWrite;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -193,10 +192,6 @@ public class ValueKeeper {
 
         }
         animationList.put("Schwanzwedeln",true);
-        animationList.put("Hinsetzen",false);
-        animationList.put("Abheben",false);
-        animationList.put("Verduften",false);
-        animationList.put("Spielen",false);
         valueKeeperAlreadyRefreshed = true;
     }
     public void saveInstance() {
@@ -303,7 +298,7 @@ public class ValueKeeper {
 
         DBHandler db=new DBHandler(FoxITActivity.getAppContext(),null,null,2);
         db.clearValueKeeper();
-        db.insertIndividualData((HashMap<String, String>) values);
+        db.insertIndividualData(values);
         db.close();
 
     }

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -53,32 +52,32 @@ public class ButtonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 switch (label) {
-                    case "Wedel mal!":
+                    case "fuchsteufelsfröhlich :)":
                             AnimationTail tail = new AnimationTail();
                             startAnimation(R.id.tale, tail, "animationTale");
                         break;
-                    case "Kick den Ball!":
+                    case "klicken zum kicken":
                         if (valueKeeper.isAnimationUnlocked("Spielen")) {
                             AnimationPlay play = new AnimationPlay();
                             startAnimation(R.id.play, play, "animationPlay");
                         }
                         else {showToast();}
                         break;
-                    case "Sitz!":
+                    case "setzen statt hetzen":
                         if (valueKeeper.isAnimationUnlocked("Hinsetzen")) {
                             AnimationSit sit = new AnimationSit();
                             startAnimation(R.id.sit, sit, "animationSit");
                         }
                         else {showToast();}
                         break;
-                    case "Versteck dich!":
+                    case "Tarnung aktivieren!":
                         if (valueKeeper.isAnimationUnlocked("Verduften")) {
                             AnimationVanish vanish = new AnimationVanish();
                             startAnimation(R.id.vanish, vanish, "animationVanish");
                         }
                         else {showToast();}
                         break;
-                    case "Flieg!":
+                    case "ich bin ein Fuchsonaut!":
                         if (valueKeeper.isAnimationUnlocked("Abheben")) {
                             AnimationFly fly = new AnimationFly();
                             startAnimation(R.id.fly, fly, "animationFly");
