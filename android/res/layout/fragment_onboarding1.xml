@@ -17,7 +17,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="107dp"
             android:contentDescription="FoxIT-Logo"
-            android:src="@mipmap/logo" />
+            android:src="@mipmap/logoold" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -26,8 +26,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:contentDescription="4-Punkte-Fortschritt"
-            android:src="@mipmap/newdots"
-            android:foregroundGravity="bottom|center_horizontal">
+            android:foregroundGravity="bottom|center_horizontal"
+            android:src="@mipmap/newdots">
 
         </ImageView>
 
