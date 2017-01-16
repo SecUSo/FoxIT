@@ -17,7 +17,8 @@
             android:layout_weight="1.01"
             android:nestedScrollingEnabled="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            android:autoLink="web"/>
 
 
     </ScrollView>

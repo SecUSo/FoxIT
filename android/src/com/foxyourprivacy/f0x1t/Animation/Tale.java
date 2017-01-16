@@ -61,7 +61,7 @@ public class Tale implements ApplicationListener {
         elapsedTime += Gdx.graphics.getDeltaTime();
 
         batch.draw(texture, 0,0, width, height);
-        batch.draw(animation.getKeyFrame(elapsedTime, true), -width/6f, -height/3,width*1.3f,height*1.3f);
+        batch.draw(animation.getKeyFrame(elapsedTime, true), -width/6f, -height/2,width*1.3f,height*1.7f);
         batch.end();
     }
     @Override

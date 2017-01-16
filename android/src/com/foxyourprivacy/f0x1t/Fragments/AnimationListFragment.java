@@ -171,7 +171,6 @@ public class AnimationListFragment extends Fragment {
 
                 // set animation price or unlocked into the textview
                 TextView textView = (TextView) gridView.findViewById(R.id.grid_item_label);
-
                 if (animationArray[position].getUnlocked()) {
                     textView.setText("unlocked");
                 } else {
