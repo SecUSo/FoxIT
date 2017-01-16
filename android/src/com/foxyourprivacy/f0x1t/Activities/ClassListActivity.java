@@ -138,30 +138,30 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
 
     private int getClassIcon(String className) {
         switch (className) {
-            case "Deep Web":
-                return R.mipmap.onion;
             case "Erstes Tapsen":
                 return R.mipmap.literature;
             case "Facebook":
                 return R.mipmap.class_facebook;
             case "Google":
                 return R.mipmap.class_google;
-            case "root & superuser":
-                return R.mipmap.class_hashtag;
+            case "Berechtigungen":
+                return R.mipmap.class_berechtigungen;
+            case "Messaging-Apps":
+                return R.mipmap.class_messanging;
             case "Die Gesellschaft":
                 return R.mipmap.class_lighthouse;
             case "Passwörter":
                 return R.mipmap.class_passwort;
             case "Datenschutzgesetze":
                 return R.mipmap.class_law;
-            case "Daily Lessions":
+            case "Daily Lessons":
                 return R.mipmap.class_daily;
             case "Verschlüsselung":
                 return R.mipmap.class_verschlusselung;
-            case "Berechtigungen":
-                return R.mipmap.class_berechtigungen;
-            case "Messaging-Apps":
-                return R.mipmap.class_messanging;
+            case "root & superuser":
+                return R.mipmap.class_hashtag;
+            case "Deep Web":
+                return R.mipmap.onion;
             default:
                 return R.mipmap.ring;
 

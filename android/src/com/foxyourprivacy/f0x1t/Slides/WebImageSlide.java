@@ -57,7 +57,7 @@ public class WebImageSlide extends Slide {
                 image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_passwort_captcha));
                 break;
             }
-            case "https://de.toonpool.com/user/65/files/datenschutz_2076665.jpg": {
+            case "fbcartoon": {
                 image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_facebook_1));
                 break;
             }
