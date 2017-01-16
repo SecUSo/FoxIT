@@ -8,12 +8,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,12 +55,11 @@ public class AnimationListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
         //creating the animationObjects - TODO: make it tidy for more animations to be added
         AnimationObject[] animationArray = {
-                new AnimationObject("Hinsetzen", "Das Füchslein ruht im Walde, so ruhest auch du.", R.mipmap.test_trophy, 5, false),
-                new AnimationObject("Schwanzwedeln", "Erhaben wallt des Fuchses Pracht, und doch ganz sacht... ", R.mipmap.badapprating, 10, false),
-                new AnimationObject("Kopfschütteln", "Kopfschütteln, das Händeschütteln der Einzelgänger.", R.mipmap.badapprating, 30, false),
-                new AnimationObject("Verduften", "Sehen oder gesehen werden...", R.mipmap.badapprating, 30, false),
-                new AnimationObject("Spielen", "Das Spiel mit dem Ball /nAuch der Ballspieler: Spielball /nVerspielt", R.mipmap.badapprating, 30, false),
-                new AnimationObject("Abheben", "...und Weitblick gewinnen", R.mipmap.badapprating, 30, false)};
+                new AnimationObject("Hinsetzen", "Das Füchslein ruht im Walde, so ruhest auch du.", R.mipmap.animation_sit, 20, false),
+                new AnimationObject("Schwanzwedeln", "Erhaben wallt des Fuchses Pracht, und doch ganz sacht... ", R.mipmap.animation_wedeln, 10, false),
+                new AnimationObject("Verduften", "Sehen oder gesehen werden...", R.mipmap.animation_vanish, 40, false),
+                new AnimationObject("Spielen", "Das Spiel mit dem Ball /nAuch der Ballspieler: Spielball /nVerspielt", R.mipmap.animation_play, 30, false),
+                new AnimationObject("Abheben", "...und Weitblick gewinnen", R.mipmap.animation_fly, 60, false)};
 
 
         // for (AnimationObject ao : animationArray) {
@@ -170,12 +171,16 @@ public class AnimationListFragment extends Fragment {
 
                 // set animation price or unlocked into the textview
                 TextView textView = (TextView) gridView.findViewById(R.id.grid_item_label);
+
                 if (animationArray[position].getUnlocked()) {
                     textView.setText("unlocked");
                 } else {
                     textView.setText(Integer.toString(animationArray[position].getPrice()));
                 }
 
+
+                ImageView image=(ImageView) gridView.findViewById(R.id.grid_item_image);
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), animationArray[position].getIcon()));
 
                 TextView name = (TextView) gridView.findViewById(R.id.text_animation_name);
                 name.setText(animationArray[position].getName());

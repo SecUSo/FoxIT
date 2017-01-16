@@ -57,7 +57,7 @@ public class TrophyListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
 
         TrophyObject[] trophyArray = {
-                new AcornTrophy("Baumhaus Kapitalist", 40, "Das Kapital ist scharf auf Nüsse.", "Du hattest zu einem Zeitpunkt 40 Eicheln.", true, R.mipmap.acorn_not, R.mipmap.acorn_finish),
+                new AcornTrophy("Baumhaus Kapitalist", 60, "Das Kapital ist scharf auf Nüsse.", "Du hattest zu einem Zeitpunkt 40 Eicheln.", true, R.mipmap.acorn_not, R.mipmap.acorn_finish),
                 new AcornTrophy("Schnüffler", 50, "Die hast du schon bekommen.", "Diese Trophäe hast du bekommen, weil wir dich gern haben. Fühl dich geknuddelt. :)", false, R.mipmap.fox_not, R.mipmap.fox_finish),
                 new AcornTrophy("Frischling", 50, "Aus kleinem Anfang entspringen alle Dinge.", "Du hast einen Kurs komplett bearbeitet.", false, R.mipmap.boar_not, R.mipmap.boar_finish),
                 new AcornTrophy("Halbzeit", 50, "Auf halben Weg zum Privatsphäre-Profi!", "Du hast die Hälfte der Kurse bearbeitet.", false, R.mipmap.clock_not, R.mipmap.clock_finish),
