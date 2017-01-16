@@ -59,7 +59,7 @@ public class AnimationListFragment extends Fragment {
                 new AnimationObject("Schwanzwedeln", "Erhaben wallt des Fuchses Pracht, und doch ganz sacht... ", R.mipmap.animation_wedeln, 10, false),
                 new AnimationObject("Verduften", "Sehen oder gesehen werden...", R.mipmap.animation_vanish, 40, false),
                 new AnimationObject("Spielen", "Das Spiel mit dem Ball /nAuch der Ballspieler: Spielball /nVerspielt", R.mipmap.animation_play, 30, false),
-                new AnimationObject("Abheben", "...und Weitblick gewinnen", R.mipmap.animation_fly, 60, false)};
+                new AnimationObject("Abheben", "...und Weitblick gewinnen", R.mipmap.animation_fly, 50, false)};
 
 
         // for (AnimationObject ao : animationArray) {
