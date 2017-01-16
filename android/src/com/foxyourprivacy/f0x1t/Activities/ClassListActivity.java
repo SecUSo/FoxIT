@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,6 +80,27 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
 
         //classObjectList.add(test);
         classObjectList = dbHandler.getClasses();
+        Log.d("ClassListActivity", classObjectList.toString());
+        Log.d("ClassListActivity", "1.: " + classObjectList.get(0).getName());
+        Log.d("ClassListActivity", "2.: " + classObjectList.get(1).getName());
+        ClassObject tempclass1 = classObjectList.get(0);
+        int i = 0;
+        while (!classObjectList.get(i).getName().equals("Erstes Tapsen")) {
+            i++;
+        }
+        classObjectList.set(0, classObjectList.get(i));
+        classObjectList.set(i, tempclass1);
+        ClassObject tempclass2 = classObjectList.get(1);
+        int j = 0;
+        while (!classObjectList.get(j).getName().equals("Daily Lessons")) {
+            j++;
+        }
+        classObjectList.set(1, classObjectList.get(j));
+        classObjectList.set(j, tempclass2);
+        Log.d("ClassListActivity", classObjectList.toString());
+        Log.d("ClassListActivity", "1.: " + classObjectList.get(0).getName());
+        Log.d("ClassListActivity", "2.: " + classObjectList.get(1).getName());
+
         dbHandler.close();
 
     }
