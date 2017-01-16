@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/count_frame"
     android:layout_width="match_parent"
@@ -11,7 +12,9 @@
     <RelativeLayout
         android:id="@+id/underToolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="?attr/actionBarSize" >
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/screenFrame"
@@ -55,6 +58,7 @@
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="25dp" />
+
         </RelativeLayout>
 
         <View
@@ -95,6 +99,7 @@
                 android:layout_marginTop="25dp"
                 android:contentDescription="Fuchs"
                 android:src="@drawable/paw" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -172,6 +177,18 @@
                 android:src="@drawable/account" />
         </RelativeLayout>
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/eichel"
+        android:id="@+id/imageView7"
+        android:visibility="visible"
+        android:importantForAccessibility="yes"
+        android:layout_marginStart="298dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/screenFrame" />
 
 </RelativeLayout>
 
