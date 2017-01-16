@@ -24,7 +24,7 @@ public class SwipeAdapter extends FragmentPagerAdapter {
                 bundle.putString("button", "setzen statt hetzen");
                 break;
             case 1:
-                bundle.putString("button", "fuchsteufelsfröhlich :)");
+                bundle.putString("button", "fuchsteufelsfröhlich");
                 break;
             case 2:
                 bundle.putString("button", "klicken zum kicken");

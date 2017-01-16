@@ -52,7 +52,7 @@ public class ButtonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 switch (label) {
-                    case "fuchsteufelsfröhlich :)":
+                    case "fuchsteufelsfröhlich":
                             AnimationTail tail = new AnimationTail();
                             startAnimation(R.id.tale, tail, "animationTale");
                         break;
