@@ -39,11 +39,17 @@
             android:id="@+id/text_animation_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:text="Baumhaus Kapitalist"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#be0e0e" />
+            android:textColor="@android:color/background_dark"
+            android:shadowDx="5"
+            android:elevation="11dp"
+            android:shadowRadius="5"
+            android:shadowDy="5"
+            android:background="@color/yellow_animation"
+            android:layout_above="@+id/grid_item_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp" />
 
     </RelativeLayout>
 
