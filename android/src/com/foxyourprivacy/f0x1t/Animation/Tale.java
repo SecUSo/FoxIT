@@ -33,7 +33,7 @@ public class Tale implements ApplicationListener {
 
         // animation
         batch = new SpriteBatch();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("tale/tale.atlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("wag/wag.atlas"));
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         // background

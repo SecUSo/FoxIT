@@ -1,107 +1,51 @@
 
-playtwo.png
+wag.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0091
+fox1.png0000
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0092
+fox1.png0001
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0093
-  rotate: false
-  xy: 1, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0094
-  rotate: false
-  xy: 1, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0095
-  rotate: false
-  xy: 1, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0096
-  rotate: false
-  xy: 1, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0097
-  rotate: false
-  xy: 1, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0098
-  rotate: false
-  xy: 1, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0099
-  rotate: false
-  xy: 1, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0100
-  rotate: false
-  xy: 1, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0101
+fox1.png0002
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0102
+fox1.png0003
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0103
+fox1.png0004
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0104
+fox1.png0005
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0105
+fox1.png0006
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -109,46 +53,46 @@ fox1.png0105
   offset: 0, 0
   index: -1
 
-playtwo2.png
+wag2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0106
+fox1.png0007
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0107
+fox1.png0008
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0108
+fox1.png0009
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0109
+fox1.png0010
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0110
+fox1.png0011
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0111
+fox1.png0012
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -156,46 +100,46 @@ fox1.png0111
   offset: 0, 0
   index: -1
 
-playtwo3.png
+wag3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0112
+fox1.png0013
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0113
+fox1.png0014
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0114
+fox1.png0015
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0115
+fox1.png0016
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0116
+fox1.png0017
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0117
+fox1.png0018
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -203,46 +147,46 @@ fox1.png0117
   offset: 0, 0
   index: -1
 
-playtwo4.png
+wag4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0118
+fox1.png0019
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0119
+fox1.png0020
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0120
+fox1.png0021
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0121
+fox1.png0022
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0122
+fox1.png0023
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0123
+fox1.png0024
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -250,46 +194,46 @@ fox1.png0123
   offset: 0, 0
   index: -1
 
-playtwo5.png
+wag5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0124
+fox1.png0025
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0125
+fox1.png0026
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0126
+fox1.png0027
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0127
+fox1.png0028
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0128
+fox1.png0029
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0129
+fox1.png0030
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -297,46 +241,46 @@ fox1.png0129
   offset: 0, 0
   index: -1
 
-playtwo6.png
+wag6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0130
+fox1.png0031
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0131
+fox1.png0032
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0132
+fox1.png0033
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0133
+fox1.png0034
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0134
+fox1.png0035
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0135
+fox1.png0036
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -344,46 +288,46 @@ fox1.png0135
   offset: 0, 0
   index: -1
 
-playtwo7.png
+wag7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0136
+fox1.png0037
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0137
+fox1.png0038
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0138
+fox1.png0039
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0139
+fox1.png0040
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0140
+fox1.png0041
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0141
+fox1.png0042
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -391,46 +335,46 @@ fox1.png0141
   offset: 0, 0
   index: -1
 
-playtwo8.png
+wag8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0142
+fox1.png0043
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0143
+fox1.png0044
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0144
+fox1.png0045
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0145
+fox1.png0046
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0146
+fox1.png0047
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0147
+fox1.png0048
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -438,46 +382,46 @@ fox1.png0147
   offset: 0, 0
   index: -1
 
-playtwo9.png
+wag9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0148
+fox1.png0049
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0149
+fox1.png0050
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0150
+fox1.png0051
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0151
+fox1.png0052
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0152
+fox1.png0053
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0153
+fox1.png0054
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -485,46 +429,46 @@ fox1.png0153
   offset: 0, 0
   index: -1
 
-playtwo10.png
+wag10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0154
+fox1.png0055
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0155
+fox1.png0056
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0156
+fox1.png0057
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0157
+fox1.png0058
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0158
+fox1.png0059
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0159
+fox1.png0060
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -532,46 +476,46 @@ fox1.png0159
   offset: 0, 0
   index: -1
 
-playtwo11.png
+wag11.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0160
+fox1.png0061
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0161
+fox1.png0062
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0162
+fox1.png0063
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0163
+fox1.png0064
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0164
+fox1.png0065
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0165
+fox1.png0066
   rotate: false
   xy: 1085, 1
   size: 540, 960
@@ -579,111 +523,189 @@ fox1.png0165
   offset: 0, 0
   index: -1
 
-playtwo12.png
+wag12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fox1.png0166
+fox1.png0067
   rotate: false
   xy: 1, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0167
+fox1.png0068
   rotate: false
   xy: 1, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0168
+fox1.png0069
   rotate: false
   xy: 543, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0169
+fox1.png0070
   rotate: false
   xy: 543, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0170
+fox1.png0071
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0171
+fox1.png0072
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+wag13.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0073
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0074
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0075
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0076
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0077
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0172
+fox1.png0078
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+wag14.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0079
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0080
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0081
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0082
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0083
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0173
+fox1.png0084
+  rotate: false
+  xy: 1085, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+
+wag15.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fox1.png0085
+  rotate: false
+  xy: 1, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0086
+  rotate: false
+  xy: 1, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0087
+  rotate: false
+  xy: 543, 963
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0088
+  rotate: false
+  xy: 543, 1
+  size: 540, 960
+  orig: 540, 960
+  offset: 0, 0
+  index: -1
+fox1.png0089
   rotate: false
   xy: 1085, 963
   size: 540, 960
   orig: 540, 960
   offset: 0, 0
   index: -1
-fox1.png0174
+fox1.png0090
   rotate: false
-  xy: 1085, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0175
-  rotate: false
-  xy: 1085, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0176
-  rotate: false
-  xy: 1085, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0177
-  rotate: false
-  xy: 1085, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0178
-  rotate: false
-  xy: 1085, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0179
-  rotate: false
-  xy: 1085, 963
-  size: 540, 960
-  orig: 540, 960
-  offset: 0, 0
-  index: -1
-fox1.png0180
-  rotate: false
-  xy: 1085, 963
+  xy: 1085, 1
   size: 540, 960
   orig: 540, 960
   offset: 0, 0

@@ -73,4 +73,6 @@ public class Play implements ApplicationListener {
     @Override
     public void resume() {
     }
+    public void animationFinished() {
+    }
 }
