@@ -199,10 +199,7 @@ public class ValueKeeper {
         animationList.put("Spielen",false);
         valueKeeperAlreadyRefreshed = true;
     }
-
-
     public void saveInstance() {
-
         HashMap<String, String> values = new HashMap<String, String>();
         values.put("onboardingStartedBefore", Boolean.toString(onboardingStartedBefore));
         values.put("analysisDoneBefore", Boolean.toString(analysisDoneBefore));
