@@ -45,7 +45,7 @@ public class MethodChangeAcornCount extends Method {
                 public void run() {
                     ValueKeeper observer = ValueKeeper.getInstance();
                     observer.changeAcornCountBy(amount);
-                    if (observer.getAcornCount() >= 40) {
+                    if (observer.getAcornCount() >= 60) {
                         ((FoxITActivity) activity).setTrophyUnlocked("Baumhaus Kapitalist");
                     }
                     if (activity.findViewById(R.id.count_frame) != null) {

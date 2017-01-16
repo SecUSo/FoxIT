@@ -96,7 +96,7 @@ public class ButtonFragment extends Fragment {
 
     public void showToast() {
         Toast.makeText(getActivity().getApplicationContext(),
-                "Du hast leider nicht genügend Eicheln, um diese Animation zu kaufen.", Toast.LENGTH_SHORT).show();
+                "Diese Animation musst du erst noch mit Eicheln freischalten. Sorry!", Toast.LENGTH_SHORT).show();
     }
 
     void startAnimation(int id, Fragment fragment, String name) {
