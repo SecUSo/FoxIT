@@ -21,17 +21,19 @@ public class SwipeAdapter extends FragmentPagerAdapter {
         Bundle bundle = new Bundle();
         switch (position) {
             case 0:
-                bundle.putString("button", "Sitz!");
+                bundle.putString("button", "setzen statt hetzen");
                 break;
             case 1:
-                bundle.putString("button", "Wedel mal!");
+                bundle.putString("button", "fuchsteufelsfröhlich :)");
                 break;
             case 2:
-                bundle.putString("button", "Kick den Ball!");
+                bundle.putString("button", "klicken zum kicken");
                 break;
-            case 3: bundle.putString("button", "Versteck dich!");
+            case 3:
+                bundle.putString("button", "Tarnung aktivieren!");
                 break;
-            case 4: bundle.putString("button", "Flieg!");
+            case 4:
+                bundle.putString("button", "ich bin ein Fuchsonaut!");
                 break;
             default:
                 bundle.putString("button", "NOTHING");

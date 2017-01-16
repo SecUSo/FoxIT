@@ -140,7 +140,7 @@ public class SettingsActivity extends FoxITActivity {
         NetworkInfo netInfo = connMan.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
-            String URL = "http://foxit.secuso.org/CSVs/raw/permissions.csv";//"https://app.seafile.de/f/740b44b607/?raw=1";
+            String URL = "https://foxit.secuso.org/CSVs/raw/permissions.csv";//"https://app.seafile.de/f/740b44b607/?raw=1";
             new CSVUpdateTask(context).execute(URL, "permissions", readCSV(R.raw.permissions, context));
 
         } else {
@@ -156,9 +156,9 @@ public class SettingsActivity extends FoxITActivity {
         NetworkInfo netInfo = connMan.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
-            String URL = "http://foxit.secuso.org/CSVs/raw/lektionen.csv";//"https://app.seafile.de/f/e27034ec0a/?raw=1";
+            String URL = "https://foxit.secuso.org/CSVs/raw/lektionen.csv";//"https://app.seafile.de/f/e27034ec0a/?raw=1";
             new CSVUpdateTask(context).execute(URL, "lessions", readLessionCSV(R.raw.lektionen, context));
-            URL = "http://foxit.secuso.org/CSVs/raw/classes.csv";//"https://app.seafile.de/f/7ca81fac4e/?raw=1";
+            URL = "https://foxit.secuso.org/CSVs/raw/classes.csv";//"https://app.seafile.de/f/7ca81fac4e/?raw=1";
             new CSVUpdateTask(context).execute(URL, "classes", readCSV(R.raw.classes, context));
 
         } else {
@@ -178,7 +178,7 @@ public class SettingsActivity extends FoxITActivity {
         NetworkInfo netInfo = connMan.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
-            String URL = "http://foxit.secuso.org/CSVs/raw/sdescription.csv";//"https://app.seafile.de/f/bb0071411b/?raw=1";
+            String URL = "https://foxit.secuso.org/CSVs/raw/sdescription.csv";//"https://app.seafile.de/f/bb0071411b/?raw=1";
             new CSVUpdateTask(context).execute(URL, "settings", readCSV(R.raw.sdescription, context));
 
         } else {

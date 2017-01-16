@@ -16,6 +16,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by noah on 11/8/16.
  */
@@ -36,9 +38,13 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
             InputStream is = null;
             try {
                 is = getStream(url);
+                if (is == null) {
+                    is = getHttpStream(url);
+                }
             } catch (Exception e) {
                 Log.d("CSVDownTask", "inputStream not valid" + e);
             }
+
             if (is != null) {
                 if (objects[1].equals("permissions")) dbHandler.updatePermissions(readStream(is));
                 if (objects[1].equals("lessions")) dbHandler.updateLessions(readLessionStream(is));
@@ -69,22 +75,55 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
         try {
             //configuration of the connection
             URL theURL = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) theURL.openConnection();
-            con.setConnectTimeout(15000);
-            con.setReadTimeout(10000);
-            con.setRequestMethod("GET");
-            con.setDoInput(true);
-            //start of the connection
-            con.connect();
-            int resCode = con.getResponseCode();
-            Log.d("CSVUpdateTask", "con response is: " + resCode);
-            is = con.getInputStream();
+            if (theURL.getProtocol().toLowerCase().equals("https")) {
+                HttpsURLConnection scon = (HttpsURLConnection) theURL.openConnection();
+                if (scon != null) {
+                    scon.setConnectTimeout(5000);
+                    scon.setReadTimeout(5000);
+                    scon.setRequestMethod("GET");
+                    scon.setDoInput(true);
+                    //start of the connection
+                    scon.connect();
+                    int resCode = scon.getResponseCode();
+                    Log.d("CSVUpdateTask", "con response is: " + resCode);
+                    is = scon.getInputStream();
+                }
+            }
+            if (is == null) {
+            }
         } catch (MalformedURLException e) {
             Log.d("CSVUpdateTask:", "URL misformed! " + e);
         } catch (ProtocolException e) {
             Log.d("CSVUpdateTask:", "protocol error! " + e);
         } catch (IOException e) {
-            Log.d("CSVUpdateTask:", "input stream not valid! " + e);
+            Log.d("CSVUpdateTask:", "https input stream not valid! :(" + e);
+        }
+        return is;
+    }
+
+    private InputStream getHttpStream(String url) {
+        InputStream is = null;
+        try {
+
+            URL theURL = new URL(url.replace("https", "http"));
+            HttpURLConnection con = (HttpURLConnection) theURL.openConnection();
+            if (con != null) {
+                con.setConnectTimeout(15000);
+                con.setReadTimeout(10000);
+                con.setRequestMethod("GET");
+                con.setDoInput(true);
+                //start of the connection
+                con.connect();
+                int resCode = con.getResponseCode();
+                Log.d("CSVUpdateTask", "con response is: " + resCode);
+                is = con.getInputStream();
+            }
+        } catch (ProtocolException e) {
+            Log.d("CSVUpdateTask:", "protocol error! " + e);
+        } catch (MalformedURLException e) {
+            Log.d("CSVUpdateTask:", "URL misformed! " + e);
+        } catch (IOException e) {
+            Log.d("CSVUpdateTask:", "http input stream not valid! :(" + e);
         }
         return is;
     }
