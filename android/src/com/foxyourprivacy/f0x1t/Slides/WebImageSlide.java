@@ -62,7 +62,7 @@ public class WebImageSlide extends Slide {
                 break;
             }
             case "https://upload.wikimedia.org/wikipedia/commons/a/ac/Presidio-modelo2.JPG": {
-                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_deepweb_1));
+                image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.mipmap.lection_image_gesellschaft_panopticon));
                 break;
             }
             case "https://lh3.googleusercontent.com/tfY9-PhmOZXzuVL-mOYtqIWqlevIJSei829aGlzIBHZFdmFAiKOCqR-bDWSLCkEn3bSd=w300":{
