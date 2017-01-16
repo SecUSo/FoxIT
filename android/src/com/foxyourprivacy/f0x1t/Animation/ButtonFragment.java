@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
@@ -22,25 +23,25 @@ import java.util.List;
 public class ButtonFragment extends Fragment {
     Button button;
     String label;
-
-    // UNLOCKING
-    HashMap<String, Boolean> unlockedAnimations = ValueKeeper.getInstance().animationList;
-
-    public boolean isUnlocked(String anim){
-        return true;
+    ValueKeeper valueKeeper;
+//
+//    // UNLOCKING
+//    HashMap<String, Boolean> unlockedAnimations = ValueKeeper.getInstance().animationList;
+//
+//    public boolean isUnlocked(String anim){
 //        boolean unlocked;
 //        for (String s : unlockedAnimations.keySet()) {
 //            unlocked = unlockedAnimations.get(s);
 //            if (s.equals(anim) && unlocked) return true;
 //        }
 //        return false;
-    }
+//    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        valueKeeper=ValueKeeper.getInstance();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_animation_page,container, false);
         button = (Button) view.findViewById(R.id.button_animation);
@@ -51,44 +52,51 @@ public class ButtonFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 switch (label) {
                     case "Wedel mal!":
-                        if (isUnlocked("")) {
-                            AnimationTale tail = new AnimationTale();
+                            AnimationTail tail = new AnimationTail();
                             startAnimation(R.id.tale, tail, "animationTale");
-                        }
                         break;
                     case "Kick den Ball!":
-                        if (isUnlocked("")) {
+                        if (valueKeeper.isAnimationUnlocked("Spielen")) {
                             AnimationPlay play = new AnimationPlay();
                             startAnimation(R.id.play, play, "animationPlay");
                         }
+                        else {showToast();}
                         break;
                     case "Sitz!":
-                        if (isUnlocked("")) {
+                        if (valueKeeper.isAnimationUnlocked("Hinsetzen")) {
                             AnimationSit sit = new AnimationSit();
                             startAnimation(R.id.sit, sit, "animationSit");
                         }
+                        else {showToast();}
                         break;
                     case "Versteck dich!":
-                        if (isUnlocked("")) {
+                        if (valueKeeper.isAnimationUnlocked("Verduften")) {
                             AnimationVanish vanish = new AnimationVanish();
                             startAnimation(R.id.vanish, vanish, "animationVanish");
                         }
+                        else {showToast();}
                         break;
                     case "Flieg!":
-                        if (isUnlocked("")) {
+                        if (valueKeeper.isAnimationUnlocked("Abheben")) {
                             AnimationFly fly = new AnimationFly();
                             startAnimation(R.id.fly, fly, "animationFly");
                         }
+                        else {showToast();}
                         break;
                     default:
-                        //...
+                        showToast();
+
                 }
             }
         });
         return view;
+    }
+
+    public void showToast() {
+        Toast.makeText(getActivity().getApplicationContext(),
+                "Du hast leider nicht genügend Eicheln, um diese Animation zu kaufen.", Toast.LENGTH_SHORT).show();
     }
 
     void startAnimation(int id, Fragment fragment, String name) {

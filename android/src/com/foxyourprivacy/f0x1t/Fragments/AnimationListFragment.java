@@ -26,7 +26,6 @@ import com.foxyourprivacy.f0x1t.R;
  */
 public class AnimationListFragment extends Fragment {
 
-
     /*
     an array holding all of the displayed settings
      */
@@ -53,9 +52,13 @@ public class AnimationListFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
         //creating the animationObjects - TODO: make it tidy for more animations to be added
-        AnimationObject[] animationArray = {new AnimationObject("Halt", "Das Füchslein ruht im Walde, so ruhest auch du.", R.mipmap.test_trophy, 5, false),
-                new AnimationObject("Tale", "Erhaben wallt des Fuches Pracht, und doch ganz sacht... ", R.mipmap.badapprating, 10, false),
-                new AnimationObject("Kopfschütteln", "Kopfschütteln, das Händeschütteln der Einzelgänger.", R.mipmap.badapprating, 30, false)};
+        AnimationObject[] animationArray = {
+                new AnimationObject("Hinsetzen", "Das Füchslein ruht im Walde, so ruhest auch du.", R.mipmap.test_trophy, 5, false),
+                new AnimationObject("Schwanzwedeln", "Erhaben wallt des Fuchses Pracht, und doch ganz sacht... ", R.mipmap.badapprating, 10, false),
+                new AnimationObject("Kopfschütteln", "Kopfschütteln, das Händeschütteln der Einzelgänger.", R.mipmap.badapprating, 30, false),
+                new AnimationObject("Verduften", "Sehen oder gesehen werden...", R.mipmap.badapprating, 30, false),
+                new AnimationObject("Spielen", "Das Spiel mit dem Ball /nAuch der Ballspieler: Spielball /nVerspielt", R.mipmap.badapprating, 30, false),
+                new AnimationObject("Abheben", "...und Weitblick gewinnen", R.mipmap.badapprating, 30, false)};
 
 
         // for (AnimationObject ao : animationArray) {

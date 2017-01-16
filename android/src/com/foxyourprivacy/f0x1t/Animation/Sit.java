@@ -70,7 +70,7 @@ public class Sit implements ApplicationListener {
         elapsedTime += Gdx.graphics.getDeltaTime();
 
         batch.draw(texture, 0,0, width, height);
-        batch.draw(animation.getKeyFrame(elapsedTime, true), width/10, 0);
+        batch.draw(animation.getKeyFrame(elapsedTime, true), -width/5f, -height/2,width*1.5f,height*1.5f);
         batch.end();
     }
 

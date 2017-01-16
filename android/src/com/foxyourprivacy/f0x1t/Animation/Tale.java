@@ -33,7 +33,7 @@ public class Tale implements ApplicationListener {
 
         // animation
         batch = new SpriteBatch();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("tale/tale.atlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("wag/wag.atlas"));
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         // background
@@ -61,7 +61,7 @@ public class Tale implements ApplicationListener {
         elapsedTime += Gdx.graphics.getDeltaTime();
 
         batch.draw(texture, 0,0, width, height);
-        batch.draw(animation.getKeyFrame(elapsedTime, true), width/10, 0);
+        batch.draw(animation.getKeyFrame(elapsedTime, true), -width/6f, -height/3,width*1.3f,height*1.3f);
         batch.end();
     }
     @Override
