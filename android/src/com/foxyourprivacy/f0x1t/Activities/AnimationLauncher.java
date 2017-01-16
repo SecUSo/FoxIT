@@ -58,7 +58,6 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 
     }
 
-
     /**
      * show back button
      *
@@ -96,18 +95,13 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * close callbacks
-     */
-    @Override
-    public void exit() {
-
-    }
-
     @Override
     public void onBackPressed() {
-
         super.onBackPressed();
     }
 
+    @Override
+    public void exit() {
+        
+    }
 }

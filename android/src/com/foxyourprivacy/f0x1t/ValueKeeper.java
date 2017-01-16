@@ -192,8 +192,11 @@ public class ValueKeeper {
 
 
         }
-        animationList.put("Tale",true);
-
+        animationList.put("Schwanzwedeln",true);
+        animationList.put("Hinsetzen",false);
+        animationList.put("Abheben",false);
+        animationList.put("Verduften",false);
+        animationList.put("Spielen",false);
         valueKeeperAlreadyRefreshed = true;
     }
 
@@ -340,8 +343,10 @@ public class ValueKeeper {
     }
 
     public boolean isAnimationUnlocked(String animationName) {
-        return animationList.get(animationName);
-
+        if (animationList.containsKey(animationName)) {
+            return animationList.get(animationName);
+        }
+        return false;
     }
 
     /**
