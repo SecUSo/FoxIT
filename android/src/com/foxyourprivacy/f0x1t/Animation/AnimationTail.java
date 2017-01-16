@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
  * Created by Lena on 28.09.2016.
  * initiates animation and forwards to core project
  */
-public class AnimationTale extends AndroidFragmentApplication {
+public class AnimationTail extends AndroidFragmentApplication {
 
     /**
      * start animating

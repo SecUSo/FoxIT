@@ -2,24 +2,17 @@ package com.foxyourprivacy.f0x1t.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
-import com.foxyourprivacy.f0x1t.Animation.AnimationPlay;
-import com.foxyourprivacy.f0x1t.Animation.AnimationSit;
-import com.foxyourprivacy.f0x1t.Animation.AnimationTale;
+import com.foxyourprivacy.f0x1t.Animation.AnimationTail;
 import com.foxyourprivacy.f0x1t.Animation.CircularViewPagerHandler;
 import com.foxyourprivacy.f0x1t.Animation.SwipeAdapter;
 import com.foxyourprivacy.f0x1t.R;
-import com.foxyourprivacy.f0x1t.ValueKeeper;
-
-import java.util.HashMap;
 
 import static android.view.View.VISIBLE;
 import static com.foxyourprivacy.f0x1t.R.id.view_pager;
@@ -57,7 +50,7 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
 
 
         //erste Animation bereits beim starten anzeigen
-        AnimationTale tail = new AnimationTale();
+        AnimationTail tail = new AnimationTail();
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.tale, tail, "animationTale");
         transaction.commit();

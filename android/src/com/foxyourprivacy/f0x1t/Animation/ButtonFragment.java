@@ -55,7 +55,7 @@ public class ButtonFragment extends Fragment {
                 switch (label) {
                     case "Wedel mal!":
                         if (isUnlocked("")) {
-                            AnimationTale tail = new AnimationTale();
+                            AnimationTail tail = new AnimationTail();
                             startAnimation(R.id.tale, tail, "animationTale");
                         }
                         break;
