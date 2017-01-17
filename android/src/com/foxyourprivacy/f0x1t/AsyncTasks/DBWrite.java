@@ -50,10 +50,10 @@ public class DBWrite extends AsyncTask<Object, Void, Void> {
         } else if (objects[0] == "insertIndividualValue") {
             dbHandler.insertIndividualValue((String) objects[1], (String) objects[2]);
         } else if (objects[0] == "clearAndSetValueKeeper") {
-            dbHandler.clearValueKeeper();
+            dbHandler.clearAppsFromVK();
             dbHandler.insertIndividualData((HashMap<String, String>) objects[1]);
-        } else if (objects[0] == "clearValueKeeper") {
-            dbHandler.clearValueKeeper();
+        } else if (objects[0] == "clearAppsFromVK") {
+            dbHandler.clearAppsFromVK();
         }
 
         dbHandler.close();

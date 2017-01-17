@@ -37,7 +37,7 @@ public class BackgroundService extends Service {
 
         context = getApplicationContext();
         Timer timer = new Timer();
-        timer.schedule(new CheckApps(), 0, 5000);
+        timer.schedule(new CheckApps(), 0, 30000);
 
 
         return Service.START_NOT_STICKY;
@@ -67,11 +67,10 @@ public class BackgroundService extends Service {
             final PackageManager pm = context.getPackageManager();
             for (int i = 0; i < apps.size(); i++) {
                 if (!pm.getApplicationLabel(apps.get(i)).toString().equals(pm.getApplicationLabel(newApps.get(i)).toString())) {
-
+                    ValueKeeper.getInstance().saveApps();
                     return pm.getApplicationLabel(apps.get(i)).toString();
                 }
             }
-
             //  Log.d("MyApp","i:"+Integer.toString(apps.size())+"n:"+Integer.toString(newApps.size())+"True");
             return "true";
         }

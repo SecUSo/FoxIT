@@ -162,7 +162,7 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
                 if (templine.matches(".*;;;")) {
                     String[] rowarray = csvrow.split(";");
                     result.add(rowarray);
-                    Log.d("SettingsActivity", "row: " + csvrow);
+                    // Log.d("SettingsActivity", "row: " + csvrow);
                     csvrow = "";
                 }
             }

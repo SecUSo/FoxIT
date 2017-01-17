@@ -68,6 +68,7 @@ public class FoxITActivity extends AppCompatActivity {
             v.reviveInstance();
             ArrayList<String> deletedApps = v.compareAppLists();
             v.deinstalledApps.addAll(deletedApps);
+            v.saveApps();
 
             Calendar c = Calendar.getInstance();
             int timeOfDay = c.get(Calendar.HOUR_OF_DAY) + 2;
@@ -108,7 +109,7 @@ public class FoxITActivity extends AppCompatActivity {
             v.setTimeOfLastAccess(System.currentTimeMillis());
         }
 
-        if(v.getTimeOfLastServerAccess()+259200000<System.currentTimeMillis()){
+        if (v.getTimeOfLastServerAccess() + 259200000 < System.currentTimeMillis() && v.getTimeOfLastServerAccess() != 0L) {
             NetworkInfo netInfo = ((ConnectivityManager) getSystemService(android.app.Activity.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/permissions.csv", "permissions");
@@ -139,7 +140,8 @@ public class FoxITActivity extends AppCompatActivity {
         v.fillApplicationStartAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndActiveCDuration(System.currentTimeMillis());
         ((FoxITApplication) this.getApplication()).startActivityTransitionTimer();
-        v.saveInstance();
+        if (this instanceof LectionActivity || this instanceof LectionListActivity || this instanceof OnboardingActivity || this instanceof TrophyRoomActivity || this instanceof Analysis || this instanceof Home)
+            v.saveInstance();
     }
 
     public int getNumberOfCurrentEvaluation() {

@@ -818,8 +818,8 @@ public class DBHandler extends SQLiteOpenHelper {
         Set<String> keys = hashMap.keySet();
         String value;
         for (String key : keys) {
-            if (hashMap.get(key) == null) value = "null";
-            else value = hashMap.get(key).replaceAll("'", "''");
+            if (hashMap.get(key) != null) value = hashMap.get(key).replaceAll("'", "''");
+            else value = "null";
             db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERSONAL + " VALUES(\'" + key.replaceAll("'", "\'") + "\', \'" + value + "\');");
         }
         db.close();
@@ -873,9 +873,15 @@ public class DBHandler extends SQLiteOpenHelper {
         return "notfound";
     }
 
-    public void clearValueKeeper() {
+    public void clearAppsFromVK() {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_PERSONAL, COLUMN_KEY + " IS NOT \'analysisDoneBefore\' OR \'onboardingStartedBefore\'", null);
+        db.delete(TABLE_PERSONAL, COLUMN_KEY + " LIKE \'app:%\'", null);
+        db.close();
+    }
+
+    public void clearDAppsFromVK() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_PERSONAL, COLUMN_KEY + " LIKE \'dap:%\'", null);
         db.close();
     }
 
