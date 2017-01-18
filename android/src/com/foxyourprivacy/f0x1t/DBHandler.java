@@ -373,7 +373,7 @@ public class DBHandler extends SQLiteOpenHelper {
      *
      * @param theLessions the List of the lessions
      */
-    public void updateLessions(ArrayList<String[]> theLessions) {
+    public void updateLessons(ArrayList<String[]> theLessions) {
         SQLiteDatabase db = getWritableDatabase();
 
         long time = System.currentTimeMillis();
@@ -397,7 +397,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     Log.e("DBHandler", "Fehler in Lektion, Länge des lessionArrays: " + lessionArray.length);
                 ioobe.printStackTrace();
             } catch (SQLiteException sqle) {
-                Log.d("DBH.updateLessions", "There was an SQLiteExcption. Please review escaping of relevant fields. Lession was: " + lessionArray[1] + " in Class " + lessionArray[0]);
+                Log.d("DBH.updateLessons", "There was an SQLiteExcption. Please review escaping of relevant fields. Lession was: " + lessionArray[1] + " in Class " + lessionArray[0]);
                 sqle.printStackTrace();
             }
 

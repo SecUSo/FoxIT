@@ -27,8 +27,8 @@ public class DBWrite extends AsyncTask<Object, Void, Void> {
             dbHandler.addParamColumn((ContentValues[]) objects[1]);
         } else if (objects[0] == "addAppColumn") {
             dbHandler.addAppColumn((ContentValues[]) objects[1]);
-        } else if (objects[0] == "updateLessions") {
-            dbHandler.updateLessions((ArrayList<String[]>) objects[1]);
+        } else if (objects[0] == "updateLessons") {
+            dbHandler.updateLessons((ArrayList<String[]>) objects[1]);
         } else if (objects[0] == "updateClasses") {
             dbHandler.updateClasses((ArrayList<String[]>) objects[1]);
         } else if (objects[0] == "updatePermissions") {

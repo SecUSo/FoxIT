@@ -165,8 +165,8 @@ public class SettingsActivity extends FoxITActivity {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
             //DBHandler dbHandler = new DBHandler(context, null, null, 1);
-            new DBWrite(context).execute("updateLessions", readLessionCSV(R.raw.lektionen, context));
-            //dbHandler.updateLessions(readCSV(R.raw.lektionen, context));
+            new DBWrite(context).execute("updateLessons", readLessionCSV(R.raw.lektionen, context));
+            //dbHandler.updateLessons(readCSV(R.raw.lektionen, context));
             new DBWrite(context).execute("updateClasses", readCSV(R.raw.classes, context));
             //dbHandler.updateClasses(readCSV(R.raw.classes, context));
             //dbHandler.close();

@@ -47,7 +47,7 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
 
             if (is != null) {
                 if (objects[1].equals("permissions")) dbHandler.updatePermissions(readStream(is));
-                if (objects[1].equals("lessions")) dbHandler.updateLessions(readLessionStream(is));
+                if (objects[1].equals("lessions")) dbHandler.updateLessons(readLessionStream(is));
                 if (objects[1].equals("classes")) dbHandler.updateClasses(readStream(is));
                 if (objects[1].equals("settings"))
                     dbHandler.updateSettingDescriptions(readStream(is));
@@ -57,7 +57,7 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
                 Log.d("CSVDownTask", "InputStream null, Internet Failure.");
                 if (objects[1].equals("permissions"))
                     dbHandler.updatePermissions((ArrayList) objects[2]);
-                if (objects[1].equals("lessions")) dbHandler.updateLessions((ArrayList) objects[2]);
+                if (objects[1].equals("lessions")) dbHandler.updateLessons((ArrayList) objects[2]);
                 if (objects[1].equals("classes")) dbHandler.updateClasses((ArrayList) objects[2]);
                 if (objects[1].equals("settings"))
                     dbHandler.updateSettingDescriptions((ArrayList) objects[2]);

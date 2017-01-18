@@ -45,7 +45,7 @@ public class CSVRefreshFragment extends Fragment {
                 ((SettingsActivity) getActivity()).updateLessions(getActivity(), (ConnectivityManager) getActivity().getSystemService(android.app.Activity.CONNECTIVITY_SERVICE));
                 /*
                 DBHandler dbHandler = new DBHandler(getActivity(),null,null,1);
-                dbHandler.updateLessions(((SettingsActivity)getActivity()).readCSV(R.raw.lektionen,getActivity()));
+                dbHandler.updateLessons(((SettingsActivity)getActivity()).readCSV(R.raw.lektionen,getActivity()));
                 dbHandler.updateClasses(((SettingsActivity)getActivity()).readCSV(R.raw.classes,getActivity()));
                 dbHandler.close();
                 */
