@@ -204,8 +204,8 @@ public class DBHandler extends SQLiteOpenHelper {
                     ) {
                 if (value != null) {
                     String escapedValue = value.getAsString(COLUMN_INITIAL).replace("\"", ""); // replaces all " with *nothing* to avoid syntax errors in the database
-                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET '(" + date + ")' = \"" + escapedValue
-                            + "\", " + COLUMN_LATEST + " = \'" + value.getAsString(COLUMN_INITIAL) + "\' WHERE " + COLUMN_SETTING + " = '" + value.getAsString(COLUMN_SETTING) + "'");
+                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET '(" + date + ")' = \"" + escapeQuote(escapedValue)
+                            + "\", " + COLUMN_LATEST + " = \'" + value.getAsString(COLUMN_INITIAL).replaceAll("'", "''") + "\' WHERE " + COLUMN_SETTING + " = '" + value.getAsString(COLUMN_SETTING).replaceAll("'", "''") + "'");
 
                     i++;
                 }
@@ -220,7 +220,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ) {
                 if (value != null) {
                     db.insert(TABLE_SETTINGS, null, value);
-                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET " + COLUMN_LATEST + " = \'" + value.getAsString(COLUMN_INITIAL) + "\' WHERE " + COLUMN_SETTING + " = '" + value.getAsString(COLUMN_SETTING) + "'");
+                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET " + COLUMN_LATEST + " = \'" + value.getAsString(COLUMN_INITIAL).replaceAll("'", "''") + "\' WHERE " + COLUMN_SETTING + " = '" + value.getAsString(COLUMN_SETTING).replaceAll("'", "''") + "'");
                     i++;
                 }
 
@@ -260,7 +260,7 @@ public class DBHandler extends SQLiteOpenHelper {
             for (ContentValues value : values
                     ) {
                 if (value != null) {
-                    db.execSQL("UPDATE " + TABLE_APPS + " SET '(" + date + ")' = 'active' WHERE " + COLUMN_APPNAME + " = '" + value.getAsString(COLUMN_APPNAME) + "'");
+                    db.execSQL("UPDATE " + TABLE_APPS + " SET '(" + date + ")' = 'active' WHERE " + COLUMN_APPNAME + " = '" + value.getAsString(COLUMN_APPNAME).replaceAll("'", "''") + "'");
                     i++;
                 }
             }
@@ -386,7 +386,7 @@ public class DBHandler extends SQLiteOpenHelper {
                             "\'" + COLUMN_DELAY + "\' = \'" + lessionArray[2] + "\', \'" + COLUMN_LECTURETYPE + "\' = \'" + lessionArray[5] + "\', \'" + COLUMN_EICHELN + "\' = \'" + lessionArray[4] +
                             "\' WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lessionArray[1]) + "\';");
                 } else {
-                    db.execSQL("INSERT INTO " + TABLE_LESSIONS + " VALUES(\'" + escapeQuote(lessionArray[1]) + "\', \'" + lessionArray[3] + "\', \'" + escapeQuote(lessionArray[0]) + "\', \'" + lessionString + "\', \'" + lessionArray[2] + "\', \'" + escapeQuote(lessionArray[5]) + "\', \'" + time + "\', \'" + lessionArray[4] + "\');");
+                    db.execSQL("INSERT INTO " + TABLE_LESSIONS + " VALUES(\'" + escapeQuote(lessionArray[1]) + "\', \'" + lessionArray[3] + "\', \'" + escapeQuote(lessionArray[0]) + "\', \'" + lessionString + "\', \'" + lessionArray[2] + "\', \'" + lessionArray[5] + "\', \'" + time + "\', \'" + lessionArray[4] + "\');");
                 }
             }catch (IndexOutOfBoundsException ioobe){
                 if (lessionArray.length > 1)
@@ -427,7 +427,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //repeat over all rows
         while (!cursor.isAfterLast()) {
             if (cursor.getString(cursor.getColumnIndex(COLUMN_COURSE)) != null) {
-                db.execSQL("INSERT OR IGNORE INTO " + TABLE_CLASSES + " VALUES(\'" + cursor.getString(cursor.getColumnIndex(COLUMN_COURSE)) + "\', \'keine Beschreibung vorhanden\');");
+                db.execSQL("INSERT OR IGNORE INTO " + TABLE_CLASSES + " VALUES(\'" + escapeQuote(cursor.getString(cursor.getColumnIndex(COLUMN_COURSE))) + "\', \'keine Beschreibung vorhanden\');");
             }
             cursor.moveToNext();
         }
@@ -566,7 +566,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         for (String[] array : permissionlist) {
             if (array.length == 1) {
-                db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\') VALUES(\'" + array[0] + "\');");
+                db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\') VALUES(\'" + escapeQuote(array[0]) + "\');");
             }
             if (array.length == 2) {
                 db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERMISSIONS + " (\'" + COLUMN_PERMISSIONNAME + "\', \'" + COLUMN_PERMISSIONDESCRIPTION + "\') VALUES(\'" + escapeQuote(array[0]) + "\', \'" + array[1].replace("'", "''") + "\');");
@@ -658,7 +658,7 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void changeLectionToRead(String lectionName) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 2 WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
+        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 2 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lectionName) + "\';");
         db.close();
     }
 
@@ -669,7 +669,7 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void changeLectionToSolved(String lectionName) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 3 WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
+        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 3 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lectionName) + "\';");
         db.close();
 
     }
@@ -681,7 +681,7 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void changeEvaluationToSolved(String lectionName) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = -98 WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
+        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = -98 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lectionName) + "\';");
         db.close();
 
     }
@@ -717,7 +717,7 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void setLectionNextFreeTime(String lectionName, long nextFreeTime) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_FREETIME + " = \'" + nextFreeTime + "\' WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
+        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_FREETIME + " = \'" + nextFreeTime + "\' WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lectionName) + "\';");
         db.close();
     }
 
@@ -725,50 +725,50 @@ public class DBHandler extends SQLiteOpenHelper {
     public void updateSettingDescriptions(ArrayList<String[]> settingsData) {
         SQLiteDatabase db = getWritableDatabase();
         for (String[] setting : settingsData) {
-            if (checkIfInside(db, TABLE_SETTINGS, COLUMN_SETTING + " = \'" + setting[0] + "\'")) {
+            if (checkIfInside(db, TABLE_SETTINGS, COLUMN_SETTING + " = \'" + escapeQuote(setting[0]) + "\'")) {
                 if (setting.length == 2) {
                     db.execSQL("UPDATE " + TABLE_SETTINGS + " SET "
                             + COLUMN_TYPE + " = " + setting[1]
-                            + " WHERE " + COLUMN_SETTING + " = \'" + setting[0] + "\';");
+                            + " WHERE " + COLUMN_SETTING + " = \'" + escapeQuote(setting[0]) + "\';");
                 } else if (setting.length == 3) {
                     db.execSQL("UPDATE " + TABLE_SETTINGS + " SET "
                             + COLUMN_TYPE + " = " + setting[1] + ", "
-                            + COLUMN_GOODNAME + " = \'" + setting[2] + "\' "
-                            + "WHERE " + COLUMN_SETTING + " = \'" + setting[0] + "\';");
+                            + COLUMN_GOODNAME + " = \'" + escapeQuote(setting[2]) + "\' "
+                            + "WHERE " + COLUMN_SETTING + " = \'" + escapeQuote(setting[0]) + "\';");
                 } else if (setting.length >= 4) {
                     db.execSQL("UPDATE " + TABLE_SETTINGS + " SET "
                             + COLUMN_TYPE + " = " + setting[1] + ", "
-                            + COLUMN_GOODNAME + " = \'" + setting[2] + "\', "
+                            + COLUMN_GOODNAME + " = \'" + escapeQuote(setting[2]) + "\', "
                             + COLUMN_SETTINGDESCRIPTION + " = \'"
                             + setting[3] + "\' " +
-                            "WHERE " + COLUMN_SETTING + " = \'" + setting[0] + "\';");
+                            "WHERE " + COLUMN_SETTING + " = \'" + escapeQuote(setting[0]) + "\';");
                 }
             } else {
                 if (setting.length == 1) {
                     db.execSQL("INSERT INTO " + TABLE_SETTINGS + "("
                             + COLUMN_SETTING
                             + ") VALUES(\'" +
-                            setting[0] + "\')");
+                            escapeQuote(setting[0]) + "\')");
                 } else if (setting.length == 2) {
                     db.execSQL("INSERT INTO " + TABLE_SETTINGS + "("
                             + COLUMN_SETTING + ", "
                             + COLUMN_TYPE
                             + ") VALUES(\'" +
-                            setting[0] + "\', \'" + setting[1] + "\')");
+                            escapeQuote(setting[0]) + "\', \'" + setting[1] + "\')");
                 } else if (setting.length == 3) {
                     db.execSQL("INSERT INTO " + TABLE_SETTINGS + "("
                             + COLUMN_SETTING + ", "
                             + COLUMN_TYPE + ", "
                             + COLUMN_GOODNAME
                             + ") VALUES(\'" +
-                            setting[0] + "\', \'" + setting[1] + "\', \'" + setting[2] + "\')");
+                            escapeQuote(setting[0]) + "\', \'" + setting[1] + "\', \'" + escapeQuote(setting[2]) + "\')");
                 } else
                     db.execSQL("INSERT INTO " + TABLE_SETTINGS + "("
                             + COLUMN_SETTING + ", "
                             + COLUMN_TYPE + ", "
                             + COLUMN_GOODNAME + ", "
                             + COLUMN_SETTINGDESCRIPTION + ") VALUES(\'" +
-                            setting[0] + "\', \'" + setting[1] + "\', \'" + setting[2] + "\', \'" + setting[3] + "\')");
+                            escapeQuote(setting[0]) + "\', \'" + setting[1] + "\', \'" + escapeQuote(setting[2]) + "\', \'" + escapeQuote(setting[3]) + "\')");
             }
         }
         renameEmptySettings();
@@ -782,9 +782,9 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 String name = cursor.getString(0);
-                name = name.replace("_", " ");
+                name = escapeQuote(name.replace("_", " "));
                 name = name.substring(0, 1).toUpperCase() + name.substring(1);
-                db.execSQL("UPDATE " + TABLE_SETTINGS + " SET " + COLUMN_GOODNAME + " = \'" + name + "\' WHERE " + COLUMN_SETTING + " = \'" + cursor.getString(0) + "\';");
+                db.execSQL("UPDATE " + TABLE_SETTINGS + " SET " + COLUMN_GOODNAME + " = \'" + name + "\' WHERE " + COLUMN_SETTING + " = \'" + escapeQuote(cursor.getString(0)) + "\';");
                 cursor.moveToNext();
             }
             cursor.close();
@@ -845,13 +845,13 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void changeIndividualValue(String key, String value) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_PERSONAL + " SET " + COLUMN_VALUE + " = \'" + value + "\' WHERE " + COLUMN_KEY + " = \'" + key + "\';");
+        db.execSQL("UPDATE " + TABLE_PERSONAL + " SET " + COLUMN_VALUE + " = \'" + escapeQuote(value) + "\' WHERE " + COLUMN_KEY + " = \'" + key + "\';");
         db.close();
     }
 
     public void insertIndividualValue(String key, String value) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERSONAL + " VALUES(\'" + key + "\', \'" + value + "\');");
+        db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERSONAL + " VALUES(\'" + key + "\', \'" + escapeQuote(value) + "\');");
         db.close();
     }
 
@@ -893,7 +893,7 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
             String name = cursor.getString(0);
             cursor.close();
-            db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 1 WHERE " + COLUMN_LECTURENAME + " = \'" + name + "\';");
+            db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 1 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(name) + "\';");
             return name;
         }
         return "There is no new Lession";
