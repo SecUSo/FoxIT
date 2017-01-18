@@ -24,6 +24,14 @@
                 android:gravity="bottom|right"
                 android:text="VPNCODE" />
 
+            <TextView
+                android:id="@+id/textViewVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="bottom|left"
+                android:text="Version" />
+
 
             <ListView
                 android:id="@android:id/list"
