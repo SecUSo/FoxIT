@@ -203,7 +203,8 @@ public class DBHandler extends SQLiteOpenHelper {
             for (ContentValues value : values
                     ) {
                 if (value != null) {
-                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET '(" + date + ")' = \"" + value.getAsString(COLUMN_INITIAL)
+                    String escapedValue = value.getAsString(COLUMN_INITIAL).replace("\"", ""); // replaces all " with *nothing* to avoid syntax errors in the database
+                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET '(" + date + ")' = \"" + escapedValue
                             + "\", " + COLUMN_LATEST + " = \'" + value.getAsString(COLUMN_INITIAL) + "\' WHERE " + COLUMN_SETTING + " = '" + value.getAsString(COLUMN_SETTING) + "'");
 
                     i++;
