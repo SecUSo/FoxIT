@@ -162,9 +162,7 @@ public class BackgroundService extends Service {
 
             String isChange = checkForChanges();
             if (!isChange.equals("false")) {
-                Log.d("Service", "Hello World!xxx");
                 v.deinstalledApps.add(isChange);
-                Log.d("Service", v.deinstalledApps.toString());
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.paw)
