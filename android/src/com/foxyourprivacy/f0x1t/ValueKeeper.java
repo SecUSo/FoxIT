@@ -488,9 +488,10 @@ public class ValueKeeper {
         for (int i = 0; i < appStartsTheLastTwoDays.size(); i++) {
             if (appStartsTheLastTwoDays.get(i) < time - 2 * 86400000) {
                 appStartsTheLastTwoDays.remove(i);
-            }
+            }}
             appStartsTheLastTwoDays.add(time);
-        }
+           
+
     }
 
     public int getSizeOfAppStarts() {

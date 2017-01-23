@@ -88,8 +88,9 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         classObjectList.set(i, tempclass1);
         ClassObject tempclass2 = classObjectList.get(1);
         int j = 0;
-        while (!classObjectList.get(j).getName().equals("Daily Lessons")) {
-            j++;
+        while (j<classObjectList.size()&&!classObjectList.get(j).getName().equals("Daily Lessons")) {
+        if(j<classObjectList.size()-1){
+            j++;}
         }
         classObjectList.set(1, classObjectList.get(j));
         classObjectList.set(j, tempclass2);
