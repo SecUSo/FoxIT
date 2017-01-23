@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.foxyourprivacy.f0x1t"
-    android:versionCode="3"
-    android:versionName="0.9">
+    package="com.foxyourprivacy.f0x1t">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -19,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activities.Home">
+        <activity
+            android:name=".Activities.Home"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +33,9 @@
             >
         </service>
 
-        <activity android:name=".Activities.Analysis" />
+        <activity
+            android:name=".Activities.Analysis"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.StartScreen"
             android:screenOrientation="portrait"/>
@@ -41,12 +43,24 @@
             android:name=".Activities.LectionActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.LectionListActivity" />
-        <activity android:name=".Activities.ClassListActivity" />
-        <activity android:name=".Activities.TrophyRoomActivity" />
-        <activity android:name=".Activities.OnboardingActivity" />
-        <activity android:name=".Activities.AnimationLauncher" />
-        <activity android:name=".Activities.SettingsActivity" />
+        <activity
+            android:name=".Activities.LectionListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ClassListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.TrophyRoomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.OnboardingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.AnimationLauncher"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SettingsActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 </manifest>

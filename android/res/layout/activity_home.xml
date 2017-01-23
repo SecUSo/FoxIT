@@ -11,7 +11,9 @@
     <RelativeLayout
         android:id="@+id/underToolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="?attr/actionBarSize" >
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/screenFrame"
@@ -55,6 +57,7 @@
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="25dp" />
+
         </RelativeLayout>
 
         <View
@@ -95,6 +98,7 @@
                 android:layout_marginTop="25dp"
                 android:contentDescription="Fuchs"
                 android:src="@drawable/paw" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -172,6 +176,7 @@
                 android:src="@drawable/account" />
         </RelativeLayout>
     </RelativeLayout>
+
 
 </RelativeLayout>
 

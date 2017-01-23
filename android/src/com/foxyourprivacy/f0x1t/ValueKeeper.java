@@ -148,8 +148,8 @@ public class ValueKeeper {
                 animationList.put(e.substring(4), Boolean.parseBoolean(data.get(e)));
 
             } else {
-                if (e.contains("dur:")) {
-                    applicationAccessAndDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
+                if (e.contains("app:")) {
+                    appsBefore.add(data.get(e));
                 } else {
                     if (e.contains("stD:")) {
                         applicationStartAndDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
@@ -172,8 +172,9 @@ public class ValueKeeper {
                                             if (e.contains("tro:")) {
                                                 trophyList.put(e.substring(4), Boolean.valueOf(data.get(e)));
                                             } else {
-                                                if (e.contains("app:")) {
-                                                    appsBefore.add(data.get(e));
+                                                if (e.contains("dur:")) {
+                                                    applicationAccessAndDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
+
                                                 }
 
                                             }
@@ -282,7 +283,14 @@ public class ValueKeeper {
             x++;
         }
 
+        DBHandler db=new DBHandler(FoxITActivity.getAppContext(),null,null,2);
+        db.insertIndividualData(values);
+        db.close();
 
+    }
+
+    public void saveApps() {
+        HashMap<String, String> values = new HashMap<>();
         final PackageManager pm = FoxITActivity.getAppContext().getPackageManager();
         //get a list of installed apps.
         if (pm == null) {
@@ -295,9 +303,8 @@ public class ValueKeeper {
             values.put("app:" + Integer.toString(t), pm.getApplicationLabel(a).toString());
             t++;
         }
-
-        DBHandler db=new DBHandler(FoxITActivity.getAppContext(),null,null,2);
-        db.clearValueKeeper();
+        DBHandler db = new DBHandler(FoxITActivity.getAppContext(), null, null, 2);
+        db.clearAppsFromVK();
         db.insertIndividualData(values);
         db.close();
 
@@ -509,14 +516,15 @@ public class ValueKeeper {
             @Override
             public int compare(String lhs, String rhs) {
 
-                if (lhs.equals(rhs)) {
-                    return 0;
-                }
-                if (lhs == null) { //TODO ist immer falsch, weil vorher equals darauf aufgerufen wurde. entweder mit == vergleichen oben, anders anordnen oder was weiß ich was das machen soll :D
+
+                if (lhs == null) {
                     return -1;
                 }
                 if (rhs == null) {
                     return 1;
+                }
+                if (lhs.equals(rhs)) {
+                    return 0;
                 }
                 return lhs.compareTo(rhs);
             }
@@ -528,14 +536,15 @@ public class ValueKeeper {
             @Override
             public int compare(String lhs, String rhs) {
 
-                if (lhs.equals(rhs)) {
-                    return 0;
-                }
-                if (lhs == null) {//TODO ist immer falsch, weil vorher equals darauf aufgerufen wurde. entweder mit == vergleichen oben, anders anordnen oder was weiß ich was das machen soll :D
+
+                if (lhs == null) {
                     return -1;
                 }
                 if (rhs == null) {
                     return 1;
+                }
+                if (lhs.equals(rhs)) {
+                    return 0;
                 }
                 return lhs.compareTo(rhs);
             }

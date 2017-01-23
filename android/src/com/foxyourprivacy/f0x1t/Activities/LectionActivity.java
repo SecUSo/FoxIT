@@ -392,6 +392,9 @@ public class LectionActivity extends FoxITActivity {
     @Override
     public void onPause() {
         super.onPause();
+        DBHandler db = new DBHandler(this, null, null, 3);
+        db.clearDAppsFromVK();
+        db.close();
         handler.removeCallbacksAndMessages(null);
     }
 }

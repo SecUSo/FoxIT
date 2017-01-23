@@ -1,7 +1,6 @@
 package com.foxyourprivacy.f0x1t;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.foxyourprivacy.f0x1t.Slides.Slide;
 
@@ -36,7 +35,7 @@ public class LectionObject {
 
         String[] s = content.replace("[", "").split("]");
         for (int i = 0; i < s.length && !s[i].isEmpty(); i++) {
-            Log.d("LectionObject", "slide: " + s[i]);
+            // Log.d("LectionObject", "slide: " + s[i]);
             String key = s[i].substring(0, s[i].indexOf("~"));
             String value = s[i].substring(s[i].indexOf("~") + 1, s[i].length());
             lectionInfoHashMap.put(key, value);

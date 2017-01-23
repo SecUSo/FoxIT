@@ -14,7 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.foxyourprivacy.f0x1t.BuildConfig;
 import com.foxyourprivacy.f0x1t.R;
+import com.foxyourprivacy.f0x1t.ValueKeeper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,6 +63,13 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
 
 
         view = inflater.inflate(R.layout.fragment_settings, container, false);
+        ValueKeeper v = ValueKeeper.getInstance();
+        TextView vpnCode = (TextView) view.findViewById(R.id.textViewVPNCODE);
+        vpnCode.setText(v.getVpnCode());
+        int versionCodeInt = BuildConfig.VERSION_CODE;
+        String versionName = BuildConfig.VERSION_NAME;
+        TextView versionCode = (TextView) view.findViewById(R.id.textViewVersion);
+        versionCode.setText(versionName + "(" + versionCodeInt + ")");
 
         return view;
     }
