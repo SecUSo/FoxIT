@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.foxyourprivacy.f0x1t.Activities.Home;
+import com.foxyourprivacy.f0x1t.activities.Home;
 
 import java.util.Calendar;
 import java.util.Collections;

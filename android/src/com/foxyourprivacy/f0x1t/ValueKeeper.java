@@ -4,7 +4,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import com.foxyourprivacy.f0x1t.Activities.FoxITActivity;
+import com.foxyourprivacy.f0x1t.activities.FoxITActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -293,16 +293,18 @@ public class ValueKeeper {
         HashMap<String, String> values = new HashMap<>();
         final PackageManager pm = FoxITActivity.getAppContext().getPackageManager();
         //get a list of installed apps.
+        List<ApplicationInfo> packages;
         if (pm == null) {
             Log.d("MyApp", "pm is Null");
+        } else {
+            packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+            int t = 0;
+            for (ApplicationInfo a : packages) {
+                values.put("app:" + Integer.toString(t), pm.getApplicationLabel(a).toString());
+                t++;
+            }
         }
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
-        int t = 0;
-        for (ApplicationInfo a : packages) {
-            values.put("app:" + Integer.toString(t), pm.getApplicationLabel(a).toString());
-            t++;
-        }
         DBHandler db = new DBHandler(FoxITActivity.getAppContext(), null, null, 2);
         db.clearAppsFromVK();
         db.insertIndividualData(values);
@@ -504,6 +506,7 @@ public class ValueKeeper {
         //get a list of installed apps.
         if (pm == null) {
             Log.d("MyApp", "pm is Null");
+            return null;
         }
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 

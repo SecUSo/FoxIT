@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/creme"
-    tools:context=".Activities.StartScreen">
+    tools:context=".activities.AnalysisResults">
 
     <RelativeLayout
         android:id="@+id/tale"
@@ -70,8 +70,8 @@
     <!--VIEW PAGER WIDGET-->
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
-        android:layout_height="100dp"
         android:layout_width="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

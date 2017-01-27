@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".Activities.Home"
+            android:name=".activities.Home"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,32 +34,32 @@
         </service>
 
         <activity
-            android:name=".Activities.Analysis"
+            android:name=".activities.Analysis"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.StartScreen"
+            android:name=".activities.AnalysisResults"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activities.LectionActivity"
+            android:name=".activities.LectionActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activities.LectionListActivity"
+            android:name=".activities.LectionListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.ClassListActivity"
+            android:name=".activities.ClassListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.TrophyRoomActivity"
+            android:name=".activities.TrophyRoomActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.OnboardingActivity"
+            android:name=".activities.OnboardingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.AnimationLauncher"
+            android:name=".activities.AnimationLauncher"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:screenOrientation="portrait" />
 
     </application>

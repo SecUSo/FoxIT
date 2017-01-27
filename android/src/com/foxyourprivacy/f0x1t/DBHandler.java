@@ -456,6 +456,27 @@ public class DBHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public String getNumberOfSolvedLessons(String className) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor unlocked = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSIONS + " WHERE "
+                + COLUMN_COURSE + "=\'" + className + "\' AND " + COLUMN_STATUS + " IS NOT -99", null);
+        Cursor solved = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSIONS + " WHERE "
+                + COLUMN_COURSE + "=\'" + className + "\' AND " + COLUMN_STATUS + " IS 3", null);
+        if (unlocked != null && solved != null) {
+            unlocked.moveToFirst();
+            solved.moveToFirst();
+            int ul = unlocked.getInt(0);
+            int s = solved.getInt(0);
+            unlocked.close();
+            solved.close();
+            db.close();
+            return s + "/" + ul;
+        }
+        db.close();
+        return "notfound";
+
+    }
+
     /**
      * creates the needed String for the internal lession-management from the CSV-input
      *

@@ -2,7 +2,7 @@ package com.foxyourprivacy.f0x1t;
 
 import android.os.Bundle;
 
-import com.foxyourprivacy.f0x1t.Slides.Slide;
+import com.foxyourprivacy.f0x1t.slides.Slide;
 
 import java.util.ArrayList;
 import java.util.HashMap;

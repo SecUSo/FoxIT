@@ -8,8 +8,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.foxyourprivacy.f0x1t.Activities.LectionActivity;
-import com.foxyourprivacy.f0x1t.Slides.EvaluationSlide;
+import com.foxyourprivacy.f0x1t.activities.LectionActivity;
+import com.foxyourprivacy.f0x1t.slides.EvaluationSlide;
 
 /**
  * Created by Ich on 25.06.2016.

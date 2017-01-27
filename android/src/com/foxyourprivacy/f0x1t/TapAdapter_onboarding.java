@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
-import com.foxyourprivacy.f0x1t.Fragments.OnboardingFragment;
-import com.foxyourprivacy.f0x1t.Fragments.OnboardingFragment2;
-import com.foxyourprivacy.f0x1t.Fragments.OnboardingFragment3;
-import com.foxyourprivacy.f0x1t.Fragments.OnboardingFragment4;
+import com.foxyourprivacy.f0x1t.fragments.OnboardingFragment;
+import com.foxyourprivacy.f0x1t.fragments.OnboardingFragment2;
+import com.foxyourprivacy.f0x1t.fragments.OnboardingFragment3;
+import com.foxyourprivacy.f0x1t.fragments.OnboardingFragment4;
 
 
 /**

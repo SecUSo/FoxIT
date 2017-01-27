@@ -6,7 +6,7 @@
     android:id="@+id/count_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.StartScreen">
+    tools:context=".activities.AnalysisResults">
 
     <RelativeLayout
         android:id="@+id/whole_screen"

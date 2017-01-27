@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
-import com.foxyourprivacy.f0x1t.Activities.TrophyRoomActivity;
-import com.foxyourprivacy.f0x1t.Fragments.AnimationListFragment;
-import com.foxyourprivacy.f0x1t.Fragments.TrophyListFragment;
+import com.foxyourprivacy.f0x1t.activities.TrophyRoomActivity;
+import com.foxyourprivacy.f0x1t.fragments.AnimationListFragment;
+import com.foxyourprivacy.f0x1t.fragments.TrophyListFragment;
 
 
 /**
@@ -20,7 +20,7 @@ public class TapAdapter_trophy extends FragmentPagerAdapter {
 
     /**
      * @param fm
-     * @param activity reference to StartScreen
+     * @param activity reference to AnalysisResults
      * @author Tim
      */
     public TapAdapter_trophy(FragmentManager fm, Activity activity) {

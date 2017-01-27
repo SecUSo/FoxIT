@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 
-import com.foxyourprivacy.f0x1t.Fragments.AppListFragment;
-import com.foxyourprivacy.f0x1t.Fragments.SettingListFragment;
+import com.foxyourprivacy.f0x1t.fragments.AppListFragment;
+import com.foxyourprivacy.f0x1t.fragments.SettingListFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,15 +15,15 @@ import java.util.Arrays;
  * Created by Ich on 04.08.2016.
  */
 
-//Class which defines the Tabs in StartScreen
+//Class which defines the Tabs in AnalysisResults
 public class TapAdapter extends FragmentPagerAdapter {
 
-    //Activity startScreenActivity; //reference to StartScreen
+    //Activity startScreenActivity; //reference to AnalysisResults
     String[] settingsArray;
 
     /**
      * @param fm
-     * @param activity      reference to StartScreen
+     * @param activity      reference to AnalysisResults
      * @param settingsArray the settings to be displayed by SettingListFragment
      * @author Tim
      */
