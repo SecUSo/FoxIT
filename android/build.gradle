@@ -15,8 +15,8 @@ android {
         instrumentTest.setRoot('tests')
     }
     defaultConfig {
-        versionCode 8
-        versionName "0.942"
+        versionCode 9
+        versionName "0.943"
         applicationId "com.foxyourprivacy.f0x1t"
         minSdkVersion 17
         targetSdkVersion 24
