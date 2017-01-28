@@ -213,7 +213,10 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             if (itemView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.layout_class_listentry, parent, false);
+                itemView = getLayoutInflater().
+                        inflate(R.layout.layout_class_listentry,
+                                parent,
+                                false);
             }
 
             ImageView classIcon = (ImageView) itemView.findViewById(R.id.image_class_icon);
