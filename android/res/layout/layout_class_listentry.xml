@@ -37,21 +37,15 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/solvedLessonsView"
+            android:id="@+id/textView_solvedLessons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/image_class_icon"
-            android:layout_alignParentBottom="false"
             android:layout_alignParentEnd="true"
-            android:layout_alignWithParentIfMissing="true"
             android:maxLines="1"
             android:paddingBottom="3dp"
             android:paddingRight="6dp"
             android:text="solvedLessons"
-            android:textAlignment="textEnd"
-            android:textAllCaps="true"
-            android:textDirection="firstStrongLtr"
-            android:textIsSelectable="false"
             android:textStyle="normal|bold" />
     </RelativeLayout>
 

@@ -229,7 +229,7 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
             className.setText(classObjectList.get(position).getName());
 
             DBHandler dbHandler = new DBHandler(getAppContext(), null, null, 21);
-            TextView solved = (TextView) itemView.findViewById(R.id.solvedLessonsView);
+            TextView solved = (TextView) itemView.findViewById(R.id.textView_solvedLessons);
             solved.setText(dbHandler.getNumberOfSolvedLessons(classObjectList.get(position).getName()));
             dbHandler.close();
 
