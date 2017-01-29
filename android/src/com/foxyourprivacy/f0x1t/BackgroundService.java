@@ -85,12 +85,12 @@ public class BackgroundService extends Service {
      */
     public List<ApplicationInfo> fetchALL_APPS() {
         if (context == null) {
-            Log.d("MyApp", "context is Null");
+            Log.d("BackgroundService", "context is Null");
         }
         final PackageManager pm = getApplicationContext().getPackageManager();
         //get a list of installed apps.
         if (pm == null) {
-            Log.d("MyApp", "pm is Null");
+            Log.d("BackgroundService", "pm is Null");
         }
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
         Collections.sort(packages, new Comparator<ApplicationInfo>() {

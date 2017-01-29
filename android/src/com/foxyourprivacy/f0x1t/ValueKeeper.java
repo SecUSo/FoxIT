@@ -88,6 +88,7 @@ public class ValueKeeper {
 
         DBHandler db = new DBHandler(FoxITActivity.getAppContext(), null, null, 1);
         HashMap<String, String> data = db.getIndividualData();
+        dailyLectionsUnlocked = db.howManyDailiesUnlocked();
         //Log.d("ValuesTest","Revived Data:\n" + data.toString()+"\nData size: "+Integer.toString(data.size()));
         db.close();
         analysisDoneBefore = Boolean.valueOf(data.get("analysisDoneBefore"));
@@ -122,7 +123,7 @@ public class ValueKeeper {
             currentEvaluation = Integer.valueOf(data.get("currentEvaluation"));
         }
         if (data.containsKey("dailyLectionsUnlocked")) {
-            dailyLectionsUnlocked = Integer.valueOf(data.get("dailyLectionsUnlocked"));
+            // dailyLectionsUnlocked = Integer.valueOf(data.get("dailyLectionsUnlocked"));
         }
         if (data.containsKey("numberOfTimesOpenedAtNight")) {
             numberOfTimesOpenedAtNight = numberOfTimesOpenedAtNight + Integer.valueOf(data.get("numberOfTimesOpenedAtNight"));
@@ -192,6 +193,7 @@ public class ValueKeeper {
 
 
         }
+
         animationList.put("Schwanzwedeln",true);
         valueKeeperAlreadyRefreshed = true;
     }
@@ -211,7 +213,7 @@ public class ValueKeeper {
         values.put("timeOfLastServerAccess",Long.toString(timeOfLastServerAccess));
 
 
-        Log.d("MyApp", "currentEval:" + Integer.toString(currentEvaluation));
+        Log.d("ValueKeeper", "currentEval:" + Integer.toString(currentEvaluation));
         //ArrayList<String> deinstalledApps=new ArrayList<>();
 
 
@@ -295,7 +297,7 @@ public class ValueKeeper {
         //get a list of installed apps.
         List<ApplicationInfo> packages;
         if (pm == null) {
-            Log.d("MyApp", "pm is Null");
+            Log.d("ValueKeeper", "pm is Null");
         } else {
             packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
             int t = 0;
@@ -505,7 +507,7 @@ public class ValueKeeper {
         final PackageManager pm = FoxITActivity.getAppContext().getPackageManager();
         //get a list of installed apps.
         if (pm == null) {
-            Log.d("MyApp", "pm is Null");
+            Log.d("ValueKeeper", "pm is Null");
             return null;
         }
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -558,7 +560,7 @@ public class ValueKeeper {
         ArrayList<String> result = new ArrayList<String>();
 
         if (appsNow.equals(appsBefore)) {
-            Log.d("MyApp", "No change was found");
+            Log.d("ValueKeeper", "No change was found");
             return result;
         } else {
             for (String b : appsBefore) {

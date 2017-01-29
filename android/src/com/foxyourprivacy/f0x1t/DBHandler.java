@@ -98,7 +98,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_INITIAL + " TEXT DEFAULT '-99', " +
                 COLUMN_GOODNAME + " TEXT, " +
                 COLUMN_LATEST + " TEXT DEFAULT '-99', " +
-                COLUMN_SETTINGDESCRIPTION + " TEXT DEFAULT 'hier fehlt leider eine Beschreibung. Du kannst gerne eine anfordern!'" +
+                COLUMN_SETTINGDESCRIPTION + " TEXT DEFAULT 'Hier fehlt leider eine Beschreibung. Du kannst gerne eine anfordern!'" +
                 ");";
         db.execSQL(query);
         String query2 = "CREATE TABLE " + TABLE_APPS + "(" +
@@ -186,46 +186,30 @@ public class DBHandler extends SQLiteOpenHelper {
         //Cursor to count the current Entries in the table
         Cursor count = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_SETTINGS + ";", null);
         count.moveToFirst();
+        //output for the user, information of existing entries
+        Log.d("DBHandler", "Rawdata hat einträge: " + count.getInt(0));
+        count.close();
         //Here should an output for the user happen instead of the Log but with similiar values
         Log.d("DBHandler", "PARAM-Column Länge von values:" + values.length);
+
         int i = 0;
-        //If there are Entries in the table already
-        if (count.getInt(0) > 0) {
-            //output for the user, information of existing entries
-            Log.d("DBHandler", "Rawdata hat einträge");
-            count.close();
-            //constructing a name for the new column
-            SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss", Locale.GERMANY);
-            String date = df.format(Calendar.getInstance(TimeZone.getDefault()).getTime());
-            //adding the new column
-            db.execSQL("ALTER TABLE " + TABLE_SETTINGS + " ADD COLUMN '(" + date + ")' TEXT;");
-            //updating the new and the latest column with the new values in their respective row
-            for (ContentValues value : values
-                    ) {
-                if (value != null) {
-                    String escapedValue = value.getAsString(COLUMN_INITIAL).replace("\"", ""); // replaces all " with *nothing* to avoid syntax errors in the database
-                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET '(" + date + ")' = \"" + escapeQuote(escapedValue)
-                            + "\", " + COLUMN_LATEST + " = \'" + value.getAsString(COLUMN_INITIAL).replaceAll("'", "''") + "\' WHERE " + COLUMN_SETTING + " = '" + value.getAsString(COLUMN_SETTING).replaceAll("'", "''") + "'");
-
-                    i++;
-                }
-            }
-
-        } else {
-            //here should output happen
-            Log.d("DBHandler", "Rawdata hat keine Einträge");
-            count.close();
-            //inserting the contentValues directly (as they are all new) and updating the latest column
-            for (ContentValues value : values
-                    ) {
-                if (value != null) {
-                    db.insert(TABLE_SETTINGS, null, value);
-                    db.execSQL("UPDATE " + TABLE_SETTINGS + " SET " + COLUMN_LATEST + " = \'" + value.getAsString(COLUMN_INITIAL).replaceAll("'", "''") + "\' WHERE " + COLUMN_SETTING + " = '" + value.getAsString(COLUMN_SETTING).replaceAll("'", "''") + "'");
-                    i++;
-                }
+        //constructing a name for the new column
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss", Locale.GERMANY);
+        String date = df.format(Calendar.getInstance(TimeZone.getDefault()).getTime());
+        //adding the new column
+        db.execSQL("ALTER TABLE " + TABLE_SETTINGS + " ADD COLUMN '(" + date + ")' TEXT;");
+        for (ContentValues value : values
+                ) {
+            if (value != null) {
+                String escapedValue = value.getAsString(COLUMN_INITIAL).replace("\"", ""); // replaces all " with *nothing* to avoid syntax errors in the database
+                db.execSQL("UPDATE " + TABLE_SETTINGS + " SET '(" + date + ")' = \"" + escapeQuote(escapedValue) + "\", " + COLUMN_LATEST + " = \'" + value.getAsString(COLUMN_INITIAL).replaceAll("'", "''") + "\' WHERE " + COLUMN_SETTING + " = '" + value.getAsString(COLUMN_SETTING).replaceAll("'", "''") + "'");
+                db.execSQL("INSERT OR IGNORE INTO " + TABLE_SETTINGS + " (" + COLUMN_SETTING + ", " + COLUMN_TYPE + ", " + COLUMN_INITIAL + ", " + COLUMN_LATEST + ") VALUES(\'" + escapeQuote(value.getAsString(COLUMN_SETTING)) + "\', \'" + value.getAsInteger(COLUMN_TYPE) + "\', \'" + escapeQuote(escapedValue) + "\', \'" + escapeQuote(escapedValue) + "\')");
+                i++;
 
             }
         }
+        renameEmptySettings();
+
         //output for user please
         Log.d("DBHandler", "Rawdata eingefügt: " + i);
         db.close();
@@ -802,9 +786,14 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor != null) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                String name = cursor.getString(0);
+                String name = cursor.getString(0).replace(".", " ");
+                Log.d("renameEmptySettings", "name from cursor and . " + name);
                 name = escapeQuote(name.replace("_", " "));
+                Log.d("renameEmptySettings", "name ' and _ " + name);
+
                 name = name.substring(0, 1).toUpperCase() + name.substring(1);
+                Log.d("renameEmptySettings", "name substring " + name);
+
                 db.execSQL("UPDATE " + TABLE_SETTINGS + " SET " + COLUMN_GOODNAME + " = \'" + name + "\' WHERE " + COLUMN_SETTING + " = \'" + escapeQuote(cursor.getString(0)) + "\';");
                 cursor.moveToNext();
             }
@@ -912,6 +901,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT " + COLUMN_LECTURENAME + " FROM " + TABLE_LESSIONS + " WHERE " + COLUMN_STATUS + " IS -99", null);
         if (cursor != null) {
             cursor.moveToFirst();
+
             String name = cursor.getString(0);
             cursor.close();
             db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 1 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(name) + "\';");
@@ -950,5 +940,17 @@ public class DBHandler extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
+    }
+
+    public int howManyDailiesUnlocked() {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor count = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSIONS + " WHERE " + COLUMN_COURSE + " IS \'Daily Lessons\' AND " + COLUMN_STATUS + " IS NOT -99;", null);
+        if (count != null) {
+            count.moveToFirst();
+            int result = count.getInt(0);
+            count.close();
+            return result;
+        }
+        return 0;
     }
 }
