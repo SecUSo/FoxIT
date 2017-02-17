@@ -1,7 +1,5 @@
 package com.foxyourprivacy.f0x1t.activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.TapAdapter_onboarding;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
-import com.foxyourprivacy.f0x1t.fragments.ParticipantIDFragment;
 
 public class OnboardingActivity extends FoxITActivity {
 
@@ -31,25 +28,8 @@ public class OnboardingActivity extends FoxITActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-
-        //add the TradeRequestFragment to the activity's context
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        //AnalysisRequestFragment tradeRequest = new AnalysisRequestFragment();
-        ParticipantIDFragment tradeRequest = new ParticipantIDFragment();
-        //add the fragment to the count_frame RelativeLayout
-        transaction.add(R.id.whole_screen, tradeRequest, "count");
-        transaction.addToBackStack("analysisRequest");
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        transaction.commit();
-
     }
 
-
-    @Override
-    public boolean setTrophyUnlocked(String trophyName) {
-        return super.setTrophyUnlocked(trophyName);
-    }
 
 
     @Override

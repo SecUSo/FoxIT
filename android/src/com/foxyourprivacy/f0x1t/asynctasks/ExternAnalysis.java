@@ -52,6 +52,7 @@ public class ExternAnalysis extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
+        //TODO: effektiverer Weg möglich? in DB schreiben und Array als intent übergeben gleichzeitig z.b.?
         new DBWrite(analysis).execute("addParamColumn", o);
         new GetSettingsAsync(analysis).execute();
     }

@@ -16,8 +16,7 @@ import com.foxyourprivacy.f0x1t.activities.FoxITActivity;
  * Created by Ich on 25.06.2016.
  */
 public class OnboardingFragment4 extends Fragment {
-    String onboardingText; //the permission described by the fragment
-    int icon;
+
     Button analysisButton;
 
     @Override

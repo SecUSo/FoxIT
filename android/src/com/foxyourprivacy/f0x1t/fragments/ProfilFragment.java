@@ -23,12 +23,11 @@ import com.foxyourprivacy.f0x1t.ValueKeeper;
  */
 public class ProfilFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
-    ProfilListObject[] profilList = {new ProfilListObject("Name:", "Hier kannst du deinen Namen eintragen."), new ProfilListObject("Alter:", "Hier kannst du dein Alter eintragen."), new ProfilListObject("Versuchspersonencode:", "Trage hier bitte deinen versuchsper")};
+    ProfilListObject[] profilList = {new ProfilListObject("Name:", "Hier kannst du deinen Namen eintragen."), new ProfilListObject("Alter:", "Hier kannst du dein Alter eintragen.")};
     String[] lengthArray;
     Context context;
     int markedProfil = -1;
     View view;
-    EditText inputText;
     private MyListAdapter_permission adapter;
 
     @Override

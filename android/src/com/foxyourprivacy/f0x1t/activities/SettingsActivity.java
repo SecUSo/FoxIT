@@ -1,27 +1,20 @@
 package com.foxyourprivacy.f0x1t.activities;
 
-import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.foxyourprivacy.f0x1t.DBHandler;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.asynctasks.CSVUpdateTask;
-import com.foxyourprivacy.f0x1t.asynctasks.DBUploadTask;
 import com.foxyourprivacy.f0x1t.asynctasks.DBWrite;
 import com.foxyourprivacy.f0x1t.fragments.SettingsFragment;
 
@@ -209,33 +202,5 @@ public class SettingsActivity extends FoxITActivity {
         }
     }
 
-    public void exportDB() {
-        new DBUploadTask().execute(this);
-        Toast.makeText(getApplicationContext(), "DB wurde hochgeladen.", Toast.LENGTH_SHORT).show();
-        int allowed = 0;
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            DBHandler dbHandler = new DBHandler(this, null, null, 1);
-            dbHandler.exportDB();
-            dbHandler.close();
-            Toast.makeText(getApplicationContext(), "DB wurde in den Speicher exportiert.", Toast.LENGTH_LONG).show();
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, allowed);
-        }
-    }
-
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (permissions[0].contentEquals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                DBHandler dbHandler = new DBHandler(this, null, null, 1);
-                dbHandler.exportDB();
-                dbHandler.close();
-                Toast.makeText(getApplicationContext(), "DB wurde in den Speicher exportiert.", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "Zugriff auf den Speicher nicht erlaubt!", Toast.LENGTH_LONG).show();
-            }
-        } else {
-            Toast.makeText(this, "Zugriff auf den Speicher nicht erlaubt", Toast.LENGTH_LONG).show();
-        }
-    }
 
 }

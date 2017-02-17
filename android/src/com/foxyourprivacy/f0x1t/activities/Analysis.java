@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.foxyourprivacy.f0x1t.DBHandler;
 import com.foxyourprivacy.f0x1t.R;
-import com.foxyourprivacy.f0x1t.ValueKeeper;
 import com.foxyourprivacy.f0x1t.asynctasks.DBWrite;
 import com.foxyourprivacy.f0x1t.asynctasks.ExternAnalysis;
 
@@ -59,7 +58,7 @@ public class Analysis extends FoxITActivity {
      * @author Noah
      */
     @Override
-    public void onCreate(final Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
 
@@ -69,8 +68,6 @@ public class Analysis extends FoxITActivity {
         //analyse();
         DBHandler dbHandler = new DBHandler(this, null, null, 1);
         dbHandler.insertIndividualValue("analysisDoneBefore", "true");
-        ValueKeeper v = ValueKeeper.getInstance();
-        v.analysisDoneBefore = true;
         dbHandler.close();
         new ExternAnalysis(this).execute(this);
 
@@ -162,8 +159,7 @@ public class Analysis extends FoxITActivity {
                 Class<?> lockPatternUtilsClass = Class.forName(LOCK_PATTERN_UTILS);
                 Object lockPatternUtils = lockPatternUtilsClass.getConstructor(Context.class).newInstance(this);
                 Method method = lockPatternUtilsClass.getMethod("getActivePasswordQuality");
-                int lockProtectionLevel = Integer.valueOf(String.valueOf(method.invoke(lockPatternUtils)));
-                value = lockProtectionLevel;
+                value = Integer.valueOf(String.valueOf(method.invoke(lockPatternUtils)));
                 // Then check if lockProtectionLevel == DevicePolicyManager.TheConstantForWhicheverLevelOfProtectionYouWantToEnforce, and return true if the check passes, false if it fails
             } catch (Exception ex) {
                 ex.printStackTrace();

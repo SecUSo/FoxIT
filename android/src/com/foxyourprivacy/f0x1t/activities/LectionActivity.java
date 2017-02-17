@@ -324,18 +324,17 @@ public class LectionActivity extends FoxITActivity {
         if (lection.getLectionName().contains(":")) {
             isEval = true;
             String switc = lection.getLectionName().substring(0, lection.getLectionName().indexOf(":"));
-            Log.d("MyApp", switc);
+            Log.d("LectionActivity", "switch-case of evaluation-lesson" + switc);
             switch (switc) {
+                //TODO: implement relevant evaluations for production
                 case "timeEval":
-
-
                     v.setIsEvaluationOutstandingFalse();
                     v.setEvaluationResults(evaluationResults);
                     v.increaseCurrentEvaluation();
                     break;
                 case "appEval":
 
-                    v.removeFirstFromAppList();
+                    //v.removeFirstFromAppList();
                     v.setEvaluationResults(evaluationResults);
                     v.increaseCurrentEvaluation();
                     break;
@@ -373,8 +372,6 @@ public class LectionActivity extends FoxITActivity {
         } else if (lection.getProcessingStatus() != 3) {
 
             long nextFreeTime = (System.currentTimeMillis() % Long.MAX_VALUE) + lection.getDelaytime();
-            Log.d("getbacktolist", "nextfreetime: " + nextFreeTime);
-            Log.d("getbacktolist", "delaytime: " + lection.getDelaytime());
             DBHandler db = new DBHandler(this, null, null, 1);
             db.setLectionNextFreeTime(lection.getLectionName(), nextFreeTime);
             db.close();
@@ -394,7 +391,6 @@ public class LectionActivity extends FoxITActivity {
     public void onPause() {
         super.onPause();
         DBHandler db = new DBHandler(this, null, null, 3);
-        db.clearDAppsFromVK();
         db.close();
         handler.removeCallbacksAndMessages(null);
     }

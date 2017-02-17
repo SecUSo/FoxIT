@@ -20,7 +20,6 @@ import com.foxyourprivacy.f0x1t.ValueKeeper;
 import com.foxyourprivacy.f0x1t.asynctasks.CSVUpdateTask;
 import com.foxyourprivacy.f0x1t.fragments.TrophyNotificationFragment;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -30,12 +29,7 @@ import java.util.Calendar;
 public class FoxITActivity extends AppCompatActivity {
 
 
-    private static Context context; //TODO Warning: Do not place Android context classes in static fields; this is a memory leak (and also breaks Instant Run)
-    //In the other version of this class it was not needed, why now and can this be helped?
 
-    public static Context getAppContext() {
-        return FoxITActivity.context;
-    }
 
     /**
      * @author Tim
@@ -43,10 +37,8 @@ public class FoxITActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FoxITActivity.context = getApplicationContext();
         ValueKeeper v = ValueKeeper.getInstance();
-        FoxITApplication myApp = (FoxITApplication) this.getApplication();
-        if (v.getSizeOfAppStarts() > 1) {
+        if (v.getSizeOfAppStarts() > 4) {
             setTrophyUnlocked("Power User");
         }
     }
@@ -58,18 +50,13 @@ public class FoxITActivity extends AppCompatActivity {
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancelAll();
 
-        FoxITActivity.context = getApplicationContext();
         ValueKeeper v = ValueKeeper.getInstance();
         FoxITApplication myApp = (FoxITApplication) this.getApplication();
-        Log.d("FITActivity", "freshlystarted: " + v.getFreshlyStarted());
         if (v.getFreshlyStarted()) {
 
             Intent mServiceIntent = new Intent(this, BackgroundService.class);
             startService(mServiceIntent);
-            v.reviveInstance();
-            ArrayList<String> deletedApps = v.compareAppLists();
-            v.deinstalledApps.addAll(deletedApps);
-            v.saveApps();
+            v.reviveInstance(getApplicationContext());
 
             Calendar c = Calendar.getInstance();
             int timeOfDay = c.get(Calendar.HOUR_OF_DAY) + 2;
@@ -117,11 +104,11 @@ public class FoxITActivity extends AppCompatActivity {
                 new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/classes.csv", "classes");
                 new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/sdescription.csv", "settings");
                 v.setTimeOfThisServerAccess();
-                Log.d("FoxITActivity", "started an update of CSV files form server");
+                Log.d("FoxITActivity", "started an update of CSV files from server");
             } else {
                 //retry in one day
                 v.setTimeOfNextServerAccess(System.currentTimeMillis() + 86400000);
-                Log.d("FoxITActivity", "delayed an update of CSV files form server");
+                Log.d("FoxITActivity", "delayed an update of CSV files from server");
 
             }
 
@@ -139,29 +126,10 @@ public class FoxITActivity extends AppCompatActivity {
         v.fillApplicationStartAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndActiveCDuration(System.currentTimeMillis());
         ((FoxITApplication) this.getApplication()).startActivityTransitionTimer();
-        if (this instanceof LectionActivity || this instanceof LectionListActivity || this instanceof OnboardingActivity || this instanceof TrophyRoomActivity || this instanceof Analysis || this instanceof Home)
-            v.saveInstance();
+        if (this instanceof LectionActivity || this instanceof LectionListActivity || this instanceof TrophyRoomActivity || this instanceof Analysis || this instanceof Home)
+            v.saveInstance(getApplicationContext());
     }
 
-    public int getNumberOfCurrentEvaluation() {
-        ValueKeeper v = ValueKeeper.getInstance();
-        return v.getCurrentEvaluation();
-    }
-
-
-    public boolean shouldEvaluationBeDisplayed() {
-        ValueKeeper v = ValueKeeper.getInstance();
-        Calendar currentTime = Calendar.getInstance();
-        int numberOfEvaluation = 0;
-        if (v.getCurrentEvaluation() == 0) { //TODO soll das so?
-            //   if(db.getIndividualValue("currentEvaluation")!=null){ numberOfEvaluation=Integer.valueOf(db.getIndividualValue("currentEvaluation"));}
-        } else {
-            numberOfEvaluation = v.getCurrentEvaluation();
-        }
-        Log.d("MyApp", "currentEvalin Fox:" + Integer.toString(v.getCurrentEvaluation()));
-
-        return v.timeOfEvaluation.length > numberOfEvaluation && v.timeOfEvaluation[numberOfEvaluation] < currentTime.getTimeInMillis();
-    }
 
 
     public boolean setTrophyUnlocked(String trophyName) {
@@ -198,20 +166,7 @@ public class FoxITActivity extends AppCompatActivity {
 
         //add the animation
         final Handler handler = new Handler();
-        //after 1250ms the old grey text is replaced by the new black acornCount
 
-        //if(this.findViewById(R.id.count_frame)!=null) {
-        //after 4000ms the Fragment disappears
-        //  handler.postDelayed(new Runnable() {
-        //    @Override
-        //  public void run() {
-        //    FragmentTransaction transaction = manager.beginTransaction();
-        //  transaction.remove(trophyNotification);
-        //  transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        //  transaction.commit();
-        // }
-        //}, 8000);
-        //}
     }
 
 }

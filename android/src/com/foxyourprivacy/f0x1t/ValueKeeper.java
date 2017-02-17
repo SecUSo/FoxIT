@@ -1,16 +1,12 @@
 package com.foxyourprivacy.f0x1t;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
+import android.content.Context;
 import android.util.Log;
 
-import com.foxyourprivacy.f0x1t.activities.FoxITActivity;
+import com.foxyourprivacy.f0x1t.asynctasks.DBWrite;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -24,10 +20,7 @@ public class ValueKeeper {
 
     static ValueKeeper instance;
     public HashMap<String, Boolean> trophyList = new HashMap<>();
-    public int currentEvaluation = 0;
-    public long[] timeOfEvaluation = {1484715600000L, 1485061200000L, 1485320400000L, 1485666000000L};
-    public Boolean wasEvaluationDisplayed = false;
-    public ArrayList<String> deinstalledApps = new ArrayList<>();
+    public int currentEvaluation;
     public Boolean onboardingStartedBefore = false;
     public Boolean analysisDoneBefore = false;
     public HashMap<String, Boolean> animationList = new HashMap<>();
@@ -38,7 +31,6 @@ public class ValueKeeper {
     HashMap<Long, Long> applicationStartAndDuration = new HashMap<>();
     HashMap<Long, Long> applicationStartAndActiveDuration = new HashMap<>();
     Boolean notDisplayed = true;
-    String vpnCode;
     //the absolute first start
     long timeOfFirstStart = 0;
     int dailyLectionsUnlocked = 0;
@@ -51,6 +43,7 @@ public class ValueKeeper {
     ArrayList<String> appsBefore = new ArrayList<>();
     HashMap<String, String> evaluationResults = new HashMap<>();
     Boolean freshlyStarted = true;
+    private String username;
     private int acornCount = 0; //amount of acorn the player collected
     private int tokenCount = 0; //amount of token the player collected
 
@@ -81,12 +74,12 @@ public class ValueKeeper {
         Log.d("MyApp", "EvaluationsResults: " + this.evaluationResults.toString());
     }
 
-    public void reviveInstance() {
+    public void reviveInstance(Context context) {//TODO: make async and a loading screen
 
 
         //HashMap<String,Boolean> trophyList=new HashMap<>();
 
-        DBHandler db = new DBHandler(FoxITActivity.getAppContext(), null, null, 1);
+        DBHandler db = new DBHandler(context, null, null, 1);
         HashMap<String, String> data = db.getIndividualData();
         dailyLectionsUnlocked = db.howManyDailiesUnlocked();
         //Log.d("ValuesTest","Revived Data:\n" + data.toString()+"\nData size: "+Integer.toString(data.size()));
@@ -113,8 +106,8 @@ public class ValueKeeper {
         if (data.containsKey("tokenCount")) {
             tokenCount = Integer.valueOf(data.get("tokenCount"));
         }
-        if (data.containsKey("vpnCode")) {
-            vpnCode = data.get("vpnCode");
+        if (data.containsKey("username")) {
+            username = data.get("username");
         }
         if (data.containsKey("notDisplayed")) {
             notDisplayed = Boolean.valueOf(data.get("notDisplayed"));
@@ -139,65 +132,50 @@ public class ValueKeeper {
         applicationAccessAndDuration = new HashMap<>();
         applicationStartAndActiveDuration = new HashMap<>();
         applicationStartAndActiveDuration = new HashMap<>();
-        deinstalledApps = new ArrayList<>();
         evaluationResults = new HashMap<>();
         trophyList = new HashMap<>();
-        appsBefore = new ArrayList<>();
         for (String e : data.keySet()) {
             if (e.contains("ani:")) {
 
                 animationList.put(e.substring(4), Boolean.parseBoolean(data.get(e)));
 
             } else {
-                if (e.contains("app:")) {
-                    appsBefore.add(data.get(e));
+                if (e.contains("stD:")) {
+                    applicationStartAndDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
                 } else {
-                    if (e.contains("stD:")) {
-                        applicationStartAndDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
+                    if (e.contains("stA:")) {
+                        applicationStartAndActiveDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
                     } else {
-                        if (e.contains("stA:")) {
-                            applicationStartAndActiveDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
+                        if (e.contains("evl:")) {
+                            evaluationResults.put(e.substring(4), data.get(e));
                         } else {
-                            if (e.contains("evl:")) {
-                                evaluationResults.put(e.substring(4), data.get(e));
+                            if (e.contains("scl:")) {
+                                solvedClasses.add(data.get(e));
                             } else {
-                                if (e.contains("dap:")) {
-                                    deinstalledApps.add(data.get(e));
+                                if (e.contains("asd:")) {
+                                    appStartsTheLastTwoDays.add(Long.valueOf(data.get(e)));
                                 } else {
-                                    if (e.contains("scl:")) {
-                                        solvedClasses.add(data.get(e));
+                                    if (e.contains("tro:")) {
+                                        trophyList.put(e.substring(4), Boolean.valueOf(data.get(e)));
                                     } else {
-                                        if (e.contains("asd:")) {
-                                            appStartsTheLastTwoDays.add(Long.valueOf(data.get(e)));
-                                        } else {
-                                            if (e.contains("tro:")) {
-                                                trophyList.put(e.substring(4), Boolean.valueOf(data.get(e)));
-                                            } else {
-                                                if (e.contains("dur:")) {
-                                                    applicationAccessAndDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
-
-                                                }
-
-                                            }
+                                        if (e.contains("dur:")) {
+                                            applicationAccessAndDuration.put(Long.parseLong(e.substring(4)), Long.parseLong(data.get(e)));
 
                                         }
-
                                     }
                                 }
                             }
                         }
                     }
                 }
-
             }
-
-
         }
 
         animationList.put("Schwanzwedeln",true);
         valueKeeperAlreadyRefreshed = true;
     }
-    public void saveInstance() {
+
+    public void saveInstance(Context context) {
         HashMap<String, String> values = new HashMap<String, String>();
         values.put("onboardingStartedBefore", Boolean.toString(onboardingStartedBefore));
         values.put("analysisDoneBefore", Boolean.toString(analysisDoneBefore));
@@ -207,7 +185,7 @@ public class ValueKeeper {
         values.put("currentEvaluation", Integer.toString(currentEvaluation));
         values.put("numberOfTimesOpenedAtMorning", Integer.toString(numberOfTimesOpenedAtMorning));
         values.put("numberOfTimesOpenedAtNight", Integer.toString(numberOfTimesOpenedAtNight));
-        values.put("vpnCode", vpnCode);
+        values.put("username", username);
         values.put("dailyLectionsUnlocked", Integer.toString(dailyLectionsUnlocked));
         values.put("timeOfFirstStart", Long.toString(timeOfFirstStart));
         values.put("timeOfLastServerAccess",Long.toString(timeOfLastServerAccess));
@@ -228,7 +206,6 @@ public class ValueKeeper {
             String key = entry.getKey();
             String value = Boolean.toString(entry.getValue());
             values.put("ani:" + key, value);
-
         }
         for (Map.Entry<String, Boolean> entry : trophyList.entrySet()) {
             String key = entry.getKey();
@@ -255,9 +232,6 @@ public class ValueKeeper {
             values.put("stA:" + Long.toString(key), Long.toString(value));
 
         }
-        values.put("currentEvaluation", Integer.toString(currentEvaluation));
-        values.put("vpnCode", vpnCode);
-
 
         for (Map.Entry<String, String> entry : evaluationResults.entrySet()) {
             String key = entry.getKey();
@@ -265,18 +239,13 @@ public class ValueKeeper {
             values.put("eva:" + key, value);
 
         }
-        int i = 0;
-        // Log.d()
-        for (String e : deinstalledApps) {
-            values.put("dap:" + Integer.toString(i), e);
-            i++;
-        }
 
-        int y = 0;
+
+        int i = 0;
         // Log.d()
         for (String e : solvedClasses) {
             values.put("scl:" + Integer.toString(i), e);
-            y++;
+            i++;
         }
 
         int x = 0;
@@ -285,34 +254,9 @@ public class ValueKeeper {
             x++;
         }
 
-        DBHandler db=new DBHandler(FoxITActivity.getAppContext(),null,null,2);
-        db.insertIndividualData(values);
-        db.close();
-
+        new DBWrite(context).execute("insertIndividualData", values);
     }
 
-    public void saveApps() {
-        HashMap<String, String> values = new HashMap<>();
-        final PackageManager pm = FoxITActivity.getAppContext().getPackageManager();
-        //get a list of installed apps.
-        List<ApplicationInfo> packages;
-        if (pm == null) {
-            Log.d("ValueKeeper", "pm is Null");
-        } else {
-            packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-            int t = 0;
-            for (ApplicationInfo a : packages) {
-                values.put("app:" + Integer.toString(t), pm.getApplicationLabel(a).toString());
-                t++;
-            }
-        }
-
-        DBHandler db = new DBHandler(FoxITActivity.getAppContext(), null, null, 2);
-        db.clearAppsFromVK();
-        db.insertIndividualData(values);
-        db.close();
-
-    }
 
 
     /**
@@ -430,12 +374,12 @@ public class ValueKeeper {
         //Log.d("MyApp","ActualTotalTime:"+applicationStartAndActiveDuration.toString());
     }
 
-    public String getVpnCode() {
-        return vpnCode;
+    public String getUsername() {
+        return username;
     }
 
-    public void setVpnCode(String vpnCode) {
-        this.vpnCode = vpnCode;
+    public void setUsername(String userna) {
+        this.username = userna;
     }
 
     public void setIsEvaluationOutstandingFalse() {
@@ -444,11 +388,6 @@ public class ValueKeeper {
 
     }
 
-    public void removeFirstFromAppList() {
-        Log.d("ValueKeeper", "remove1stfromapplistBefore:" + Integer.toString(deinstalledApps.size()));
-        deinstalledApps.remove(0);
-        Log.d("ValueKeeper", "remove1stfromapplistAfter:" + Integer.toString(deinstalledApps.size()));
-    }
 
 
     public boolean isTrophyUnlocked(String trophyName) {
@@ -502,84 +441,10 @@ public class ValueKeeper {
         return appStartsTheLastTwoDays.size();
     }
 
-    public ArrayList<String> compareAppLists() {
-
-        final PackageManager pm = FoxITActivity.getAppContext().getPackageManager();
-        //get a list of installed apps.
-        if (pm == null) {
-            Log.d("ValueKeeper", "pm is Null");
-            return null;
-        }
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-
-
-        ArrayList<String> appsNow = new ArrayList<>();
-        for (ApplicationInfo n : packages) {
-            appsNow.add(pm.getApplicationLabel(n).toString());
-        }
-
-        Collections.sort(appsNow, new Comparator<String>() {
-            @Override
-            public int compare(String lhs, String rhs) {
-
-
-                if (lhs == null) {
-                    return -1;
-                }
-                if (rhs == null) {
-                    return 1;
-                }
-                if (lhs.equals(rhs)) {
-                    return 0;
-                }
-                return lhs.compareTo(rhs);
-            }
-
-        });
-
-
-        Collections.sort(appsBefore, new Comparator<String>() {
-            @Override
-            public int compare(String lhs, String rhs) {
-
-
-                if (lhs == null) {
-                    return -1;
-                }
-                if (rhs == null) {
-                    return 1;
-                }
-                if (lhs.equals(rhs)) {
-                    return 0;
-                }
-                return lhs.compareTo(rhs);
-            }
-
-        });
-
-        ArrayList<String> result = new ArrayList<String>();
-
-        if (appsNow.equals(appsBefore)) {
-            Log.d("ValueKeeper", "No change was found");
-            return result;
-        } else {
-            for (String b : appsBefore) {
-
-                if (!appsNow.contains(b)) {
-                    result.add(b);
-                }
-            }
-
-            //Log.d("MyApp", result.toString());
-            return result;
-        }
-
-    }
 
     public void increaseDailyLectionsUnlocked() {
         dailyLectionsUnlocked++;
     }
-
 
     public long getTimeOfLastServerAccess() {
         return timeOfLastServerAccess;

@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.TapAdapter;
-import com.foxyourprivacy.f0x1t.asynctasks.DBUploadTask;
 import com.foxyourprivacy.f0x1t.fragments.PermissionListFragment;
 
 public class AnalysisResults extends FoxITActivity {
@@ -78,27 +77,11 @@ public class AnalysisResults extends FoxITActivity {
                 }
             }
         });
-        new DBUploadTask().execute(this);
 
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-    }
-
-    /**
-     * Method for goToHomeButton
-     * if pressed Activity Home will appear
-     *
-     * @author HannahD
-     */
-    public void goToHome(View h) {
-        Intent intent = new Intent(getApplicationContext(), Home.class);
-        startActivity(intent);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -27,55 +27,20 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
 
     public ArrayList<ClassObject> classObjectList = new ArrayList<>();
 
-    String[] lectionDescriptionArray = {
-            "[name~Deep, Dark, - Lost!][0~type~text'text~Eine Einführung ins Deep Web und Dark Web.][1~type~text'text~Allgemein lässt sich das World Wide Web (WWW) in zwei Bereiche einteilen: Surface Web und Deep Web.\n" +
-                    "][2~type~text'text~Surface Web:\n" +
-                    "Unter dem Surface Web versteht man diejenigen Inhalte und Webseiten, welche über Suchmaschinen wie z.B. Google, Bing, Yahoo oder DuckDuckGo gefunden werden können. ][3~type~text'text~Deep Web:\n" +
-                    "Hierzu zählen alle nicht referenzierten Inhalte des World Wide Web. Wird z.B. über die Webseite einer Fluggesellschaft nach Flügen gesucht, so sind diese Ergebnisse nicht referenziert.][4~type~text'text~Die Flüge liegen in einer Datenbank der Fluggesellschaft und können über eine allgemeine Suchmaschine nicht gefunden werden. Sie zählen damit zum Deep Web. \n" +
-                    "Im weiteren Sinne sind dies also Daten, die zwar online verfügbar, aber “vergraben” sind.][5~type~text'text~Dark Web:\n" +
-                    "Das Dark Web ist ein Teil des Deep Web. Normalerweise verweisen Webseiten auf andere Seiten, welche wiederum auf weitere verweisen u.s.w.. \n" +
-                    "Es gibt jedoch Webseiten, auf die keine Verweise existieren. Kennt man die genaue URL sind sie erreichbar, ansonsten bleiben sie verborgen. Dies gilt z.B. für unveröffentliche Bilder oder Blogeinträge, sowie Subdomain-Namen.][6~type~text'text~Ein weiteres Beispiel des Dark Web sind virtuelle private Netzwerke (VPNs). Das Internet ist ein Netzwerk bestehend aus Netzwerken, von denen einige privat sind. \n" +
-                    "Um sich z.B. mit dem eigenen Firmennetzwerk von zuhause aus zu verbinden, sind spezielle Einstellungen oder Software nötig. Für normale Internetnutzer bleiben die Firmendaten verborgen.][7~type~text'text~TOR:\n" +
-                    "Ein bekanntes VPN des Dark Web ist das Darknet Tor (früher: The onion routing). Oberstes Ziel des Tor-Netzes ist es, Verbindungsdaten anonym zu halten. In der Realität ist dies ein Magnet für illegale Tätigkeiten bishin zu Menschen-, Waffen-, und Drogenhandel.][8~type~text'text~Dennoch schafft Tor auch freien Internetzugang in stark zensierten Regionen oder anonyme Kommunikation. \n" +
-                    "So war das Tor-Projekt 2011 Gewinner des Preises für gesellschaftlichen Nutzen der Free Software Foundation. ]\n" +
-                    "[solved~false]",
-            "[name~Deep und Dark Web Quiz][0~type~quiz4'text~Das Deep Web ist'answer1text~Größer als das Surface Web'answer1solution~true'answer2text~Das Gleiche wie das Darknet'answer2solution~false'answer3text~Teil des World Wide Web'answer3solution~true'answer4text~Ein abgegrenzter Bereich des Internets'answer4solution~false'successText~Du hast Recht.'failureText~Leider nicht \n" +
-                    "ganz richtig.'points~3][1~type~quiz4'text~Typische Teile eines Deep Web sind z.B.'answer1text~Bibliothek-Datenbänke'answer1solution~true'answer2text~Alle Inhalte, die man nicht über Verlinkungen erreichen kann'answer2solution~true'answer3text~Webseiteninterne Suchergebnisse'answer3solution~true'answer4text~Suchmaschinenergebnisse'answer4solution~false'successText~Das ist Richtig.'failureText~Das solltest du dir nochmal\n" +
-                    "angucken.'points~3][2~type~quiz4'text~Legal ist…'answer1text~Der Zugriff auf das Tor-Netzwerk'answer1solution~true'answer2text~Alle Aktivitäten innerhalb des Tor-Netzwerkes'answer2solution~false'answer3text~Einen Dienst im Tor-Netzwerk anzubieten'answer3solution~true'answer4text~Sich den Client “Onion Proxy” herunterzuladen'answer4solution~true'successText~Sehr gut!'failureText~Wenn du es nicht weißt, recherchier doch mal\n" +
-                    "im Internet.'points~3][3~type~quiz4'text~Das Tor-Netzwerk'answer1text~Ist bekannt für Anonymität'answer1solution~true'answer2text~Ist zu 100% anonym'answer2solution~false'answer3text~Ist an dem Aufbau eines VPN angelehnt'answer3solution~true'answer4text~Ist erschaffen worden, um anonym Torheiten begehen zu können'answer4solution~false'successText~Das stimmt.'failureText~Nicht ganz \n" +
-                    "Richtig.'points~3][4~type~certificate'successText~Bravo!\n" +
-                    "Du hast bestanden. Das war garnicht so einfach!'failureText~Schade.\n" +
-                    "Du hast leider nicht bestanden. Aber wenn du fleißig lernst, klappt es sicher beim nächsten mal!'pointsNeeded~12]"};
-
-    //"[4~type~quiz4'text~Das Tor-Netzwerk'answer1text~Ist bekannt für Anonymität'answer1solution~true'answer2text~Ist zu 100% anonym'answer2solution~false'answer3text~Ist an dem Aufbau eines VPN angelehnt'answer3solution~true'answer4text~Ist erschaffen worden, um anonym Torheiten begehen zu können'answer4solution~false'successText~Das stimmt.'failureText~Nicht ganz Richtig.'points~3]\n" +
-    //"[5~type~quiz4'text~Routing'answer1text~beschreibt das Weiterleiten von Informationen in Rechnernetzen'answer1solution~true'answer2text~Beschreibt das Einrichten eines Computers'answer2solution~false'answer3text~Ist eine Grundlage moderner Telekommunikation'answer3solution~true'answer4text~Verliert in letzter Zeit immer mehr Bedeutung'answer4solution~false'successText~Richtig!'failureText~Leider falsch. Aber so hast du auch was gelernt.'points~3]\n" +
-    //"[6~type~certificate'successText~Bravo!\n" +
-    //"Du hast bestanden. Das war garnicht so einfach!'failureText~Schade.\n" +
-    //"Du hast leider nicht bestanden. Aber wenn du fleißig lernst, klappts sicher beim nächsten mal!'pointsNeeded~12]"};
-
-
-    String[] classList = {};
-
-    String[] firstLection = {"[name~Meine Einstellung gegenüber Privatsphäre][0~type~text'text~Hallo! \nIn dieser Lektion geht es darum, ein bisschen etwas über Privatsphäre am Smartphone zu erfahren und erste Impulse für einen besseren Umgang mit Apps und Einstellungen zu setzten. Wir starten damit, herauszufinden was Privatsphäre für dich ist.]" +
-            "[1~type~question'text~Also: \nInteressiert dich Privatsphäre?'buttonText~Ja'callClassMethod~slideSwitch'methodParameter~2'buttonText2~Nein'method2~'methodParameter2~]" +
-            "[2~type~question'text~Sehr gut! \n Hast du schon einmal aktiv etwas für deine Privatsphäre am Smartphone gemacht?’buttonText~Ja’callClassMethod~’methodParameter~’buttonText2~Nein’method2~’methodParameter2~]" + "[solved~false]",
-            "[name~Kleines Quiz][0~type~quiz4'text~Sollte man am Smartphone eine Bildschirmsperre einrichten?’answer1text~Braucht man nicht’answer1solution~false’answer2text~Entsperrmuster, damit bin ich sicher’answer2solution~false’answer3text~Hat jemand anderes mein Handy, kann ich eh nichts mehr tun. Nein’answer3solution~false’answer4text~Zahlencode oder Passwort, nur dann bin ich sicher’answer4solution~true’successText~Das stimmt! Nur mit Passwort oder Zahlencode ist man größtenteils gesichert!’failureText~Eher nicht… Um dein Smartphone zu sichern solltest du auf jeden Fall einen Zahlencode oder ein Passwort verwenden!’points~10][solved~false]"
-    };
 
     Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_class_list);
-
         // sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        //ClassObject test = new ClassObject("Deep Web", lectionDescriptionArray);
-        //test.setDescriptionText("Eine Einführung ins Deep Web und Dark Web. Bereiche des World Wide Web jenseits der Suchmaschinen.");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_class_list);
+
+
+        DBHandler dbHandler = new DBHandler(this, null, null, 1);
 
         //classObjectList.add(test);
         classObjectList = dbHandler.getClasses();
@@ -96,7 +61,6 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         }
         classObjectList.set(1, classObjectList.get(j));
         classObjectList.set(j, tempclass2);
-
 
         dbHandler.close();
 
@@ -148,6 +112,7 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
     @Override
     public void onResume() {
         super.onResume();
+        //TODO: sollte vielleicht auskommentiert werden oder verändert, so dass die Liste beim zurück-gehen nicht immer wieder von oben angezeigt wird.
         ListView lectionList = (ListView) findViewById(R.id.headline_frame);
         //creates the listView
         ArrayAdapter<ClassObject> adapter = new MyListAdapter_class();
@@ -228,7 +193,7 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
             TextView className = (TextView) itemView.findViewById(R.id.text_class_name);
             className.setText(classObjectList.get(position).getName());
 
-            DBHandler dbHandler = new DBHandler(getAppContext(), null, null, 21);
+            DBHandler dbHandler = new DBHandler(getApplicationContext(), null, null, 21);
             TextView solved = (TextView) itemView.findViewById(R.id.textView_solvedLessons);
             solved.setText(dbHandler.getNumberOfSolvedLessons(classObjectList.get(position).getName()));
             dbHandler.close();

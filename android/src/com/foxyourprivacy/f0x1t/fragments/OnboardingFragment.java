@@ -12,9 +12,6 @@ import com.foxyourprivacy.f0x1t.R;
  * Created by Ich on 25.06.2016.
  */
 public class OnboardingFragment extends Fragment {
-    String onboardingText; //the permission described by the fragment
-    int icon;
-
     @Override
     /**
      * @author Hannah
@@ -28,9 +25,9 @@ public class OnboardingFragment extends Fragment {
      * @author Hannah
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_onboarding1, container, false);
+        return inflater.inflate(R.layout.fragment_onboarding1, container, false);
 
-        return view;
+
     }
 
 

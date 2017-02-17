@@ -70,18 +70,6 @@ public class CSVRefreshFragment extends Fragment {
             }
         });
 
-        Button acornAndTokenButton = (Button) view.findViewById(R.id.button_exportDB);
-        acornAndTokenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((SettingsActivity) getActivity()).exportDB();
-                //  MethodFactory m=new MethodFactory(getActivity());
-                //  Method raiseAcornCount= m.createMethod("changeAcornCount");
-                //  raiseAcornCount.callClassMethod("100");
-                //  Method raiseTokenCount =m.createMethod("changeTokenCount");
-                // raiseTokenCount.callClassMethod("100");
-            }
-        });
 
 
         return view;

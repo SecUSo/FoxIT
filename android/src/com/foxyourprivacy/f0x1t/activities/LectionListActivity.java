@@ -184,18 +184,12 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
 
             } else {
 
-                Log.d("MyApp", "CurrentTime" + Long.toString((System.currentTimeMillis()) % Integer.MAX_VALUE));
                 Log.d("MyApp", "duTime" + Long.toString(lectionObjectList.get(position).getNextfreetime()));
 
 
                 Intent intent = new Intent(getApplicationContext(), LectionActivity.class);
                 //to inform lectionActivity which lection is to be displayed
-                Log.d("how many lections inLOL", Integer.toString(lectionObjectList.size()));
-                Log.d("position is", Integer.toString(position));
-                Log.d("thenameis", lectionObjectList.get(position).getLectionName());
 
-                Log.d("thecontentis", lectionObjectList.get(position).getContent());
-                Log.d("the freetime is", Long.toString(lectionObjectList.get(position).getDelaytime()));
                 intent.putExtra("lection", lectionObjectList.get(position).getContent());
                 intent.putExtra("name", lectionObjectList.get(position).getLectionName());
                 intent.putExtra("type", lectionObjectList.get(position).getType());
