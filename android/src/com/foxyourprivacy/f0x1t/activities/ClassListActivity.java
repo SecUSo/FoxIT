@@ -32,12 +32,13 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // sets our toolbar as the actionbar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_list);
+        // sets our toolbar as the actionbar
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
 
 
         DBHandler dbHandler = new DBHandler(this, null, null, 1);

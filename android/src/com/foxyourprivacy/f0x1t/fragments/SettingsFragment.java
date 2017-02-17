@@ -65,7 +65,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
         view = inflater.inflate(R.layout.fragment_settings, container, false);
         ValueKeeper v = ValueKeeper.getInstance();
         TextView vpnCode = (TextView) view.findViewById(R.id.textViewVPNCODE);
-        vpnCode.setText(v.getVpnCode());
+        vpnCode.setText(v.getUsername());
         int versionCodeInt = BuildConfig.VERSION_CODE;
         String versionName = BuildConfig.VERSION_NAME;
         TextView versionCode = (TextView) view.findViewById(R.id.textViewVersion);

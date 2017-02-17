@@ -36,24 +36,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/button_description_csv"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:text="Die Datenbank exportieren:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <Button
-            android:id="@+id/button_exportDB"
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView6"
-            android:layout_centerHorizontal="true"  />
 
         <TextView
             android:id="@+id/textView13"

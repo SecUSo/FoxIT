@@ -920,7 +920,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void exportDB() {
         Log.d("DBHandler", "exporting DB");
-        String user = ValueKeeper.getInstance().getVpnCode();
+        String user = ValueKeeper.getInstance().getUsername();
         String timestamp = String.valueOf(System.currentTimeMillis());
         File stordir = Environment.getExternalStorageDirectory();
         File data = Environment.getDataDirectory();
