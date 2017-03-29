@@ -31,7 +31,7 @@ https://lh3.googleusercontent.com/gcw6-BzPp0HX3lSFwlsBOZ5ZKKkBXAzPRtco7aAYqe0gLK
 Icons:  
 - Fox: Icons made by http://www.flaticon.com/authors/pixel-perfect from www.flaticon.com 
 - Boar: Icons made by http://www.freepik.com from www.flaticon.com 
-- Clock:Icons made by http://www.flaticon.com/authors/roundicons from www.flaticon.com 
+- Clock: Icons made by http://www.flaticon.com/authors/roundicons from www.flaticon.com 
 - Shield, owl, bird, rocket, hammer, mailbox, moon, book: https://icons8.com/ 
 - Onion: Icons made by http://www.freepik.com from www.flaticon.com 
 - Facebook: Icons made by www.freepik.com from www.flaticon.com 
@@ -78,7 +78,7 @@ https://lh3.googleusercontent.com/gcw6-BzPp0HX3lSFwlsBOZ5ZKKkBXAzPRtco7aAYqe0gLK
 Icons:  
 - Fuchs: Icons made by http://www.flaticon.com/authors/pixel-perfect from www.flaticon.com 
 - Wildschwein: Icons made by http://www.freepik.com from www.flaticon.com 
-- Uhr:Icons made by http://www.flaticon.com/authors/roundicons from www.flaticon.com 
+- Uhr: Icons made by http://www.flaticon.com/authors/roundicons from www.flaticon.com 
 - Schild, Eule, Vogel, Rakete, Hammer, Briefkasten, Mond, Buch: https://icons8.com/ 
 - Zwiebel: Icons made by http://www.freepik.com from www.flaticon.com 
 - Facebook: Icons made by www.freepik.com from www.flaticon.com 
