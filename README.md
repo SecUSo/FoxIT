@@ -6,7 +6,7 @@ Authors of FoxIT are _Hannah Drews, Elisa Kirchner, Noah Schlegel, Tim Schmidt &
 
 We already did a study about the effects of usage, but the results are not ready yet. If you are interested in our project, find bugs, have ideas or whatever, don't hesitate to contact us at [foxit[at]psychologie.tu-darmstadt.de](mailto:foxit@psychologie.tu-darmstad.de).
 
-FoxIT is under GPL 3 license. If you use our code for commercial purposes, we would love some comprehension, but it's obviously no must. 
+FoxIT is under GPL 3 license. If you use our code for commercial purposes, we would love some compensation, but it's obviously no must. 
 
 Please notice that we use code from libGDX and therefore refer to the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) under which libGDX is published.
 
