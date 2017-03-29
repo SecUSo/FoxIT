@@ -1,12 +1,12 @@
 **Android App to conveniently learn stuff about privacy**
 
-FoxIT is an Application for Android which was created in an university project at the Technische Universität Darmstadt. The goal of FoxIT is to give users information about privacy relevant aspects in a playful and convenient way.
+FoxIT is an Application for Android which was created as part of a university project at the Technische Universität Darmstadt. The goal of FoxIT is to give users information about privacy relevant aspects in a playful and convenient way.
 
 Authors of FoxIT are _Hannah Drews, Elisa Kirchner, Noah Schlegel, Tim Schmidt & Lena Scholz._
 
 We already did a study about the effects of usage, but the results are not ready yet. If you are interested in our project, find bugs, have ideas or whatever, don't hesitate to contact us at [foxit[at]psychologie.tu-darmstadt.de](mailto:foxit@psychologie.tu-darmstad.de).
 
-At the moment we don't include an open source license with FoxIT. But this will probably follow soon.
+FoxIT is under GPL 3 license. If you use our code for commercial purposes, we would love some comprehension, but it's obviously no must. 
 
 Please notice that we use code from libGDX and therefore refer to the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) under which libGDX is published.
 
