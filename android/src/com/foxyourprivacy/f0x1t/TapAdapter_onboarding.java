@@ -60,7 +60,7 @@ public class TapAdapter_onboarding extends FragmentPagerAdapter {
     }
 
     /**
-     * defines the number of tabs presented (2)
+     * defines the number of tabs presented (4)
      *
      * @return the number of Tabs
      * @author Hannah

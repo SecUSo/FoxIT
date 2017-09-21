@@ -11,18 +11,18 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@color/colorPrimaryDark"
-            android:padding="2dp"
-            android:layout_marginLeft="5dp"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true">
+            android:layout_gravity="right"
+            android:layout_marginLeft="5dp"
+            android:background="@color/colorPrimaryDark"
+            android:padding="2dp">
 
             <RelativeLayout
                 android:layout_width="330dp"
+                android:layout_height="310dp"
                 android:layout_gravity="center"
-                android:background="@color/creme"
-                android:layout_height="310dp">
+                android:background="@color/creme">
 
                 <ImageView
                     android:id="@+id/image_acorn_symbol"
@@ -34,15 +34,17 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Der Baumhaus Kapitalist"
-                    android:src="@mipmap/test_trophy"
-                    android:layout_marginTop="10dp" />
+                    android:src="@mipmap/test_trophy" />
 
                 <TextView
                     android:id="@+id/text_trophy_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/image_acorn_symbol"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:gravity="top|center"
                     android:maxLines="1"
@@ -50,21 +52,19 @@
                     android:text="Baumhaus Kapitalist"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#65bbb3"
-                    android:textSize="28dp"
-                    android:layout_below="@+id/image_acorn_symbol"
-                    android:layout_centerHorizontal="true" />
+                    android:textSize="28dp" />
 
                 <TextView
-                    android:text="TextView"
+                    android:id="@+id/text_trophy_describtion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_trophy_name"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/text_trophy_describtion"
-                    android:textColor="@color/material_deep_teal_200"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:paddingTop="5dp" />
+                    android:paddingTop="5dp"
+                    android:text="TextView"
+                    android:textColor="@color/material_deep_teal_200" />
             </RelativeLayout>
         </FrameLayout>
     </RelativeLayout>

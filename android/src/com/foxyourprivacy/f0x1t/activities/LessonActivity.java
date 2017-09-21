@@ -1,42 +1,48 @@
 package com.foxyourprivacy.f0x1t.activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.foxyourprivacy.f0x1t.DBHandler;
-import com.foxyourprivacy.f0x1t.LectionObject;
+import com.foxyourprivacy.f0x1t.LessonObject;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 import com.foxyourprivacy.f0x1t.lessonmethods.Method;
 import com.foxyourprivacy.f0x1t.lessonmethods.MethodFactory;
+import com.foxyourprivacy.f0x1t.slides.CertSlide;
 import com.foxyourprivacy.f0x1t.slides.EvaluationSlide;
-import com.foxyourprivacy.f0x1t.slides.QuizSlide;
+import com.foxyourprivacy.f0x1t.slides.GenQuizSlide;
+import com.foxyourprivacy.f0x1t.slides.LinkSlide;
+import com.foxyourprivacy.f0x1t.slides.QuestSlide;
 import com.foxyourprivacy.f0x1t.slides.Slide;
+import com.foxyourprivacy.f0x1t.slides.TextImageSlide;
+import com.foxyourprivacy.f0x1t.slides.VideoSlide;
 
 import java.util.HashMap;
 
 /**
  * manages the visualisation of slides
  */
-public class LectionActivity extends FoxITActivity {
-    public LectionObject lection;
-    String lectionDescription;
+public class LessonActivity extends FoxITActivity {
+    public LessonObject lesson;
     int slideNumber = 0;
     Toolbar toolbar;
     boolean didEvaluationStart = false;
     boolean isEvaluation = false;
     String className = "nothing";
+    String[] slideStringArray;
 
     HashMap<String, String> evaluationResults = new HashMap<>();
     Handler handler;
@@ -48,53 +54,75 @@ public class LectionActivity extends FoxITActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_lection_activity);
-        lectionDescription = getIntent().getStringExtra("lection");
+        setContentView(R.layout.activity_lesson_activity);
+
+        lesson = getIntent().getExtras().getParcelable("lesson");
+        slideStringArray = lesson.getSlides().split("_slide_;");
         className = getIntent().getStringExtra("classname");
+
+
+        lesson.slidearray = new Slide[slideStringArray.length];
+        int i = 0;
+        for (String slideString : slideStringArray) {
+            if (slideString.startsWith(" ")) slideString.replaceFirst(" ", "");
+            Bundle args = new Bundle();
+            args.putString("slide", slideString);
+            lesson.slidearray[i] = createSlide(slideString);
+            lesson.slidearray[i].setArguments(args);
+            i++;
+        }
+        //initializes handler for going back to lessons
         handler = new Handler();
 
         // sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         if (toolbar != null) {
-            toolbar.setTitle("Toolbar");
+            toolbar.setTitle(lesson.getLessonName());
         }
 
-        //setting the lectionObject, it's used for storing the slides
-        long l = 0;
-        lection = new LectionObject(getIntent().getStringExtra("name"), lectionDescription, getIntent().getIntExtra("type", 0), getIntent().getIntExtra("delay", 0), getIntent().getLongExtra("freetime", l), getIntent().getIntExtra("status", 1), getIntent().getIntExtra("acorn", 3));
-
-
-        if (lection.getProcessingStatus() < 2 && lection.getProcessingStatus() != -99) {
+        //changes status of lesson to read if it was below that
+        if (lesson.getProcessingStatus() < 2 && lesson.getProcessingStatus() != -99) {
             DBHandler db = new DBHandler(this, null, null, 1);
-            db.changeLectionToRead(lection.getLectionName());
+            db.changeLessonToRead(lesson.getLessonName(), className);
             db.close();
-
         }
+
+
         //add the first slide to the activities' context
-        FragmentManager manager = getFragmentManager();
+        FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        Slide firstSlide = lection.slideHashMap.get("0");
+        Slide firstSlide = lesson.slidearray[0];
         //if the first slide is a QuizSlide show the question mark
-        if (firstSlide instanceof QuizSlide) {
+        if (firstSlide instanceof GenQuizSlide) {
             setImage("check");
+        } else if (lesson.slidearray.length < 2) {
+            setImage("kreuz");
         }
-        transaction.add(R.id.lection_frame, firstSlide, "slide");
+        int j = 0;
+        //transaction.add(R.id.lesson_frame, firstSlide, "slide");
+        for (Slide s : lesson.slidearray) {
+            transaction.add(R.id.lesson_frame, s, "slide");
+            transaction.hide(s);
+            j++;
+        }
+        transaction.show(lesson.slidearray[0]);
         transaction.commit();
 
 
-        if (lection.getType() == -99) {
+        if (lesson.getType().equals("evaluation")) {
             isEvaluation = true;
             RelativeLayout outerFrame = (RelativeLayout) findViewById(R.id.count_frame);
-            outerFrame.setBackgroundColor(Color.LTGRAY);
+            outerFrame.setBackgroundColor(Color.BLUE);
         }
 
         //if the first slide does not have a previous slide, hide the backArrow
         final ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
-        if (lection.slideHashMap.get(Integer.toString(slideNumber)).back() == null) {
+        if (lesson.slidearray[slideNumber].back() == -99) {
             backButton.setVisibility(View.GONE);
         }
+
 
         // define the proper button behavior for switching slides, and change the button image accordingly
         ImageButton nextButton = (ImageButton) findViewById(R.id.next_button);
@@ -103,70 +131,74 @@ public class LectionActivity extends FoxITActivity {
             @Override
             public void onClick(View v) {
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 int slideToJumpTo; //aka the next slideNumber
-                Slide currentSlide = lection.slideHashMap.get(Integer.toString(slideNumber));
+                Slide currentSlide = lesson.slidearray[slideNumber];
+
 
                 //if the next slide is a QuizSlide show the question mark
-                if (currentSlide.next() != null && currentSlide.next().equals("quiz")) {
-                    ((QuizSlide) currentSlide).evaluation();
+                if (currentSlide.type.equals("quiz")) {
+                    ((GenQuizSlide) currentSlide).evaluation();
                     //if there is no next slide after the next show the cross
-                    if ((currentSlide.next() == null) && (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null)) {
+                    if ((currentSlide.next() == -99) && (lesson.slidearray.length < (slideNumber + 3))) {
                         setImage("kreuz");
                         //if there is a next slide after the next slide set the arrow
                     } else {
                         setImage("pfeil_rechts");
                     }
-                } else {
-                    if (!(currentSlide instanceof EvaluationSlide) || ((EvaluationSlide) currentSlide).evaluation()) {
+
+                } else if (!(currentSlide instanceof EvaluationSlide) || ((EvaluationSlide) currentSlide).evaluation()) {
 
                         //if the current slide defines a next slides that's the slideNumberToJumpTo
-                        if (currentSlide.next() != null) {
-                            slideToJumpTo = Integer.parseInt(currentSlide.next());
+                    if (currentSlide.next() != -99) {
+                        slideToJumpTo = currentSlide.next();
                         } else {
                             //otherwise its the slide with the next higher number
                             slideToJumpTo = slideNumber + 1;
                         }
                         //if the slide with the retrieved number exists jump to it
-                        if (lection.lectionInfoHashMap.get(Integer.toString(slideToJumpTo)) != null) {
-                            jumpToSlide(Integer.toString(slideToJumpTo));
+                    if (lesson.slidearray.length > slideToJumpTo) {
+                        jumpToSlide(slideToJumpTo);
                         } else {
                             //otherwise close the Activity
-                            goBackToLectionList(slideNumber);
+                        goBackToLessonList(slideNumber);
                         }
-                    }
                 }
                 ft.commit();
             }
         });
+
+
         // define the proper button behavior for going back one slide, and change the button image accordingly
         backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                Slide currentSlide = lection.slideHashMap.get(Integer.toString(slideNumber));
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                Slide currentSlide = lesson.slidearray[slideNumber];
                 //if the slide defines a backSlide jump to it
-                if (currentSlide.back() != null) {
+                if (currentSlide.back() != -99) {
                     jumpToSlide(currentSlide.back());
                 } else {
                     //otherwise if its not prevented to jump back jump to the last slide in the backStack of slides
-                    if (!lection.getBackSlide().equals("noBack")) {
-                        ft.show(lection.slideHashMap.get(lection.getBackSlide()));
+                    if (lesson.getBackSlide() != -99) {
+
+                        ft.show(lesson.slidearray[lesson.getBackSlide()]);
                         //if the last slide has a nextSlide show the arrow otherwise show the cross symbol
-                        if (!((lection.slideHashMap.get(lection.getBackSlide()).next() == null) && (lection.slideHashMap.get(Integer.toString(Integer.parseInt(lection.getBackSlide()) + 1)) == null))) {
-                            setImage("pfeil_rechts");
-                        } else {
+                        if ((lesson.slidearray[lesson.getBackSlide()].next() == -99) && (lesson.slidearray.length < (lesson.getBackSlide() + 1))) {
                             setImage("kreuz");
+                        } else {
+                            setImage("pfeil_rechts");
                         }
                         ft.hide(currentSlide);
                         //set the right slideNumber
-                        slideNumber = Integer.parseInt(lection.getBackSlide());
+                        slideNumber = lesson.getBackSlide();
                         //remove the last slide from the slideBackStack
-                        lection.slideBackStack.remove(lection.slideBackStack.size() - 1);
+                        lesson.slideBackStack.remove(lesson.slideBackStack.size() - 1);
                     }
                     //if the slide currently open has no backSlide, hide the backButton
-                    if (lection.getBackSlide().equals("noBack") && lection.slideHashMap.get(Integer.toString(slideNumber)).back() == null) {
+                    if (lesson.getBackSlide() == -99 && lesson.slidearray[slideNumber].back() < 0) {
                         backButton.setVisibility(View.GONE);
                     }
                     ft.commit();
@@ -174,24 +206,26 @@ public class LectionActivity extends FoxITActivity {
             }
         });
 
+        /*
+
         //defines the exact same behavior as the nextButton for the whole slide except that quizSlides are not evaluated
-        RelativeLayout lectionFrame = (RelativeLayout) findViewById(R.id.lection_frame);
-        lectionFrame.setOnClickListener(new View.OnClickListener() {
+        RelativeLayout lessonFrame = (RelativeLayout) findViewById(R.id.lesson_frame);
+        lessonFrame.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if ((!lection.getLectionName().contains(":")) || !(lection.getLectionName().contains("timeEval") || lection.getLectionName().contains("appEval"))) {
-                    String nextSlideNumber = lection.slideHashMap.get(Integer.toString(slideNumber)).next();
+                if ((!lesson.getLessonName().contains(":")) || !(lesson.getLessonName().contains("timeEval") || lesson.getLessonName().contains("appEval"))) {
+                    String nextSlideNumber = lesson.slideHashMap.get(Integer.toString(slideNumber)).next();
 
-                    Slide slide = lection.slideHashMap.get(Integer.toString(slideNumber));
-                    if (!(didEvaluationStart) && (!(slide instanceof QuizSlide) || ((QuizSlide) slide).getEvaluated())) {
+                    Slide slide = lesson.slideHashMap.get(Integer.toString(slideNumber));
+                    if (!(didEvaluationStart) && (!(slide instanceof QuizSlide) || ((QuizSlide) slide).gotEvaluated())) {
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         int slideToJumpTo; //aka the next SlideNumber
                         //if the next slide is a quizSlide show the question mark
                         if (nextSlideNumber != null && nextSlideNumber.equals("quiz")) {
-                            ((QuizSlide) lection.slideHashMap.get(Integer.toString(slideNumber))).evaluation();
+                            ((QuizSlide) lesson.slideHashMap.get(Integer.toString(slideNumber))).evaluation();
                             //if there is no next slide after the next show the cross
-                            if (lection.lectionInfoHashMap.get(Integer.toString(slideNumber + 1)) == null) {
+                            if (lesson.lessonInfoHashMap.get(Integer.toString(slideNumber + 1)) == null) {
                                 setImage("kreuz");
                                 //if there is a next slide after the next slide set the arrow
                             } else {
@@ -206,11 +240,11 @@ public class LectionActivity extends FoxITActivity {
                                 slideToJumpTo = slideNumber + 1;
                             }
                             //if the slide with the retrieved number exists, jump to it
-                            if (lection.lectionInfoHashMap.get(Integer.toString(slideToJumpTo)) != null) {
+                            if (lesson.lessonInfoHashMap.get(Integer.toString(slideToJumpTo)) != null) {
                                 jumpToSlide(Integer.toString(slideToJumpTo));
                             } else {
                                 //otherwise close the Activity
-                                goBackToLectionList(slideNumber);
+                                goBackToLessonList(slideNumber);
                             }
                         }
                         ft.commit();
@@ -218,6 +252,8 @@ public class LectionActivity extends FoxITActivity {
                 }
             }
         });
+
+        */
     }
 
     /**
@@ -250,81 +286,59 @@ public class LectionActivity extends FoxITActivity {
      * @param next the slide Number of the slide to switch to
      * @author Tim
      */
-    public void jumpToSlide(String next) {
+    public void jumpToSlide(int next) {
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
-        //if the nextSlide to be called exists and is not already created, create it out of its description
-        if (lection.lectionInfoHashMap.containsKey(next) && !lection.slideHashMap.containsKey(next)) {
-            String slideDescription = lection.lectionInfoHashMap.get(next);
-            Slide newSlide = Slide.createSlide(slideDescription);
-            Bundle slideInfos = new Bundle();
-            slideInfos.putString("parameters", slideDescription);
-            newSlide.setArguments(slideInfos);
-            //add the new slide to the lectionObject
-            lection.slideHashMap.put(next, newSlide);
+        Slide slide = lesson.slidearray[next];
+        Log.d("nextSlide", slide.getSlideInfo());
+        ft.show(slide);
+        //hide the current Slide
+        ft.hide(lesson.slidearray[slideNumber]);
+        ft.show(lesson.slidearray[next]);
+        //add the current Slide to the slideBackStack
+        lesson.slideBackStack.add(slideNumber);
+        slideNumber = next;
+        //if the new Slide has no last slide hide the backButton
+        if (lesson.getBackSlide() == -99 && slide.back() == -99) {
+            backButton.setVisibility(View.GONE);
+        } else backButton.setVisibility(View.VISIBLE);
 
-            //and display the newly created slide
-            FragmentManager manager = getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-
-            transaction.add(R.id.lection_frame, newSlide, "slide");
-            transaction.commit();
+        //if the next slide is a quizSlide set the questionMark
+        if (slide instanceof GenQuizSlide && !((GenQuizSlide) slide).gotEvaluated()) {
+            setImage("check");
         } else {
-            ft.show(lection.slideHashMap.get(next));
-
-        }
-        if (lection.slideHashMap.get(next) != null) {
-            Slide slide = lection.slideHashMap.get(next);
-            //hide the current Slide
-            ft.hide(lection.slideHashMap.get((Integer.toString(slideNumber))));
-
-            //add the current Slide to the slideBackStack
-            lection.slideBackStack.add(Integer.toString(slideNumber));
-            slideNumber = Integer.parseInt(next);
-            //if the new Slide has no last slide hide the backButton
-            if (slide.back() == null) {
-                backButton.setVisibility(View.GONE);
-            }
-            //if it has a last slide show the backButton
-            if (!lection.getBackSlide().equals("noBack") || slide.back() != null) {
-                backButton.setVisibility(View.VISIBLE);
-            }
-            //if the next slide is a quizSlide set the questionMark
-            if (slide instanceof QuizSlide && !((QuizSlide) slide).getEvaluated()) {
-                setImage("check");
+            //if the nextSlide has no slide thereafter show the cross
+            if ((slide.next() == -99) && (lesson.slidearray.length < (next + 2))) {
+                setImage("kreuz");
             } else {
-                //if the nextSlide has no slide thereafter show the cross
-                if ((slide.next() == null) && (lection.lectionInfoHashMap.get(Integer.toString(Integer.parseInt(next) + 1)) == null)) {
-                    setImage("kreuz");
-                } else {
-                    setImage("pfeil_rechts");
-                }
+                setImage("pfeil_rechts");
             }
         }
+
         ft.commit();
     }
 
     /**
-     * wrap up the lection, count points and return to lection overview
+     * wrap up the lesson, count points and return to lesson overview
      *
      * @param currentSlide
      */
-    private void goBackToLectionList(int currentSlide) {
+    private void goBackToLessonList(int currentSlide) {
         didEvaluationStart = true;
         ImageView button = (ImageView) findViewById(R.id.next_button);
         button.setVisibility(View.GONE);
         button = (ImageView) findViewById(R.id.back_button);
         button.setVisibility(View.GONE);
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.lection_frame);
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.lesson_frame);
         layout.setEnabled(true);
 
         ValueKeeper v = ValueKeeper.getInstance();
         Boolean isEval = false;
-        if (lection.getLectionName().contains(":")) {
+        if (lesson.getLessonName().contains("EVALUATION")) {
             isEval = true;
-            String switc = lection.getLectionName().substring(0, lection.getLectionName().indexOf(":"));
-            Log.d("LectionActivity", "switch-case of evaluation-lesson" + switc);
+            String switc = lesson.getLessonName().substring(0, lesson.getLessonName().indexOf("EVALUATION"));
             switch (switc) {
                 //TODO: implement relevant evaluations for production
                 case "timeEval":
@@ -344,11 +358,11 @@ public class LectionActivity extends FoxITActivity {
 
 
         }
-        if (lection.slideHashMap.get(Integer.toString(currentSlide)).isLectionSolved() && (lection.getProcessingStatus() != 3 && !isEval)) {
+        if (lesson.slidearray[currentSlide].isLessonSolved() && (lesson.getProcessingStatus() != 3 && !isEval)) {
             DBHandler db = new DBHandler(this, null, null, 1);
 
-            if (lection.getProcessingStatus() != -99) {
-                db.changeLectionToSolved(lection.getLectionName());
+            if (lesson.getProcessingStatus() != -99) {
+                db.changeLessonToSolved(lesson.getLessonName());
             }
 
             MethodFactory factory = new MethodFactory(this);
@@ -359,7 +373,7 @@ public class LectionActivity extends FoxITActivity {
 
             //raise the acornCount on success
             Method method2 = factory.createMethod("changeAcornCount");
-            method2.callClassMethod(Integer.toString(lection.getReward()));
+            method2.callClassMethod(Integer.toString(lesson.getReward()));
             db.close();
 
 
@@ -369,20 +383,36 @@ public class LectionActivity extends FoxITActivity {
                     onBackPressed();
                 }
             }, 4250);
-        } else if (lection.getProcessingStatus() != 3) {
+        } else if (lesson.getProcessingStatus() != 3) {
 
-            long nextFreeTime = (System.currentTimeMillis() % Long.MAX_VALUE) + lection.getDelaytime();
+            long nextFreeTime = (System.currentTimeMillis() % Long.MAX_VALUE) + lesson.getDelaytime() * 60000;
             DBHandler db = new DBHandler(this, null, null, 1);
-            db.setLectionNextFreeTime(lection.getLectionName(), nextFreeTime);
+            db.setLessonNextFreeTime(lesson.getLessonName(), className, nextFreeTime);
             db.close();
             onBackPressed();
         } else onBackPressed();
     }
 
+    private Slide createSlide(String slideString) {
+        if (slideString.startsWith("[LINK]")) {
+            return new LinkSlide();
+        } else if (slideString.startsWith("[VIDEO]")) {
+            return new VideoSlide();
+        } else if (slideString.startsWith("[QUIZ]")) {
+            return new GenQuizSlide();
+        } else if (slideString.startsWith("[CERT]")) {
+            return new CertSlide();
+        } else if (slideString.startsWith("[QUEST]")) {
+            return new QuestSlide();
+        } else {
+            return new TextImageSlide();
+        }
+    }
+
 
     public void addEvaluationResult(String question, String answer) {
 
-        String prefix = lection.getLectionName().substring(lection.getLectionName().indexOf(":") + 1, lection.getLectionName().length());
+        String prefix = lesson.getLessonName().substring(lesson.getLessonName().indexOf(":") + 1, lesson.getLessonName().length());
         evaluationResults.put(prefix + ":" + question, answer);
 
     }
@@ -394,4 +424,17 @@ public class LectionActivity extends FoxITActivity {
         db.close();
         handler.removeCallbacksAndMessages(null);
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.toolbar_activities, menu);
+        menu.findItem(R.id.action_options).setVisible(false);
+        menu.findItem(R.id.goOn).setVisible(false);
+        menu.findItem(R.id.goBack).setVisible(false);
+        setTitle(lesson.getLessonName());
+        return true;
+    }
+
 }

@@ -1,3 +1,4 @@
+/*
 package com.foxyourprivacy.f0x1t.slides;
 
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.widget.Toast;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.lessonmethods.MethodFactory;
 
+*/
 /**
  * Created by Ich on 25.06.2016.
- */
+ *//*
+
 public class Quiz3Slide extends QuizSlide {
     View view;
 
@@ -29,23 +32,29 @@ public class Quiz3Slide extends QuizSlide {
     String points = "0";
 
 
-    /**
+    */
+/**
      * @author Tim
-     */
+ *//*
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         view = inflater.inflate(R.layout.layout_slide_quiz, container, false);
         fillLayout();
-        nextSlide = "quiz";
         return view;
     }
 
-
+*/
+/*
     @Override
     public
-    /**
+    *//*
+*/
+/**
      * @author Tim
-     */
+ *//*
+*/
+/*
     void fillLayout() {
         TextView text = (TextView) view.findViewById(R.id.quiz_text);
         text.setText(parameter.get("text"));
@@ -76,12 +85,15 @@ public class Quiz3Slide extends QuizSlide {
             wrongAnswer = parameter.get("failureText");
         }
 
-    }
+    }*//*
+
 
     @Override
-    /**checks if the answer is right
+    */
+/**checks if the answer is right
      * @author Tim
-     */
+ *//*
+
     public boolean evaluation() {
         //disables the checkboxes for them not to be changed
         CheckBox box1 = (CheckBox) view.findViewById(R.id.checkBox);
@@ -91,7 +103,7 @@ public class Quiz3Slide extends QuizSlide {
         CheckBox box3 = (CheckBox) view.findViewById(R.id.checkBox3);
         box3.setEnabled(false);
 
-        nextSlide = null;
+        nextSlide = -99;
         evaluated = true;
         //shows which answers are right or wrong
         if (answer1true) {
@@ -126,4 +138,4 @@ public class Quiz3Slide extends QuizSlide {
     }
 
 
-}
+}*/

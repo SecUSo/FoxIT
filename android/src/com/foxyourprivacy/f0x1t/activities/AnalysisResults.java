@@ -13,14 +13,14 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.foxyourprivacy.f0x1t.R;
-import com.foxyourprivacy.f0x1t.TapAdapter;
+import com.foxyourprivacy.f0x1t.TapAdapter_results;
 import com.foxyourprivacy.f0x1t.fragments.PermissionListFragment;
 
 public class AnalysisResults extends FoxITActivity {
 
     public ViewPager mViewPager; //defines the tabView's content
     public PermissionListFragment permissionList;
-    TapAdapter adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
+    TapAdapter_results adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
     String settingsArray[]; //array with settings fetched from the database
     Toolbar toolbar; //reference to the toolbar
 
@@ -37,7 +37,7 @@ public class AnalysisResults extends FoxITActivity {
         settingsArray = getIntent().getStringArrayExtra("settings");
 
         //defining the tabs and the tab bar
-        adapter = new TapAdapter(getFragmentManager(), this, settingsArray);
+        adapter = new TapAdapter_results(getFragmentManager(), this, settingsArray);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -154,7 +154,7 @@ public class AnalysisResults extends FoxITActivity {
 
     public void onBackPressed() {
         //if there is an fragment
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             //if PermissionDescriptionFragment exists
             if (permissionList != null && permissionList.getChildFragmentManager().getBackStackEntryCount() > 0) {
                 permissionList.setListVisible();//make the hidden permissionList visible again
@@ -163,7 +163,7 @@ public class AnalysisResults extends FoxITActivity {
                 if (permissionList != null) {
                     permissionList = null;
                 }
-                getFragmentManager().popBackStack(); //destroy PermissionListFragment
+                getSupportFragmentManager().popBackStack(); //destroy PermissionListFragment
                 FrameLayout appFrame = (FrameLayout) findViewById(R.id.appFrame);
                 appFrame.setVisibility(View.VISIBLE); //make the hidden appList visible again
                 mViewPager.setVisibility(View.VISIBLE);

@@ -126,7 +126,7 @@ public class FoxITActivity extends AppCompatActivity {
         v.fillApplicationStartAndDuration(System.currentTimeMillis());
         v.fillApplicationStartAndActiveCDuration(System.currentTimeMillis());
         ((FoxITApplication) this.getApplication()).startActivityTransitionTimer();
-        if (this instanceof LectionActivity || this instanceof LectionListActivity || this instanceof TrophyRoomActivity || this instanceof Analysis || this instanceof Home)
+        if (this instanceof LessonActivity || this instanceof LessonListActivity || this instanceof TrophyRoomActivity || this instanceof Analysis || this instanceof Home)
             v.saveInstance(getApplicationContext());
     }
 

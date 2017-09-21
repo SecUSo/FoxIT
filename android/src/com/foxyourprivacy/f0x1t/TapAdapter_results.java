@@ -12,11 +12,11 @@ import java.util.Arrays;
 
 
 /**
- * Created by Ich on 04.08.2016.
+ * Created by Tim on 04.08.2016.
  */
 
 //Class which defines the Tabs in AnalysisResults
-public class TapAdapter extends FragmentPagerAdapter {
+public class TapAdapter_results extends FragmentPagerAdapter {
 
     //Activity startScreenActivity; //reference to AnalysisResults
     String[] settingsArray;
@@ -27,7 +27,7 @@ public class TapAdapter extends FragmentPagerAdapter {
      * @param settingsArray the settings to be displayed by SettingListFragment
      * @author Tim
      */
-    public TapAdapter(android.app.FragmentManager fm, Activity activity, String[] settingsArray) {
+    public TapAdapter_results(android.app.FragmentManager fm, Activity activity, String[] settingsArray) {
         super(fm);
         //this.startScreenActivity = activity;
         this.settingsArray = settingsArray;

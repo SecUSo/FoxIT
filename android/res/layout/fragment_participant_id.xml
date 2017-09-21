@@ -1,86 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="#aad4d4d4"
     android:id="@+id/whole_frame"
-    android:clickable="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#aad4d4d4"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="120dp"
         android:layout_weight="0.11"
         android:background="@color/creme">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@color/creme"
-            android:id="@+id/relativeLayout2">
+            android:layout_gravity="right"
+            android:background="@color/creme">
 
             <TextView
+                android:id="@+id/instruction_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Bitte gib deinen Versuchspersonencode ein. Dieser setzt sich zusammen aus den beiden letzten Buchstaben des Vornamens deines Vaters, den letzten zwei Ziffern deiner Handynummer und den letzten 2 Buchstaben des Vornamens deiner Mutter."
-                android:layout_gravity="center_horizontal"
                 android:layout_below="@+id/text_amount"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"
-                android:layout_marginBottom="15dp"
-                android:layout_margin="10dp"
                 android:maxWidth="240dp"
-                android:id="@+id/instruction_text" />
+                android:text="Bitte gib deinen Versuchspersonencode ein. Dieser setzt sich zusammen aus den beiden letzten Buchstaben des Vornamens deines Vaters, den letzten zwei Ziffern deiner Handynummer und den letzten 2 Buchstaben des Vornamens deiner Mutter."
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="171dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/creme"
             android:layout_below="@+id/relativeLayout2"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/creme">
 
 
         </RelativeLayout>
 
         <EditText
+            android:id="@+id/participant_id_input_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/participant_id_input_text"
-            android:inputType="text"
-            android:gravity="left"
-            android:layout_weight="0.11"
-            android:layout_below="@+id/relativeLayout2"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="14dp"
+            android:layout_below="@+id/relativeLayout2"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_weight="0.11"
             android:background="@color/white"
-            android:padding="5dp"
-            android:maxLength="6"
             android:ems="6"
-            android:hint="6 Zeichen" />
+            android:gravity="left"
+            android:hint="6 Zeichen"
+            android:inputType="text"
+            android:maxLength="6"
+            android:padding="5dp" />
 
         <ImageButton
+            android:id="@+id/continue_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_check"
-            android:layout_marginEnd="17dp"
-            android:id="@+id/continue_button"
             android:layout_alignBottom="@+id/participant_id_input_text"
             android:layout_alignEnd="@+id/relativeLayout2"
+            android:layout_marginEnd="17dp"
+            android:layout_marginTop="15dp"
+            android:adjustViewBounds="true"
             android:maxHeight="@android:dimen/app_icon_size"
             android:maxWidth="@android:dimen/app_icon_size"
-            android:adjustViewBounds="true"
-            android:layout_marginTop="15dp" />
+            app:srcCompat="@drawable/ic_check" />
 
     </RelativeLayout>
 

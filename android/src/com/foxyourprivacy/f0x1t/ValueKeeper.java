@@ -33,7 +33,7 @@ public class ValueKeeper {
     Boolean notDisplayed = true;
     //the absolute first start
     long timeOfFirstStart = 0;
-    int dailyLectionsUnlocked = 0;
+    int dailyLessonsUnlocked = 0;
     boolean valueKeeperAlreadyRefreshed = false;
     int numberOfTimesOpenedAtNight = 0;
     int numberOfTimesOpenedAtMorning = 0;
@@ -81,7 +81,7 @@ public class ValueKeeper {
 
         DBHandler db = new DBHandler(context, null, null, 1);
         HashMap<String, String> data = db.getIndividualData();
-        dailyLectionsUnlocked = db.howManyDailiesUnlocked();
+        dailyLessonsUnlocked = db.howManyDailiesUnlocked();
         //Log.d("ValuesTest","Revived Data:\n" + data.toString()+"\nData size: "+Integer.toString(data.size()));
         db.close();
         analysisDoneBefore = Boolean.valueOf(data.get("analysisDoneBefore"));
@@ -115,8 +115,8 @@ public class ValueKeeper {
         if (data.containsKey("currentEvaluation")) {
             currentEvaluation = Integer.valueOf(data.get("currentEvaluation"));
         }
-        if (data.containsKey("dailyLectionsUnlocked")) {
-            // dailyLectionsUnlocked = Integer.valueOf(data.get("dailyLectionsUnlocked"));
+        if (data.containsKey("dailyLessonsUnlocked")) {
+            // dailyLessonsUnlocked = Integer.valueOf(data.get("dailyLessonsUnlocked"));
         }
         if (data.containsKey("numberOfTimesOpenedAtNight")) {
             numberOfTimesOpenedAtNight = numberOfTimesOpenedAtNight + Integer.valueOf(data.get("numberOfTimesOpenedAtNight"));
@@ -186,7 +186,7 @@ public class ValueKeeper {
         values.put("numberOfTimesOpenedAtMorning", Integer.toString(numberOfTimesOpenedAtMorning));
         values.put("numberOfTimesOpenedAtNight", Integer.toString(numberOfTimesOpenedAtNight));
         values.put("username", username);
-        values.put("dailyLectionsUnlocked", Integer.toString(dailyLectionsUnlocked));
+        values.put("dailyLessonsUnlocked", Integer.toString(dailyLessonsUnlocked));
         values.put("timeOfFirstStart", Long.toString(timeOfFirstStart));
         values.put("timeOfLastServerAccess",Long.toString(timeOfLastServerAccess));
 
@@ -442,8 +442,8 @@ public class ValueKeeper {
     }
 
 
-    public void increaseDailyLectionsUnlocked() {
-        dailyLectionsUnlocked++;
+    public void increaseDailyLessonsUnlocked() {
+        dailyLessonsUnlocked++;
     }
 
     public long getTimeOfLastServerAccess() {

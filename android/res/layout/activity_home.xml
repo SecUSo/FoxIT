@@ -43,7 +43,7 @@
                 android:layout_marginTop="25dp"
                 android:contentDescription="Lektionen"
                 android:scaleType="fitEnd"
-                android:src="@drawable/lection">
+                android:src="@drawable/lesson">
             </ImageView>
 
             <TextView

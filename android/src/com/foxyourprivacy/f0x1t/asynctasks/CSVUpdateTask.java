@@ -159,8 +159,8 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
             while ((templine = br.readLine()) != null) {
                 csvrow += templine;
                 if (templine.matches(".*;;;")) {
-                    String[] rowarray = csvrow.split(";");
-                    result.add(rowarray);
+                    String[] lessonarray = csvrow.split(";");
+                    result.add(lessonarray);
                     // Log.d("SettingsActivity", "row: " + csvrow);
                     csvrow = "";
                 }

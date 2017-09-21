@@ -3,6 +3,8 @@
     package="com.foxyourprivacy.f0x1t">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
 
     <application
@@ -35,28 +37,35 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.AnalysisResults"
+            android:label="Analyse-Ergebnisse"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activities.LectionActivity"
+            android:name=".activities.LessonActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activities.LectionListActivity"
+            android:name=".activities.LessonListActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ClassListActivity"
+            android:label="Die Kurse"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.TrophyRoomActivity"
+            android:label="Deine Erfolge und Animationen"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.OnboardingActivity"
+            android:label="Willkommen zu FoxIT!"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.AnimationLauncher"
+            android:label="Lass uns spielen!"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SettingsActivity"
+            android:label="Einstellungen"
+
             android:screenOrientation="portrait" />
 
     </application>

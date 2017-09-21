@@ -16,7 +16,7 @@ public class MethodFactory {
     /**
      * methodLeft to implement the methodFactory-designpattern, creates subclasses of methodLeft all designated to a single purpose
      *
-     * @param method the string contained in the lectionDescription describing which methodLeft is to be created
+     * @param method the string contained in the lessonDescription describing which methodLeft is to be created
      * @return a subclass of Method implementing a fitting methodLeft()
      */
     public Method createMethod(String method) {

@@ -92,16 +92,16 @@ public class BackgroundService extends Service {
                 Long currentTime = System.currentTimeMillis();
                 Long result = (currentTime - firstTime) / 86400000;
 
-                if (result > v.dailyLectionsUnlocked && v.dailyLectionsUnlocked < 15 && v.valueKeeperAlreadyRefreshed) {
+            if (result > v.dailyLessonsUnlocked && v.dailyLessonsUnlocked < 15 && v.valueKeeperAlreadyRefreshed) {
                     DBHandler db = new DBHandler(context, null, null, 2);
-                    String lectionName = db.unlockDaily();
-                    v.increaseDailyLectionsUnlocked();
+                String lessonName = db.unlockDaily();
+                v.increaseDailyLessonsUnlocked();
 
                     NotificationCompat.Builder mBuilder =
                             new NotificationCompat.Builder(context)
                                     .setSmallIcon(R.mipmap.literature)
                                     .setContentTitle("Eine neue Lektion ist verfügbar!")
-                                    .setContentText(lectionName);
+                                    .setContentText(lessonName);
 
                     Intent resultIntent = new Intent(context, Home.class);
 

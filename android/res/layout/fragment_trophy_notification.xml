@@ -8,11 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="55dp"
         android:background="@color/colorPrimaryDark"
-        android:padding="2dp"
-        android:layout_marginLeft="10dp">
+        android:padding="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,12 +29,12 @@
                 android:layout_toStartOf="@+id/image_trophy_symbol"
                 android:gravity="top|center"
                 android:maxLines="2"
+                android:paddingTop="2dp"
                 android:singleLine="false"
                 android:text="Schnüffler unlocked!"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/background_dark"
-                android:textSize="24sp"
-                android:paddingTop="2dp" />
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/image_trophy_symbol"

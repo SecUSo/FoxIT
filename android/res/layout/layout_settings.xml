@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:contextClickable="false"
     android:descendantFocusability="blocksDescendants"
-    android:minHeight="40dp"
-    android:contextClickable="false">
+    android:minHeight="40dp">
 
     <android.support.percent.PercentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:focusable="false"
+        android:layout_height="match_parent"
         android:clickable="false"
-        android:focusableInTouchMode="false"
-        android:layout_height="match_parent">
+        android:focusable="false"
+        android:focusableInTouchMode="false">
 
     <TextView
-        app:layout_widthPercent="55%"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
         android:id="@+id/text_setting_type"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="6dp"
         android:layout_toLeftOf="@+id/text_setting_setting"
+        android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:clickable="false"
         android:gravity="left"
-        android:minHeight="50dp" />
+        android:minHeight="50dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_widthPercent="55%" />
 
     <TextView
-        app:layout_widthPercent="35%"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Large Text"
         android:id="@+id/text_setting_setting"
-        android:minHeight="50dp"
-        android:singleLine="true"
-        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="false"
-        android:paddingStart="20dp"
+        android:layout_alignParentRight="true"
         android:layout_marginRight="6dp"
-        android:focusable="false"
         android:clickable="false"
+        android:focusable="false"
         android:focusableInTouchMode="false"
         android:gravity="right"
-        android:textColor="#000000"/>
+        android:minHeight="50dp"
+        android:paddingStart="20dp"
+        android:singleLine="true"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
+        app:layout_widthPercent="35%" />
 
     </android.support.percent.PercentRelativeLayout>
 

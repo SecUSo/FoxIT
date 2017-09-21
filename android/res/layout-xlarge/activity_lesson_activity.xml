@@ -7,21 +7,26 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <include
-        android:id="@+id/include3"
-        layout="@layout/toolbar_actionbar" />
+    <include layout="@layout/toolbar_actionbar" />
+
 
     <RelativeLayout
-        android:id="@+id/lection_frame"
+        android:id="@+id/lesson_frame"
         android:layout_width="match_parent"
-        android:layout_height="446dp"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="200dp"
         android:layout_weight="0.90"
         android:background="#ffffff"
         android:contextClickable="true">
+
+        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/lessonpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
@@ -38,6 +43,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="31dp"
+            android:layout_marginTop="4dp"
             android:adjustViewBounds="true"
             android:background="#00ffffff"
             android:contentDescription="zurück"
@@ -57,6 +63,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="22dp"
+            android:layout_marginTop="4dp"
             android:adjustViewBounds="true"
             android:background="#00ffff00"
             android:contentDescription="vorwärts"

@@ -1,6 +1,6 @@
 package com.foxyourprivacy.f0x1t.lessonmethods;
 
-import com.foxyourprivacy.f0x1t.activities.LectionActivity;
+import com.foxyourprivacy.f0x1t.activities.LessonActivity;
 
 /**
  * Created by Tim on 19.07.2016.
@@ -14,8 +14,8 @@ public class MethodSlideSwitch extends Method {
      */
     public void callClassMethod(String destination) {
 
-        if (activity instanceof LectionActivity) {
-            ((LectionActivity) activity).jumpToSlide(destination);
+        if (activity instanceof LessonActivity) {
+            ((LessonActivity) activity).jumpToSlide(Integer.parseInt(destination));
         }
     }
 

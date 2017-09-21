@@ -6,7 +6,7 @@ package com.foxyourprivacy.f0x1t.slides;
 public abstract class QuizSlide extends Slide {
     protected boolean evaluated = false;
 
-    public boolean getEvaluated() {
+    public boolean gotEvaluated() {
         return evaluated;
     }
 

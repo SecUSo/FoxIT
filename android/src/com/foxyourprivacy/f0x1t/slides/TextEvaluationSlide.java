@@ -1,3 +1,4 @@
+/*
 package com.foxyourprivacy.f0x1t.slides;
 
 import android.os.Bundle;
@@ -9,11 +10,13 @@ import android.widget.TextView;
 
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
-import com.foxyourprivacy.f0x1t.activities.LectionActivity;
+import com.foxyourprivacy.f0x1t.activities.LessonActivity;
 
+*/
 /**
  * Created by Tim on 25.06.2016.
- */
+ *//*
+
 public class TextEvaluationSlide extends EvaluationSlide {
     View view;
 
@@ -24,9 +27,11 @@ public class TextEvaluationSlide extends EvaluationSlide {
     String points = "0";
 
 
-    /**
+    */
+/**
      * @author Tim
-     */
+ *//*
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         view = inflater.inflate(R.layout.layout_slide_question_text, container, false);
@@ -37,9 +42,11 @@ public class TextEvaluationSlide extends EvaluationSlide {
 
     @Override
     public
-    /**
+    */
+/**
      * @author Tim
-     */
+ *//*
+
     void fillLayout() {
         TextView text = (TextView) view.findViewById(R.id.question_text);
         text.setText(parameter.get("text"));
@@ -52,19 +59,21 @@ public class TextEvaluationSlide extends EvaluationSlide {
     }
 
     @Override
-    /**checks if the answer is right
+    */
+/**checks if the answer is right
      * @author Tim
-     */
+ *//*
+
     public boolean evaluation() {
         EditText textField = (EditText) view.findViewById(R.id.answer_text_field);
         String answer = textField.getText().toString();
 
 
         ValueKeeper v = ValueKeeper.getInstance();
-        LectionActivity l = (LectionActivity) getActivity();
+        LessonActivity l = (LessonActivity) getActivity();
         l.addEvaluationResult(questionText, answer);
         evaluated = true;
-        nextSlide = null;
+        nextSlide = -99;
 
 
         return true;
@@ -72,4 +81,4 @@ public class TextEvaluationSlide extends EvaluationSlide {
     }
 
 
-}
+}*/

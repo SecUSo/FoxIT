@@ -1,7 +1,5 @@
 package com.foxyourprivacy.f0x1t;
 
-import android.util.Log;
-
 /**
  * Created by Ich on 18.09.2016.
  */

@@ -7,7 +7,7 @@ package com.foxyourprivacy.f0x1t.lessonmethods;
 public class MethodDoLittle extends Method {
 
     @Override
-    /**callClassMethod to be called if the callClassMethod description in the lectionDescribtion is wrong
+    /**callClassMethod to be called if the callClassMethod description in the lessonDescribtion is wrong
      * @author Tim
      */
     public void callClassMethod(String neverUsed) {

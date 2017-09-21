@@ -23,23 +23,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foxyourprivacy.f0x1t.DBHandler;
-import com.foxyourprivacy.f0x1t.LectionObject;
+import com.foxyourprivacy.f0x1t.LessonObject;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 import com.foxyourprivacy.f0x1t.asynctasks.DBWrite;
-import com.foxyourprivacy.f0x1t.fragments.TradeRequestFragment_lection;
+import com.foxyourprivacy.f0x1t.fragments.TradeRequestFragment_lesson;
 
 import java.util.ArrayList;
 
-//Displayes the lections corresponding to a certain course and manages their usage
-public class LectionListActivity extends FoxITActivity implements AdapterView.OnItemClickListener {
+//Displayes the lessons corresponding to a certain class and manages their usage
+public class LessonListActivity extends FoxITActivity implements AdapterView.OnItemClickListener {
 
-    //List of lectionDescribtions, send by ClassListActivity
-    static String[] lectionStringArray; //has to be static for now
+    //List of lessonDescribtions, send by ClassListActivity
+    static String[] lessonStringArray; //has to be static for now
     static String className;//has to be static for now
     static String classDescriptionText; //Text describing the class currently on display
-    //list of lectionObjects generated to fill the ListView
-    public ArrayList<LectionObject> lectionObjectList = new ArrayList<>();
+    //list of lessonObjects generated to fill the ListView
+    public ArrayList<LessonObject> lessonObjectList = new ArrayList<>();
     boolean descriptionVisible = false; //true if the classDescription is visible
     ArrayAdapter<String> adapter;
     Toolbar toolbar;
@@ -50,7 +50,7 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lection_list);
+        setContentView(R.layout.activity_lesson_list);
 
         // sets our toolbar as the actionbar
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -60,9 +60,9 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
         }
 
 
-        //retrieve the lectionDescriptions
-        if (getIntent().getStringArrayExtra("lection") != null) {
-            lectionStringArray = getIntent().getStringArrayExtra("lection");
+        //retrieve the lessonDescriptions
+        if (getIntent().getStringArrayExtra("lesson") != null) {
+            lessonStringArray = getIntent().getStringArrayExtra("lesson");
         }
 
         //retrieve the className
@@ -128,6 +128,7 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
         menu.findItem(R.id.action_options).setVisible(false);
         menu.findItem(R.id.goOn).setVisible(false);
+        setTitle(className);
         return true;
     }
 
@@ -148,55 +149,49 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
 
 
     /**
-     * onItemClick the Activity is switched to lectionActivity
+     * onItemClick the Activity is switched to lessonActivity
      *
      * @author Tim
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        if (lectionObjectList.get(position).getProcessingStatus() == 0) {
+        if (lessonObjectList.get(position).getProcessingStatus() == 0) {
 
             Bundle tradeInfos = new Bundle();
-            tradeInfos.putString("target", lectionObjectList.get(position).getLectionName());
+            tradeInfos.putString("target", lessonObjectList.get(position).getLessonName());
 
             //add the acornCountFragment to the activity's context
             FragmentManager manager = getFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            TradeRequestFragment_lection tradeRequest = new TradeRequestFragment_lection();
+            TradeRequestFragment_lesson tradeRequest = new TradeRequestFragment_lesson();
             tradeRequest.setArguments(tradeInfos);
             //add the fragment to the count_frame RelativeLayout
             transaction.add(R.id.count_frame, tradeRequest, "count");
-            transaction.addToBackStack("lectionTradeRequest");
+            transaction.addToBackStack("lessonTradeRequest");
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             transaction.commit();
 
 
         } else {
-            if (lectionObjectList.get(position).getNextfreetime() > (System.currentTimeMillis())) {
+            if (lessonObjectList.get(position).getNextfreetime() > (System.currentTimeMillis())) {
 
                 //display the animation description
-                Log.d("nextfreetime: ", lectionObjectList.get(position).getNextfreetime() + " ");
+                Log.d("nextfreetime: ", lessonObjectList.get(position).getNextfreetime() + " ");
                 Log.d("currenttime :", System.currentTimeMillis() + " ");
                 Toast.makeText(getApplicationContext(),
-                        "Diese Lektion ist erst wieder in " + Long.toString((lectionObjectList.get(position).getNextfreetime() - System.currentTimeMillis()) / 60000) + " Minuten verfügbar.", Toast.LENGTH_LONG).show();
+                        "Diese Lektion ist erst wieder in " + Long.toString((lessonObjectList.get(position).getNextfreetime() - System.currentTimeMillis()) / 60000) + " Minuten verfügbar.", Toast.LENGTH_LONG).show();
 
 
             } else {
 
-                Log.d("MyApp", "duTime" + Long.toString(lectionObjectList.get(position).getNextfreetime()));
+                Log.d("MyApp", "duTime" + Long.toString(lessonObjectList.get(position).getNextfreetime()));
 
 
-                Intent intent = new Intent(getApplicationContext(), LectionActivity.class);
-                //to inform lectionActivity which lection is to be displayed
+                Intent intent = new Intent(getApplicationContext(), LessonActivity.class);
+                //to inform lessonActivity which lesson is to be displayed
 
-                intent.putExtra("lection", lectionObjectList.get(position).getContent());
-                intent.putExtra("name", lectionObjectList.get(position).getLectionName());
-                intent.putExtra("type", lectionObjectList.get(position).getType());
-                intent.putExtra("delay", lectionObjectList.get(position).getDelaytime());
-                intent.putExtra("freetime", lectionObjectList.get(position).getNextfreetime());
-                intent.putExtra("status", lectionObjectList.get(position).getProcessingStatus());
-                intent.putExtra("acorn", lectionObjectList.get(position).getReward());
+                intent.putExtra("lesson", lessonObjectList.get(position));
                 intent.putExtra("classname", className);
                 startActivity(intent);
             }
@@ -211,26 +206,26 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
      */
     @Override
     public void onResume() {
-        ListView lectionList = (ListView) findViewById(R.id.headline_frame);
+        ListView lessonList = (ListView) findViewById(R.id.headline_frame);
         DBHandler db = new DBHandler(this, null, null, 1);
-        lectionObjectList = db.getLectionsFromDB(className);
+        lessonObjectList = db.getLessonsFromDB(className);
         db.close();
 
-        lectionStringArray = new String[lectionObjectList.size()];
+        lessonStringArray = new String[lessonObjectList.size()];
 
         TextView name = (TextView) findViewById(R.id.text_class_name);
         name.setText(className);
 
-        int lectionNumber = lectionObjectList.size();
-        int solvedLectionNumber = 0;
-        for (LectionObject l : lectionObjectList) {
+        int lessonNumber = lessonObjectList.size();
+        int solvedLessonNumber = 0;
+        for (LessonObject l : lessonObjectList) {
             if (l.getProcessingStatus() == 3) {
-                solvedLectionNumber++;
+                solvedLessonNumber++;
             }
         }
 
         ValueKeeper v = ValueKeeper.getInstance();
-        if (solvedLectionNumber == lectionNumber && lectionNumber != 0) {
+        if (solvedLessonNumber == lessonNumber && lessonNumber != 0) {
             v.insertSolvedClass(className);
         }
 
@@ -246,35 +241,35 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
         }
 
         TextView solved = (TextView) findViewById(R.id.text_percentage_solved);
-        solved.setText(Integer.toString(solvedLectionNumber) + "/" + Integer.toString(lectionNumber));
+        solved.setText(Integer.toString(solvedLessonNumber) + "/" + Integer.toString(lessonNumber));
 
         TextView description = (TextView) findViewById(R.id.description_text);
         description.setText(classDescriptionText);
 
 
         //creates the listView
-        adapter = new MyListAdapter_lection();
-        lectionList.setAdapter(adapter);
-        lectionList.setOnItemClickListener(this);
+        adapter = new MyListAdapter_lesson();
+        lessonList.setAdapter(adapter);
+        lessonList.setOnItemClickListener(this);
         adapter.notifyDataSetChanged();
         super.onResume();
     }
 
     /**
-     * handles the purchase of a lection
+     * handles the purchase of a lesson
      *
      * @return if the purchase was successful
      * @author Tim
      */
     public boolean purchase(String articleOfCommerce) {
-        for (LectionObject l : lectionObjectList) {
-            if (l.getLectionName().equals(articleOfCommerce)) {
-                //sets the lections status to unlocked
+        for (LessonObject l : lessonObjectList) {
+            if (l.getLessonName().equals(articleOfCommerce)) {
+                //sets the lessons status to unlocked
                 l.setProcessingStatus(1);
                 //update the listView
 
                 adapter.notifyDataSetChanged();
-                new DBWrite(this).execute("changeLectionToUnlocked", articleOfCommerce);
+                new DBWrite(this).execute("changeLessonToUnlocked", articleOfCommerce);
                 return true;
             }
         }
@@ -293,15 +288,15 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
      *
      * @author Tim
      */
-    private class MyListAdapter_lection extends ArrayAdapter<String> {
-        public MyListAdapter_lection() {
+    private class MyListAdapter_lesson extends ArrayAdapter<String> {
+        public MyListAdapter_lesson() {
             //here is defined what layout the listView uses for a single entry
-            super(getApplicationContext(), R.layout.layout_settings, lectionStringArray);
+            super(getApplicationContext(), R.layout.layout_settings, lessonStringArray);
 
         }
 
         /**
-         * Here ist defined how the XML-Layout is filed  by the data stored in the lectionStringArray.
+         * Here ist defined how the XML-Layout is filed  by the data stored in the lessonStringArray.
          *
          * @param position    position in the array used
          * @param convertView
@@ -314,37 +309,37 @@ public class LectionListActivity extends FoxITActivity implements AdapterView.On
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             if (itemView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.layout_lection_listentry, parent, false);
+                itemView = getLayoutInflater().inflate(R.layout.layout_lesson_listentry, parent, false);
             }
 
-            LectionObject lection = lectionObjectList.get(position);
-            //new LectionObject(lectionStringArray[position]);
+            LessonObject lesson = lessonObjectList.get(position);
+            //new LessonObject(lessonStringArray[position]);
 
-            //setting the text for lectionName
-            TextView lectionName = (TextView) itemView.findViewById(R.id.text_lection_name);
-            lectionName.setText(lection.getLectionName());
-            if (lection.getProcessingStatus() == 0) {
-                lectionName.setTextColor(Color.GRAY);
+            //setting the text for lessonName
+            TextView lessonName = (TextView) itemView.findViewById(R.id.text_lesson_name);
+            lessonName.setText(lesson.getLessonName());
+            if (lesson.getProcessingStatus() == 0) {
+                lessonName.setTextColor(Color.GRAY);
             } else {
-                lectionName.setTextColor(Color.BLACK);
+                lessonName.setTextColor(Color.BLACK);
             }
 
 
             //setting the stars
-            ImageView solvedIcon = (ImageView) itemView.findViewById(R.id.image_lection_solved);
-            if (lection.getNextfreetime() > System.currentTimeMillis()) {
+            ImageView solvedIcon = (ImageView) itemView.findViewById(R.id.image_lesson_solved);
+            if (lesson.getNextfreetime() > System.currentTimeMillis()) {
                 solvedIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_hourglass_empty_black_48dp));
             } else {
 
-                solvedIcon.setImageDrawable(getIcon(lection.getProcessingStatus()));
+                solvedIcon.setImageDrawable(getIcon(lesson.getProcessingStatus()));
             }
             return itemView;
         }
 
         /**
-         * returns the fitting starIcon for a lections state of solving
+         * returns the fitting starIcon for a lessons state of solving
          *
-         * @param processingStatus the lections processingStatus accessible with "processingStatus"
+         * @param processingStatus the lessons processingStatus accessible with "processingStatus"
          * @return
          * @author Tim
          */

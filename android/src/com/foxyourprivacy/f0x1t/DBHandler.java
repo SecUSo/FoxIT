@@ -32,7 +32,7 @@ import java.util.TimeZone;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    public static final String TABLE_PERSONAL = "personalstuff";
+    public static final String TABLE_USERDATA = "userdata";
     public static final String COLUMN_KEY = "key";
     //file-name
     public static final String DB_NAME = "rawdata.db";
@@ -45,27 +45,28 @@ public class DBHandler extends SQLiteOpenHelper {
     //type: for readout - 0=String, 1=BOOLEAN, 2=int
     public static final String COLUMN_TYPE = "type";
     //DB-Version is updated, when changes in structur apply
-    private static final int DB_VERSION = 28;
+    private static final int DB_VERSION = 30;
     //table-names
     private static final String TABLE_APPS = "apps";
-    private static final String TABLE_LESSIONS = "lessions";
+    private static final String TABLE_LESSONS = "lessons";
     private static final String TABLE_CLASSES = "classes";
     private static final String TABLE_PERMISSIONS = "permissions";
     private static final String TABLE_SETTINGS = "settings";
     private static final String COLUMN_GOODNAME = "propername";
     private static final String COLUMN_SETTINGDESCRIPTION = "sdescription";
     private static final String COLUMN_LATEST = "latestvalue";
-    private static final String COLUMN_LECTURENAME = "name";
-    private static final String COLUMN_CONTENT = "content";
-    private static final String COLUMN_COURSE = "course";
+    private static final String COLUMN_LESSONNAME = "name";
+    private static final String COLUMN_SLIDES = "slides";
+    private static final String COLUMN_CLASS = "class";
     //0=not available yet; 1=not yet read; 2=not yet finished; 3=finished
     private static final String COLUMN_STATUS = "status";
     private static final String COLUMN_DELAY = "delay";
     private static final String COLUMN_FREETIME = "freeat";
-    private static final String COLUMN_LECTURETYPE = "ltype";
+    private static final String COLUMN_LESSONTYPE = "ltype";
     private static final String COLUMN_EICHELN = "eicheln";
-    private static final String COLUMN_COURSENAME = "course_name";
-    private static final String COLUMN_COURSEDESCRIPTION = "description";
+    private static final String COLUMN_POSITION = "position";
+    private static final String COLUMN_CLASSNAME = "class_name";
+    private static final String COLUMN_CLASSDESCRIPTION = "description";
     private static final String COLUMN_PERMISSIONNAME = "pname";
     private static final String COLUMN_PERMISSIONDESCRIPTION = "pdescription";
     private static final String COLUMN_PERMISSIONNICENAME = "propername";
@@ -108,19 +109,21 @@ public class DBHandler extends SQLiteOpenHelper {
                 ");";
         db.execSQL(query2);
         String query3 = "CREATE TABLE " + TABLE_CLASSES + "(" +
-                COLUMN_COURSENAME + " TEXT PRIMARY KEY, " +
-                COLUMN_COURSEDESCRIPTION + " TEXT " +
+                COLUMN_CLASSNAME + " TEXT PRIMARY KEY, " +
+                COLUMN_CLASSDESCRIPTION + " TEXT " +
                 ");";
         db.execSQL(query3);
-        String query4 = "CREATE TABLE " + TABLE_LESSIONS + "(" +
-                COLUMN_LECTURENAME + " TEXT PRIMARY KEY, " +
+        String query4 = "CREATE TABLE " + TABLE_LESSONS + "(" +
+                COLUMN_LESSONNAME + " TEXT, " +
                 COLUMN_STATUS + " INTEGER, " +
-                COLUMN_COURSE + " TEXT, " +
-                COLUMN_CONTENT + " TEXT, " +
+                COLUMN_CLASS + " TEXT, " +
+                COLUMN_SLIDES + " TEXT, " +
                 COLUMN_DELAY + " INTEGER, " +
-                COLUMN_LECTURETYPE + " INTEGER, " +
+                COLUMN_LESSONTYPE + " TEXT, " +
                 COLUMN_FREETIME + " INTEGER, " +
-                COLUMN_EICHELN + " INTEGER" +
+                COLUMN_EICHELN + " INTEGER, " +
+                COLUMN_POSITION + " INTEGER, " +
+                "PRIMARY KEY (" + COLUMN_LESSONNAME + ", " + COLUMN_CLASS + ")" +
                 ");";
         db.execSQL(query4);
         String query5 = "CREATE TABLE " + TABLE_PERMISSIONS + "(" +
@@ -130,7 +133,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_PERMISSIONLEVEL + " INTEGER DEFAULT -1" +
                 ");";
         db.execSQL(query5);
-        String query6 = "CREATE TABLE " + TABLE_PERSONAL + "(" +
+        String query6 = "CREATE TABLE " + TABLE_USERDATA + "(" +
                 COLUMN_KEY + " TEXT PRIMARY KEY, " +
                 COLUMN_VALUE + " TEXT" +
                 ");";
@@ -151,28 +154,12 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_APPS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLASSES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LESSIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LESSONS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERMISSIONS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONAL);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERDATA);
         onCreate(db);
     }
 
-    /**
-     * function for adding setting-parameters to the rawdata-table
-     *
-     * @param name  name (primary key) of the setting
-     * @param type  data type of the setting-value (generally saved as TEXT, but for reading purposes)
-     * @param value String to save as value of the setting
-     */
-    public void addParameter(String name, int type, String value) {
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_SETTING, name);
-        values.put(COLUMN_INITIAL, value);
-        values.put(COLUMN_TYPE, type);
-        SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_SETTINGS, null, values);
-        db.close();
-    }
 
     /**
      * Inserts a whole Array of Settings to the DB if it's empty or creates a new Column with the
@@ -361,30 +348,30 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         long time = System.currentTimeMillis();
-        // db.execSQL("DROP TABLE IF EXISTS "+TABLE_LESSIONS);
-        for (String[] lessionArray : theLessions) {
+        // db.execSQL("DROP TABLE IF EXISTS "+TABLE_LESSONS);
+        for (String[] lessonArray : theLessions) {
             try{
-                String lessionString = createLessionString(lessionArray).replace("'", "''");
-                if (checkIfInside(db, TABLE_LESSIONS, COLUMN_LECTURENAME + " = \'" + escapeQuote(lessionArray[1]) + "\'")) {
-                    db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_CONTENT + " = \'" + lessionString + "\', " + COLUMN_COURSE + " = \'" + escapeQuote(lessionArray[0]) + "\', " +
-                            "\'" + COLUMN_DELAY + "\' = \'" + lessionArray[2] + "\', \'" + COLUMN_LECTURETYPE + "\' = \'" + lessionArray[5] + "\', \'" + COLUMN_EICHELN + "\' = \'" + lessionArray[4] +
-                            "\' WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lessionArray[1]) + "\';");
+                String slidearray = createSlidesString(lessonArray).replace("'", "''");
+                Log.d("DBHANDLER", slidearray);
+                if (checkIfInside(db, TABLE_LESSONS, COLUMN_LESSONNAME + " = \'" + escapeQuote(lessonArray[1]) + "\' AND " + COLUMN_CLASS + "= \'" + escapeQuote(lessonArray[0]) + "\'")) {
+                    db.execSQL("UPDATE " + TABLE_LESSONS + " SET " + COLUMN_SLIDES + " = \'" + slidearray + "\', " + COLUMN_CLASS + " = \'" + escapeQuote(lessonArray[0]) + "\', " +
+                            "\'" + COLUMN_DELAY + "\' = \'" + lessonArray[3] + "\', \'" + COLUMN_LESSONTYPE + "\' = \'" + lessonArray[2] + "\', \'" + COLUMN_EICHELN + "\' = \'" + lessonArray[4] +
+                            "\', \'" + COLUMN_POSITION + "\' = \'" + lessonArray[5] + "\' WHERE " + COLUMN_LESSONNAME + " = \'" + escapeQuote(lessonArray[1]) + "\' AND " + COLUMN_CLASS + "= \'" + escapeQuote(lessonArray[0]) + "\';");
                 } else {
-                    db.execSQL("INSERT INTO " + TABLE_LESSIONS + " VALUES(\'" + escapeQuote(lessionArray[1]) + "\', \'" + lessionArray[3] + "\', \'" + escapeQuote(lessionArray[0]) + "\', \'" + lessionString + "\', \'" + lessionArray[2] + "\', \'" + lessionArray[5] + "\', \'" + time + "\', \'" + lessionArray[4] + "\');");
+                    db.execSQL("INSERT INTO " + TABLE_LESSONS + " VALUES(\'" + escapeQuote(lessonArray[1]) + "\', \'" + lessonArray[6] + "\', \'" + escapeQuote(lessonArray[0]) + "\', \'" + slidearray + "\', \'" + lessonArray[3] + "\', \'" + lessonArray[2] + "\', \'" + time + "\', \'" + lessonArray[4] + "\', \'" + lessonArray[5] + "\');");
                 }
             }catch (IndexOutOfBoundsException ioobe){
-                if (lessionArray.length > 1)
-                    Log.e("DBHandler", "Fehler in Lektion: " + lessionArray[1]);
-                else if (lessionArray.length == 1)
-                    Log.e("DBHandler", "Fehler in Lektion: " + lessionArray[0]);
+                if (lessonArray.length > 1)
+                    Log.e("DBHandler", "Fehler in Lektion: " + lessonArray[1]);
+                else if (lessonArray.length == 1)
+                    Log.e("DBHandler", "Fehler in Lektion: " + lessonArray[0]);
                 else
-                    Log.e("DBHandler", "Fehler in Lektion, Länge des lessionArrays: " + lessionArray.length);
+                    Log.e("DBHandler", "Fehler in Lektion, Länge des lessionArrays: " + lessonArray.length);
                 ioobe.printStackTrace();
             } catch (SQLiteException sqle) {
-                Log.d("DBH.updateLessons", "There was an SQLiteExcption. Please review escaping of relevant fields. Lession was: " + lessionArray[1] + " in Class " + lessionArray[0]);
+                Log.d("DBH.updateLessons", "There was an SQLiteExcption. Please review escaping of relevant fields. Lession was: " + lessonArray[1] + " in Class " + lessonArray[0]);
                 sqle.printStackTrace();
             }
-
         }
         db.close();
 
@@ -406,12 +393,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //safety-measure: inserting all classes that are specified from a lession in the DB,
         // so that every lession is reachable
-        Cursor cursor = db.rawQuery("SELECT DISTINCT " + COLUMN_COURSE + " FROM " + TABLE_LESSIONS + ";", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT " + COLUMN_CLASS + " FROM " + TABLE_LESSONS + ";", null);
         cursor.moveToFirst();
         //repeat over all rows
         while (!cursor.isAfterLast()) {
-            if (cursor.getString(cursor.getColumnIndex(COLUMN_COURSE)) != null) {
-                db.execSQL("INSERT OR IGNORE INTO " + TABLE_CLASSES + " VALUES(\'" + escapeQuote(cursor.getString(cursor.getColumnIndex(COLUMN_COURSE))) + "\', \'keine Beschreibung vorhanden\');");
+            if (cursor.getString(cursor.getColumnIndex(COLUMN_CLASS)) != null) {
+                db.execSQL("INSERT OR IGNORE INTO " + TABLE_CLASSES + " VALUES(\'" + escapeQuote(cursor.getString(cursor.getColumnIndex(COLUMN_CLASS))) + "\', \'keine Beschreibung vorhanden\');");
             }
             cursor.moveToNext();
         }
@@ -431,8 +418,8 @@ public class DBHandler extends SQLiteOpenHelper {
         ArrayList<ClassObject> result = new ArrayList<ClassObject>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            result.add(new ClassObject(cursor.getString(cursor.getColumnIndex(COLUMN_COURSENAME)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_COURSEDESCRIPTION))));
+            result.add(new ClassObject(cursor.getString(cursor.getColumnIndex(COLUMN_CLASSNAME)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_CLASSDESCRIPTION))));
             cursor.moveToNext();
         }
         cursor.close();
@@ -442,10 +429,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public String getNumberOfSolvedLessons(String className) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor unlocked = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSIONS + " WHERE "
-                + COLUMN_COURSE + "=\'" + className + "\' AND " + COLUMN_STATUS + " IS NOT -99", null);
-        Cursor solved = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSIONS + " WHERE "
-                + COLUMN_COURSE + "=\'" + className + "\' AND " + COLUMN_STATUS + " IS 3", null);
+        Cursor unlocked = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSONS + " WHERE "
+                + COLUMN_CLASS + "=\'" + className + "\' AND " + COLUMN_STATUS + " IS NOT -99", null);
+        Cursor solved = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSONS + " WHERE "
+                + COLUMN_CLASS + "=\'" + className + "\' AND " + COLUMN_STATUS + " IS 3", null);
         if (unlocked != null && solved != null) {
             unlocked.moveToFirst();
             solved.moveToFirst();
@@ -461,56 +448,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    /**
-     * creates the needed String for the internal lession-management from the CSV-input
-     *
-     * @param lessionArray Array with content of one lession
-     * @return the needed String
-     */
-    private String createLessionString(String[] lessionArray) throws IndexOutOfBoundsException{
-        //Log.d("createLessionString", lessionArray[1] + lessionArray[0]);
+    private String createSlidesString(String[] slides) {
         StringBuilder sb = new StringBuilder();
-        sb.append("[name~" + lessionArray[1] + "]");
-        //iterates over the parts of the Array which contains the actual slides
-        for (int i = 6; i < lessionArray.length; i++) {
-            //Log.d("slide:", lessionArray[i]);
-            String[] slides = lessionArray[i].split("_");
-            slides[0] = slides[0].toLowerCase();
-            sb.append("[" + (i - 6) + "~type~" + slides[0] + "\'");
-            //puts the input in the desired form depending on the type of slide it is
-            switch (slides[0]) {
-                case "text":
-                    sb.append("text~" + slides[1]);
-                    break;
-                case "quiz4":
-                    sb.append("points~" + slides[1] + "\'text~" + slides[2] + "\'answer1text~" + slides[3] + "\'answer1solution~" +
-                            slides[4] + "\'answer2text~" + slides[5] + "\'answer2solution~" +
-                            slides[6] + "\'answer3text~" + slides[7] + "\'answer3solution~" +
-                            slides[8] + "\'answer4text~" + slides[9] + "\'answer4solution~" +
-                            slides[10]);
-                    break;
-                case "button":
-                    sb.append("text~" + slides[1] + "\'buttonText~" + slides[2] + "\'method~" + slides[3] + "\'methodParameter~" + slides[4]);
-                    break;
-                case "question":
-                    sb.append("text~" + slides[1] + "\'buttonText~" + slides[2] + "\'method~" + slides[3] + "\'methodParameter~" + slides[4] + "\'buttonText2~" + slides[5] + "\'method2~" + slides[6] + "\'methodParameter2~" + slides[7]);
-                    break;
-                case "certificate":
-                    sb.append("successText~" + slides[1] + "\'failureText~" + slides[2] + "\'pointsNeeded~" + slides[3]);
-                    break;
-                default:
-                    sb.append("text~" + slides[1]);
-            }
-            //appending the next and back functions, if it is found
-            if (lessionArray[i].contains("next")) {
-                sb.append("\'next~" + lessionArray[i].substring(lessionArray[i].lastIndexOf("next") + 4, lessionArray[i].lastIndexOf("next") + 5));
-            }
-            if (lessionArray[i].contains("back")) {
-                sb.append("\'back~" + lessionArray[i].substring(lessionArray[i].lastIndexOf("back") + 4, lessionArray[i].lastIndexOf("back") + 5));
-            }
-            sb.append("]");
+        for (int i = 7; i < slides.length; i++) {
+            sb.append(slides[i]);
+            sb.append(";");
         }
-
         return sb.toString();
     }
 
@@ -522,7 +465,7 @@ public class DBHandler extends SQLiteOpenHelper {
      * @return true/false
      */
     public Boolean checkIfInside(SQLiteDatabase db, String table, String whereclause) {
-        Cursor cursor = db.rawQuery("SELECT * FROM " + table + " WHERE " + whereclause + ";", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + table + " WHERE " + whereclause + "", null);
         if (cursor.getCount() <= 0) {
             cursor.close();
             return false;
@@ -532,27 +475,28 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * gives all Lections that belong to the specified class and are activated
+     * gives all Lessons that belong to the specified class and are activated
      *
-     * @param courseName identifier of the class
-     * @return ArrayList of LectionObjects
+     * @param className identifier of the class
+     * @return ArrayList of LessonObjects
      * @author Noah
      */
-    public ArrayList<LectionObject> getLectionsFromDB(String courseName) {
+    public ArrayList<LessonObject> getLessonsFromDB(String className) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_LESSIONS + " WHERE "
-                + COLUMN_COURSE + "=\'" + courseName + "\' AND " + COLUMN_STATUS + " IS NOT -99", null);
-        ArrayList<LectionObject> result = new ArrayList<LectionObject>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_LESSONS + " WHERE "
+                + COLUMN_CLASS + "=\'" + className + "\' AND " + COLUMN_STATUS + " IS NOT -99", null);
+        ArrayList<LessonObject> result = new ArrayList<LessonObject>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            result.add(new LectionObject(
-                    cursor.getString(cursor.getColumnIndex(COLUMN_LECTURENAME)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_CONTENT)),
-                    cursor.getInt(cursor.getColumnIndex(COLUMN_LECTURETYPE)),
+            result.add(new LessonObject(
+                    cursor.getString(cursor.getColumnIndex(COLUMN_LESSONNAME)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_SLIDES)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_LESSONTYPE)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_DELAY)),
                     cursor.getLong(cursor.getColumnIndex(COLUMN_FREETIME)),
                     cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)),
-                    cursor.getInt(cursor.getColumnIndex(COLUMN_EICHELN))));
+                    cursor.getInt(cursor.getColumnIndex(COLUMN_EICHELN)),
+                    cursor.getInt(cursor.getColumnIndex(COLUMN_POSITION))));
             cursor.moveToNext();
         }
         cursor.close();
@@ -657,54 +601,54 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * change the lection's status from unread (1) to read (2)
+     * change the lesson's status from unread (1) to read (2)
      *
-     * @param lectionName name of the lection to be changed
+     * @param lessonName name of the lesson to be changed
      */
-    public void changeLectionToRead(String lectionName) {
+    public void changeLessonToRead(String lessonName, String className) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 2 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lectionName) + "\';");
+        db.execSQL("UPDATE " + TABLE_LESSONS + " SET " + COLUMN_STATUS + " = 2 WHERE " + COLUMN_LESSONNAME + " = \'" + escapeQuote(lessonName) + "\' AND " + COLUMN_CLASS + " = \'" + escapeQuote(className) + "\';");
         db.close();
     }
 
     /**
-     * change the lection's status from unread (1) or read (2) to solved (3)
+     * change the lesson's status from unread (1) or read (2) to solved (3)
      *
-     * @param lectionName name of the lection to be changed
+     * @param lessonName name of the lesson to be changed
      */
-    public void changeLectionToSolved(String lectionName) {
+    public void changeLessonToSolved(String lessonName) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 3 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lectionName) + "\';");
-        db.close();
-
-    }
-
-    /**
-     * change the lection's status from unread (1) or read (2) to solved (3)
-     *
-     * @param lectionName name of the lection to be changed
-     */
-    public void changeEvaluationToSolved(String lectionName) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = -98 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lectionName) + "\';");
+        db.execSQL("UPDATE " + TABLE_LESSONS + " SET " + COLUMN_STATUS + " = 3 WHERE " + COLUMN_LESSONNAME + " = \'" + escapeQuote(lessonName) + "\';");
         db.close();
 
     }
 
     /**
-     * try to change the lection's status from locked (0) to unlocked (1) and return true on
-     * success or false if the lection could not been found
+     * change the lesson's status from unread (1) or read (2) to solved (3)
      *
-     * @param lectionName name of the lection to be changed
-     * @return true/false wether the lection was found
+     * @param lessonName name of the lesson to be changed
      */
-    public boolean changeLectionToUnlocked(String lectionName) {
+    public void changeEvaluationToSolved(String lessonName) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_LESSIONS + " WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';", null);
+        db.execSQL("UPDATE " + TABLE_LESSONS + " SET " + COLUMN_STATUS + " = -98 WHERE " + COLUMN_LESSONNAME + " = \'" + escapeQuote(lessonName) + "\';");
+        db.close();
+
+    }
+
+    /**
+     * try to change the lesson's status from locked (0) to unlocked (1) and return true on
+     * success or false if the lesson could not been found
+     *
+     * @param lessonName name of the lesson to be changed
+     * @return true/false wether the lesson was found
+     */
+    public boolean changeLessonToUnlocked(String lessonName) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_LESSONS + " WHERE " + COLUMN_LESSONNAME + " = \'" + lessonName + "\';", null);
         if (cursor != null) {
             cursor.moveToFirst();
             if (cursor.getCount() > 0) {
-                db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 1 WHERE " + COLUMN_LECTURENAME + " = \'" + lectionName + "\';");
+                db.execSQL("UPDATE " + TABLE_LESSONS + " SET " + COLUMN_STATUS + " = 1 WHERE " + COLUMN_LESSONNAME + " = \'" + lessonName + "\';");
                 cursor.close();
                 db.close();
                 return true;
@@ -715,14 +659,14 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * set a lections nextFreeTime according to the input
+     * set a lessons nextFreeTime according to the input
      *
-     * @param lectionName  name of the lection to be changed
-     * @param nextFreeTime the time the lection is available again in ms
+     * @param lessonName  name of the lesson to be changed
+     * @param nextFreeTime the time the lesson is available again in ms
      */
-    public void setLectionNextFreeTime(String lectionName, long nextFreeTime) {
+    public void setLessonNextFreeTime(String lessonName, String className, long nextFreeTime) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_FREETIME + " = \'" + nextFreeTime + "\' WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(lectionName) + "\';");
+        db.execSQL("UPDATE " + TABLE_LESSONS + " SET " + COLUMN_FREETIME + " = \'" + nextFreeTime + "\' WHERE " + COLUMN_LESSONNAME + " = \'" + escapeQuote(lessonName) + "\' AND " + COLUMN_CLASS + " = \'" + className + "\';");
         db.close();
     }
 
@@ -831,7 +775,7 @@ public class DBHandler extends SQLiteOpenHelper {
         for (String key : keys) {
             if (hashMap.get(key) != null) value = hashMap.get(key).replaceAll("'", "''");
             else value = "null";
-            db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERSONAL + " VALUES(\'" + key.replaceAll("'", "\'") + "\', \'" + value + "\');");
+            db.execSQL("INSERT OR REPLACE INTO " + TABLE_USERDATA + " VALUES(\'" + key.replaceAll("'", "\'") + "\', \'" + value + "\');");
         }
         db.close();
     }
@@ -839,7 +783,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public HashMap<String, String> getIndividualData() {
         SQLiteDatabase db = getWritableDatabase();
         HashMap<String, String> result = new HashMap<>();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PERSONAL + " WHERE 1", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USERDATA + " WHERE 1", null);
         if (cursor != null) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -855,19 +799,19 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void changeIndividualValue(String key, String value) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_PERSONAL + " SET " + COLUMN_VALUE + " = \'" + escapeQuote(value) + "\' WHERE " + COLUMN_KEY + " = \'" + key + "\';");
+        db.execSQL("UPDATE " + TABLE_USERDATA + " SET " + COLUMN_VALUE + " = \'" + escapeQuote(value) + "\' WHERE " + COLUMN_KEY + " = \'" + key + "\';");
         db.close();
     }
 
     public void insertIndividualValue(String key, String value) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT OR REPLACE INTO " + TABLE_PERSONAL + " VALUES(\'" + key + "\', \'" + escapeQuote(value) + "\');");
+        db.execSQL("INSERT OR REPLACE INTO " + TABLE_USERDATA + " VALUES(\'" + key + "\', \'" + escapeQuote(value) + "\');");
         db.close();
     }
 
     public String getIndividualValue(String key) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + COLUMN_VALUE + " FROM " + TABLE_PERSONAL + " WHERE " + COLUMN_KEY + " = \'" + key + "\';", null);
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_VALUE + " FROM " + TABLE_USERDATA + " WHERE " + COLUMN_KEY + " = \'" + key + "\';", null);
         if (cursor == null) {
             db.close();
             return "notfound";
@@ -886,25 +830,25 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void clearAppsFromVK() {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_PERSONAL, COLUMN_KEY + " LIKE \'app:%\'", null);
+        db.delete(TABLE_USERDATA, COLUMN_KEY + " LIKE \'app:%\'", null);
         db.close();
     }
 
     public void clearDAppsFromVK() {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_PERSONAL, COLUMN_KEY + " LIKE \'dap:%\'", null);
+        db.delete(TABLE_USERDATA, COLUMN_KEY + " LIKE \'dap:%\'", null);
         db.close();
     }
 
     public String unlockDaily() {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + COLUMN_LECTURENAME + " FROM " + TABLE_LESSIONS + " WHERE " + COLUMN_STATUS + " IS -99", null);
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_LESSONNAME + " FROM " + TABLE_LESSONS + " WHERE " + COLUMN_STATUS + " IS -99", null);
         if (cursor != null) {
             cursor.moveToFirst();
 
             String name = cursor.getString(0);
             cursor.close();
-            db.execSQL("UPDATE " + TABLE_LESSIONS + " SET " + COLUMN_STATUS + " = 1 WHERE " + COLUMN_LECTURENAME + " = \'" + escapeQuote(name) + "\';");
+            db.execSQL("UPDATE " + TABLE_LESSONS + " SET " + COLUMN_STATUS + " = 1 WHERE " + COLUMN_LESSONNAME + " = \'" + escapeQuote(name) + "\';");
             return name;
         }
         return "There is no new Lession";
@@ -944,7 +888,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public int howManyDailiesUnlocked() {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor count = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSIONS + " WHERE " + COLUMN_COURSE + " IS \'Daily Lessons\' AND " + COLUMN_STATUS + " IS NOT -99;", null);
+        Cursor count = db.rawQuery("SELECT COUNT(*) AS count FROM " + TABLE_LESSONS + " WHERE " + COLUMN_CLASS + " IS \'Daily Lessons\' AND " + COLUMN_STATUS + " IS NOT -99;", null);
         if (count != null) {
             count.moveToFirst();
             int result = count.getInt(0);

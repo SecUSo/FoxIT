@@ -13,17 +13,17 @@ import android.widget.Toast;
 
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
-import com.foxyourprivacy.f0x1t.activities.LectionListActivity;
+import com.foxyourprivacy.f0x1t.activities.LessonListActivity;
 import com.foxyourprivacy.f0x1t.lessonmethods.Method;
 import com.foxyourprivacy.f0x1t.lessonmethods.MethodFactory;
 
 /**
  * Created by Tim on 25.06.2016.
  */
-public class TradeRequestFragment_lection extends Fragment {
+public class TradeRequestFragment_lesson extends Fragment {
     View view; //the fragments view, useful for usages outside of onCreateView
-    int price = 1;  //the token amount to unlock this lection
-    String articleOfCommerce; //the lection to be unlocked
+    int price = 1;  //the token amount to unlock this lesson
+    String articleOfCommerce; //the lesson to be unlocked
     Fragment thisFragment;
 
     /**
@@ -43,7 +43,7 @@ public class TradeRequestFragment_lection extends Fragment {
      * @author Tim
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        view = inflater.inflate(R.layout.fragment_trade_request_lection, container, false);
+        view = inflater.inflate(R.layout.fragment_trade_request_lesson, container, false);
         thisFragment = this;
 
         LinearLayout button = (LinearLayout) view.findViewById(R.id.whole_frame);
@@ -69,10 +69,10 @@ public class TradeRequestFragment_lection extends Fragment {
                 } else {
                     boolean tradeSuccessful = false;
                     Activity activity = getActivity();
-                    //call the purchase callClassMethod of LectionListActivity
-                    if (activity instanceof LectionListActivity) {
-                        LectionListActivity lectionListActivity = (LectionListActivity) activity;
-                        tradeSuccessful = lectionListActivity.purchase(articleOfCommerce);
+                    //call the purchase callClassMethod of LessonListActivity
+                    if (activity instanceof LessonListActivity) {
+                        LessonListActivity lessonListActivity = (LessonListActivity) activity;
+                        tradeSuccessful = lessonListActivity.purchase(articleOfCommerce);
                     }
 
                     //if the trade was successful change the tokenCount

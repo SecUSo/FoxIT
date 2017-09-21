@@ -25,6 +25,7 @@
             android:layout_height="75dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:background="#00ffff00"
             android:contentDescription="4. von 4 Punkten"
             android:src="@mipmap/newdots4">
 
@@ -41,7 +42,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/LectionDescription"
+            android:id="@+id/LessonDescription"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/AnalyseText"

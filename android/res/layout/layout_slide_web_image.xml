@@ -14,12 +14,12 @@
             android:id="@+id/image_web"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
             android:contentDescription="große Eichel auf weißem Grund"
-            app:srcCompat="@mipmap/eichel"
-            android:layout_gravity="center_vertical"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            app:srcCompat="@mipmap/eichel" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -22,8 +22,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:minHeight="450dp"
-                android:clickable="true"></ListView>
+                android:clickable="true"
+                android:minHeight="450dp"></ListView>
 
         </RelativeLayout>
 

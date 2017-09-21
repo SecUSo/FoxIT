@@ -1,4 +1,5 @@
-package com.foxyourprivacy.f0x1t;
+/*
+package com.foxyourprivacy.f0x1t.slides;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +9,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.foxyourprivacy.f0x1t.activities.LectionActivity;
+import com.foxyourprivacy.f0x1t.R;
+import com.foxyourprivacy.f0x1t.ValueKeeper;
+import com.foxyourprivacy.f0x1t.activities.LessonActivity;
 import com.foxyourprivacy.f0x1t.slides.EvaluationSlide;
 
+*/
 /**
  * Created by Ich on 25.06.2016.
- */
+ *//*
+
 public class ScaleEvaluationSlide extends EvaluationSlide {
     View view;
 
@@ -24,9 +29,11 @@ public class ScaleEvaluationSlide extends EvaluationSlide {
     String points = "0";
 
 
-    /**
+    */
+/**
      * @author Tim
-     */
+ *//*
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         view = inflater.inflate(R.layout.layout_slide_question_scale, container, false);
@@ -37,9 +44,11 @@ public class ScaleEvaluationSlide extends EvaluationSlide {
 
     @Override
     public
-    /**
+    */
+/**
      * @author Tim
-     */
+ *//*
+
     void fillLayout() {
         TextView text = (TextView) view.findViewById(R.id.question_text);
         text.setText(parameter.get("text"));
@@ -52,9 +61,11 @@ public class ScaleEvaluationSlide extends EvaluationSlide {
     }
 
     @Override
-    /**checks if the answer is right
+    */
+/**checks if the answer is right
      * @author Tim
-     */
+ *//*
+
     public boolean evaluation() {
         RadioGroup radioButtons = (RadioGroup) view.findViewById(R.id.radio_group);
         int radioButtonID = radioButtons.getCheckedRadioButtonId();
@@ -66,10 +77,10 @@ public class ScaleEvaluationSlide extends EvaluationSlide {
             return false;
         } else {
             ValueKeeper v = ValueKeeper.getInstance();
-            LectionActivity l = (LectionActivity) getActivity();
+            LessonActivity l = (LessonActivity) getActivity();
             l.addEvaluationResult(questionText, Integer.toString(idx));
             evaluated = true;
-            nextSlide = null;
+            nextSlide = -99;
             return true;
         }
 
@@ -77,4 +88,4 @@ public class ScaleEvaluationSlide extends EvaluationSlide {
     }
 
 
-}
+}*/

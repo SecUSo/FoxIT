@@ -5,52 +5,52 @@
     android:layout_height="match_parent">
 
     <ProgressBar
+        android:id="@+id/analysisProgressBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/analysisProgressBar"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/log"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp"
         android:background="@color/colorPrimaryDark"
         android:indeterminate="false"
-        android:indeterminateDuration="@android:integer/config_mediumAnimTime"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/log" />
+        android:indeterminateDuration="@android:integer/config_mediumAnimTime" />
 
     <TextView
+        android:id="@+id/progressComment"
+        style="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Einstellungen analysieren..."
-        android:id="@+id/progressComment"
-        android:layout_below="@+id/analysisProgressBar"
-        android:layout_alignRight="@+id/analysisProgressBar"
         android:layout_alignEnd="@+id/analysisProgressBar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
-        style="@style/Theme.AppCompat.Light.NoActionBar"
+        android:layout_alignRight="@+id/analysisProgressBar"
+        android:layout_below="@+id/analysisProgressBar"
         android:hint="Loading..."
+        android:text="Einstellungen analysieren..."
         android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
 
-        android:typeface="monospace"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:typeface="monospace" />
 
     <include layout="@layout/toolbar_actionbar" />
 
     <TextView
-        android:text="EIGENSCHAFTEN"
+        android:id="@+id/log"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:id="@+id/log"
-        android:textAlignment="viewStart"
-        android:textStyle="normal|bold"
-        android:scrollbars="vertical"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:gravity="bottom"
         android:layout_marginBottom="7dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="160dp" />
+        android:layout_marginTop="160dp"
+        android:gravity="bottom"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:text="EIGENSCHAFTEN"
+        android:textAlignment="viewStart"
+        android:textStyle="normal|bold" />
 
 </RelativeLayout>

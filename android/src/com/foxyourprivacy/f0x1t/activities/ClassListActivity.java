@@ -2,6 +2,7 @@ package com.foxyourprivacy.f0x1t.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 public class ClassListActivity extends FoxITActivity implements AdapterView.OnItemClickListener {
 
     public ArrayList<ClassObject> classObjectList = new ArrayList<>();
+    Parcelable listState;
+    ListView theListView;
 
 
     Toolbar toolbar;
@@ -65,6 +68,12 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
 
         dbHandler.close();
 
+        theListView = (ListView) findViewById(R.id.headline_frame);
+        //creates the listView
+        ArrayAdapter<ClassObject> adapter = new MyListAdapter_class();
+        theListView.setAdapter(adapter);
+        theListView.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -93,14 +102,14 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
 
 
     /**
-     * onItemClick the Activity is switched to lectionActivity
+     * onItemClick the Activity is switched to lessonActivity
      *
      * @author Tim
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getApplicationContext(), LectionListActivity.class);
-        //to inform lectionActivity which lection is to be displayed
+        Intent intent = new Intent(getApplicationContext(), LessonListActivity.class);
+        //to inform lessonActivity which lesson is to be displayed
         intent.putExtra("description", classObjectList.get(position).getDescriptionText());
         intent.putExtra("name", classObjectList.get(position).getName());
         intent.putExtra("icon", getClassIcon(classObjectList.get(position).getName()));
@@ -113,12 +122,25 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
     @Override
     public void onResume() {
         super.onResume();
+        if (listState != null) {
+            theListView.onRestoreInstanceState(listState);
+        }
+        listState = null;
         //TODO: sollte vielleicht auskommentiert werden oder verändert, so dass die Liste beim zurück-gehen nicht immer wieder von oben angezeigt wird.
-        ListView lectionList = (ListView) findViewById(R.id.headline_frame);
-        //creates the listView
-        ArrayAdapter<ClassObject> adapter = new MyListAdapter_class();
-        lectionList.setAdapter(adapter);
-        lectionList.setOnItemClickListener(this);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        listState = savedInstanceState.getParcelable("liststate");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        listState = theListView.onSaveInstanceState();
+        outState.putParcelable("liststate", listState);
     }
 
     private int getClassIcon(String className) {
@@ -153,6 +175,12 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         }
     }
 
+    @Override
+    public void onPause() {
+        listState = theListView.onSaveInstanceState();
+        super.onPause();
+    }
+
     /**
      * class to define the way the settings are displayed in the listView
      *
@@ -166,7 +194,7 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         }
 
         /**
-         * Here ist defined how the XML-Layout is filed  by the data stored in the lectionStringArray.
+         * Here ist defined how the XML-Layout is filed  by the data stored in the lessonStringArray.
          *
          * @param position    position in the array used
          * @param convertView
@@ -205,4 +233,5 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
 
 
     }
+
 }

@@ -33,14 +33,14 @@ public class DBWrite extends AsyncTask<Object, Void, Void> {
             dbHandler.updateClasses((ArrayList<String[]>) objects[1]);
         } else if (objects[0] == "updatePermissions") {
             dbHandler.updatePermissions((ArrayList<String[]>) objects[1]);
-        } else if (objects[0] == "changeLectionToRead") {
-            dbHandler.changeLectionToRead((String) objects[1]);
-        } else if (objects[0] == "changeLectionToSolved") {
-            dbHandler.changeLectionToSolved((String) objects[1]);
-        } else if (objects[0] == "changeLectionToUnlocked") {
-            dbHandler.changeLectionToUnlocked((String) objects[1]);
-        } else if (objects[0] == "setLectionNextFreeTime") {
-            dbHandler.setLectionNextFreeTime((String) objects[1], (long) objects[2]);
+        } else if (objects[0] == "changeLessonToRead") {
+            dbHandler.changeLessonToRead((String) objects[1], (String) objects[2]);
+        } else if (objects[0] == "changeLessonToSolved") {
+            dbHandler.changeLessonToSolved((String) objects[1]);
+        } else if (objects[0] == "changeLessonToUnlocked") {
+            dbHandler.changeLessonToUnlocked((String) objects[1]);
+        } else if (objects[0] == "setLessonNextFreeTime") {
+            dbHandler.setLessonNextFreeTime((String) objects[1], (String) objects[2], (long) objects[3]);
         } else if (objects[0] == "updateSettingDescriptions") {
             dbHandler.updateSettingDescriptions((ArrayList<String[]>) objects[1]);
         } else if (objects[0] == "insertIndividualData") {

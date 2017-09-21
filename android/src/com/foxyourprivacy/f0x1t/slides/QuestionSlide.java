@@ -1,19 +1,9 @@
 package com.foxyourprivacy.f0x1t.slides;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.foxyourprivacy.f0x1t.R;
-import com.foxyourprivacy.f0x1t.lessonmethods.Method;
-import com.foxyourprivacy.f0x1t.lessonmethods.MethodFactory;
-
 /**
  * Created by Ich on 25.06.2016.
  */
+/*
 public class QuestionSlide extends Slide {
     View view;
     //callClassMethod for the left button
@@ -21,11 +11,13 @@ public class QuestionSlide extends Slide {
     //callClassMethod for the right button
     Method methodRight;
 
-    /**
+    */
+/**
      * fills the layout by calling fillLayout
      *
      * @author Tim
-     */
+ *//*
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         view = inflater.inflate(R.layout.layout_slide_question, container, false);
@@ -38,9 +30,11 @@ public class QuestionSlide extends Slide {
 
     @Override
     public
-    /** fills the slide's layout
+    */
+/** fills the slide's layout
      * @author Tim
-     */
+ *//*
+
     void fillLayout() {
         //fetches the methods for the buttons
         MethodFactory methodFactory = new MethodFactory(getActivity());
@@ -82,4 +76,4 @@ public class QuestionSlide extends Slide {
 
     }
 
-}
+}*/

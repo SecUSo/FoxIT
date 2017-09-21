@@ -13,10 +13,10 @@
 
         <RelativeLayout
             android:id="@+id/trophy_frame"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#dad7b4"
-            app:layout_widthPercent="100%"
-            android:layout_width="match_parent">
+            app:layout_widthPercent="100%">
 
             <ImageView
                 android:id="@+id/grid_item_image"

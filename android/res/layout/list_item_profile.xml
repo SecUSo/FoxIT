@@ -6,14 +6,14 @@
 
 
     <TextView
+        android:id="@+id/text_fragment_name"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/text_fragment_name"
-        android:text=" "
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/image_app_icon"
-        android:layout_marginLeft="5dp" />
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
 </RelativeLayout>

@@ -26,7 +26,7 @@ public class Home extends FoxITActivity {
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        RelativeLayout lectionButton = (RelativeLayout) findViewById(R.id.firstLayout);
+        RelativeLayout lessonButton = (RelativeLayout) findViewById(R.id.firstLayout);
 
         RelativeLayout settingsButton = (RelativeLayout) findViewById(R.id.sixtLayout);
 
@@ -40,7 +40,7 @@ public class Home extends FoxITActivity {
         });
 
 
-        lectionButton.setOnClickListener(new View.OnClickListener() {
+        lessonButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -87,12 +87,13 @@ public class Home extends FoxITActivity {
         super.onStart();
         ValueKeeper v = ValueKeeper.getInstance();
         DBHandler dbHandler = new DBHandler(this, null, null, 1);
+        dbHandler.insertIndividualValue("tokenCount", "100");
         //TODO: könnte ein startup slowdown sein
-        if ((!dbHandler.checkIfInside(dbHandler.getWritableDatabase(), DBHandler.TABLE_PERSONAL, DBHandler.COLUMN_KEY + " = \'analysisDoneBefore\'") || dbHandler.getIndividualValue("analysisDoneBefore").equals("false")) && !v.analysisDoneBefore.equals(true)) {//v.analysisDoneBefore){//!dbHandler.checkIfInside(dbHandler.TABLE_PERSONAL,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
+        if ((!dbHandler.checkIfInside(dbHandler.getWritableDatabase(), DBHandler.TABLE_USERDATA, DBHandler.COLUMN_KEY + " = \'analysisDoneBefore\'") || dbHandler.getIndividualValue("analysisDoneBefore").equals("false")) && !v.analysisDoneBefore.equals(true)) {//v.analysisDoneBefore){//!dbHandler.checkIfInside(dbHandler.TABLE_USERDATA,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
             dbHandler.close();
             Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
             startActivity(intent);
-        }
+        } else dbHandler.close();
     }
 
 

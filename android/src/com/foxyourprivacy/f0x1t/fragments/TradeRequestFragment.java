@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
-import com.foxyourprivacy.f0x1t.activities.LectionListActivity;
+import com.foxyourprivacy.f0x1t.activities.LessonListActivity;
 import com.foxyourprivacy.f0x1t.activities.TrophyRoomActivity;
 import com.foxyourprivacy.f0x1t.lessonmethods.Method;
 import com.foxyourprivacy.f0x1t.lessonmethods.MethodFactory;
@@ -71,9 +71,9 @@ public class TradeRequestFragment extends Fragment {
 
                 } else {
 
-                    if (activity instanceof LectionListActivity) {
-                        LectionListActivity lectionListActivity = (LectionListActivity) activity;
-                        tradeSuccessful = lectionListActivity.purchase(articleOfCommerce);
+                    if (activity instanceof LessonListActivity) {
+                        LessonListActivity lessonListActivity = (LessonListActivity) activity;
+                        tradeSuccessful = lessonListActivity.purchase(articleOfCommerce);
                     }
 
                     if (activity instanceof TrophyRoomActivity) {

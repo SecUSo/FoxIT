@@ -1,5 +1,5 @@
 android {
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.0'
     compileSdkVersion 24
     sourceSets {
         main {
@@ -15,11 +15,11 @@ android {
         instrumentTest.setRoot('tests')
     }
     defaultConfig {
-        versionCode 11
-        versionName "0.945"
+        versionCode 13
+        versionName "1"
         applicationId "com.foxyourprivacy.f0x1t"
         minSdkVersion 17
-        targetSdkVersion 24
+        targetSdkVersion 26
     }
 }
 // called every time gradle gets executed, takes the native dependencies of

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -15,39 +14,39 @@
             android:id="@+id/settings_value_scroller"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:scrollbars="vertical"
+            android:layout_alignParentStart="true"
             android:fillViewport="true"
-            android:layout_alignParentStart="true">
+            android:scrollbars="vertical">
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:orientation="vertical"
                 android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_gravity="top|center_horizontal">
+                android:layout_gravity="top|center_horizontal"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_setting_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Wert"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:minHeight="30dp"
                     android:layout_marginBottom="10dp"
-
+                    android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
-                    android:layout_marginLeft="6dp" />
+                    android:minHeight="30dp"
+
+                    android:text="Wert"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
                 <TextView
                     android:id="@+id/text_setting_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:text="Beschreibung"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:minHeight="30dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="6dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginRight="6dp"
+                    android:minHeight="30dp"
+                    android:text="Beschreibung"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
         </ScrollView>
 
@@ -57,35 +56,35 @@
         android:id="@+id/setting_headline_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/creme"
-        android:clickable="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:background="@color/creme"
+        android:clickable="true">
 
         <TextView
             android:id="@+id/text_setting_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/image_app_icon"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:minHeight="30dp"
             android:layout_alignParentEnd="true"
-            android:background="@color/creme"
+            android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
-            android:layout_marginLeft="6dp" />
+            android:background="@color/creme"
+            android:minHeight="30dp"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/text_setting_original"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_setting_name"
-            android:text="original"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:minHeight="25dp"
-            android:background="@color/creme"
+            android:layout_marginLeft="12dp"
             android:layout_marginRight="6dp"
-            android:layout_marginLeft="12dp"/>
+            android:background="@color/creme"
+            android:minHeight="25dp"
+            android:text="original"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
     </RelativeLayout>

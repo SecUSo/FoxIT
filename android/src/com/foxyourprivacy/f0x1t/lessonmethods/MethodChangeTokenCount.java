@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
-import com.foxyourprivacy.f0x1t.activities.LectionActivity;
+import com.foxyourprivacy.f0x1t.activities.LessonActivity;
 import com.foxyourprivacy.f0x1t.fragments.TokenCountFragment;
 
 /**
@@ -49,7 +49,7 @@ public class MethodChangeTokenCount extends Method {
                     }
                 }
             }, 1250);
-            if (activity.findViewById(R.id.count_frame) != null && !activity.isFinishing() && !(activity instanceof LectionActivity)) {
+            if (activity.findViewById(R.id.count_frame) != null && !activity.isFinishing() && !(activity instanceof LessonActivity)) {
                 //after 4000ms the Fragment disappears
                 handler.postDelayed(new Runnable() {
                     @Override
