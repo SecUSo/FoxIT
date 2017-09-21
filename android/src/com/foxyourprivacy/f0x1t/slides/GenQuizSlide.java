@@ -1,5 +1,6 @@
 package com.foxyourprivacy.f0x1t.slides;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -7,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foxyourprivacy.f0x1t.R;
+import com.foxyourprivacy.f0x1t.lessonmethods.MethodFactory;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -30,11 +33,13 @@ public class GenQuizSlide extends Slide {
     String rightAnswer;// = getString(R.string.genericQuizCorrect);
     String wrongAnswer;// = getString(R.string.genericQuizIncorrect);
     String question;
+    int points = 0;
 
 
     @Override
     public void setArguments(Bundle arg) {
         super.setArguments(arg);
+        type = "quiz";
         slideInfo = slideInfo.replaceFirst(Pattern.quote("[QUIZ]"), "");
         Log.d("Quiz-content", slideInfo);
 
@@ -86,14 +91,14 @@ public class GenQuizSlide extends Slide {
     public void fillLayout() {
         TextView questionText = (TextView) view.findViewById(R.id.quiz_text);
         questionText.setText(question);
-        LinearLayout boxcontainer = (LinearLayout) view.findViewById(R.id.quiz_boxes);
+        GridLayout boxcontainer = (GridLayout) view.findViewById(R.id.quiz_boxes);
 
         ids = new int[answers.length];
         int k = 0;
         for (String str : answers) {
             CheckBox box = new CheckBox(getContext());
             box.setText(str);
-            View.generateViewId();
+            box.setId(k + 9999);
             ids[k] = box.getId();
             k++;
             boxcontainer.addView(box);
@@ -128,7 +133,34 @@ public class GenQuizSlide extends Slide {
     }
 
     public boolean evaluation() {
-        return true;
+        int i = 0;
+        for (int id : ids) {
+            CheckBox box = (CheckBox) view.findViewById(id);
+            box.setEnabled(false);
+            if (box.isChecked() && correctness[i] || !box.isChecked() && !correctness[i]) {
+                box.setBackgroundResource(R.color.rightAnswer);
+                points++;
+            } else {
+                box.setBackgroundResource(R.color.wrongAnswer);
+            }
+            i++;
+        }
+        evaluated = true;
+        if (points >= answers.length) {
+            Toast toast = Toast.makeText(getActivity(), rightAnswer, Toast.LENGTH_LONG);
+            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            v.setBackgroundColor(Color.GREEN);
+            toast.show();
+            MethodFactory factory = new MethodFactory(getActivity());
+            factory.createMethod("scoreAdd").callClassMethod(String.valueOf(points));
+            return true;
+        } else {
+            Toast toast = Toast.makeText(getActivity(), wrongAnswer, Toast.LENGTH_LONG);
+            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            v.setBackgroundColor(Color.RED);
+            toast.show();
+            return false;
+        }
     }
 
 }

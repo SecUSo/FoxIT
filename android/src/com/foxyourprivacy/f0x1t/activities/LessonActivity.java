@@ -137,7 +137,7 @@ public class LessonActivity extends FoxITActivity {
 
 
                 //if the next slide is a QuizSlide show the question mark
-                if (currentSlide.type.equals("quiz")) {
+                if (currentSlide.type.equals("quiz") && !((GenQuizSlide) currentSlide).gotEvaluated()) {
                     ((GenQuizSlide) currentSlide).evaluation();
                     //if there is no next slide after the next show the cross
                     if ((currentSlide.next() == -99) && (lesson.slidearray.length < (slideNumber + 3))) {

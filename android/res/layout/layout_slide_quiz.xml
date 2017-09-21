@@ -12,16 +12,22 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
-    <LinearLayout
+    <GridLayout
         android:id="@+id/quiz_boxes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/quiz_text"
+        android:layout_centerHorizontal="true"
+
+        android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:layout_centerHorizontal="true">
+        android:paddingLeft="40dp"
+        android:paddingTop="30dp">
 
 
-    </LinearLayout>
+    </GridLayout>
 </RelativeLayout>
