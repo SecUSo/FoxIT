@@ -29,6 +29,7 @@ public class LessonObject implements Parcelable {
     public ArrayList<Integer> slideBackStack = new ArrayList<>();
     //Score for lessons with QuizSlides
     public int score = 0;
+    public int maxscore = 0;
     public int position = 99;
     String lessonName; //name~
     int processingStatus; //solved~
