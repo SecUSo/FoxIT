@@ -50,21 +50,49 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         classObjectList = dbHandler.getClasses();
 
         //sort Erstes Tapsen and Daily Lessons on the first 2 slots
-        ClassObject tempclass1 = classObjectList.get(0);
-        int i = 0;
-        while (!classObjectList.get(i).getName().equals("Erstes Tapsen")) {
-            i++;
+        ArrayList<ClassObject> sortedList = new ArrayList<>();
+        int pointer = 0;
+        boolean inserted = false;
+        for (ClassObject co : classObjectList) {
+
+            if (sortedList.isEmpty()) {
+                sortedList.add(co);
+                inserted = true;
+            }
+            int position = co.getPosition();
+            //as long as the correct position was not found
+            while (!inserted) {
+                //is the class after the current class
+                if (position >= sortedList.get(pointer).getPosition()) {
+                    //is the class before the next class or is the last element reached
+                    if (pointer + 1 >= sortedList.size() || position < sortedList.get(pointer + 1).getPosition()) {
+                        //add as last, new highest index or after the next
+                        pointer++;
+                        sortedList.add(pointer, co);
+                        inserted = true;
+                        //the class belongs further in the list
+                    } else {
+                        pointer = (sortedList.size() + pointer) / 2;
+                    }
+                    //class is before the current class
+                } else {
+                    //the first element is reached or the class belongs after the previous class
+                    if (pointer == 0 || position > sortedList.get(pointer - 1).getPosition()) {
+                        sortedList.add(pointer, co);
+                        inserted = true;
+                        //class belongs earlier in the list
+                    } else {
+                        pointer = pointer / 2;
+                    }
+                }
+            }
+            inserted = false;
+            pointer = (sortedList.size() / 2);
+
+
+
         }
-        classObjectList.set(0, classObjectList.get(i));
-        classObjectList.set(i, tempclass1);
-        ClassObject tempclass2 = classObjectList.get(1);
-        int j = 0;
-        while (j<classObjectList.size()&&!classObjectList.get(j).getName().equals("Daily Lessons")) {
-        if(j<classObjectList.size()-1){
-            j++;}
-        }
-        classObjectList.set(1, classObjectList.get(j));
-        classObjectList.set(j, tempclass2);
+        classObjectList = sortedList;
 
         dbHandler.close();
 

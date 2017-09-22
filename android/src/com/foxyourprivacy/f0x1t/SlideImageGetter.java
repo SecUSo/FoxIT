@@ -58,10 +58,13 @@ public class SlideImageGetter implements Html.ImageGetter {
 
         @Override
         protected void onPostExecute(Drawable drawable) {
-            ddrawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-            ddrawable.drawable = drawable;
-            SlideImageGetter.this.container.invalidate();
-            SlideImageGetter.this.container.setHeight(SlideImageGetter.this.container.getHeight() + drawable.getIntrinsicHeight());
+            if (drawable != null) {
+                ddrawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                ddrawable.drawable = drawable;
+                SlideImageGetter.this.container.invalidate();
+                SlideImageGetter.this.container.setHeight(SlideImageGetter.this.container.getHeight() + drawable.getIntrinsicHeight());
+
+            }
 
         }
 

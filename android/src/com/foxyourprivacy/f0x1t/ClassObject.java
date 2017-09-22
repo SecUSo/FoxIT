@@ -7,15 +7,17 @@ public class ClassObject {
 
     private String name;
     private String descriptionText; //text describing the class content
+    private int position;
 
     /**
      * @param name             the className
      * @param classDescription the description of the class
      * @author Tim
      */
-    public ClassObject(String name, String classDescription) {
+    public ClassObject(String name, String classDescription, int classposition) {
         this.name = name;
         this.descriptionText = classDescription;
+        this.position = classposition;
     }
 
 
@@ -31,6 +33,10 @@ public class ClassObject {
     //Setter
     public void setDescriptionText(String descriptionText) {
         this.descriptionText = descriptionText;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
 

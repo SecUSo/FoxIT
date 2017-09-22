@@ -47,7 +47,7 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
 
             if (is != null) {
                 if (objects[1].equals("permissions")) dbHandler.updatePermissions(readStream(is));
-                if (objects[1].equals("lessions")) dbHandler.updateLessons(readLessionStream(is));
+                if (objects[1].equals("lessions")) dbHandler.updateLessons(readLessonStream(is));
                 if (objects[1].equals("classes")) dbHandler.updateClasses(readStream(is));
                 if (objects[1].equals("settings"))
                     dbHandler.updateSettingDescriptions(readStream(is));
@@ -150,7 +150,7 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
 
     }
 
-    public ArrayList readLessionStream(InputStream is) {
+    public ArrayList readLessonStream(InputStream is) {
         ArrayList result = new ArrayList();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         try {
