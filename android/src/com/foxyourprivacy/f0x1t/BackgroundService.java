@@ -94,7 +94,8 @@ public class BackgroundService extends Service {
 
             if (result > v.dailyLessonsUnlocked && v.dailyLessonsUnlocked < 15 && v.valueKeeperAlreadyRefreshed) {
                     DBHandler db = new DBHandler(context, null, null, 2);
-                String lessonName = db.unlockDaily();
+                String lessonName = "blabla";//db.unlockDaily();
+                //TODO unlockdaily fixen
                 v.increaseDailyLessonsUnlocked();
 
                     NotificationCompat.Builder mBuilder =
