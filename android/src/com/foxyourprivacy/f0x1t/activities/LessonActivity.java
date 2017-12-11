@@ -136,8 +136,9 @@ public class LessonActivity extends FoxITActivity {
                 Slide currentSlide = lesson.slidearray[slideNumber];
 
 
+
                 //if the next slide is a QuizSlide show the question mark
-                if (currentSlide.type.equals("quiz")) {
+                if (currentSlide.type.equals("quiz") && !((GenQuizSlide) currentSlide).gotEvaluated()) {
                     ((GenQuizSlide) currentSlide).evaluation();
                     //if there is no next slide after the next show the cross
                     if ((currentSlide.next() == -99) && (lesson.slidearray.length < (slideNumber + 3))) {
@@ -152,18 +153,24 @@ public class LessonActivity extends FoxITActivity {
                         //if the current slide defines a next slides that's the slideNumberToJumpTo
                     if (currentSlide.next() != -99) {
                         slideToJumpTo = currentSlide.next();
-                        } else {
+                    } else {
                             //otherwise its the slide with the next higher number
-                            slideToJumpTo = slideNumber + 1;
-                        }
+                        slideToJumpTo = slideNumber + 1;
+                    }
                         //if the slide with the retrieved number exists jump to it
                     if (lesson.slidearray.length > slideToJumpTo) {
                         jumpToSlide(slideToJumpTo);
-                        } else {
-                            //otherwise close the Activity
-                        goBackToLessonList(slideNumber);
+                        if (lesson.slidearray[slideToJumpTo].type.equals("cert")) {
+                            ((CertSlide) lesson.slidearray[slideToJumpTo]).evaluate();
                         }
+                    } else {
+                        //otherwise close the Activity
+                        goBackToLessonList(slideNumber);
+                    }
+
+
                 }
+
                 ft.commit();
             }
         });

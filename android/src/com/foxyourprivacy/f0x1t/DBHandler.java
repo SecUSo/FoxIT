@@ -45,7 +45,7 @@ public class DBHandler extends SQLiteOpenHelper {
     //type: for readout - 0=String, 1=BOOLEAN, 2=int
     public static final String COLUMN_TYPE = "type";
     //DB-Version is updated, when changes in structur apply
-    private static final int DB_VERSION = 30;
+    private static final int DB_VERSION = 31;
     //table-names
     private static final String TABLE_APPS = "apps";
     private static final String TABLE_LESSONS = "lessons";
@@ -58,6 +58,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_LESSONNAME = "name";
     private static final String COLUMN_SLIDES = "slides";
     private static final String COLUMN_CLASS = "class";
+    private static final String COLUMN_CLASSPOSITION = "position";
     //0=not available yet; 1=not yet read; 2=not yet finished; 3=finished
     private static final String COLUMN_STATUS = "status";
     private static final String COLUMN_DELAY = "delay";
@@ -110,7 +111,8 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(query2);
         String query3 = "CREATE TABLE " + TABLE_CLASSES + "(" +
                 COLUMN_CLASSNAME + " TEXT PRIMARY KEY, " +
-                COLUMN_CLASSDESCRIPTION + " TEXT " +
+                COLUMN_CLASSDESCRIPTION + " TEXT, " +
+                COLUMN_CLASSPOSITION + " INTEGER " +
                 ");";
         db.execSQL(query3);
         String query4 = "CREATE TABLE " + TABLE_LESSONS + "(" +
@@ -388,7 +390,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //insert all the classes from the file
         SQLiteDatabase db = getWritableDatabase();
         for (String[] clas : classesList) {
-            db.execSQL("INSERT OR REPLACE INTO " + TABLE_CLASSES + " VALUES(\'" + escapeQuote(clas[0]) + "\', \'" + escapeQuote(clas[1]) + "\');");
+            db.execSQL("INSERT OR REPLACE INTO " + TABLE_CLASSES + " VALUES(\'" + escapeQuote(clas[0]) + "\', \'" + escapeQuote(clas[1]) + "\', \'" + escapeQuote(clas[2]) + "\');");
         }
 
         //safety-measure: inserting all classes that are specified from a lession in the DB,
@@ -398,7 +400,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //repeat over all rows
         while (!cursor.isAfterLast()) {
             if (cursor.getString(cursor.getColumnIndex(COLUMN_CLASS)) != null) {
-                db.execSQL("INSERT OR IGNORE INTO " + TABLE_CLASSES + " VALUES(\'" + escapeQuote(cursor.getString(cursor.getColumnIndex(COLUMN_CLASS))) + "\', \'keine Beschreibung vorhanden\');");
+                db.execSQL("INSERT OR IGNORE INTO " + TABLE_CLASSES + " VALUES(\'" + escapeQuote(cursor.getString(cursor.getColumnIndex(COLUMN_CLASS))) + "\', \'keine Beschreibung vorhanden\', 99);");
             }
             cursor.moveToNext();
         }
@@ -419,7 +421,7 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             result.add(new ClassObject(cursor.getString(cursor.getColumnIndex(COLUMN_CLASSNAME)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_CLASSDESCRIPTION))));
+                    cursor.getString(cursor.getColumnIndex(COLUMN_CLASSDESCRIPTION)), cursor.getInt(cursor.getColumnIndex(COLUMN_CLASSPOSITION))));
             cursor.moveToNext();
         }
         cursor.close();

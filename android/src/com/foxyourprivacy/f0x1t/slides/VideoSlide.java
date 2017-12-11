@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.regex.Pattern;
 
 /**
  * Created by noah on 04.06.17.
@@ -22,7 +23,7 @@ public class VideoSlide extends Slide {
     @Override
     public void setArguments(Bundle arg) {
         super.setArguments(arg);
-        slideInfo = slideInfo.replaceFirst("[VIDEO]", "");
+        slideInfo = slideInfo.replaceFirst(Pattern.quote("[VIDEO]"), "");
         MediaPlayer mp = new MediaPlayer();
         mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
