@@ -9,4 +9,5 @@
     <string name="title_activity_profile">profile</string>
     <string name="genericQuizCorrect">Richtig.</string>
     <string name="genericQuizIncorrect">Falsch.</string>
+    <string name="videowaittext">Lade das Video...</string>
 </resources>
