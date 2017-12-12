@@ -8,12 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="ToolbarStyle" parent="AppTheme"></style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="button_text" >
         <item name="android:layout_width" >fill_parent</item>
         <item name="android:layout_height" >wrap_content</item>

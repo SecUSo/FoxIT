@@ -1,23 +1,20 @@
 package com.foxyourprivacy.f0x1t.slides;
 
-import android.content.res.AssetFileDescriptor;
-import android.media.AudioManager;
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -25,12 +22,11 @@ import android.widget.VideoView;
 
 import com.foxyourprivacy.f0x1t.R;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.regex.Pattern;
 
 /**
  * Created by noah on 04.06.17.
+ * Video Slide shows either a video via MediaPlayer or a WebView, where "iframe" is found in the content to enable more embedded videos
  */
 
 public class VideoSlide extends Slide {
@@ -109,8 +105,20 @@ public class VideoSlide extends Slide {
             params.height = 0;
             videoView.setLayoutParams(params);
             webView = (WebView) view.findViewById(R.id.webvideo);
-            String videoSite = "<html><body>Online-Video<br>"+content+"</body></html>";//"<html><body>Video From YouTube<br><iframe width=\"420\" height=\"315\" src=\""+content+"\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+            webView.getSettings().setLoadWithOverviewMode(true);
+            webView.getSettings().setUseWideViewPort(true);
 
+            String videoSite = "<html><body>" + content + "</body></html>";
+
+            DisplayMetrics metrics = new DisplayMetrics();
+            WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+            wm.getDefaultDisplay().getMetrics(metrics);
+
+            int width = (metrics.widthPixels);
+
+            int height = (int) (width * 0.75);
+            videoSite = videoSite.replaceFirst("height=\"[0-9]*", "height=\"" + String.valueOf(height));
+            videoSite = videoSite.replaceFirst("width=\"[0-9]*", "width=\"" + String.valueOf(width));
             webView.setWebViewClient(new WebViewClient(){
 
                 @Override

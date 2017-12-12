@@ -1,13 +1,6 @@
 <resources>
     <string name="app_name">FoxIT</string>
     <string name="action_options">Optionen</string>
-    <string name="ueberspringen">Überspringen</string>
-    <string name="title_activity_home">Home</string>
 
-    <string name="ShowAppsButtonText">Show me my apps.</string>
-    <string name="ShowSettingsButtonText">Show me my settings.</string>
-    <string name="title_activity_profile">profile</string>
-    <string name="genericQuizCorrect">Richtig.</string>
-    <string name="genericQuizIncorrect">Falsch.</string>
     <string name="videowaittext">Lade das Video...</string>
 </resources>
