@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/whole_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="120dp"
         android:layout_weight="0.11"
-        android:background="@color/creme">
+        android:background="@drawable/rounded_corners">
 
         <RelativeLayout
             android:id="@+id/relativeLayout2"
@@ -21,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="end"
-            android:background="@color/creme">
+            android:background="@drawable/rounded_corners">
 
             <TextView
                 android:id="@+id/text_product_type"
@@ -34,7 +35,8 @@
                 android:layout_marginRight="6dp"
                 android:maxWidth="240dp"
                 android:text="@string/analysisStart"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:textColor="#323232" />
 
         </RelativeLayout>
 
@@ -44,7 +46,7 @@
             android:layout_below="@+id/relativeLayout2"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:background="@color/creme">
+            android:background="@drawable/rounded_corners">
 
 
             <Button

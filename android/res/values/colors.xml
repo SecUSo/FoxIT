@@ -10,4 +10,5 @@
     <color name="yellow_animation">#bafafc58</color>
     <color name="trophyBack">#f5d64b</color>
     <color name="unlockedItem">#4ff908</color>
+    <color name="popup">#ffed75</color>
 </resources>
