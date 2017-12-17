@@ -146,5 +146,6 @@
     <string name="earlyBirdDescription">Du hast die App 5 mal am Morgen geöffnet.</string>
     <string name="powerUserDescription">Du hast die App 5 mal in 2 Tagen geöffnet.</string>
     <string name="newLessonAvailable">Eine neue Lektion ist verfügbar!</string>
+    <string name="progressApps">Apps analysieren...</string>
 
 </resources>

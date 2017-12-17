@@ -83,6 +83,16 @@ public class Analysis extends FoxITActivity {
      * @author Noah
      */
     public void getALL_APPS() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView progress = findViewById(R.id.progressComment);
+                progress.setText(getString(R.string.progressApps));
+            }
+        });
+
+
+
         // DBHandler dbHandler = new DBHandler(this, null, null, 1);
         final PackageManager pm = getPackageManager();
         final TextView log = findViewById(R.id.log);
@@ -237,6 +247,14 @@ public class Analysis extends FoxITActivity {
      * @author Lena
      */
     public ContentValues[] getSETTINGS(Uri uri, String[] projection) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView progress = findViewById(R.id.progressComment);
+                progress.setText(getString(R.string.settingsProgress));
+            }
+        });
+
 
         ContentResolver cR = getContentResolver();
         String name;
