@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/animation_frame"
         android:layout_height="wrap_content"
-        android:background="#dad7b4"
+        android:background="@drawable/rounded_corners"
         app:layout_widthPercent="100%">
 
         <ImageView

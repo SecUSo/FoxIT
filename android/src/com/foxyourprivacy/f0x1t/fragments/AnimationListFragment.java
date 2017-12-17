@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -182,9 +181,10 @@ public class AnimationListFragment extends Fragment {
                         .findViewById(R.id.animation_frame);
                 if (animationArray[position].getUnlocked()) {
                     // set image based on selected text
-                    trophyFrame.setBackgroundColor(getResources().getColor(R.color.unlockedItem));
+                    trophyFrame.setBackgroundResource(R.drawable.rounded_corners_unlocked);
                 } else {
-                    trophyFrame.setBackgroundColor(Color.WHITE);
+                    trophyFrame.setBackgroundResource(R.drawable.rounded_corners);
+
                 }
 
             } else {
