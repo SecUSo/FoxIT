@@ -30,14 +30,10 @@ import java.util.List;
  * Created by Hannah on 24.09.2016.
  */
 public class SettingsFragment extends ListFragment implements AdapterView.OnItemClickListener {
-    private final String[] profileListItems = {
-            getString(R.string.reAnalyse),
-            getString(R.string.help),
-            getString(R.string.Impressum),
-            getString(R.string.debugging),
-            getString(R.string.legalInfo)
-    };
+
+
     private final HashMap<String, Fragment> fragmentList = new HashMap<>();
+    private String[] profileListItems;
     private Context context;
 
     @Override
@@ -48,6 +44,13 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
+
+        profileListItems = new String[]{getString(R.string.reAnalyse),
+                getString(R.string.help),
+                getString(R.string.Impressum),
+                getString(R.string.debugging),
+                getString(R.string.legalInfo)
+        };
 
         fragmentList.put(getString(R.string.personalData), new ProfileFragment());
         fragmentList.put(getString(R.string.reAnalyse), new LegalInformationFragment());

@@ -18,17 +18,7 @@ import com.foxyourprivacy.f0x1t.R;
  * Created by Tim on 11.06.2016.
  */
 public class FAQFragment extends ListFragment implements AdapterView.OnItemClickListener {
-    private final String[] questionArray = {
-            getString(R.string.faqq1) + getString(R.string.faqa1),
-            getString(R.string.faqq2) + getString(R.string.faqa2),
-            getString(R.string.faqq3) + getString(R.string.faqa3),
-            getString(R.string.faqq4) + getString(R.string.faqa4),
-            getString(R.string.faqq5) + getString(R.string.faqa5),
-            getString(R.string.faqq6) + getString(R.string.faqa6),
-            getString(R.string.faqq7) + getString(R.string.faqa7),
-            getString(R.string.faqq8) + getString(R.string.faqa8),
-
-    };
+    private String[] questionArray;
 
     private Context context;
     private boolean[] isAnswerVisible;
@@ -41,6 +31,17 @@ public class FAQFragment extends ListFragment implements AdapterView.OnItemClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         context = getActivity().getApplicationContext();
         View itemView = getActivity().getLayoutInflater().inflate(R.layout.fragment_faq, container, false);
+        questionArray = new String[]{
+                getString(R.string.faqq1) + getString(R.string.faqa1),
+                getString(R.string.faqq2) + getString(R.string.faqa2),
+                getString(R.string.faqq3) + getString(R.string.faqa3),
+                getString(R.string.faqq4) + getString(R.string.faqa4),
+                getString(R.string.faqq5) + getString(R.string.faqa5),
+                getString(R.string.faqq6) + getString(R.string.faqa6),
+                getString(R.string.faqq7) + getString(R.string.faqa7),
+                getString(R.string.faqq8) + getString(R.string.faqa8),
+
+        };
         isAnswerVisible = new boolean[questionArray.length];
 
         return itemView;
