@@ -35,14 +35,14 @@ import java.util.List;
  */
 public class AppListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
-    List<ApplicationInfo> apps;
-    Context context;
+    private List<ApplicationInfo> apps;
+    private Context context;
 
 
-    @Override
     /**provides the presented apps
      * @author Tim
      */
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         context = getActivity().getApplicationContext();
         apps = fetchALL_APPS();
@@ -50,10 +50,10 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
     }
 
 
-    @Override
     /**fills the listView and manages the scroll hint
      * @author Tim
      */
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //fills the ListView
@@ -78,12 +78,12 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
     }
 
 
-    @Override
     /**
      * The function called by clicking on an item of the listView
      * It creates the fragment in charge of displaying the apps' permissions.
      * @author Tim
      */
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         final PackageManager pm = context.getPackageManager();
@@ -118,8 +118,8 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
         transaction.commit();
 
         //make appListFragment and SettingsListFragment invisible after permissionListFragment is created
-        FrameLayout settingFrame = (FrameLayout) getActivity().findViewById(R.id.settingFrame);
-        FrameLayout appFrame = (FrameLayout) getActivity().findViewById(R.id.appFrame);
+        FrameLayout settingFrame = getActivity().findViewById(R.id.settingFrame);
+        FrameLayout appFrame = getActivity().findViewById(R.id.appFrame);
         settingFrame.setVisibility(View.GONE);
         appFrame.setVisibility(View.GONE);
         AnalysisResults a = (AnalysisResults) getActivity();
@@ -130,10 +130,10 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
     /**
      * a totally makeshift methodLeft to determine the dangerLevel of an app, not important to understand
      *
-     * @param app
-     * @return
+     * @param app the app data to get the name for which the danger level is to be assessed
+     * @return int on a scale 0-2
      */
-    public int getLevelOfDanger(ApplicationInfo app) {
+    private int getLevelOfDanger(ApplicationInfo app) {
         String[] harmlessReferenceValue = {};
         String[] normalReferenceValue = {
                 "android.permission.ACCESS_LOCATION_EXTRA_COMMANDS",
@@ -179,11 +179,10 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
                 "android.permission.PROCESS_OUTGOING_CALLS", "android.permission.BODY_SENSORS", "android.permission.SEND_SMS",
                 "android.permission.RECEIVE_SMS", "android.permission.READ_SMS", "android.permission.RECEIVE_WAP_PUSH",
                 "android.permission.RECEIVE_MMS", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
-        ArrayList<String> harmlessPermissions = new ArrayList<String>();
-        ArrayList<String> normalPermissions = new ArrayList<String>();
-        ArrayList<String> dangerousPermissions = new ArrayList<String>();
-        ArrayList<String> otherPermissions = new ArrayList<String>();
-        ArrayList<String> result = new ArrayList<String>();
+        // ArrayList<String> harmlessPermissions = new ArrayList<String>();
+        ArrayList<String> normalPermissions = new ArrayList<>();
+        ArrayList<String> dangerousPermissions = new ArrayList<>();
+        // ArrayList<String> otherPermissions = new ArrayList<String>();
         String[] allPermissions = {};
 
         PackageInfo packageInfo;
@@ -201,13 +200,13 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
 
             outerloop:
             for (String permissionApp : allPermissions) {
-
+/*
                 for (String permissionReference : harmlessReferenceValue) {
                     if (permissionApp.equals(permissionReference)) {
                         harmlessPermissions.add(permissionApp);
                         continue outerloop;
                     }
-                }
+                }*/
 
                 for (String permissionReference : normalReferenceValue) {
                     if (permissionApp.equals(permissionReference)) {
@@ -223,7 +222,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
                     }
                 }
 
-                otherPermissions.add(permissionApp);
+                //otherPermissions.add(permissionApp);
             }
 
             if (dangerousPermissions.size() != 0) return 2;
@@ -241,14 +240,16 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
      * @return list of retrieved apps
      * @author Tim
      */
-    public List<ApplicationInfo> fetchALL_APPS() {
+    private List<ApplicationInfo> fetchALL_APPS() {
         if (context == null) {
             Log.d("MyApp", "context is Null");
+            return null;
         }
         final PackageManager pm = context.getPackageManager();
         //get a list of installed apps.
         if (pm == null) {
             Log.d("MyApp", "pm is Null");
+            return null;
         }
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
         Collections.sort(packages, new Comparator<ApplicationInfo>() {
@@ -257,7 +258,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
 
                 String leftAppName = pm.getApplicationLabel(lhs).toString();
                 String rightAppName = pm.getApplicationLabel(rhs).toString();
-
+                /*
                 if (leftAppName == null) {
                     return -1;
                 }
@@ -265,6 +266,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
                 if (rightAppName == null) {
                     return 1;
                 }
+                */
 
                 if (leftAppName.equals(rightAppName)) {
                     return 0;
@@ -282,10 +284,10 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
     /**
      * creates the sorted list of permissions the PermissionDescriptionFragment  displays
      *
-     * @param app
-     * @return
+     * @param app app for which the list is to be created
+     * @return list of strings with the permission-names
      */
-    public ArrayList<String> createPermissionList(ApplicationInfo app) {
+    private ArrayList<String> createPermissionList(ApplicationInfo app) {
         //the refereceValues are not needed at the moment because the classification provided by android is used
         String[] harmlessReferenceValue = {};
         String[] normalReferenceValue = {
@@ -332,11 +334,12 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
                 "android.permission.PROCESS_OUTGOING_CALLS", "android.permission.BODY_SENSORS", "android.permission.SEND_SMS",
                 "android.permission.RECEIVE_SMS", "android.permission.READ_SMS", "android.permission.RECEIVE_WAP_PUSH",
                 "android.permission.RECEIVE_MMS", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
-        ArrayList<String> harmlessPermissions = new ArrayList<String>();
-        ArrayList<String> normalPermissions = new ArrayList<String>();
-        ArrayList<String> dangerousPermissions = new ArrayList<String>();
-        ArrayList<String> otherPermissions = new ArrayList<String>();
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> harmlessPermissions = new ArrayList<>(); //TODO implement own danger estimate for permissions, now its just empty every time
+        //TODO in the other function it is commented out therefore
+        ArrayList<String> normalPermissions = new ArrayList<>();
+        ArrayList<String> dangerousPermissions = new ArrayList<>();
+        ArrayList<String> otherPermissions = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<>();
         String[] allPermissions = {};
 
         PackageInfo packageInfo;  //is actually used
@@ -386,11 +389,11 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
                     //and the permission is added to the associated list
                     if (dangerLevel == PermissionInfo.PROTECTION_DANGEROUS) {
                         dangerousPermissions.add(permissionApp);
-                        continue outerloop;
+                        continue;
                     }
                     if (dangerLevel == PermissionInfo.PROTECTION_NORMAL) {
                         normalPermissions.add(permissionApp);
-                        continue outerloop;
+                        continue;
                     }
 
                 } catch (PackageManager.NameNotFoundException e) {
@@ -401,14 +404,16 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
             }
 
             //the created lists are added onto each other divided by headlines
-            if (dangerousPermissions.size() != 0) result.add("Gefährliche Berechtigungen:");
+            if (dangerousPermissions.size() != 0)
+                result.add(getString(R.string.dangerousPermissions));
             result.addAll(dangerousPermissions);
-            if (normalPermissions.size() != 0) result.add("Normale Berechtigungen:");
+            if (normalPermissions.size() != 0) result.add(getString(R.string.normalPermissions));
             result.addAll(normalPermissions);
-            if (harmlessPermissions.size() != 0) result.add("Harmlose Berechtigungen:");
+            if (harmlessPermissions.size() != 0)
+                result.add(getString(R.string.harmlessPermissions));
             result.addAll(harmlessPermissions);
             if (dangerousPermissions.size() + normalPermissions.size() + harmlessPermissions.size() != allPermissions.length)
-                result.add("Andere Berechtigungen:");
+                result.add(getString(R.string.otherPermissions));
             result.addAll(otherPermissions);
         }
         return result;
@@ -437,7 +442,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
          */
         @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             final PackageManager pm = context.getPackageManager();      //only important for fetching the app info
@@ -448,11 +453,11 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
             //the current app is retrieved
             ApplicationInfo currentApp = apps.get(position);
             //setting the app's name
-            TextView appName = (TextView) itemView.findViewById(R.id.text_app_name);
+            TextView appName = itemView.findViewById(R.id.text_app_name);
             appName.setText(pm.getApplicationLabel(currentApp).toString());
 
             //adding an icon describing the risk posed by the app
-            ImageView ratingIcon = (ImageView) itemView.findViewById(R.id.image_permission_rating);
+            ImageView ratingIcon = itemView.findViewById(R.id.image_permission_rating);
             int i = getLevelOfDanger(currentApp);
 
             switch (i) {
@@ -471,7 +476,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
             }
 
             //setting the appIcon
-            ImageView icon = (ImageView) itemView.findViewById(R.id.image_app_icon);
+            ImageView icon = itemView.findViewById(R.id.image_app_icon);
             try {
                 icon.setImageDrawable(pm.getApplicationIcon(currentApp.packageName));
 

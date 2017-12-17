@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -26,7 +25,7 @@ import java.util.Calendar;
  * device and user specific content is retrieved and saved in database
  * including installed apps, respective permissions & settings.
  */
-public class FoxITActivity extends AppCompatActivity {
+public abstract class FoxITActivity extends AppCompatActivity {
 
 
 
@@ -44,11 +43,12 @@ public class FoxITActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
+    public void onStart() { //TODO Activity which every Acitivity inherits does way too much in onStart!
         super.onStart();
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.cancelAll();
+        if (nm == null) Log.d("NotificationProblem", "NotificationManager is null");
+        else nm.cancelAll();
 
         ValueKeeper v = ValueKeeper.getInstance();
         FoxITApplication myApp = (FoxITApplication) this.getApplication();
@@ -97,12 +97,12 @@ public class FoxITActivity extends AppCompatActivity {
         }
 
         if (v.getTimeOfLastServerAccess() + 259200000 < System.currentTimeMillis() && v.getTimeOfLastServerAccess() != 0L) {
-            NetworkInfo netInfo = ((ConnectivityManager) getSystemService(android.app.Activity.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            NetworkInfo netInfo = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
-                new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/permissions.csv", "permissions");
-                new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/lektionen.csv", "lessions");
-                new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/classes.csv", "classes");
-                new CSVUpdateTask(this).execute("https://foxit.secuso.org/CSVs/raw/sdescription.csv", "settings");
+                new CSVUpdateTask().execute(this, "https://foxit.secuso.org/CSVs/raw/permissions.csv", "permissions");
+                new CSVUpdateTask().execute(this, "https://foxit.secuso.org/CSVs/raw/lektionen.csv", "lessions");
+                new CSVUpdateTask().execute(this, "https://foxit.secuso.org/CSVs/raw/classes.csv", "classes");
+                new CSVUpdateTask().execute(this, "https://foxit.secuso.org/CSVs/raw/sdescription.csv", "settings");
                 v.setTimeOfThisServerAccess();
                 Log.d("FoxITActivity", "started an update of CSV files from server");
             } else {
@@ -148,7 +148,7 @@ public class FoxITActivity extends AppCompatActivity {
     }
 
 
-    public void displayTrophyUnlocked(String trophyName) {
+    private void displayTrophyUnlocked(String trophyName) {
 
         //add the acornCountFragment to the activity's context
         final FragmentManager manager = this.getFragmentManager();
@@ -163,10 +163,6 @@ public class FoxITActivity extends AppCompatActivity {
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             transaction.commit();
         }
-
-        //add the animation
-        final Handler handler = new Handler();
-
     }
 
 }
