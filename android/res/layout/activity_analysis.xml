@@ -30,8 +30,7 @@
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
 
-        android:textSize="18sp"
-        android:typeface="monospace" />
+        android:textSize="18sp" />
 
     <include layout="@layout/toolbar_actionbar" />
 
