@@ -31,15 +31,25 @@ public class TextImageSlide extends Slide {
         super.setArguments(slidecontent);
         slidetext = slideInfo.replace(";", "<br>");
 
+
     }
 
     @Override
     public void fillLayout() {
-//sets the displayed text
+        //sets the displayed text
         TextView text = rootView.findViewById(R.id.textimageslide);
-        SlideImageGetter sig = new SlideImageGetter(text);
+        SlideImageGetter sig = new SlideImageGetter(text, getContext());
         if (getContext() == null) Log.d("isnull", ":(");
         Spanned htmlspanned;
+
+        /*
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        int width = (int)(metrics.widthPixels*0.95);
+        slidetext = slidetext.replaceAll("style=\"","style=\"height:"+(width*2/3)+"px; width:"+width+"px; ");
+        Log.d("TextImageSlide",slidetext);*/
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             htmlspanned = Html.fromHtml(slidetext, Html.FROM_HTML_MODE_LEGACY, sig, null);

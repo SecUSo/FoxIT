@@ -1,13 +1,18 @@
 package com.foxyourprivacy.f0x1t;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.Html;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -18,10 +23,12 @@ import java.net.URL;
 
 public class SlideImageGetter implements Html.ImageGetter {
     private final TextView container;
+    private final WeakReference<Context> contextWeakReference;
 
 
-    public SlideImageGetter(TextView v) {
+    public SlideImageGetter(TextView v, Context context) {
         container = v;
+        contextWeakReference = new WeakReference<>(context);
     }
 
     @Override
@@ -57,10 +64,25 @@ public class SlideImageGetter implements Html.ImageGetter {
         @Override
         protected void onPostExecute(Drawable drawable) {
             if (drawable != null) {
-                ddrawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                Log.d("onPost", "height: " + drawable.getIntrinsicHeight());
+                Log.d("onPost", "width: " + drawable.getIntrinsicWidth());
+
+
+                DisplayMetrics metrics = new DisplayMetrics();
+                WindowManager wm = (WindowManager) contextWeakReference.get().getSystemService(Context.WINDOW_SERVICE);
+                wm.getDefaultDisplay().getMetrics(metrics);
+
+                int width = (int) (metrics.widthPixels * 0.95);
+                int height = (width * drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth());
+
+                Log.d("SlideImageGetter", "width: " + width);
+                Log.d("SlideImageGetter", "height: " + height);
+
+
+                ddrawable.setBounds(0, 0, width, height);
                 ddrawable.drawable = drawable;
+                SlideImageGetter.this.container.setHeight(SlideImageGetter.this.container.getHeight() + height);
                 SlideImageGetter.this.container.invalidate();
-                SlideImageGetter.this.container.setHeight(SlideImageGetter.this.container.getHeight() + drawable.getIntrinsicHeight());
 
             }
 
@@ -74,7 +96,18 @@ public class SlideImageGetter implements Html.ImageGetter {
 
                 InputStream in = new BufferedInputStream(connection.getInputStream());
                 Drawable drawable = Drawable.createFromStream(in, "src");
-                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+
+
+                DisplayMetrics metrics = new DisplayMetrics();
+                WindowManager wm = (WindowManager) contextWeakReference.get().getSystemService(Context.WINDOW_SERVICE);
+                wm.getDefaultDisplay().getMetrics(metrics);
+
+                int width = (int) (metrics.widthPixels * 0.94);
+                int height = (width * drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth());
+                Log.d("SlideImageGetter", "width: " + width);
+                Log.d("SlideImageGetter", "height: " + height);
+
+                drawable.setBounds(0, 0, width, height);
                 return drawable;
             } catch (Exception e) {
                 e.printStackTrace();
