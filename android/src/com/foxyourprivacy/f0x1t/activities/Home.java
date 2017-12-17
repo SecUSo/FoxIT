@@ -15,20 +15,18 @@ import com.foxyourprivacy.f0x1t.ValueKeeper;
 
 public class Home extends FoxITActivity {
 
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
 
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
 
-        RelativeLayout lessonButton = (RelativeLayout) findViewById(R.id.firstLayout);
+        RelativeLayout lessonButton = findViewById(R.id.firstLayout);
 
-        RelativeLayout settingsButton = (RelativeLayout) findViewById(R.id.sixtLayout);
+        RelativeLayout settingsButton = findViewById(R.id.sixtLayout);
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
 
@@ -49,7 +47,7 @@ public class Home extends FoxITActivity {
             }
         });
 
-        RelativeLayout trophyButton = (RelativeLayout) findViewById(R.id.fifthLayout);
+        RelativeLayout trophyButton = findViewById(R.id.fifthLayout);
 
 
         trophyButton.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +63,7 @@ public class Home extends FoxITActivity {
 
         });
 
-        RelativeLayout animationButton = (RelativeLayout) findViewById(R.id.thirdLayout);
+        RelativeLayout animationButton = findViewById(R.id.thirdLayout);
 
         animationButton.setOnClickListener(new View.OnClickListener() {
 
@@ -86,7 +84,7 @@ public class Home extends FoxITActivity {
     public void onStart() {
         super.onStart();
         ValueKeeper v = ValueKeeper.getInstance();
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+        DBHandler dbHandler = new DBHandler(this);
         dbHandler.insertIndividualValue("tokenCount", "100");
         //TODO: könnte ein startup slowdown sein
         if ((!dbHandler.checkIfInside(dbHandler.getWritableDatabase(), DBHandler.TABLE_USERDATA, DBHandler.COLUMN_KEY + " = \'analysisDoneBefore\'") || dbHandler.getIndividualValue("analysisDoneBefore").equals("false")) && !v.analysisDoneBefore.equals(true)) {//v.analysisDoneBefore){//!dbHandler.checkIfInside(dbHandler.TABLE_USERDATA,dbHandler.COLUMN_KEY+" = \'firstrun\'")){//!v.wasEvaluationDisplayed){
@@ -113,7 +111,6 @@ public class Home extends FoxITActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 

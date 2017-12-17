@@ -8,8 +8,8 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="10dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="55dp"
         android:background="@color/colorPrimaryDark"
         android:padding="2dp">
@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="98dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|top"
+            android:layout_gravity="start|top"
             android:background="@color/creme">
 
             <TextView
@@ -25,14 +25,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/image_acorn_symbol"
-                android:layout_toStartOf="@+id/image_acorn_symbol"
+                android:layout_alignTop="@+id/image_token_symbol"
+                android:layout_toStartOf="@+id/image_token_symbol"
                 android:gravity="top|center"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="200"
+                android:text="@string/tokenCount"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/material_deep_teal_200"
+                android:textColor="#ff80cbc4"
                 android:textSize="28dp" />
 
             <ImageView
@@ -41,10 +41,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_marginTop="1dp"
                 android:adjustViewBounds="true"
-                android:contentDescription="Pilz"
+                android:contentDescription="@string/mushroom"
                 android:maxHeight="35dp"
                 android:maxWidth="35dp"
                 android:src="@mipmap/mushroom"

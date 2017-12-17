@@ -8,12 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.AnalysisResults">
 
-    <RelativeLayout
-        android:id="@+id/whole_screen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.design.widget.TabLayout
+    <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -31,7 +26,5 @@
             tools:context="net.voidynullness.android.tabitytabs.TabLayoutActivity">
 
         </android.support.v4.view.ViewPager>
-
-    </RelativeLayout>
 
 </RelativeLayout>

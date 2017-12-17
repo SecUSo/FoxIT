@@ -1,13 +1,15 @@
 package com.foxyourprivacy.f0x1t;
 
 /**
+ * An object for the classes to hold their properties in the list and in the classview
+ * they have an index, a description and a name
  * Created by Tim on 01.08.2016.
  */
 public class ClassObject {
 
-    private String name;
-    private String descriptionText; //text describing the class content
-    private int position;
+    private final String name;
+    private final String descriptionText; //text describing the class content
+    private final int position;
 
     /**
      * @param name             the className
@@ -28,11 +30,6 @@ public class ClassObject {
 
     public String getDescriptionText() {
         return descriptionText;
-    }
-
-    //Setter
-    public void setDescriptionText(String descriptionText) {
-        this.descriptionText = descriptionText;
     }
 
     public int getPosition() {

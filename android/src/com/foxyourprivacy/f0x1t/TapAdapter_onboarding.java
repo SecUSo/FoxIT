@@ -1,6 +1,5 @@
 package com.foxyourprivacy.f0x1t;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
@@ -16,23 +15,19 @@ import com.foxyourprivacy.f0x1t.fragments.OnboardingFragment4;
  */
 public class TapAdapter_onboarding extends FragmentPagerAdapter {
 
-    Activity activity; //reference to onboardingActivity
-
     /**
-     * @param fm
-     * @param activity reference to Onboarding
+     * @param fm the fragment manager to use
      * @author Hannah
      */
-    public TapAdapter_onboarding(FragmentManager fm, Activity activity) {
+    public TapAdapter_onboarding(FragmentManager fm) {
         super(fm);
-        this.activity = activity;
     }
 
     /**
      * Fills the TabAdapter with the Fragments to be displayed
      *
      * @param position describes which tab is pressed
-     * @return
+     * @return Fragment that belongs on that position
      * @author Hannah
      */
     @Override

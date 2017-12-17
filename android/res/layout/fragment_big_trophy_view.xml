@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_gravity="right"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
             android:background="@color/colorPrimaryDark"
             android:padding="2dp">
 
@@ -28,7 +24,6 @@
                     android:id="@+id/image_acorn_symbol"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/text_acorn_count"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="10dp"
@@ -36,7 +31,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:adjustViewBounds="true"
-                    android:contentDescription="Der Baumhaus Kapitalist"
+                    android:contentDescription="@string/thecapitalist"
                     android:src="@mipmap/test_trophy" />
 
                 <TextView
@@ -49,13 +44,13 @@
                     android:gravity="top|center"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Baumhaus Kapitalist"
+                    android:text="@string/capitalist"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#65bbb3"
                     android:textSize="28dp" />
 
                 <TextView
-                    android:id="@+id/text_trophy_describtion"
+                    android:id="@+id/text_trophy_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_trophy_name"
@@ -63,10 +58,9 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:paddingTop="5dp"
-                    android:text="TextView"
-                    android:textColor="@color/material_deep_teal_200" />
+                    android:text="@string/trophyDescription"
+                    android:textColor="#ff80cbc4" />
             </RelativeLayout>
         </FrameLayout>
-    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

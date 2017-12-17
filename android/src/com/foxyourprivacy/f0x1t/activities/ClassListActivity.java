@@ -3,6 +3,7 @@ package com.foxyourprivacy.f0x1t.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,16 +23,16 @@ import com.foxyourprivacy.f0x1t.R;
 import java.util.ArrayList;
 
 /**
+ * In this activity the classes are listed to choose on and go on to lesson selection
+ * the number of solved lessons per class is shown and classes are ordered after their index in the classes.csv
  * Created by Tim on 01.08.2016.
  */
 public class ClassListActivity extends FoxITActivity implements AdapterView.OnItemClickListener {
 
-    public ArrayList<ClassObject> classObjectList = new ArrayList<>();
-    Parcelable listState;
-    ListView theListView;
+    private ArrayList<ClassObject> classObjectList = new ArrayList<>();
+    private Parcelable listState;
+    private ListView theListView;
 
-
-    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,11 +41,11 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_list);
         // sets our toolbar as the actionbar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
 
 
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+        DBHandler dbHandler = new DBHandler(this);
 
         //classObjectList.add(test);
         classObjectList = dbHandler.getClasses();
@@ -96,7 +97,7 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
 
         dbHandler.close();
 
-        theListView = (ListView) findViewById(R.id.headline_frame);
+        theListView = findViewById(R.id.headline_frame);
         //creates the listView
         ArrayAdapter<ClassObject> adapter = new MyListAdapter_class();
         theListView.setAdapter(adapter);
@@ -231,7 +232,8 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
          * @author Tim
          */
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        @NonNull
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             if (itemView == null) {
@@ -241,17 +243,17 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
                                 false);
             }
 
-            ImageView classIcon = (ImageView) itemView.findViewById(R.id.image_class_icon);
+            ImageView classIcon = itemView.findViewById(R.id.image_class_icon);
 
             classIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getClassIcon(classObjectList.get(position).getName())));
 
 
             //setting the text for className
-            TextView className = (TextView) itemView.findViewById(R.id.text_class_name);
+            TextView className = itemView.findViewById(R.id.text_class_name);
             className.setText(classObjectList.get(position).getName());
 
-            DBHandler dbHandler = new DBHandler(getApplicationContext(), null, null, 21);
-            TextView solved = (TextView) itemView.findViewById(R.id.textView_solvedLessons);
+            DBHandler dbHandler = new DBHandler(getApplicationContext());
+            TextView solved = itemView.findViewById(R.id.textView_solvedLessons);
             solved.setText(dbHandler.getNumberOfSolvedLessons(classObjectList.get(position).getName()));
             dbHandler.close();
 

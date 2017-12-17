@@ -12,15 +12,12 @@ import android.widget.TextView;
 import java.io.InputStream;
 
 /**
- * Created by Ich on 09.09.2016.
+ * Another async task for loading images to a slide
+ * Created by Tim on 09.09.2016.
  */
-
-/**
- * Class to handle the loading of images in an extra task
- */
-public class DownloadImageToTextViewTask extends AsyncTask<String, Void, Bitmap> {
-    TextView textView; //the textView the image is to be displayed in
-    Context context;
+class DownloadImageToTextViewTask extends AsyncTask<String, Void, Bitmap> {
+    private final TextView textView; //the textView the image is to be displayed in
+    private final Context context;
 
     public DownloadImageToTextViewTask(TextView textView, Context con) {
         this.textView = textView;

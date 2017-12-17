@@ -37,20 +37,22 @@ import com.foxyourprivacy.f0x1t.activities.AnalysisResults;
 import java.util.ArrayList;
 
 /**
+ * This fragment shows the permissions of an app that is selected from the app list.
+ * from here the user can open the permissionDescriptionFragment
  * Created by Tim on 11.06.2016.
  */
 public class PermissionListFragment extends ListFragment implements AdapterView.OnItemClickListener {
-    static boolean firstTimeScrollhint = true;  //true=the scrollHint has to be displayed, false= the listView has been scrolled
-    String[] permissionArray = {"Diese App benötigt keine Berechtigungen."}; //contains the permissions displayed in the listView
-    Context context;
-    ApplicationInfo currentApp;           //the App whose permission are on display
-    int appRating;
+    private static boolean firstTimeScrollhint = true;  //true=the scrollHint has to be displayed, false= the listView has been scrolled
+    private String[] permissionArray = {"Diese App benötigt keine Berechtigungen."}; //contains the permissions displayed in the listView
+    private Context context;
+    private ApplicationInfo currentApp;           //the App whose permission are on display
+    private int appRating;
 
 
-    @Override
     /**fills the fragments layout and provides behavior for the permissionHeadline
      * @author Tim
      */
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         context = getActivity().getApplicationContext();
         setFragmentInActivity(); //IMPORTANT! informs AnalysisResults-activity of the existence of this fragment
@@ -58,7 +60,7 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
         View itemView = getActivity().getLayoutInflater().inflate(R.layout.fragment_permission_list, container, false);
 
         //attaches the OnClickEvent for switching to the androidAppSetting
-        Button settingsButton = (Button) itemView.findViewById(R.id.app_settings_button);
+        Button settingsButton = itemView.findViewById(R.id.app_settings_button);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,11 +74,11 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
 
         //inserts the app name into the headline
         PackageManager pm = context.getPackageManager();
-        TextView appName = (TextView) itemView.findViewById(R.id.text_permission_app_name);
+        TextView appName = itemView.findViewById(R.id.text_permission_app_name);
         appName.setText(pm.getApplicationLabel(currentApp).toString());
 
         //setting the headline's icon
-        ImageView icon = (ImageView) itemView.findViewById(R.id.image_permission_app_icon);
+        ImageView icon = itemView.findViewById(R.id.image_permission_app_icon);
         try {
             icon.setImageDrawable(pm.getApplicationIcon(currentApp.packageName));
 
@@ -92,12 +94,12 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
             //Get Permissions
             String[] requestedPermissions = packageInfo.requestedPermissions;
             //inserts the number of permissions into the headline
-            TextView permissionCount = (TextView) itemView.findViewById(R.id.text_app_permissions);
+            TextView permissionCount = itemView.findViewById(R.id.text_app_permissions);
 
             if (requestedPermissions == null) {
                 permissionCount.setText("0");
             } else {
-                permissionCount.setText(Integer.toString(requestedPermissions.length));
+                permissionCount.setText(String.format("%d", requestedPermissions.length));
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -111,7 +113,7 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
         }
 
         //links the onClickEvent for returning to AppListFragment to the headline
-        RelativeLayout headline = (RelativeLayout) itemView.findViewById(R.id.app_headline_frame);
+        RelativeLayout headline = itemView.findViewById(R.id.app_headline_frame);
         switch (appRating) {
             case (0):
                 headline.setBackgroundColor(Color.argb(255, 2, 174, 0));
@@ -137,10 +139,10 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
     }
 
 
-    @Override
     /** defines the listView
      * @author Tim
      */
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         //filling the listView with data
         super.onActivityCreated(savedInstanceState);
@@ -169,10 +171,10 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
     }
 
 
-    @Override
     /**
      * if the fragment is closed the scrollHint disappears
      */
+    @Override
     public void onStop() {
         super.onStop();
         if (getActivity() instanceof AnalysisResults) {
@@ -181,11 +183,11 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
 
     }
 
-    @Override
     /**
      * on Item Click the permissionDescriptionFragment is created
      * @author Tim
      */
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String permissionName = permissionArray[position];
         if (!(permissionName.equals("Gefährliche Berechtigungen:") || permissionName.equals("Normale Berechtigungen:") || permissionName.equals("Harmlose Berechtigungen:") || permissionName.equals("Andere Berechtigungen:") || permissionName.equals("Diese App benötigt keine Berechtigungen."))) {
@@ -200,10 +202,10 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
             FragmentManager childFragmentManager = getChildFragmentManager();
             FragmentTransaction transaction = childFragmentManager.beginTransaction();
 
-            transaction.add(R.id.permission_frame, fragment, "permissionDescription");
+            transaction.add(R.id.list_frame, fragment, "permissionDescription");
             transaction = transaction.addToBackStack("permissionDescription");
             transaction.commit();
-            RelativeLayout settingFrame = (RelativeLayout) getActivity().findViewById(R.id.list_frame);
+            RelativeLayout settingFrame = getActivity().findViewById(R.id.list_frame);
             settingFrame.setVisibility(View.GONE);
             if (getActivity() instanceof AnalysisResults) {
                 ((AnalysisResults) getActivity()).setScrollMessageVisiblility(false);
@@ -212,12 +214,12 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
         }
     }
 
-    @Override
     /**methodLeft to set the fragment's arguments from the outside
      * @author Tim
      * @param arg Bundle holding an ArrayList calles "permissions" holding an app's permissions
      *
      */
+    @Override
     public void setArguments(Bundle arg) {
         ArrayList<String> permissions = arg.getStringArrayList("permissions");
         if (permissions != null)
@@ -255,7 +257,7 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
      * @author Tim
      */
     public void setListVisible() {
-        RelativeLayout settingFrame = (RelativeLayout) getActivity().findViewById(R.id.list_frame);
+        RelativeLayout settingFrame = getActivity().findViewById(R.id.list_frame);
         settingFrame.setVisibility(View.VISIBLE);
     }
 
@@ -281,7 +283,7 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
          */
         @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             if (itemView == null) {
@@ -289,7 +291,7 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
             }
 
             //setting the text for the permission's name
-            TextView permissionName = (TextView) itemView.findViewById(R.id.text_permission_name);
+            TextView permissionName = itemView.findViewById(R.id.text_permission_name);
             // permissionName.setText(permissionArray[position]);
             if (!(permissionArray[position].equals("Gefährliche Berechtigungen:") || permissionArray[position].equals("Normale Berechtigungen:") || permissionArray[position].equals("Harmlose Berechtigungen:"))) {
                 //permissionName.setText(permissionArray[position].substring(permissionArray[position].indexOf(".")+1,permissionArray[position].length()));
@@ -309,19 +311,19 @@ public class PermissionListFragment extends ListFragment implements AdapterView.
 
             //sets the permissionIcon
             Drawable permissionIcon = getPermissionDrawable(permissionArray[position]);
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.image_app_icon);
+            ImageView imageView = itemView.findViewById(R.id.image_app_icon);
             imageView.setImageDrawable(permissionIcon);
 
             return itemView;
         }
 
-        @Nullable
         /**
          * determines the icon for a single permission
          * also defined in PermissionDescriptionFragment, probably bad
          * @author Tim
          * @param permission the permission whose icon is to be fetched
          */
+        @Nullable
         private Drawable getPermissionDrawable(String permission) {
             PackageManager mPackageManager = context.getPackageManager();
             Drawable drawable = null; //the icon

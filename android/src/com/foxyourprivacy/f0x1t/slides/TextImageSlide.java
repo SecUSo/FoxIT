@@ -1,6 +1,7 @@
 package com.foxyourprivacy.f0x1t.slides;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -13,14 +14,14 @@ import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.SlideImageGetter;
 
 /**
+ * A new Slide to replace TextSlide and WebImageSlide to show Text and Images in one slide together.
+ * Fetches images with the SlideImageGetter.
  * Created by noah on 04.06.17.
  */
 
 public class TextImageSlide extends Slide {
-    String slidetext = "";
-    TextView[] views;
-    View rootView;
-    Boolean imageInserted = false;
+    private String slidetext = "";
+    private View rootView;
 
     public TextImageSlide() {
         super();
@@ -28,7 +29,6 @@ public class TextImageSlide extends Slide {
 
     public void setArguments(Bundle slidecontent) {
         super.setArguments(slidecontent);
-        TextView temp;
         slidetext = slideInfo.replace(";", "<br>");
 
     }
@@ -36,8 +36,8 @@ public class TextImageSlide extends Slide {
     @Override
     public void fillLayout() {
 //sets the displayed text
-        TextView text = (TextView) rootView.findViewById(R.id.textimageslide);
-        SlideImageGetter sig = new SlideImageGetter(text, getContext());
+        TextView text = rootView.findViewById(R.id.textimageslide);
+        SlideImageGetter sig = new SlideImageGetter(text);
         if (getContext() == null) Log.d("isnull", ":(");
         Spanned htmlspanned;
 
@@ -50,7 +50,7 @@ public class TextImageSlide extends Slide {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.layout_slide_textimage, container, false);
         fillLayout();
         return rootView;

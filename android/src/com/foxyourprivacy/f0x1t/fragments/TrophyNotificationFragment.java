@@ -13,11 +13,12 @@ import android.widget.TextView;
 import com.foxyourprivacy.f0x1t.R;
 
 /**
- * Created by Ich on 25.06.2016.
+ * Fragment that notifies the user when a trophy is achieved
+ * Created by Tim on 25.06.2016.
  */
 public class TrophyNotificationFragment extends Fragment {
-    View view; //the fragments view, useful for usages outside of onCreateView
-    String name = "default";
+    private View view; //the fragments view, useful for usages outside of onCreateView
+    private String name = "default";
 
     /**
      * @author Tim
@@ -27,10 +28,10 @@ public class TrophyNotificationFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         //and display it
-        TextView text = (TextView) view.findViewById(R.id.text_trophy_name);
-        text.setText(name + " freigeschaltet!");
+        TextView text = view.findViewById(R.id.text_trophy_name);
+        text.setText(getString(R.string.trophyunlocked, name));
 
-        ImageView trophyIcon = (ImageView) view.findViewById(R.id.image_trophy_symbol);
+        ImageView trophyIcon = view.findViewById(R.id.image_trophy_symbol);
         Drawable image;
         switch (name) {
             case "Baumhaus Kapitalist":
@@ -74,10 +75,10 @@ public class TrophyNotificationFragment extends Fragment {
 
     }
 
-    @Override
     /**
      * @author Tim
      */
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         view = inflater.inflate(R.layout.fragment_trophy_notification, container, false);
         return view;
@@ -86,7 +87,7 @@ public class TrophyNotificationFragment extends Fragment {
     /**
      * tells the fragment the information needed for this trade, called whenever this fragment gets created
      *
-     * @param arg
+     * @param arg bundle with the name of the trophy that was unlocked
      * @author Tim
      */
     public void setArguments(Bundle arg) {

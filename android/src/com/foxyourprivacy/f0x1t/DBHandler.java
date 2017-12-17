@@ -1,11 +1,6 @@
 package com.foxyourprivacy.f0x1t;
 
-/**
- * General Database-API
- * Created by noah on 29.05.16. :)
- *
- * @author: Noah
- */
+
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,8 +14,6 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,12 +23,16 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
+/**
+ * General Database-API
+ * Created by noah on 29.05.16. :)
+ *
+ * @author Noah
+ */
 public class DBHandler extends SQLiteOpenHelper {
 
     public static final String TABLE_USERDATA = "userdata";
     public static final String COLUMN_KEY = "key";
-    //file-name
-    public static final String DB_NAME = "rawdata.db";
     //column-names
     public static final String COLUMN_APPNAME = "name";
     public static final String COLUMN_PERMISSIONS = "permissions";
@@ -44,8 +41,10 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_INITIAL = "initial";
     //type: for readout - 0=String, 1=BOOLEAN, 2=int
     public static final String COLUMN_TYPE = "type";
+    //file-name
+    private static final String DB_NAME = "rawdata.db";
     //DB-Version is updated, when changes in structur apply
-    private static final int DB_VERSION = 31;
+    private static final int DB_VERSION = 32;
     //table-names
     private static final String TABLE_APPS = "apps";
     private static final String TABLE_LESSONS = "lessons";
@@ -78,12 +77,9 @@ public class DBHandler extends SQLiteOpenHelper {
      * Constructor
      *
      * @param context is most times the reference 'this' for refering
-     * @param name    name of the database
-     * @param factory in pratice, irrelevant for us. (usually given null)
-     * @param version version of the DB, for update purposes
      */
-    public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DB_NAME, factory, DB_VERSION);
+    public DBHandler(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     /**
@@ -287,7 +283,8 @@ public class DBHandler extends SQLiteOpenHelper {
      * @return a String that contains the TEXT from the parameter-table
      */
     public String printParams() {
-        String dbstring = "";
+        StringBuilder sb = new StringBuilder();
+        //String dbstring = "";
         SQLiteDatabase db = getWritableDatabase();
         // get all rows of rawdata
         String query = "SELECT * FROM " + TABLE_SETTINGS + " WHERE 1;";
@@ -298,17 +295,23 @@ public class DBHandler extends SQLiteOpenHelper {
         while (!c.isAfterLast()) {
             //append all info from the row to the String where there is a parameter name
             if (c.getString(c.getColumnIndex(COLUMN_SETTING)) != null) {
-                dbstring += c.getString(c.getColumnIndex(COLUMN_SETTING)) + " " +
+                sb.append(c.getString(c.getColumnIndex(COLUMN_SETTING)));
+                sb.append(" ");
+                sb.append(c.getString(c.getColumnIndex(COLUMN_TYPE)));
+                sb.append(" ");
+                sb.append(c.getString(c.getColumnIndex(COLUMN_INITIAL)));
+                sb.append("\n");
+               /* dbstring += c.getString(c.getColumnIndex(COLUMN_SETTING)) + " " +
                         c.getString(c.getColumnIndex(COLUMN_TYPE)) + " " +
                         c.getString(c.getColumnIndex(COLUMN_INITIAL));
                 //append newline
-                dbstring += "\n";
+                dbstring += "\n"; */
             }
             c.moveToNext();
         }
         c.close();
         db.close();
-        return dbstring;
+        return sb.toString();
     }
 
     /**
@@ -317,7 +320,8 @@ public class DBHandler extends SQLiteOpenHelper {
      * @return a String that contains the TEXT from the app-table
      */
     public String printApps() {
-        String dbstring = "";
+        StringBuilder sb = new StringBuilder();
+        // String dbstring = "";
         SQLiteDatabase db = getWritableDatabase();
         // get all rows of apps
         String query = "SELECT * FROM " + TABLE_APPS + " WHERE 1;";
@@ -328,17 +332,27 @@ public class DBHandler extends SQLiteOpenHelper {
         while (!c.isAfterLast()) {
             //append all info from the row to the String where there is a parameter name
             if (c.getString(c.getColumnIndex(COLUMN_APPNAME)) != null) {
+                sb.append(c.getString(c.getColumnIndex(COLUMN_APPNAME)));
+                sb.append(" ");
+                sb.append(c.getString(c.getColumnIndex(COLUMN_PERMISSIONS)));
+                sb.append(" ");
+                sb.append(c.getString(c.getColumnIndex(COLUMN_APPDESCRIPTION)));
+                sb.append("\n");
+
+                /*
                 dbstring += c.getString(c.getColumnIndex(COLUMN_APPNAME)) + " " +
                         c.getString(c.getColumnIndex(COLUMN_PERMISSIONS)) + " " +
                         c.getString(c.getColumnIndex(COLUMN_APPDESCRIPTION));
                 //append newline
                 dbstring += "\n";
+                */
+
             }
             c.moveToNext();
         }
         c.close();
         db.close();
-        return dbstring;
+        return sb.toString();
     }
 
     /**
@@ -417,7 +431,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<ClassObject> getClasses() {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CLASSES + " WHERE 1;", null);
-        ArrayList<ClassObject> result = new ArrayList<ClassObject>();
+        ArrayList<ClassObject> result = new ArrayList<>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             result.add(new ClassObject(cursor.getString(cursor.getColumnIndex(COLUMN_CLASSNAME)),
@@ -487,7 +501,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_LESSONS + " WHERE "
                 + COLUMN_CLASS + "=\'" + className + "\' AND " + COLUMN_STATUS + " IS NOT -99", null);
-        ArrayList<LessonObject> result = new ArrayList<LessonObject>();
+        ArrayList<LessonObject> result = new ArrayList<>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             result.add(new LessonObject(
@@ -856,13 +870,6 @@ public class DBHandler extends SQLiteOpenHelper {
         return "There is no new Lession";
     }
 
-    public void uploadDB() {
-        try {
-            URL url = new URL("https://app.seafile.de/u/d/4a569e6c81/");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void exportDB() {
         Log.d("DBHandler", "exporting DB");

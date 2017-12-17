@@ -8,22 +8,22 @@
         android:id="@+id/goBack"
         android:layout_gravity="left"
         android:icon="@drawable/back"
-        android:title="Zurück"
+        android:title="@string/back"
         android:visible="true"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/goOn"
         android:icon="@drawable/forward"
-        android:title="Weiter"
+        android:title="@string/forward"
         android:visible="true"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_options"
         android:icon="@drawable/ic_more_vert_white_48dp"
         android:title="@string/action_options"
         android:visible="true"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
 </menu>

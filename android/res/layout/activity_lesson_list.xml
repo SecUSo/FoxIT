@@ -4,8 +4,8 @@
     android:id="@+id/count_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:clickable="true">
+    android:clickable="true"
+    android:focusable="true">
 
     <include layout="@layout/toolbar_actionbar" />
 
@@ -28,13 +28,14 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/underToolbar2"
         android:background="@color/colorPrimaryDark"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <TextView
             android:id="@+id/text_percentage_solved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/image_app_icon"
+            android:layout_alignBottom="@+id/image_class_icon"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="18dp"
             android:maxHeight="50dp"
@@ -64,7 +65,7 @@
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:adjustViewBounds="true"
-            android:contentDescription="Kurslogo"
+            android:contentDescription="@string/classsymbol"
             android:longClickable="false"
             android:maxHeight="40dp"
             android:maxWidth="40dp"
@@ -100,7 +101,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:contentDescription="Kursbeschreibung"
+            android:contentDescription="@string/classdescription"
             android:maxHeight="10dp"
             android:src="@drawable/ic_more_vert_white_48dp_vertical" />
     </RelativeLayout>

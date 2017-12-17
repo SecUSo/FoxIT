@@ -9,21 +9,24 @@ import com.foxyourprivacy.f0x1t.DBHandler;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 import com.foxyourprivacy.f0x1t.activities.AnalysisResults;
 
+import java.lang.ref.WeakReference;
+
 /**
+ * async task that gets called from ExternAnalysis to continue the views for the user
  * Created by noah on 11/9/16.
  */
 
-public class GetSettingsAsync extends AsyncTask<Void, Void, String[]> {
+class GetSettingsAsync extends AsyncTask<Void, Void, String[]> {
 
-    Context context;
+    private final WeakReference<Context> context;
 
     public GetSettingsAsync(Context con) {
-        context = con;
+        context = new WeakReference<>(con);
     }
 
     @Override
     protected String[] doInBackground(Void... voids) {
-        DBHandler dbHandler = new DBHandler(context, null, null, 1);
+        DBHandler dbHandler = new DBHandler(context.get());
         String[] result = dbHandler.getSettingsFromDB();
         //dbHandler.insertIndividualValue("firstrun","true");
         ValueKeeper v = ValueKeeper.getInstance();
@@ -36,14 +39,14 @@ public class GetSettingsAsync extends AsyncTask<Void, Void, String[]> {
     @Override
     protected void onPostExecute(final String[] strings) {
         super.onPostExecute(strings);
-        // Timer: Open AnalysisResults after 7 Seconds
+        // Timer: Open AnalysisResults after 3 Seconds
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(context.getApplicationContext(), AnalysisResults.class);
+                Intent i = new Intent(context.get().getApplicationContext(), AnalysisResults.class);
                 i.putExtra("settings", strings);
-                context.startActivity(i);
+                context.get().startActivity(i);
             }
         }, 3000L);
     }

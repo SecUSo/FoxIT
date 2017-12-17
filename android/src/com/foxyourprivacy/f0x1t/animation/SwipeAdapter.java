@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 /**
+ * This SwipeAdapter is used in the fox animation activity to control the buttons for animation selection.
  * Created by Lynn on 05.01.2017.
  */
 

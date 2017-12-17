@@ -4,7 +4,8 @@
 
     android:id="@+id/count_frame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/creme">
 
     <include layout="@layout/toolbar_actionbar"/>
 
@@ -25,18 +26,20 @@
         android:backgroundTintMode="src_atop" />
 
     <RelativeLayout
-        android:id="@+id/trophy_frame"
+        android:id="@+id/animation_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tabs"></RelativeLayout>
+        android:layout_below="@+id/tabs" />
 
     <RelativeLayout
         android:id="@+id/big_trophy_view_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tabs"
         android:background="#aad4d4d4"
-        android:visibility="gone"></RelativeLayout>
+        android:visibility="gone" />
 
 
 </RelativeLayout>

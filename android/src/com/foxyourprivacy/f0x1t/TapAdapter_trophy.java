@@ -10,16 +10,16 @@ import com.foxyourprivacy.f0x1t.fragments.TrophyListFragment;
 
 
 /**
+ * Class which defines the Tabs in TrophyRoomActivity
  * Created by Tim on 04.08.2016.
  */
 
-//Class which defines the Tabs in TrophyRoomActivity
 public class TapAdapter_trophy extends FragmentPagerAdapter {
 
-    Activity activity; //reference to TrophyRoomActivity
+    private final Activity activity; //reference to TrophyRoomActivity
 
     /**
-     * @param fm
+     * @param fm the fragment manager to use
      * @param activity reference to AnalysisResults
      * @author Tim
      */
@@ -32,7 +32,7 @@ public class TapAdapter_trophy extends FragmentPagerAdapter {
      * Fills the TabAdapter with the Fragments to be displayed
      *
      * @param position describes which tab is pressed
-     * @return
+     * @return Fragment that belongs on that position
      * @author Tim
      */
 

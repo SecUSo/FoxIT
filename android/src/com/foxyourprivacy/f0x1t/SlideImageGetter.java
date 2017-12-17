@@ -1,6 +1,5 @@
 package com.foxyourprivacy.f0x1t;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.Html;
@@ -13,17 +12,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
+ * This is the latest class that loads the image from an url into TextImageSlides (asychronously).
  * Created by noah on 13.09.17.
  */
 
 public class SlideImageGetter implements Html.ImageGetter {
-    Context con;
-    TextView container;
+    private final TextView container;
 
 
-    public SlideImageGetter(TextView v, Context context) {
+    public SlideImageGetter(TextView v) {
         container = v;
-        con = context;
     }
 
     @Override
@@ -38,7 +36,7 @@ public class SlideImageGetter implements Html.ImageGetter {
     }
 
     private class AsyncDrawableLoader extends AsyncTask<String, Void, Drawable> {
-        DownloadDrawable ddrawable;
+        final DownloadDrawable ddrawable;
 
         public AsyncDrawableLoader(DownloadDrawable dd) {
             this.ddrawable = dd;

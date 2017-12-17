@@ -20,9 +20,6 @@ public class AnalysisResults extends FoxITActivity {
 
     public ViewPager mViewPager; //defines the tabView's content
     public PermissionListFragment permissionList;
-    TapAdapter_results adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
-    String settingsArray[]; //array with settings fetched from the database
-    Toolbar toolbar; //reference to the toolbar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,22 +27,22 @@ public class AnalysisResults extends FoxITActivity {
         setContentView(R.layout.activity_start_screen);
 
         //sets our toolbar as the actionbar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
 
         //get Settings from DB into ListView
-        settingsArray = getIntent().getStringArrayExtra("settings");
+        String[] settingsArray = getIntent().getStringArrayExtra("settings");
 
         //defining the tabs and the tab bar
-        adapter = new TapAdapter_results(getFragmentManager(), this, settingsArray);
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        TapAdapter_results adapter = new TapAdapter_results(getFragmentManager(), settingsArray);
+        mViewPager = findViewById(R.id.pager);
         mViewPager.setAdapter(adapter);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
 
         //defining an event for clicking the tab bar, this is necessary for hiding the permissionList in case the tabBar is pressed
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
             //if a new tab is pressed
@@ -122,7 +119,7 @@ public class AnalysisResults extends FoxITActivity {
                 permissionList = null;
             }
             getFragmentManager().popBackStack(); //destroy it
-            FrameLayout appFrame = (FrameLayout) findViewById(R.id.appFrame);
+            FrameLayout appFrame = findViewById(R.id.appFrame);
             appFrame.setVisibility(View.VISIBLE); //and make the appList visible
             mViewPager.setVisibility(View.VISIBLE);
 
@@ -138,7 +135,7 @@ public class AnalysisResults extends FoxITActivity {
      * @author Tim
      */
     public void setScrollMessageVisiblility(boolean isVisible) {
-        RelativeLayout scrollMessage = (RelativeLayout) findViewById(R.id.hintFrame);
+        RelativeLayout scrollMessage = findViewById(R.id.hintFrame);
         if (isVisible) {
             scrollMessage.setVisibility(View.VISIBLE);
         } else {
@@ -146,12 +143,11 @@ public class AnalysisResults extends FoxITActivity {
         }
     }
 
-    @Override
     /**
      * overrides the behavior of the backButton for it to properly support Fragments and Fragments in Fragments (ChildFragments)
      * @author Tim
      */
-
+    @Override
     public void onBackPressed() {
         //if there is an fragment
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
@@ -164,7 +160,7 @@ public class AnalysisResults extends FoxITActivity {
                     permissionList = null;
                 }
                 getSupportFragmentManager().popBackStack(); //destroy PermissionListFragment
-                FrameLayout appFrame = (FrameLayout) findViewById(R.id.appFrame);
+                FrameLayout appFrame = findViewById(R.id.appFrame);
                 appFrame.setVisibility(View.VISIBLE); //make the hidden appList visible again
                 mViewPager.setVisibility(View.VISIBLE);
             }

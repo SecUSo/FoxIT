@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bp.Home">
+    android:background="@color/creme"
+    tools:context="com.foxyourprivacy.f0x1t.activities.OnboardingActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/creme">
+
 
         <ImageView
             android:layout_width="100dp"
@@ -16,7 +14,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="107dp"
-            android:contentDescription="Akademischer Hut"
+            android:contentDescription="@string/academicHat"
             android:src="@drawable/lesson" />
 
         <ImageView
@@ -26,7 +24,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="#00ffff00"
-            android:contentDescription="2. von 4 Punkten"
+            android:contentDescription="@string/onboardigProgress2"
             android:src="@mipmap/newdots2">
 
         </ImageView>
@@ -38,7 +36,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="230dp"
-            android:text="Erweitere deinen Horizont!"
+            android:text="@string/onboarding2text1"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -48,10 +46,9 @@
             android:layout_below="@id/LessonText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="Verschaffe dir Wissen zum Thema Privatsphäre! Lerne mit unseren Lektionen wie du versteckte Berechtigungen findest, wie du anonym bleiben kannst und vieles mehr!"
+            android:text="@string/onboarding2text2"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    </RelativeLayout>
 
 </RelativeLayout>

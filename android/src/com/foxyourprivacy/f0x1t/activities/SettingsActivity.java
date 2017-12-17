@@ -19,6 +19,7 @@ import com.foxyourprivacy.f0x1t.asynctasks.DBWrite;
 import com.foxyourprivacy.f0x1t.fragments.SettingsFragment;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,13 +28,11 @@ import java.util.ArrayList;
 
 public class SettingsActivity extends FoxITActivity {
 
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
 
         //Fragment is created
@@ -48,7 +47,7 @@ public class SettingsActivity extends FoxITActivity {
 
     }
 
-    public ArrayList readCSV(int input, Context context) {
+    private ArrayList readCSV(int input, Context context) {
         InputStream is = context.getResources().openRawResource(input);
         ArrayList result = new ArrayList();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -61,42 +60,34 @@ public class SettingsActivity extends FoxITActivity {
         } catch (IOException e) {
             throw new RuntimeException("CSV file couldn't be read properly: " + e);
         } finally {
-            try {
-                is.close();
-                br.close();
-            } catch (IOException e) {
-                throw new RuntimeException("Input Stream couldn't be closed properly: " + e);
-            }
+            cleanup(is);
+            cleanup(br);
         }
         return result;
 
     }
 
-    public ArrayList readLessionCSV(int input, Context context) {
+    private ArrayList readLessonCSV(int input, Context context) {
         InputStream is = context.getResources().openRawResource(input);
         ArrayList result = new ArrayList();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         try {
             String templine;
-            String csvrow = "";
+            StringBuilder sb = new StringBuilder();
             while ((templine = br.readLine()) != null) {
-                csvrow += templine;
+                sb.append(templine);
                 if (templine.matches(".*;;;")) {
-                    String[] rowarray = csvrow.split(";");
+                    String[] rowarray = sb.toString().split(";");
                     result.add(rowarray);
                     // Log.d("SettingsActivity", "row: " + csvrow);
-                    csvrow = "";
+                    sb.setLength(0);
                 }
             }
         } catch (IOException e) {
             throw new RuntimeException("CSV file couldn't be read properly: " + e);
         } finally {
-            try {
-                is.close();
-                br.close();
-            } catch (IOException e) {
-                throw new RuntimeException("Input Stream couldn't be closed properly: " + e);
-            }
+            cleanup(is);
+            cleanup(br);
         }
         return result;
 
@@ -134,12 +125,12 @@ public class SettingsActivity extends FoxITActivity {
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
             String URL = "https://foxit.secuso.org/CSVs/raw/permissions.csv";//"https://app.seafile.de/f/740b44b607/?raw=1";
-            new CSVUpdateTask(context).execute(URL, "permissions", readCSV(R.raw.permissions, context));
+            new CSVUpdateTask().execute(context, URL, "permissions", readCSV(R.raw.permissions, context));
 
         } else {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
-            new DBWrite(context).execute("updatePermissions", readCSV(R.raw.permissions, context));
+            new DBWrite().execute(context, "updatePermissions", readCSV(R.raw.permissions, context));
         }
 
     }
@@ -150,17 +141,17 @@ public class SettingsActivity extends FoxITActivity {
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
             String URL = "https://foxit.secuso.org/CSVs/raw/lektionen.csv";//"https://app.seafile.de/f/e27034ec0a/?raw=1";
-            new CSVUpdateTask(context).execute(URL, "lessions", readLessionCSV(R.raw.lektionen, context));
+            new CSVUpdateTask().execute(context, URL, "lessions", readLessonCSV(R.raw.lektionen, context));
             URL = "https://foxit.secuso.org/CSVs/raw/classes.csv";//"https://app.seafile.de/f/7ca81fac4e/?raw=1";
-            new CSVUpdateTask(context).execute(URL, "classes", readCSV(R.raw.classes, context));
+            new CSVUpdateTask().execute(context, URL, "classes", readCSV(R.raw.classes, context));
 
         } else {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
             //DBHandler dbHandler = new DBHandler(context, null, null, 1);
-            new DBWrite(context).execute("updateLessons", readLessionCSV(R.raw.testcsv, context));
+            new DBWrite().execute(context, "updateLessons", readLessonCSV(R.raw.testcsv, context));
             //dbHandler.updateLessons(readCSV(R.raw.lektionen, context));
-            new DBWrite(context).execute("updateClasses", readCSV(R.raw.classes, context));
+            new DBWrite().execute(context, "updateClasses", readCSV(R.raw.classes, context));
             //dbHandler.updateClasses(readCSV(R.raw.classes, context));
             //dbHandler.close();
         }
@@ -172,25 +163,24 @@ public class SettingsActivity extends FoxITActivity {
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
             String URL = "https://foxit.secuso.org/CSVs/raw/sdescription.csv";//"https://app.seafile.de/f/bb0071411b/?raw=1";
-            new CSVUpdateTask(context).execute(URL, "settings", readCSV(R.raw.sdescription, context));
+            new CSVUpdateTask().execute(context, URL, "settings", readCSV(R.raw.sdescription, context));
 
         } else {
             //fallback on local data provided by apk
             Log.d("SettingsActivity: ", "no internet connection");
-            new DBWrite(context).execute("updateSettingDescriptions", readCSV(R.raw.sdescription, context));
+            new DBWrite().execute(context, "updateSettingDescriptions", readCSV(R.raw.sdescription, context));
         }
     }
 
 
-    @Override
     /**
      * overrides the behavior of the backButton for it to properly support Fragments and Fragments in Fragments (ChildFragments)
      * @author Tim
      */
-
+    @Override
     public void onBackPressed() {
         //if there is an fragment
-        RelativeLayout firstFragmentFrame = (RelativeLayout) findViewById(R.id.first_fragment_frame);
+        RelativeLayout firstFragmentFrame = findViewById(R.id.first_fragment_frame);
 
 
         if (firstFragmentFrame.getVisibility() == View.GONE) {
@@ -200,6 +190,16 @@ public class SettingsActivity extends FoxITActivity {
         } else {//if no fragments exist behave normal
             super.onBackPressed();
         }
+    }
+
+    private void cleanup(Closeable stream) {
+        try {
+            stream.close();
+        } catch (IOException e) {
+            Log.d("SettingsActivity", "Input Stream couldn't be closed properly");
+            e.printStackTrace();
+        }
+
     }
 
 

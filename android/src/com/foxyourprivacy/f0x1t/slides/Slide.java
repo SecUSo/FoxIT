@@ -3,20 +3,21 @@ package com.foxyourprivacy.f0x1t.slides;
 import android.os.Bundle;
 
 /**
+ * Slides are the base of lessons, there are different kinds of slides which all inherit from this class.
  * Created by Tim on 25.06.2016.
  */
 public abstract class Slide extends android.support.v4.app.Fragment {
-    //Strings which describes which slide shall be next, null if its the succeeding number
-    public int nextSlide = -99;
-    public int backSlide = -99;
     public String type = "textimage";
     protected String slideInfo;
+    //Strings which describes which slide shall be next, null if its the succeeding number
+    private int nextSlide = -99;
+    private int backSlide = -99;
 
-    @Override
     /**
      * Enables to pass arguments to the fragment
      * @author Tim
      */
+    @Override
     public void setArguments(Bundle arg) {
         //fetches the slide information
         slideInfo = arg.getString("slide");
@@ -27,6 +28,7 @@ public abstract class Slide extends android.support.v4.app.Fragment {
     }
 
     public int next() {
+
         return nextSlide;
     }
 

@@ -3,6 +3,7 @@ package com.foxyourprivacy.f0x1t.fragments;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,27 +14,30 @@ import android.widget.TextView;
 import com.foxyourprivacy.f0x1t.R;
 
 /**
+ * This fragment is used in the settings and answers basic questions of the user
  * Created by Tim on 11.06.2016.
  */
 public class FAQFragment extends ListFragment implements AdapterView.OnItemClickListener {
-    String[] questionArray = {"Wo kann ich Wünsche oder Verbesserungsvorschläge abgeben?;" +
-            "Du kannst uns gerne unter foxit@psychologie.tu-darmstadt.de kontaktieren! Wir helfen gerne und sind für alle Anmerkungen dankbar!",
-            "Warum ein Fuchs?;Füchse stehen für Intelligenz und Klugheit. Außerdem sind sie neugierig und schnüffeln viel herum. Auch wir buddeln uns durch Einstellungen und Funktionen und machen dich so mit dem Thema Datensicherheit vertraut.",
-            "Was bringen mir die Einstellungs-und App-Listen?;Im Großen und Ganzen spiegelt sich hier deine Privatsphäre am Smartphone wider. Gut erklärt wird dies im Kurs “Erstes Tapsen”.",
-            "Was bedeutet Privacy Paradox?;Das Privacy Paradox beschreibt den Zwiespalt zwischen dem Wunsch nach Privatsphäre und der sozialen Entfaltung sowie praktischem Nutzen.",
-            "Was sind Trophäen?;Trophäen sind kleine Aufmerksamkeiten die du dafür erhälst, wie du die App nutzt. Sie schalten sich automatisch frei, wenn du bestimmte Check-Points erreicht hast.",
-            "Wieso kann ich nicht alle Lektionen sofort bearbeiten?;Falsch bearbeitete Lektionen werden für einen bestimmten Zeitraum gesperrt, damit du noch einmal in Ruhe über alle Fragen nachdenken kannst. :)",
-            "Wie funktioniert das Punktesystem?;Für vollständig und richtig bearbeitete Lektionen bekommst du Eicheln und Pilze. Eicheln kannst du dafür verwenden, neue Animationen für den Fuchs freizuschalten. Mit Pilzen kannst du gesperrte Lektionen freischalten.",
-            "Ich habe Probleme mit der App, was soll ich tun?;Da unsere App ein Prototyp ist und es sicherlich noch viele unentdeckte Fehler gibt, erstmal Ruhe bewaren. In diesem Fall kontaktiere uns am Besten über foxit@psychologie.tu-darmstadt.de!"};
+    private final String[] questionArray = {
+            getString(R.string.faqq1) + getString(R.string.faqa1),
+            getString(R.string.faqq2) + getString(R.string.faqa2),
+            getString(R.string.faqq3) + getString(R.string.faqa3),
+            getString(R.string.faqq4) + getString(R.string.faqa4),
+            getString(R.string.faqq5) + getString(R.string.faqa5),
+            getString(R.string.faqq6) + getString(R.string.faqa6),
+            getString(R.string.faqq7) + getString(R.string.faqa7),
+            getString(R.string.faqq8) + getString(R.string.faqa8),
 
-    Context context;
-    boolean[] isAnswerVisible;
+    };
+
+    private Context context;
+    private boolean[] isAnswerVisible;
     private MyListAdapter_permission adapter;
 
-    @Override
     /**fills the fragments layout and provides behavior for the permissionHeadline
      * @author Tim
      */
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         context = getActivity().getApplicationContext();
         View itemView = getActivity().getLayoutInflater().inflate(R.layout.fragment_faq, container, false);
@@ -43,10 +47,10 @@ public class FAQFragment extends ListFragment implements AdapterView.OnItemClick
     }
 
 
-    @Override
     /** defines the listView
      * @author Tim
      */
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         //filling the listView with data
         super.onActivityCreated(savedInstanceState);
@@ -57,11 +61,11 @@ public class FAQFragment extends ListFragment implements AdapterView.OnItemClick
     }
 
 
-    @Override
     /**
      * on Item Click the permissionDescriptionFragment is created
      * @author Tim
      */
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         if (isAnswerVisible[position]) {
@@ -96,17 +100,18 @@ public class FAQFragment extends ListFragment implements AdapterView.OnItemClick
          * @author Tim
          */
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        @NonNull
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             if (itemView == null) {
                 itemView = getActivity().getLayoutInflater().inflate(R.layout.layout_faq, parent, false);
             }
 
-            TextView question = (TextView) itemView.findViewById(R.id.text_question);
+            TextView question = itemView.findViewById(R.id.text_question);
             question.setText(questionArray[position].substring(0, questionArray[position].indexOf(";")));
 
-            TextView answer = (TextView) itemView.findViewById(R.id.text_answer);
+            TextView answer = itemView.findViewById(R.id.text_answer);
             answer.setText(questionArray[position].substring(questionArray[position].indexOf(";") + 1, questionArray[position].length()));
 
             if (isAnswerVisible[position]) {

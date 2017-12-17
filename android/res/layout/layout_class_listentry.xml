@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="false"
-    android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/relativeClassLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="false">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeClassLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false">
 
         <ImageView
             android:id="@+id/image_class_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp"
             android:layout_marginTop="5dp"
             android:adjustViewBounds="true"
-            android:contentDescription="Lektions-Anzeige"
+            android:contentDescription="@string/classsymbol"
             android:maxHeight="70dp"
             android:maxWidth="70dp"
             android:src="@mipmap/ring" />
@@ -29,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/image_class_icon"
             android:gravity="center_vertical"
             android:minHeight="40dp"
@@ -44,9 +40,9 @@
             android:layout_alignParentEnd="true"
             android:maxLines="1"
             android:paddingBottom="3dp"
-            android:paddingRight="6dp"
-            android:text="solvedLessons"
+            android:paddingEnd="6dp"
+            android:paddingStart="2dp"
+            android:text="@string/solvedLessons"
             android:textStyle="normal|bold" />
     </RelativeLayout>
 
-</LinearLayout>

@@ -11,21 +11,15 @@ import android.widget.TextView;
 import com.foxyourprivacy.f0x1t.R;
 
 /**
- * Created by Ich on 25.06.2016.
+ * Fragment to view the trophy images in big, when they are achieved and clicked on
+ * Created by Tim on 25.06.2016.
  */
 public class BigTrophyViewFragment extends Fragment {
-    String trophyName; //the name of the described trophy
-    String trophyDescription;
-    int icon;
+    private String trophyName; //the name of the described trophy
+    private String trophyDescription;
+    private int icon;
 
-    /**
-     * @param savedInstanceState
-     * @author Tim
-     */
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
+
 
     /**
      * setts the name and image of the trophy view
@@ -34,32 +28,32 @@ public class BigTrophyViewFragment extends Fragment {
      * @param container
      * @param saveInstanceState
      * @return
-     * @autor Tim
+     * @author Tim
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.fragment_big_trophy_view, container, false);
-        TextView trophyName = (TextView) view.findViewById(R.id.text_trophy_name);
+        TextView trophyName = view.findViewById(R.id.text_trophy_name);
         trophyName.setText(this.trophyName);
 
-        TextView trophyText = (TextView) view.findViewById(R.id.text_trophy_describtion);
+        TextView trophyText = view.findViewById(R.id.text_trophy_description);
         trophyText.setText(trophyDescription);
 
-        ImageView trophyIcon = (ImageView) view.findViewById(R.id.image_acorn_symbol);
+        ImageView trophyIcon = view.findViewById(R.id.image_acorn_symbol);
         trophyIcon.setImageResource(icon);
 
         return view;
     }
 
-    @Override
     /**
      * Enables to pass arguments to the fragment
      * @author Tim
      */
+    @Override
     public void setArguments(Bundle arg) {
         trophyName = arg.getString("trophyName");
         icon = arg.getInt("icon");
-        trophyDescription = arg.getString("trophyDescribtion");
+        trophyDescription = arg.getString("trophyDescription");
     }
 
 }

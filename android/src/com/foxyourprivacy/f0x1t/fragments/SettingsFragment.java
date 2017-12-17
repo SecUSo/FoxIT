@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,23 +25,20 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * This Fragment is the first one that is shown in settings.
+ * From here the user can select different options.
  * Created by Hannah on 24.09.2016.
  */
 public class SettingsFragment extends ListFragment implements AdapterView.OnItemClickListener {
-    String settingsText; //the setting described by the fragment
-    int icon;
-    View view;
-    String theAnalysisEntry = "Analyse wiederholen";
-    Context context;
-    String[] profileListItems = {
-            "Analyse wiederholen",
-            "Hilfe",
-            "Impressum",
-            "Debugging",
-            "Rechtliche Informationen"
+    private final String[] profileListItems = {
+            getString(R.string.reAnalyse),
+            getString(R.string.help),
+            getString(R.string.Impressum),
+            getString(R.string.debugging),
+            getString(R.string.legalInfo)
     };
-    HashMap<String, Fragment> fragmentList = new HashMap<>();
-
+    private final HashMap<String, Fragment> fragmentList = new HashMap<>();
+    private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,25 +49,25 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
-        fragmentList.put("Persönliche Daten", new ProfilFragment());
-        fragmentList.put("Analyse wiederholen", new LegalInformationFragment());
-        fragmentList.put("Hilfe", new FAQFragment());
-        fragmentList.put("Impressum", new LegalInformationFragment());
-        fragmentList.put("Debugging", new CSVRefreshFragment());
-        fragmentList.put("Rechtliche Informationen", new LegalInformationFragment_libGDX());
+        fragmentList.put(getString(R.string.personalData), new ProfileFragment());
+        fragmentList.put(getString(R.string.reAnalyse), new LegalInformationFragment());
+        fragmentList.put(getString(R.string.help), new FAQFragment());
+        fragmentList.put(getString(R.string.Impressum), new LegalInformationFragment());
+        fragmentList.put(getString(R.string.debugging), new CSVRefreshFragment());
+        fragmentList.put(getString(R.string.legalInfo), new LegalInformationFragment_libGDX());
 
         context = getActivity().getApplicationContext();
         List<String> profileList = new ArrayList<>(Arrays.asList(profileListItems));
 
 
-        view = inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ValueKeeper v = ValueKeeper.getInstance();
-        TextView vpnCode = (TextView) view.findViewById(R.id.textViewVPNCODE);
+        TextView vpnCode = view.findViewById(R.id.textViewVPNCODE);
         vpnCode.setText(v.getUsername());
         int versionCodeInt = BuildConfig.VERSION_CODE;
         String versionName = BuildConfig.VERSION_NAME;
-        TextView versionCode = (TextView) view.findViewById(R.id.textViewVersion);
-        versionCode.setText(versionName + "(" + versionCodeInt + ")");
+        TextView versionCode = view.findViewById(R.id.textViewVersion);
+        versionCode.setText(getString(R.string.versionDisplay, versionName, versionCodeInt));
 
         return view;
     }
@@ -77,6 +75,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        String theAnalysisEntry = getString(R.string.reAnalyse);
         if (profileListItems[position].equals(theAnalysisEntry)) {
             //add the TradeRequestFragment to the activity's context
             FragmentManager manager = getFragmentManager();
@@ -100,7 +99,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
                 transaction = transaction.addToBackStack("setting");
                 transaction.commit();
 
-                RelativeLayout firstFragment = (RelativeLayout) getActivity().findViewById(R.id.first_fragment_frame);
+                RelativeLayout firstFragment = getActivity().findViewById(R.id.first_fragment_frame);
                 firstFragment.setVisibility(View.GONE);
             }
         }
@@ -108,10 +107,10 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
     }
 
 
-    @Override
     /** defines the listView
      * @author Tim
      */
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         //filling the listView with data
         super.onActivityCreated(savedInstanceState);
@@ -123,17 +122,17 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
 
     }
 
-    /**
-     * @Override /**
-     * Enables to pass arguments to the fragment
-     * @author Tim
-     * <p>
-     * public void setArguments(Bundle arg){
-     * <p>
-     * onboardingText=arg.getString("onboardingText");
-     * icon=arg.getInt("icon");
-     * }
-     */
+//    /**
+//     * Enables to pass arguments to the fragment
+//     * @author Tim
+//     * <p>
+//     */
+//     @Override
+//     public void setArguments(Bundle arg){
+//         onboardingText=arg.getString("onboardingText");
+//         icon=arg.getInt("icon");
+//     }
+
 
 
     /**
@@ -157,7 +156,8 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
          * @author Tim
          */
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        @NonNull
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             if (itemView == null) {
@@ -165,7 +165,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
             }
 
 
-            TextView fragmentName = (TextView) itemView.findViewById(R.id.text_fragment_name);
+            TextView fragmentName = itemView.findViewById(R.id.text_fragment_name);
             fragmentName.setText(profileListItems[position]);
 
 

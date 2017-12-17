@@ -3,7 +3,7 @@ package com.foxyourprivacy.f0x1t.activities;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,10 +21,7 @@ import static com.foxyourprivacy.f0x1t.R.id.view_pager;
  * kicks off the animation
  * includes android toolbar design
  */
-public class AnimationLauncher extends ActionBarActivity implements AndroidFragmentApplication.Callbacks {
-
-    Toolbar toolbar;
-    ViewPager viewPager;
+public class AnimationLauncher extends AppCompatActivity implements AndroidFragmentApplication.Callbacks {
 
     /**
      * start animation via static fragment implementation
@@ -37,28 +34,28 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
 
-        viewPager = (ViewPager) findViewById(view_pager);
+        ViewPager viewPager = findViewById(view_pager);
         SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager());
         viewPager.setAdapter(swipeAdapter);
         viewPager.addOnPageChangeListener(new CircularViewPagerHandler(viewPager));
 
         getWindow().getDecorView().setBackgroundColor(Color.WHITE);
         // show toolbar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
 
         //erste Animation bereits beim starten anzeigen
         AnimationTail tail = new AnimationTail();
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.tale, tail, "animationTale");
+        transaction.add(R.id.tail, tail, "animationTale");
         transaction.commit();
-        findViewById(R.id.tale).setVisibility(VISIBLE);
+        findViewById(R.id.tail).setVisibility(VISIBLE);
     }
 
     /**
      * show back button
      *
-     * @param menu
+     * @param menu optionsmenu which is referenced and manipulated
      * @return
      */
     @Override
@@ -74,7 +71,7 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
     /**
      * make backButton working correctly
      *
-     * @param item
+     * @param item which was selected and called the method
      * @return
      */
     @Override
@@ -92,10 +89,6 @@ public class AnimationLauncher extends ActionBarActivity implements AndroidFragm
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 
     @Override
     public void exit() {

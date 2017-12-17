@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:background="@color/creme"
+    tools:context="com.foxyourprivacy.f0x1t.activities.OnboardingActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/creme">
 
         <ImageView
             android:layout_width="100dp"
@@ -16,7 +15,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="107dp"
-            android:contentDescription="Profil-Symbol"
+            android:contentDescription="@string/profileSymbol"
             android:src="@drawable/account" />
 
         <ImageView
@@ -26,7 +25,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="#00ffff00"
-            android:contentDescription="4. von 4 Punkten"
+            android:contentDescription="@string/onboardigProgress4"
             android:src="@mipmap/newdots4">
 
         </ImageView>
@@ -38,7 +37,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="230dp"
-            android:text="Scanne dein Smartphone"
+            android:text="@string/onboarding4text1"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -48,7 +47,7 @@
             android:layout_below="@id/AnalyseText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="Erfahre alles über die aktuellen Einstellungen und Berechtigungen der Apps, die du gerade verwendest!"
+            android:text="@string/onboarding4text2"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -59,8 +58,7 @@
             android:layout_above="@+id/imageView2"
             android:layout_centerHorizontal="true"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="Los geht's!" />
+            android:text="@string/letsgo" />
 
-    </RelativeLayout>
 
 </RelativeLayout>

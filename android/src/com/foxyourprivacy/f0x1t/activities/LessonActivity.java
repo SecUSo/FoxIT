@@ -37,15 +37,12 @@ import java.util.HashMap;
  */
 public class LessonActivity extends FoxITActivity {
     public LessonObject lesson;
-    int slideNumber = 0;
-    Toolbar toolbar;
-    boolean didEvaluationStart = false;
     boolean isEvaluation = false;
-    String className = "nothing";
-    String[] slideStringArray;
-
-    HashMap<String, String> evaluationResults = new HashMap<>();
-    Handler handler;
+    boolean didEvaluationStart = false;
+    private int slideNumber = 0;
+    private String className = "nothing";
+    private HashMap<String, String> evaluationResults = new HashMap<>(); //inspection wants final because changing methods are not called now without proper evaluations
+    private Handler handler;
 
     /**
      * @author Tim
@@ -57,14 +54,14 @@ public class LessonActivity extends FoxITActivity {
         setContentView(R.layout.activity_lesson_activity);
 
         lesson = getIntent().getExtras().getParcelable("lesson");
-        slideStringArray = lesson.getSlides().split("_slide_;");
+        String[] slideStringArray = lesson.getSlides().split("_slide_;");
         className = getIntent().getStringExtra("classname");
 
 
         lesson.slidearray = new Slide[slideStringArray.length];
         int i = 0;
         for (String slideString : slideStringArray) {
-            if (slideString.startsWith(" ")) slideString.replaceFirst(" ", "");
+            if (slideString.startsWith(" ")) slideString = slideString.replaceFirst(" ", "");
             Bundle args = new Bundle();
             args.putString("slide", slideString);
             lesson.slidearray[i] = createSlide(slideString);
@@ -75,7 +72,7 @@ public class LessonActivity extends FoxITActivity {
         handler = new Handler();
 
         // sets our toolbar as the actionbar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
         if (toolbar != null) {
             toolbar.setTitle(lesson.getLessonName());
@@ -83,7 +80,7 @@ public class LessonActivity extends FoxITActivity {
 
         //changes status of lesson to read if it was below that
         if (lesson.getProcessingStatus() < 2 && lesson.getProcessingStatus() != -99) {
-            DBHandler db = new DBHandler(this, null, null, 1);
+            DBHandler db = new DBHandler(this);
             db.changeLessonToRead(lesson.getLessonName(), className);
             db.close();
         }
@@ -113,19 +110,19 @@ public class LessonActivity extends FoxITActivity {
 
         if (lesson.getType().equals("evaluation")) {
             isEvaluation = true;
-            RelativeLayout outerFrame = (RelativeLayout) findViewById(R.id.count_frame);
+            RelativeLayout outerFrame = findViewById(R.id.count_frame);
             outerFrame.setBackgroundColor(Color.BLUE);
         }
 
         //if the first slide does not have a previous slide, hide the backArrow
-        final ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
+        final ImageButton backButton = findViewById(R.id.back_button);
         if (lesson.slidearray[slideNumber].back() == -99) {
             backButton.setVisibility(View.GONE);
         }
 
 
         // define the proper button behavior for switching slides, and change the button image accordingly
-        ImageButton nextButton = (ImageButton) findViewById(R.id.next_button);
+        ImageButton nextButton = findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -269,8 +266,8 @@ public class LessonActivity extends FoxITActivity {
      * @param image kreuz, pfeil_rechts, question
      * @author Tim
      */
-    public void setImage(String image) {
-        ImageButton nextButton = (ImageButton) findViewById(R.id.next_button);
+    private void setImage(String image) {
+        ImageButton nextButton = findViewById(R.id.next_button);
         Context context = getApplicationContext();
         switch (image) {
             case ("kreuz"):
@@ -297,7 +294,7 @@ public class LessonActivity extends FoxITActivity {
 
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
+        ImageButton backButton = findViewById(R.id.back_button);
         Slide slide = lesson.slidearray[next];
         Log.d("nextSlide", slide.getSlideInfo());
         ft.show(slide);
@@ -330,15 +327,15 @@ public class LessonActivity extends FoxITActivity {
     /**
      * wrap up the lesson, count points and return to lesson overview
      *
-     * @param currentSlide
+     * @param currentSlide position index of the slide from where the user left the lesson
      */
     private void goBackToLessonList(int currentSlide) {
         didEvaluationStart = true;
-        ImageView button = (ImageView) findViewById(R.id.next_button);
+        ImageView button = findViewById(R.id.next_button);
         button.setVisibility(View.GONE);
-        button = (ImageView) findViewById(R.id.back_button);
+        button = findViewById(R.id.back_button);
         button.setVisibility(View.GONE);
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.lesson_frame);
+        RelativeLayout layout = findViewById(R.id.lesson_frame);
         layout.setEnabled(true);
 
         ValueKeeper v = ValueKeeper.getInstance();
@@ -366,7 +363,7 @@ public class LessonActivity extends FoxITActivity {
 
         }
         if (lesson.slidearray[currentSlide].isLessonSolved() && (lesson.getProcessingStatus() != 3 && !isEval)) {
-            DBHandler db = new DBHandler(this, null, null, 1);
+            DBHandler db = new DBHandler(this);
 
             if (lesson.getProcessingStatus() != -99) {
                 db.changeLessonToSolved(lesson.getLessonName());
@@ -393,7 +390,7 @@ public class LessonActivity extends FoxITActivity {
         } else if (lesson.getProcessingStatus() != 3) {
 
             long nextFreeTime = (System.currentTimeMillis() % Long.MAX_VALUE) + lesson.getDelaytime() * 60000;
-            DBHandler db = new DBHandler(this, null, null, 1);
+            DBHandler db = new DBHandler(this);
             db.setLessonNextFreeTime(lesson.getLessonName(), className, nextFreeTime);
             db.close();
             onBackPressed();
@@ -427,7 +424,7 @@ public class LessonActivity extends FoxITActivity {
     @Override
     public void onPause() {
         super.onPause();
-        DBHandler db = new DBHandler(this, null, null, 3);
+        DBHandler db = new DBHandler(this);
         db.close();
         handler.removeCallbacksAndMessages(null);
     }

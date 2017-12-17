@@ -11,7 +11,8 @@ import com.foxyourprivacy.f0x1t.activities.LessonActivity;
 import com.foxyourprivacy.f0x1t.fragments.AcornCountFragment;
 
 /**
- * Created by Ich on 30.07.2016.
+ * A method to be used inside the lessons that adds acorns to the users stash
+ * Created by Tim on 30.07.2016.
  */
 public class MethodChangeAcornCount extends Method {
 

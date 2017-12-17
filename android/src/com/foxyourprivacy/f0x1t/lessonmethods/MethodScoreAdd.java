@@ -5,6 +5,7 @@ import android.util.Log;
 import com.foxyourprivacy.f0x1t.activities.LessonActivity;
 
 /**
+ * A method to be used inside the lessons that adds points to the current lesson
  * Created by Tim on 30.07.2016.
  */
 public class MethodScoreAdd extends Method {

@@ -13,30 +13,25 @@ import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.activities.SettingsActivity;
 
 /**
- * Created by Ich on 25.06.2016.
+ * This is a Fragment for the settings screen, where your classes and descriptions for permissions and settings can be updated
+ * Created by Tim on 25.06.2016.
  */
+
+//TODO explain this view a bit more, what do the buttons do?
 public class CSVRefreshFragment extends Fragment {
 
 
-    Button refreshClassButton;
-    Button refreshDescriptionButton;
+    private Button refreshClassButton;
+    private Button refreshDescriptionButton;
 
-    @Override
 
-    /**
-     * @author Tim
-     */
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     /**fills the layout with the permission name and description
      * @author Tim
      */
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.fragment_csv_refresh, container, false);
-        Button classButton = (Button) view.findViewById(R.id.button_class_csv);
+        Button classButton = view.findViewById(R.id.button_class_csv);
         refreshClassButton = classButton;
         classButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +48,7 @@ public class CSVRefreshFragment extends Fragment {
             }
         });
 
-        Button descriptionButton = (Button) view.findViewById(R.id.button_description_csv);
+        Button descriptionButton = view.findViewById(R.id.button_description_csv);
         refreshDescriptionButton = descriptionButton;
         descriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,11 +70,11 @@ public class CSVRefreshFragment extends Fragment {
         return view;
     }
 
-    @Override
     /**
      * Enables to pass arguments to the fragment
      * @author Tim
      */
+    @Override
     public void setArguments(Bundle arg) {
 
     }

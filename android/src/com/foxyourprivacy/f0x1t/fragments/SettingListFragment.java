@@ -5,10 +5,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,12 +32,12 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
     /*
     an array holding all of the displayed settings
      */
-    String[] settingsArray;
+    private String[] settingsArray;
 
     /*
     context of current activity
      */
-    Context context;
+    private Context context;
 
     /**
      * shows a setting list
@@ -97,8 +97,12 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
     @Override
     public void setArguments(Bundle arg) {
         ArrayList<String> settings = arg.getStringArrayList("settings");
-        settingsArray = settings.toArray(new String[settings.size()]);
-        Arrays.sort(settingsArray);
+        if (settings == null) Log.d("SettingListFragment", "setting list is null");
+        else {
+            settingsArray = settings.toArray(new String[settings.size()]);
+            Arrays.sort(settingsArray);
+        }
+
     }
 
     /**
@@ -106,7 +110,7 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
      *
      * @param parent
      * @param view
-     * @param position
+     * @param position index of the item clicked on in the settings list
      * @param id
      */
     @Override
@@ -114,7 +118,6 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
 
         Bundle settingsBundle = new Bundle(); //Bundle to pass arguments to the Fragment
         SettingValueFragment fragment = new SettingValueFragment();
-        final PackageManager pm = context.getPackageManager();
         String settings = settingsArray[position];
 
         settingsBundle.putString("settingName", settings.substring(0, settings.indexOf("|t1|")));
@@ -131,8 +134,8 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
         transaction.commit();
 
         //make appListFragment and SettingsListFragment invisible after permissionListFragment is created
-        FrameLayout settingFrame = (FrameLayout) getActivity().findViewById(R.id.settingFrame);
-        FrameLayout appFrame = (FrameLayout) getActivity().findViewById(R.id.appFrame);
+        FrameLayout settingFrame = getActivity().findViewById(R.id.settingFrame);
+        FrameLayout appFrame = getActivity().findViewById(R.id.appFrame);
         settingFrame.setVisibility(View.GONE);
         appFrame.setVisibility(View.GONE);
         AnalysisResults a = (AnalysisResults) getActivity();
@@ -166,7 +169,7 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
          */
         @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
             //convertView has to be filled with layout_app if null
             View itemView = convertView;
@@ -175,11 +178,11 @@ public class SettingListFragment extends ListFragment implements AdapterView.OnI
             }
 
             //set the text for setting type
-            TextView settingType = (TextView) itemView.findViewById(R.id.text_setting_type);
-            settingType.setText(settingsArray[position].substring(0, settingsArray[position].indexOf("|t1|")) + ":");
+            TextView settingType = itemView.findViewById(R.id.text_setting_type);
+            settingType.setText(getString(R.string.settingTypeText, settingsArray[position].substring(0, settingsArray[position].indexOf("|t1|"))));
 
             //set the text for the setting's setting
-            TextView settingSetting = (TextView) itemView.findViewById(R.id.text_setting_setting);
+            TextView settingSetting = itemView.findViewById(R.id.text_setting_setting);
             String preValue = settingsArray[position].substring(settingsArray[position].indexOf("|t1|") + 4, settingsArray[position].length());
             String value = preValue.substring(0, preValue.indexOf("|t2|"));
             if (value.equals("0")) value = "OFF";

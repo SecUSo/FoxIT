@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bp.Home">
+    android:background="@color/creme"
+    tools:context="com.foxyourprivacy.f0x1t.activities.OnboardingActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/creme">
+
 
         <ImageView
             android:layout_width="100dp"
@@ -16,7 +14,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="107dp"
-            android:contentDescription="FoxIT-Logo"
+            android:contentDescription="@string/foxITlogo"
             android:src="@mipmap/logoold" />
 
         <ImageView
@@ -26,7 +24,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="#00ffff00"
-            android:contentDescription="4-Punkte-Fortschritt"
+            android:contentDescription="@string/onboardigProgress1"
             android:foregroundGravity="bottom|center_horizontal"
             android:src="@mipmap/newdots">
 
@@ -39,7 +37,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="230dp"
-            android:text="Willkommen bei FoxIt!"
+            android:text="@string/onboarding1text1"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -49,10 +47,9 @@
             android:layout_below="@id/WelcomeText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="Wir helfen dir, deine Privatsphäre im Alltag zu schützen. Lege gleich los und erfahre mehr!"
+            android:text="@string/onboarding1text2"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    </RelativeLayout>
 
 </RelativeLayout>

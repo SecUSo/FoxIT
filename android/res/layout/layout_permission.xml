@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text=" "
+        android:text="@string/permissionHeadline"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/image_app_icon"
-        android:text=" "
+        android:text="@string/permissionName"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 
@@ -33,7 +33,7 @@
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:adjustViewBounds="true"
-        android:contentDescription="Tier-Logo"
+        android:contentDescription="@string/animalSymbol"
         android:longClickable="false"
         android:maxHeight="40dp"
         android:maxWidth="40dp"

@@ -2,6 +2,7 @@ package com.foxyourprivacy.f0x1t.slides;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,20 +21,21 @@ import java.util.Random;
 import java.util.regex.Pattern;
 
 /**
+ * A quiz slide that takes as many options as you like
  * Created by noah on 04.06.17.
  */
 
 public class GenQuizSlide extends Slide {
 
-    protected boolean evaluated = false;
-    View view;
-    String[] answers;
-    Boolean[] correctness;
-    int[] ids;
-    String rightAnswer;// = getString(R.string.genericQuizCorrect);
-    String wrongAnswer;// = getString(R.string.genericQuizIncorrect);
-    String question;
-    int points = 0;
+    private boolean evaluated = false;
+    private View view;
+    private String[] answers;
+    private Boolean[] correctness;
+    private int[] ids;
+    private String rightAnswer;// = getString(R.string.genericQuizCorrect);
+    private String wrongAnswer;// = getString(R.string.genericQuizIncorrect);
+    private String question;
+    private int points = 0;
 
 
     @Override
@@ -89,7 +91,7 @@ public class GenQuizSlide extends Slide {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_slide_quiz, container, false);
         fillLayout();
         //adds number of achievable points (in this slide) to the lesson maxpoints
@@ -101,9 +103,9 @@ public class GenQuizSlide extends Slide {
 
     @Override
     public void fillLayout() {
-        TextView questionText = (TextView) view.findViewById(R.id.quiz_text);
+        TextView questionText = view.findViewById(R.id.quiz_text);
         questionText.setText(question);
-        GridLayout boxcontainer = (GridLayout) view.findViewById(R.id.quiz_boxes);
+        GridLayout boxcontainer = view.findViewById(R.id.quiz_boxes);
 
         ids = new int[answers.length];
         int k = 0;
@@ -121,22 +123,22 @@ public class GenQuizSlide extends Slide {
         int index;
         String[] randAnswers = new String[answers.length];
         Random random = new Random();
-        for (int i = 0; i < answers.length; i++) {
+        for (String answer : answers) {
             printArray(randAnswers);
             index = random.nextInt(answers.length - 1);
             while (randAnswers[index] != null) {
                 Log.d(index + "", randAnswers[index]);
                 index = random.nextInt(answers.length);
             }
-            randAnswers[index] = answers[i];
+            randAnswers[index] = answer;
         }
         return randAnswers;
 
     }
 
     private void printArray(String[] array) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] != null) Log.d("array", array[i]);
+        for (String anArray : array) {
+            if (anArray != null) Log.d("array", anArray);
         }
     }
 
@@ -147,7 +149,7 @@ public class GenQuizSlide extends Slide {
     public boolean evaluation() {
         int i = 0;
         for (int id : ids) {
-            CheckBox box = (CheckBox) view.findViewById(id);
+            CheckBox box = view.findViewById(id);
             box.setEnabled(false);
             if (box.isChecked() && correctness[i] || !box.isChecked() && !correctness[i]) {
                 box.setBackgroundResource(R.color.rightAnswer);
@@ -164,13 +166,13 @@ public class GenQuizSlide extends Slide {
         Log.d("evaluationactivity", getActivity().toString());
         if (points >= answers.length) {
             Toast toast = Toast.makeText(getActivity(), rightAnswer, Toast.LENGTH_LONG);
-            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            TextView v = toast.getView().findViewById(android.R.id.message);
             v.setBackgroundColor(Color.GREEN);
             toast.show();
             return true;
         } else {
             Toast toast = Toast.makeText(getActivity(), wrongAnswer, Toast.LENGTH_LONG);
-            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            TextView v = toast.getView().findViewById(android.R.id.message);
             v.setBackgroundColor(Color.RED);
             toast.show();
             return false;

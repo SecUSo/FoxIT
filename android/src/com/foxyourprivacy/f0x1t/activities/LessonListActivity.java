@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,15 +35,14 @@ import java.util.ArrayList;
 //Displayes the lessons corresponding to a certain class and manages their usage
 public class LessonListActivity extends FoxITActivity implements AdapterView.OnItemClickListener {
 
-    //List of lessonDescribtions, send by ClassListActivity
-    static String[] lessonStringArray; //has to be static for now
-    static String className;//has to be static for now
-    static String classDescriptionText; //Text describing the class currently on display
+    //List of lessonDescriptions, send by ClassListActivity
+    private static String[] lessonStringArray; //has to be static for now
+    private static String className;//has to be static for now
+    private static String classDescriptionText; //Text describing the class currently on display
     //list of lessonObjects generated to fill the ListView
-    public ArrayList<LessonObject> lessonObjectList = new ArrayList<>();
-    boolean descriptionVisible = false; //true if the classDescription is visible
-    ArrayAdapter<String> adapter;
-    Toolbar toolbar;
+    private ArrayList<LessonObject> lessonObjectList = new ArrayList<>();
+    private boolean descriptionVisible = false; //true if the classDescription is visible
+    private ArrayAdapter<String> adapter;
 
     /**
      * @author Tim
@@ -53,7 +53,7 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
         setContentView(R.layout.activity_lesson_list);
 
         // sets our toolbar as the actionbar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
         if (toolbar != null) {
             toolbar.setTitle("Toolbar");
@@ -75,33 +75,34 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
         }
 
         if (getIntent().getIntExtra("icon", 0) != 0) {
-            ImageView icon = (ImageView) findViewById(R.id.image_class_icon);
+            ImageView icon = findViewById(R.id.image_class_icon);
             icon.setImageDrawable(ContextCompat.getDrawable(this, getIntent().getIntExtra("icon", 0)));
         }
 
 
-        /**
-         * Display the descriptionText if the headline is pressed
-         * @author Tim
-         */
         View.OnClickListener expandText = new View.OnClickListener() {
+            /**
+             * Display the descriptionText if the headline is pressed
+             *
+             * @author Tim
+             */
             @Override
             public void onClick(View v) {
                 if (descriptionVisible) {
                     //hide the description if it is visible
-                    TextView classDescription = (TextView) findViewById(R.id.description_text);
+                    TextView classDescription = findViewById(R.id.description_text);
                     classDescription.setVisibility(View.GONE);
                     //make the icon visible
-                    ImageView moreVertImage = (ImageView) findViewById(R.id.more_vert_image);
+                    ImageView moreVertImage = findViewById(R.id.more_vert_image);
                     moreVertImage.setVisibility(View.VISIBLE);
 
                     descriptionVisible = false;
                 } else {
                     //show the description Text if it is invisible
-                    TextView classDescription = (TextView) findViewById(R.id.description_text);
+                    TextView classDescription = findViewById(R.id.description_text);
                     classDescription.setVisibility(View.VISIBLE);
                     //hide the icon
-                    ImageView moreVertImage = (ImageView) findViewById(R.id.more_vert_image);
+                    ImageView moreVertImage = findViewById(R.id.more_vert_image);
                     moreVertImage.setVisibility(View.GONE);
 
                     descriptionVisible = true;
@@ -111,11 +112,11 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
         };
 
         // show the classDescription on Click
-        RelativeLayout descriptionFrame = (RelativeLayout) findViewById(R.id.description_frame);
+        RelativeLayout descriptionFrame = findViewById(R.id.description_frame);
         descriptionFrame.setOnClickListener(expandText);
 
         // show the classDescription on Click
-        RelativeLayout classHeadline = (RelativeLayout) findViewById(R.id.class_headline_frame);
+        RelativeLayout classHeadline = findViewById(R.id.class_headline_frame);
         classHeadline.setOnClickListener(expandText);
 
 
@@ -206,14 +207,14 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
      */
     @Override
     public void onResume() {
-        ListView lessonList = (ListView) findViewById(R.id.headline_frame);
-        DBHandler db = new DBHandler(this, null, null, 1);
+        ListView lessonList = findViewById(R.id.headline_frame);
+        DBHandler db = new DBHandler(this);
         lessonObjectList = db.getLessonsFromDB(className);
         db.close();
 
         lessonStringArray = new String[lessonObjectList.size()];
 
-        TextView name = (TextView) findViewById(R.id.text_class_name);
+        TextView name = findViewById(R.id.text_class_name);
         name.setText(className);
 
         int lessonNumber = lessonObjectList.size();
@@ -240,10 +241,10 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
             setTrophyUnlocked("Privacy Shield");
         }
 
-        TextView solved = (TextView) findViewById(R.id.text_percentage_solved);
-        solved.setText(Integer.toString(solvedLessonNumber) + "/" + Integer.toString(lessonNumber));
+        TextView solved = findViewById(R.id.text_percentage_solved);
+        solved.setText(getString(R.string.solvedLessonsCount, solvedLessonNumber, lessonNumber));
 
-        TextView description = (TextView) findViewById(R.id.description_text);
+        TextView description = findViewById(R.id.description_text);
         description.setText(classDescriptionText);
 
 
@@ -269,19 +270,13 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
                 //update the listView
 
                 adapter.notifyDataSetChanged();
-                new DBWrite(this).execute("changeLessonToUnlocked", articleOfCommerce);
+                new DBWrite().execute(this,"changeLessonToUnlocked", articleOfCommerce);
                 return true;
             }
         }
         return false;
     }
 
-    @Override
-    public boolean setTrophyUnlocked(String trophyName) {
-
-
-        return super.setTrophyUnlocked(trophyName);
-    }
 
     /**
      * class to define the way the settings are displayed in the listView by defining how the content is displayed in the list entries
@@ -305,7 +300,8 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
          * @author Tim
          */
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        @NonNull
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             if (itemView == null) {
@@ -316,7 +312,7 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
             //new LessonObject(lessonStringArray[position]);
 
             //setting the text for lessonName
-            TextView lessonName = (TextView) itemView.findViewById(R.id.text_lesson_name);
+            TextView lessonName = itemView.findViewById(R.id.text_lesson_name);
             lessonName.setText(lesson.getLessonName());
             if (lesson.getProcessingStatus() == 0) {
                 lessonName.setTextColor(Color.GRAY);
@@ -326,7 +322,7 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
 
 
             //setting the stars
-            ImageView solvedIcon = (ImageView) itemView.findViewById(R.id.image_lesson_solved);
+            ImageView solvedIcon = itemView.findViewById(R.id.image_lesson_solved);
             if (lesson.getNextfreetime() > System.currentTimeMillis()) {
                 solvedIcon.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_hourglass_empty_black_48dp));
             } else {
@@ -340,7 +336,7 @@ public class LessonListActivity extends FoxITActivity implements AdapterView.OnI
          * returns the fitting starIcon for a lessons state of solving
          *
          * @param processingStatus the lessons processingStatus accessible with "processingStatus"
-         * @return
+         * @return the fitting drawable for the status of the lesson
          * @author Tim
          */
         Drawable getIcon(int processingStatus) {

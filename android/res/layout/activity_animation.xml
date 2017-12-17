@@ -6,17 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/creme"
-    tools:context=".activities.AnalysisResults">
+    tools:context=".activities.AnimationLauncher">
 
     <RelativeLayout
-        android:id="@+id/tale"
+        android:id="@+id/tail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/tabs"
-        android:layout_marginBottom="100dp">
+        android:layout_marginBottom="100dp" />
 
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/sit"
@@ -24,8 +23,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/tabs"
-        android:layout_marginBottom="100dp">
-    </RelativeLayout>
+        android:layout_marginBottom="100dp" />
+
 
     <RelativeLayout
         android:id="@+id/vanish"
@@ -33,8 +32,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/tabs"
-        android:layout_marginBottom="100dp">
-    </RelativeLayout>
+        android:layout_marginBottom="100dp" />
+
 
     <RelativeLayout
         android:id="@+id/fly"
@@ -42,18 +41,18 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/tabs"
-        android:layout_marginBottom="100dp">
-    </RelativeLayout>
+        android:layout_marginBottom="100dp" />
+
 
     <RelativeLayout
         android:id="@+id/play"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/tabs"
-        android:layout_marginBottom="100dp">
+        android:layout_marginBottom="100dp" />
 
-    </RelativeLayout>
+
 
 
     <include layout="@layout/toolbar_actionbar" />
@@ -72,6 +71,6 @@
         android:id="@+id/view_pager"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

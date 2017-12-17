@@ -1,6 +1,5 @@
 package com.foxyourprivacy.f0x1t;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 
@@ -12,22 +11,21 @@ import java.util.Arrays;
 
 
 /**
+ * Class which defines the Tabs in AnalysisResults
  * Created by Tim on 04.08.2016.
  */
 
-//Class which defines the Tabs in AnalysisResults
 public class TapAdapter_results extends FragmentPagerAdapter {
 
     //Activity startScreenActivity; //reference to AnalysisResults
-    String[] settingsArray;
+    private final String[] settingsArray;
 
     /**
-     * @param fm
-     * @param activity      reference to AnalysisResults
+     * @param fm the fragment manager to use
      * @param settingsArray the settings to be displayed by SettingListFragment
      * @author Tim
      */
-    public TapAdapter_results(android.app.FragmentManager fm, Activity activity, String[] settingsArray) {
+    public TapAdapter_results(android.app.FragmentManager fm, String[] settingsArray) {
         super(fm);
         //this.startScreenActivity = activity;
         this.settingsArray = settingsArray;
@@ -38,7 +36,7 @@ public class TapAdapter_results extends FragmentPagerAdapter {
      * by creating a new fragment for each page of the TabView
      *
      * @param position describes which tab is pressed
-     * @return
+     * @return Fragment that belongs on that position
      * @author Tim
      */
 
@@ -51,7 +49,7 @@ public class TapAdapter_results extends FragmentPagerAdapter {
             //adds SettingListFragment for the first page
             SettingListFragment settingList = new SettingListFragment();
             Bundle settings = new Bundle();
-            settings.putStringArrayList("settings", new ArrayList<String>(Arrays.asList(settingsArray)));
+            settings.putStringArrayList("settings", new ArrayList<>(Arrays.asList(settingsArray)));
             settingList.setArguments(settings);
             return settingList;
         }

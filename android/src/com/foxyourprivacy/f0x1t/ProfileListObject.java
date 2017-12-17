@@ -1,15 +1,16 @@
 package com.foxyourprivacy.f0x1t;
 
 /**
- * Created by Ich on 29.09.2016.
+ * Items to be displayed on the profileFragment
+ * Created by Tim on 29.09.2016.
  */
 
-public class ProfilListObject {
-    String inputType;
-    String inputDescription;
-    String input = "";
+public class ProfileListObject {
+    private final String inputType;
+    private final String inputDescription;
+    private String input = "";
 
-    public ProfilListObject(String inputType, String inputDescription) {
+    public ProfileListObject(String inputType, String inputDescription) {
         this.inputType = inputType;
         this.inputDescription = inputDescription;
     }

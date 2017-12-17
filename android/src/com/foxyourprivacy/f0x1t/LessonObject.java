@@ -6,10 +6,11 @@ import android.os.Parcelable;
 import com.foxyourprivacy.f0x1t.slides.Slide;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
- * Created by Ich on 18.07.2016.
+ * LessonObjects hold all the information needed to display and interact with a lesson in the LessonActivity
+ * the Slides and everything that is shown in the LessonActivity is controlled in this class
+ * Created by Tim on 18.07.2016.
  */
 public class LessonObject implements Parcelable {
     public static final Parcelable.Creator<LessonObject> CREATOR = new Parcelable.Creator<LessonObject>() {
@@ -21,8 +22,12 @@ public class LessonObject implements Parcelable {
             return new LessonObject[size];
         }
     };
-    //Hashmap to store the split up version of the lessonDescription-String
-    public HashMap<String, String> lessonInfoHashMap = new HashMap<>();
+    private final String lessonName; //name~
+    private final String type;//Lesson-type
+    private final int delaytime; //how much time has to pass if the lesson is blocked until it is unlocked again
+    private final long nextfreetime; //the lesson is blocked to this point in time
+    private final int reward; //the amount of acorn gained by solving this lesson
+    private final String slides; //the slides stored as one large String
     //Hashmap that stores every slide already generated
     public Slide[] slidearray;
     //BackStack for tracking which slide the back button should access
@@ -30,14 +35,8 @@ public class LessonObject implements Parcelable {
     //Score for lessons with QuizSlides
     public int score = 0;
     public int maxscore = 0;
-    public int position = 99;
-    String lessonName; //name~
-    int processingStatus; //solved~
-    String type;//Lesson-type
-    int delaytime; //how much time has to pass if the lesson is blocked until it is unlocked again
-    long nextfreetime; //the lesson is blocked to this point in time
-    int reward; //the amount of acorn gained by solving this lesson
-    String slides; //the slides stored as one large String
+    private int position = 99;
+    private int processingStatus; //solved~
 
     /**
      * @author Tim
@@ -56,7 +55,7 @@ public class LessonObject implements Parcelable {
 
     }
 
-    public LessonObject(Parcel in) {
+    private LessonObject(Parcel in) {
         lessonName = in.readString();
         type = in.readString();
         slides = in.readString();

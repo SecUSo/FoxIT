@@ -1,43 +1,43 @@
 package com.foxyourprivacy.f0x1t.asynctasks;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;
 
 import com.foxyourprivacy.f0x1t.DBHandler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
+ * This async task can read the database contents, so it doesn't have to be done on main thread.
+ * returns are not implemented though, that's why it is not used atm
  * Created by noah on 11/8/16.
  */
 
-public class DBRead extends AsyncTask<String, Void, Object> {
-    Context context;
 
-    public DBRead(Context thecontext) {
-        context = thecontext;
+//TODO implement return in onpostexecute so that the class can be used
+class DBRead extends AsyncTask<Object, Void, Object> {
+
+    public DBRead() {
+
     }
 
     @Override
-    protected Object doInBackground(String... objects) {
-        DBHandler dbHandler = new DBHandler(context, null, null, 1);
+    protected Object doInBackground(Object... objects) {
+        Context context = (Context) objects[0];
+        DBHandler dbHandler = new DBHandler(context);
         Object result;
-        if (objects[0] == "getClasses") {
+        if ("getClasses".equals(objects[1])) {
             result = dbHandler.getClasses();
-        } else if (objects[0] == "getNumberOfSolvedLessons") {
-            result = dbHandler.getNumberOfSolvedLessons(objects[1]);
-        } else if (objects[0] == "getLessonsFromDB") {
-            result = dbHandler.getLessonsFromDB(objects[1]);
-        } else if (objects[0] == "getPermissionDescription") {
-            result = dbHandler.getPermissionDescription(objects[1]);
-        } else if (objects[0] == "getSettingsFromDB") {
+        } else if ("getNumberOfSolvedLessons".equals(objects[1])) {
+            result = dbHandler.getNumberOfSolvedLessons((String) objects[2]);
+        } else if ("getLessonsFromDB".equals(objects[1])) {
+            result = dbHandler.getLessonsFromDB((String) objects[2]);
+        } else if ("getPermissionDescription".equals(objects[1])) {
+            result = dbHandler.getPermissionDescription((String) objects[2]);
+        } else if ("getSettingsFromDB".equals(objects[1])) {
             result = dbHandler.getSettingsFromDB();
-        } else if (objects[0] == "getIndividualData") {
+        } else if ("getIndividualData".equals(objects[1])) {
             result = dbHandler.getIndividualData();
-        } else if (objects[0] == "getIndividualValue") {
-            result = dbHandler.getIndividualValue(objects[1]);
+        } else if ("getIndividualValue".equals(objects[1])) {
+            result = dbHandler.getIndividualValue((String) objects[2]);
         }else{
             result = "no method found";
         }

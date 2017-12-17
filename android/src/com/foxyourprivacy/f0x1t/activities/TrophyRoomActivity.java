@@ -16,22 +16,19 @@ import com.foxyourprivacy.f0x1t.fragments.AnimationListFragment;
 
 public class TrophyRoomActivity extends FoxITActivity {
 
-    TapAdapter_trophy adapter; //defines the content of the tabs, SettingListfragment and AppListFragment
-    ViewPager mViewPager;
-    AnimationListFragment animationListFragment;
-    Toolbar toolbar;
+    private AnimationListFragment animationListFragment;
 
-    @Override
     /**sets up the tap adapter
      * @author Tim
      */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trophy_room);
 
         // sets our toolbar as the actionbar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
         //if (toolbar != null) {
         //   toolbar.setTitle("Toolbar");
@@ -39,13 +36,13 @@ public class TrophyRoomActivity extends FoxITActivity {
 
 
         //defining the tabs and the tab bar
-        adapter = new TapAdapter_trophy(getFragmentManager(), this);
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        TapAdapter_trophy adapter = new TapAdapter_trophy(getFragmentManager(), this);
+        ViewPager mViewPager = findViewById(R.id.pager);
         mViewPager.setAdapter(adapter);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         //bigTrophyLayoutView adds an graphical effect and it disappears if its klicked
-        RelativeLayout bigTrophyViewFrame = (RelativeLayout) findViewById(R.id.big_trophy_view_frame);
+        RelativeLayout bigTrophyViewFrame = findViewById(R.id.big_trophy_view_frame);
         bigTrophyViewFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +71,7 @@ public class TrophyRoomActivity extends FoxITActivity {
     /**
      * necessary for purchase to find the fragment
      *
-     * @param animationListFragment
+     * @param animationListFragment the fragment that is to be set as the animationListFragment
      * @author Tim
      */
     public void setAnimationListFragment(AnimationListFragment animationListFragment) {
@@ -82,12 +79,12 @@ public class TrophyRoomActivity extends FoxITActivity {
     }
 
 
-    @Override
     /**overrides the back button behavior for bigTrophyViewFrame to nicely disappear
      * @author Tim
      */
+    @Override
     public void onBackPressed() {
-        RelativeLayout BigTrophyViewFrame = (RelativeLayout) findViewById(R.id.big_trophy_view_frame);
+        RelativeLayout BigTrophyViewFrame = findViewById(R.id.big_trophy_view_frame);
         if (BigTrophyViewFrame.getVisibility() == View.GONE) {
             super.onBackPressed();
         } else {

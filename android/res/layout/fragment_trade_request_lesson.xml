@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:background="@color/creme">
 
             <TextView
@@ -31,7 +31,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"
-                android:text="für diese Lektion ausgeben?"
+                android:text="@string/buyLesson"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="15dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Möchtest du "
+                android:text="@string/doYouWant"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginEnd="13dp"
                 android:layout_toStartOf="@+id/imageView3"
-                android:text="5"
+                android:text="@string/tradeAmountLesson"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageView
@@ -66,7 +66,7 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginEnd="19dp"
                 android:adjustViewBounds="true"
-                android:contentDescription="Pilz"
+                android:contentDescription="@string/mushroom"
                 android:maxWidth="35dp"
                 android:minHeight="35dp"
                 android:src="@mipmap/mushroom" />
@@ -94,7 +94,7 @@
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:minWidth="70dp"
                 android:singleLine="true"
-                android:text="Nein" />
+                android:text="@string/no" />
 
             <Button
                 android:id="@+id/button_yes"
@@ -105,7 +105,7 @@
                 android:layout_marginTop="6dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:minWidth="70dp"
-                android:text="Ja" />
+                android:text="@string/yes" />
 
         </RelativeLayout>
 

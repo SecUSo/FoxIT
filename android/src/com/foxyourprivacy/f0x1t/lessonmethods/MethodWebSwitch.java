@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 
 /**
+ * A method to be used inside the lessons that opens a webpage
  * Created by Tim on 30.07.2016.
  */
 //provides a callClassMethod for jumping to web pages

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView9"
@@ -16,7 +13,7 @@
             android:layout_below="@+id/button_class_csv"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="Beschreibungen aktualisieren:"
+            android:text="@string/refreshDescriptions"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
@@ -44,7 +41,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
-            android:text="Achtung, diese Ansicht ist nur zu Zwecken der Fehlerbehebung gedacht. Bitte nur nach Anweisung benutzen."
+            android:text="@string/debugMessage"
             android:textAlignment="center"
             android:textColor="@android:color/black" />
 
@@ -56,7 +53,6 @@
             android:layout_below="@+id/textView13"
             android:layout_marginTop="31dp"
             android:gravity="center"
-            android:text="Kurse aktualisieren:"
+            android:text="@string/refreshClasses"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
-</LinearLayout>

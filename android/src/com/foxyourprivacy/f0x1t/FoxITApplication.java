@@ -6,17 +6,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * a parent class to many of the activities of FoxIT.
+ * things that have to be done on every activity call are done here (unfortunately, some more too)
  * Created by Ich on 18.10.2016.
  */
 
+
+//TODO extract functions that are not important for every activity!
 public class FoxITApplication extends Application {
 
-    private final long MAX_ACTIVITY_TRANSITION_TIME_MS = 10000;
+
     public boolean wasInBackground;
     private Timer mActivityTransitionTimer;
     private TimerTask mActivityTransitionTimerTask;
 
     public void startActivityTransitionTimer() {
+        final long MAX_ACTIVITY_TRANSITION_TIME_MS = 10000;
         this.mActivityTransitionTimer = new Timer();
         this.mActivityTransitionTimerTask = new TimerTask() {
             public void run() {

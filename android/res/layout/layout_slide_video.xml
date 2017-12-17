@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimary"
+        android:contentDescription="@string/playbuttondesc"
         android:src="@drawable/ic_play"
         android:visibility="invisible" />
 

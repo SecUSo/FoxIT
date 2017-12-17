@@ -4,7 +4,7 @@ package com.foxyourprivacy.f0x1t.animation;
 import android.support.v4.view.ViewPager;
 
 public class CircularViewPagerHandler implements ViewPager.OnPageChangeListener {
-    private ViewPager mViewPager;
+    private final ViewPager mViewPager;
     private int         mCurrentPosition;
     private int         mScrollState;
 

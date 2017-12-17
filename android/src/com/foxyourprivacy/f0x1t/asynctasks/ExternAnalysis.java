@@ -8,31 +8,31 @@ import android.provider.Settings;
 
 import com.foxyourprivacy.f0x1t.activities.Analysis;
 
+import java.lang.ref.WeakReference;
+
 import static com.foxyourprivacy.f0x1t.activities.Analysis.combineArraysP2;
 
-/**
- * Created by noah on 11/8/16.
- */
 
 /**
  * fetches all installed apps and the device settings to pass it into the database
- *
+ * does the phone analysis in an async task and executes another async task at the end, which continues the app-flow
+ * Created by noah on 11/8/16.
  * @author Noah
  */
 public class ExternAnalysis extends AsyncTask {
 
-    private Context analysis;
+    private final WeakReference<Context> analysisRef;
 
     public ExternAnalysis(Context con) {
-        analysis = con;
+        analysisRef = new WeakReference<>(con);
     }
 
-    @Override
     /**
      * fetches all installed apps and the device settings to pass it into the database
      *
      * @author Noah
      */
+    @Override
     protected Object doInBackground(Object[] objects) {
         // Get all apps
         ((Analysis) objects[0]).getALL_APPS();
@@ -53,7 +53,7 @@ public class ExternAnalysis extends AsyncTask {
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
         //TODO: effektiverer Weg möglich? in DB schreiben und Array als intent übergeben gleichzeitig z.b.?
-        new DBWrite(analysis).execute("addParamColumn", o);
-        new GetSettingsAsync(analysis).execute();
+        new DBWrite().execute(analysisRef.get(), "addParamColumn", o);
+        new GetSettingsAsync(analysisRef.get()).execute();
     }
 }

@@ -25,7 +25,8 @@
 
         android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:paddingLeft="40dp"
+        android:paddingEnd="12dp"
+        android:paddingStart="40dp"
         android:paddingTop="30dp">
 
 

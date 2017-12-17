@@ -4,6 +4,7 @@ import android.app.ListFragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,45 +15,46 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.foxyourprivacy.f0x1t.ProfilListObject;
+import com.foxyourprivacy.f0x1t.ProfileListObject;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 
 /**
+ * This fragment is used in the settings to display and change user info
  * Created by Tim on 11.06.2016.
  */
-public class ProfilFragment extends ListFragment implements AdapterView.OnItemClickListener {
+public class ProfileFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
-    ProfilListObject[] profilList = {new ProfilListObject("Name:", "Hier kannst du deinen Namen eintragen."), new ProfilListObject("Alter:", "Hier kannst du dein Alter eintragen.")};
-    String[] lengthArray;
-    Context context;
-    int markedProfil = -1;
-    View view;
+    private ProfileListObject[] profileList = {new ProfileListObject("Name:", "Hier kannst du deinen Namen eintragen."), new ProfileListObject("Alter:", "Hier kannst du dein Alter eintragen.")};
+    private String[] lengthArray;
+    private Context context;
+    private int markedProfile = -1;
+    private View view;
     private MyListAdapter_permission adapter;
 
-    @Override
     /**fills the fragments layout and provides behavior for the permissionHeadline
      * @author Tim
      */
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        lengthArray = new String[profilList.length];
+        lengthArray = new String[profileList.length];
         //ValueKeeper vk=ValueKeeper.getInstance();
-        // profilList= vk.getProfilList(profilList);
+        // profileList= vk.getProfilList(profileList);
 
         context = getActivity().getApplicationContext();
-        view = getActivity().getLayoutInflater().inflate(R.layout.fragment_profil, container, false);
+        view = getActivity().getLayoutInflater().inflate(R.layout.fragment_profile, container, false);
 
-        final EditText inputField = (EditText) view.findViewById(R.id.input_input);
+        final EditText inputField = view.findViewById(R.id.input_input);
         inputField.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                if (markedProfil != -1) {
+                if (markedProfile != -1) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN) {
                         switch (keyCode) {
                             case KeyEvent.KEYCODE_DPAD_CENTER:
                             case KeyEvent.KEYCODE_ENTER:
-                                profilList[markedProfil].setInput(inputField.getText().toString());
+                                profileList[markedProfile].setInput(inputField.getText().toString());
                                 adapter.notifyDataSetChanged();
                                 return true;
                             default:
@@ -65,7 +67,7 @@ public class ProfilFragment extends ListFragment implements AdapterView.OnItemCl
         });
 
 
-        RelativeLayout answerFrame = (RelativeLayout) view.findViewById(R.id.answer_frame);
+        RelativeLayout answerFrame = view.findViewById(R.id.answer_frame);
         answerFrame.setVisibility(View.GONE);
 
 
@@ -73,10 +75,10 @@ public class ProfilFragment extends ListFragment implements AdapterView.OnItemCl
     }
 
 
-    @Override
     /** defines the listView
      * @author Tim
      */
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         //filling the listView with data
         super.onActivityCreated(savedInstanceState);
@@ -86,21 +88,21 @@ public class ProfilFragment extends ListFragment implements AdapterView.OnItemCl
         getListView().setOnItemClickListener(this);
     }
 
-    @Override
     /**
      * on Item Click the permissionDescriptionFragment is created
      * @author Tim
      */
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        markedProfil = position;
+        markedProfile = position;
 
-        RelativeLayout answerFrame = (RelativeLayout) this.view.findViewById(R.id.answer_frame);
+        RelativeLayout answerFrame = this.view.findViewById(R.id.answer_frame);
         answerFrame.setVisibility(View.VISIBLE);
 
-        TextView inputDescription = (TextView) this.view.findViewById(R.id.text_input_description);
-        inputDescription.setText(profilList[position].getInputDescription());
-        EditText input = (EditText) this.view.findViewById(R.id.input_input);
-        input.setText(profilList[position].getInput());
+        TextView inputDescription = this.view.findViewById(R.id.text_input_description);
+        inputDescription.setText(profileList[position].getInputDescription());
+        EditText input = this.view.findViewById(R.id.input_input);
+        input.setText(profileList[position].getInput());
         adapter.notifyDataSetChanged();
     }
 
@@ -108,7 +110,7 @@ public class ProfilFragment extends ListFragment implements AdapterView.OnItemCl
     public void onDestroyView() {
 
         ValueKeeper vk = ValueKeeper.getInstance();
-        vk.setProfilList(profilList);
+        vk.setProfilList(profileList);
         super.onDestroyView();
     }
 
@@ -133,20 +135,21 @@ public class ProfilFragment extends ListFragment implements AdapterView.OnItemCl
          * @author Tim
          */
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        @NonNull
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             //convertView has to be filled with layout_app if it's null
             View itemView = convertView;
             if (itemView == null) {
                 itemView = getActivity().getLayoutInflater().inflate(R.layout.layout_profil, parent, false);
             }
-            TextView inputType = (TextView) itemView.findViewById(R.id.text_input_type);
-            inputType.setText(profilList[position].getInputType());
+            TextView inputType = itemView.findViewById(R.id.text_input_type);
+            inputType.setText(profileList[position].getInputType());
 
-            TextView input = (TextView) itemView.findViewById(R.id.text_input_input);
-            input.setText(profilList[position].getInput());
+            TextView input = itemView.findViewById(R.id.text_input_input);
+            input.setText(profileList[position].getInput());
 
-            RelativeLayout wholeEntry = (RelativeLayout) itemView.findViewById(R.id.profil_frame);
-            if (position == markedProfil) {
+            RelativeLayout wholeEntry = itemView.findViewById(R.id.profil_frame);
+            if (position == markedProfile) {
                 wholeEntry.setBackgroundColor(Color.LTGRAY);
             } else {
                 wholeEntry.setBackgroundColor(Color.WHITE);

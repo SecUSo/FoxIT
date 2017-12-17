@@ -7,6 +7,7 @@ import android.util.Log;
 import com.foxyourprivacy.f0x1t.DBHandler;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,22 +20,24 @@ import java.util.ArrayList;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
+ * This async task loads csv files from the server and updates the content in the app
  * Created by noah on 11/8/16.
  */
 
 public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
-    private Context thecontext;
 
-    public CSVUpdateTask(Context context) {
-        thecontext = context;
+
+    public CSVUpdateTask() {
+
     }
 
     @Override
     protected Integer doInBackground(Object... objects) {
-        String url = (String) objects[0];
-        if (objects[1] != null) {
-            DBHandler dbHandler = new DBHandler(thecontext, null, null, 0);
-            Log.d("CSVUpdater", (String) objects[1]);
+        Context thecontext = (Context) objects[0];
+        String url = (String) objects[1];
+        if (objects[2] != null) {
+            DBHandler dbHandler = new DBHandler(thecontext);
+            Log.d("CSVUpdater", (String) objects[2]);
             InputStream is = null;
             try {
                 is = getStream(url);
@@ -46,21 +49,23 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
             }
 
             if (is != null) {
-                if (objects[1].equals("permissions")) dbHandler.updatePermissions(readStream(is));
-                if (objects[1].equals("lessions")) dbHandler.updateLessons(readLessonStream(is));
-                if (objects[1].equals("classes")) dbHandler.updateClasses(readStream(is));
-                if (objects[1].equals("settings"))
+                if (objects[2].equals("permissions")) dbHandler.updatePermissions(readStream(is));
+                if (objects[2].equals("lessions")) dbHandler.updateLessons(readLessonStream(is));
+                if (objects[2].equals("classes")) dbHandler.updateClasses(readStream(is));
+                if (objects[2].equals("settings"))
                     dbHandler.updateSettingDescriptions(readStream(is));
                 dbHandler.close();
                 return 0;
-            } else if (objects.length > 2 && objects[2] != null) {
+            } else if (objects.length > 2 && objects[3] != null) {
                 Log.d("CSVDownTask", "InputStream null, Internet Failure.");
-                if (objects[1].equals("permissions"))
-                    dbHandler.updatePermissions((ArrayList) objects[2]);
-                if (objects[1].equals("lessions")) dbHandler.updateLessons((ArrayList) objects[2]);
-                if (objects[1].equals("classes")) dbHandler.updateClasses((ArrayList) objects[2]);
-                if (objects[1].equals("settings"))
-                    dbHandler.updateSettingDescriptions((ArrayList) objects[2]);
+                if (objects[2].equals("permissions"))
+                    dbHandler.updatePermissions((ArrayList<String[]>) objects[3]);
+                if (objects[2].equals("lessions"))
+                    dbHandler.updateLessons((ArrayList<String[]>) objects[3]);
+                if (objects[2].equals("classes"))
+                    dbHandler.updateClasses((ArrayList<String[]>) objects[3]);
+                if (objects[2].equals("settings"))
+                    dbHandler.updateSettingDescriptions((ArrayList<String[]>) objects[3]);
                 dbHandler.close();
 
                 return -1;
@@ -127,8 +132,8 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
         return is;
     }
 
-    private ArrayList readStream(InputStream is) {
-        ArrayList result = new ArrayList();
+    private ArrayList<String[]> readStream(InputStream is) {
+        ArrayList<String[]> result = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         try {
             String templine;
@@ -139,41 +144,45 @@ public class CSVUpdateTask extends AsyncTask<Object, Void, Integer> {
         } catch (IOException e) {
             throw new RuntimeException("Input Stream couldn't be read properly: " + e);
         } finally {
-            try {
-                is.close();
-                br.close();
-            } catch (IOException e) {
-                throw new RuntimeException("Input Stream couldn't be closed properly: " + e);
-            }
+            cleanup(is);
+            cleanup(br);
         }
         return result;
 
     }
 
-    public ArrayList readLessonStream(InputStream is) {
-        ArrayList result = new ArrayList();
+    private void cleanup(Closeable stream) {
+        try {
+            stream.close();
+        } catch (IOException e) {
+            Log.d("CSVUpdateTask", "Input Stream couldn't be closed properly");
+            e.printStackTrace();
+        }
+
+    }
+
+    private ArrayList<String[]> readLessonStream(InputStream is) {
+        ArrayList<String[]> result = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         try {
             String templine;
-            String csvrow = "";
+            StringBuilder sb = new StringBuilder();
             while ((templine = br.readLine()) != null) {
-                csvrow += templine;
+                sb.append(templine);
                 if (templine.matches(".*;;;")) {
-                    String[] lessonarray = csvrow.split(";");
+                    String[] lessonarray = sb.toString().split(";");
                     result.add(lessonarray);
+                    sb.setLength(0);
                     // Log.d("SettingsActivity", "row: " + csvrow);
-                    csvrow = "";
                 }
             }
+
+
         } catch (IOException e) {
             throw new RuntimeException("Lession stream couldn't be read properly: " + e);
         } finally {
-            try {
-                is.close();
-                br.close();
-            } catch (IOException e) {
-                throw new RuntimeException("Input Stream couldn't be closed properly: " + e);
-            }
+            cleanup(is);
+            cleanup(br);
         }
         return result;
 

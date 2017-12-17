@@ -12,11 +12,11 @@ import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 
 /**
- * Created by Ich on 25.06.2016.
+ * This fragment is shown when the count of tokens changes. Either a lesson has been solved (+1) or a lesson has been unlocked (-1)
+ * Created by Tim on 25.06.2016.
  */
 public class TokenCountFragment extends Fragment {
-    View view; //the fragments view, useful for usages outside of onCreateView
-    int tokenCount; //amount of token currently on display
+    private View view; //the fragments view, useful for usages outside of onCreateView
 
     /**
      * @author Tim
@@ -25,16 +25,16 @@ public class TokenCountFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //fetch the current tokenCount from the ValueKeeper
-        tokenCount = ValueKeeper.getInstance().getTokenCount();
+        int tokenCount = ValueKeeper.getInstance().getTokenCount();
         //and display it
-        TextView text = (TextView) view.findViewById(R.id.text_token_count);
-        text.setText(Integer.toString(tokenCount));
+        TextView text = view.findViewById(R.id.text_token_count);
+        text.setText(String.format("%d", tokenCount));
     }
 
-    @Override
     /**
      * @author Tim
      */
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         view = inflater.inflate(R.layout.fragment_token_count, container, false);
         return view;
@@ -48,7 +48,7 @@ public class TokenCountFragment extends Fragment {
      * @author Tim
      */
     public void changeText(String newText) {
-        TextView text = (TextView) view.findViewById(R.id.text_token_count);
+        TextView text = view.findViewById(R.id.text_token_count);
         text.setText(newText);
         text.setTextColor(Color.BLACK);
 

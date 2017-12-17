@@ -10,7 +10,8 @@ import com.foxyourprivacy.f0x1t.activities.LessonActivity;
 import com.foxyourprivacy.f0x1t.fragments.TokenCountFragment;
 
 /**
- * Created by Ich on 30.07.2016.
+ * A method to be used inside the lessons that adds tokens to the users stash
+ * Created by Tim on 30.07.2016.
  */
 public class MethodChangeTokenCount extends Method {
 

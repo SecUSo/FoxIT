@@ -10,6 +10,7 @@ import android.content.pm.ApplicationInfo;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.foxyourprivacy.f0x1t.activities.Home;
 
@@ -18,13 +19,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by Ich on 13.11.2016.
+ * Background Service run originally to check on app installs and notify about evaluations and daily lessons
+ * now it is only used for notifications on dailies and planned for news updates given on the server
+ * Created by Tim on 13.11.2016.
  */
 
 public class BackgroundService extends Service {
 
-    Context context;
     List<ApplicationInfo> apps;
+    private Context context;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -93,15 +96,16 @@ public class BackgroundService extends Service {
                 Long result = (currentTime - firstTime) / 86400000;
 
             if (result > v.dailyLessonsUnlocked && v.dailyLessonsUnlocked < 15 && v.valueKeeperAlreadyRefreshed) {
-                    DBHandler db = new DBHandler(context, null, null, 2);
-                String lessonName = "blabla";//db.unlockDaily();
+                DBHandler db = new DBHandler(context);
+                String lessonName = "blabla";
+                //db.unlockDaily();
                 //TODO unlockdaily fixen
                 v.increaseDailyLessonsUnlocked();
 
                     NotificationCompat.Builder mBuilder =
-                            new NotificationCompat.Builder(context)
+                            new NotificationCompat.Builder(context, "15")
                                     .setSmallIcon(R.mipmap.literature)
-                                    .setContentTitle("Eine neue Lektion ist verfügbar!")
+                                    .setContentTitle(getString(R.string.newLessonAvailable))
                                     .setContentText(lessonName);
 
                     Intent resultIntent = new Intent(context, Home.class);
@@ -121,10 +125,10 @@ public class BackgroundService extends Service {
                                     PendingIntent.FLAG_UPDATE_CURRENT
                             );
                     mBuilder.setContentIntent(resultPendingIntent);
-                    NotificationManager mNotificationManager =
-                            (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                     // mId allows you to update the notification later on.
-                    mNotificationManager.notify(15, mBuilder.build());
+                if (mNotificationManager != null) mNotificationManager.notify(15, mBuilder.build());
+                else Log.d("Notification", "NotifactionManager is null");
 
             }
         }

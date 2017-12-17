@@ -3,11 +3,12 @@ package com.foxyourprivacy.f0x1t.lessonmethods;
 import android.app.Activity;
 
 /**
+ * This class is called to decide the behavior of the methods that can be used inside lessons
  * Created by Tim on 19.07.2016.
  */
 public class MethodFactory {
     //the activity the methodFactory is created in
-    Activity activity;
+    private final Activity activity;
 
     public MethodFactory(Activity activity) {
         this.activity = activity;

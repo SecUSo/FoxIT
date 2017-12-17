@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/creme"
+    tools:context="com.foxyourprivacy.f0x1t.activities.OnboardingActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/creme">
 
-        <ImageView
+    <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="107dp"
-            android:contentDescription="Tatze"
+        android:contentDescription="@string/paw"
             android:src="@drawable/paw" />
 
         <ImageView
@@ -24,7 +23,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="#00ffff00"
-            android:contentDescription="3. von 4 Punkten"
+            android:contentDescription="@string/onboardigProgress3"
             android:src="@mipmap/newdots3">
 
         </ImageView>
@@ -36,7 +35,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="230dp"
-            android:text="Lass den Fuchs schnüffeln!"
+            android:text="@string/onboarding3text1"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -46,10 +45,9 @@
             android:layout_below="@id/GameText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="Erspiele Punkte in den Lektionen, setzte sie ein, und mach deinen Fuchs zum Privatsphären-Schnüffler!"
+            android:text="@string/onboarding3text2"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    </RelativeLayout>
 
 </RelativeLayout>

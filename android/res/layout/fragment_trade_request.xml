@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:background="@color/creme">
 
             <TextView
@@ -31,7 +31,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"
-                android:text="für diese Animation ausgeben?"
+                android:text="@string/buyAnimation"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Möchtest du "
+                android:text="@string/doYouWant"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_below="@+id/textView5"
                 android:layout_marginEnd="13dp"
                 android:layout_toStartOf="@+id/imageView3"
-                android:text="5"
+                android:text="@string/tradeAmount"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageView
@@ -64,7 +64,7 @@
                 android:layout_alignEnd="@+id/textView5"
                 android:layout_marginEnd="17dp"
                 android:adjustViewBounds="true"
-                android:contentDescription="Eichel"
+                android:contentDescription="@string/acorn"
                 android:maxWidth="35dp"
                 android:minHeight="35dp"
                 android:src="@mipmap/eichel" />
@@ -92,7 +92,7 @@
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:minWidth="70dp"
                 android:singleLine="true"
-                android:text="Nein" />
+                android:text="@string/no" />
 
             <Button
                 android:id="@+id/button_yes"
@@ -103,7 +103,7 @@
                 android:layout_marginTop="6dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:minWidth="70dp"
-                android:text="Ja" />
+                android:text="@string/yes" />
 
         </RelativeLayout>
 

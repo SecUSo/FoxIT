@@ -7,20 +7,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import java.util.Date;
+import java.util.Calendar;
 
 
-public class Tale implements ApplicationListener {
+class Tail implements ApplicationListener {
 
-    float scale_w;
-    float scale_h;
-    Texture texture;
-    TextureRegion region;
+    private Texture texture;
     private float width;
     private float height;
-    private float margin = 70f;
     private SpriteBatch batch;
     private TextureAtlas textureAtlas;
     private Animation animation;
@@ -38,7 +33,7 @@ public class Tale implements ApplicationListener {
 
         // background
         texture = new Texture(Gdx.files.internal("backgrounds/light_sky.jpg"));
-        int h = new Date().getHours();
+        int h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         if (h < 7 || h >= 21) {
             texture = new Texture(Gdx.files.internal("backgrounds/dark_sky.jpg"));
         }

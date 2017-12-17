@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,14 +30,13 @@ public class AnimationListFragment extends Fragment {
     /*
     an array holding all of the displayed settings
      */
-    AnimationObject[] animationArray;
-    View view;
+    private AnimationObject[] animationArray;
+    private View view;
     /*
     context of current activity
      */
 
-    Context context;
-    GridView gridView; //the gridView the Animations are displayed in
+    private GridView gridView; //the gridView the Animations are displayed in
 
     /**
      * shows a animation gridView
@@ -54,19 +52,18 @@ public class AnimationListFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_trophy_list, container, false);
         //creating the animationObjects - TODO: make it tidy for more animations to be added
-        AnimationObject[] animationArray = {
-                new AnimationObject("Hinsetzen", "Das Füchslein ruht im Walde, so ruhest auch du.", R.mipmap.animation_sit, 20, false),
-                new AnimationObject("Schwanzwedeln", "Erhaben wallt des Fuchses Pracht, und doch ganz sacht... ", R.mipmap.animation_wedeln, 10, false),
-                new AnimationObject("Verduften", "Sehen oder gesehen werden...", R.mipmap.animation_vanish, 40, false),
-                new AnimationObject("Spielen", "Das Spiel mit dem Ball. Auch der Ballspieler: Spielball. Verspielt.", R.mipmap.animation_play, 30, false),
-                new AnimationObject("Abheben", "...und Weitblick gewinnen", R.mipmap.animation_fly, 50, false)};
+        animationArray = new AnimationObject[]{
+                new AnimationObject(getString(R.string.sitDown), getString(R.string.sitDownDescription), R.mipmap.animation_sit, 20),
+                new AnimationObject(getString(R.string.tailMove), getString(R.string.tailMoveDescription), R.mipmap.animation_wedeln, 10),
+                new AnimationObject(getString(R.string.fadeAway), getString(R.string.fadeAwayDescription), R.mipmap.animation_vanish, 40),
+                new AnimationObject(getString(R.string.play), getString(R.string.playDescription), R.mipmap.animation_play, 30),
+                new AnimationObject(getString(R.string.rise), getString(R.string.riseDescription), R.mipmap.animation_fly, 50)};
 
 
         // for (AnimationObject ao : animationArray) {
         //   o.addAnimationIfNotContained(ao.getName(), false);
         //ao.getUnlocked());
         //}
-        this.animationArray = animationArray;
         return view;
     }
 
@@ -80,11 +77,10 @@ public class AnimationListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        context = getActivity().getApplicationContext();
 
         //creating the gridView
-        gridView = (GridView) view.findViewById(R.id.grid_trophy);
-        gridView.setAdapter(new animationViewAdapter(getActivity().getApplicationContext()));
+        gridView = view.findViewById(R.id.grid_trophy);
+        gridView.setAdapter(new animationViewAdapter());
 
         //display an tradeRequestFragent on click for buying an animation
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,8 +125,8 @@ public class AnimationListFragment extends Fragment {
         }
 
         //reload the gridView
-        gridView = (GridView) view.findViewById(R.id.grid_trophy);
-        animationViewAdapter i = new animationViewAdapter(getActivity().getApplicationContext());
+        gridView = view.findViewById(R.id.grid_trophy);
+        animationViewAdapter i = new animationViewAdapter();
         i.notifyDataSetChanged();
         gridView.setAdapter(i);
 
@@ -140,17 +136,15 @@ public class AnimationListFragment extends Fragment {
      * fills the gridView
      */
     private class animationViewAdapter extends BaseAdapter {
-        private Context context;
 
-        public animationViewAdapter(Context context) {
-            this.context = context;
+        public animationViewAdapter() {
 
         }
 
         /**
          * defines how a single animationObject is displayed
          *
-         * @param position
+         * @param position list position for which the view is sought
          * @param convertView
          * @param parent
          * @return
@@ -158,8 +152,7 @@ public class AnimationListFragment extends Fragment {
          */
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = getActivity().getLayoutInflater();//(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View gridView;
             animationArray[position].checkUnlocked();
@@ -167,29 +160,29 @@ public class AnimationListFragment extends Fragment {
 
 
                 // get the layout for an animation from xml
-                gridView = inflater.inflate(R.layout.layout_animation, null);
+                gridView = inflater.inflate(R.layout.layout_animation, null);//TODO maybe parent instead of null? nope, not it :D
 
                 // set animation price or unlocked into the textview
-                TextView textView = (TextView) gridView.findViewById(R.id.grid_item_label);
+                TextView textView = gridView.findViewById(R.id.grid_item_label);
                 if (animationArray[position].getUnlocked()) {
-                    textView.setText("unlocked");
+                    textView.setText(getString(R.string.unlocked));
                 } else {
-                    textView.setText(Integer.toString(animationArray[position].getPrice()));
+                    textView.setText(String.format("%d", animationArray[position].getPrice()));
                 }
 
 
-                ImageView image = (ImageView) gridView.findViewById(R.id.grid_item_image);
+                ImageView image = gridView.findViewById(R.id.grid_animation_image);
                 image.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), animationArray[position].getIcon()));
 
-                TextView name = (TextView) gridView.findViewById(R.id.text_animation_name);
+                TextView name = gridView.findViewById(R.id.text_animation_name);
                 name.setText(animationArray[position].getName());
 
                 //change the animations color whether it's unlocked
-                RelativeLayout trophyFrame = (RelativeLayout) gridView
-                        .findViewById(R.id.trophy_frame);
+                RelativeLayout trophyFrame = gridView
+                        .findViewById(R.id.animation_frame);
                 if (animationArray[position].getUnlocked()) {
                     // set image based on selected text
-                    trophyFrame.setBackgroundColor(Color.GREEN);
+                    trophyFrame.setBackgroundColor(getResources().getColor(R.color.unlockedItem));
                 } else {
                     trophyFrame.setBackgroundColor(Color.WHITE);
                 }

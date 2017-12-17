@@ -32,8 +32,6 @@ import java.util.List;
  */
 public class Analysis extends FoxITActivity {
 
-    Toolbar toolbar;
-
     /**
      * combines two arrays
      *
@@ -53,7 +51,7 @@ public class Analysis extends FoxITActivity {
     /**
      * while all the data is retrieved, a loading symbol will be shown on screen
      *
-     * @param savedInstanceState
+     * @param savedInstanceState bundle of informations, saved in onpause
      * @author Tim
      * @author Noah
      */
@@ -63,10 +61,10 @@ public class Analysis extends FoxITActivity {
         setContentView(R.layout.activity_analysis);
 
         //sets our toolbar as the action bar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
         //analyse();
-        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+        DBHandler dbHandler = new DBHandler(this);
         dbHandler.insertIndividualValue("analysisDoneBefore", "true");
         dbHandler.close();
         new ExternAnalysis(this).execute(this);
@@ -87,7 +85,7 @@ public class Analysis extends FoxITActivity {
     public void getALL_APPS() {
         // DBHandler dbHandler = new DBHandler(this, null, null, 1);
         final PackageManager pm = getPackageManager();
-        final TextView log = (TextView) findViewById(R.id.log);
+        final TextView log = findViewById(R.id.log);
 
         // get a list of installed apps.
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -104,8 +102,9 @@ public class Analysis extends FoxITActivity {
                 // get Permissions
                 String[] requestedPermissions = packageInfo.requestedPermissions;
                 if (requestedPermissions != null) {
-                    for (int i = 0; i < requestedPermissions.length; i++) {
-                        bb.append(requestedPermissions[i] + ";");
+                    for (String requestedPermission : requestedPermissions) {
+                        bb.append(requestedPermission);
+                        bb.append(";");
                     }
                 } else {
                     bb.append("NULL");
@@ -129,7 +128,7 @@ public class Analysis extends FoxITActivity {
             counter++;
             bb.setLength(0);
         }
-        new DBWrite(this).execute("addAppColumn", appValues);
+        new DBWrite().execute(this, "addAppColumn", appValues);
         //dbHandler.addAppColumn(appValues);
     }
 
@@ -156,6 +155,7 @@ public class Analysis extends FoxITActivity {
             name = "lock_pattern_utils";
 
             try {
+                //TODO internal class reflection is dangerous. Is there another way?
                 Class<?> lockPatternUtilsClass = Class.forName(LOCK_PATTERN_UTILS);
                 Object lockPatternUtils = lockPatternUtilsClass.getConstructor(Context.class).newInstance(this);
                 Method method = lockPatternUtilsClass.getMethod("getActivePasswordQuality");
@@ -170,7 +170,7 @@ public class Analysis extends FoxITActivity {
         else {
             name = "keyguard_manager";
             KeyguardManager a = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-            if (a.isDeviceSecure()) {
+            if (a != null && a.isDeviceSecure()) {
                 value = 1;
             } else {
                 value = 0;
@@ -231,28 +231,35 @@ public class Analysis extends FoxITActivity {
     /**
      * takes a location of the android provider and inserts its parameter to the database
      *
-     * @param uri
-     * @param projection
+     * @param uri uri to look for when fetching informations e.g. global/secure settings
+     * @param projection projection to look for when fetching informations e.g. global/secure
      * @return int number of inserted parameters
      * @author Lena
      */
     public ContentValues[] getSETTINGS(Uri uri, String[] projection) {
 
         ContentResolver cR = getContentResolver();
-        String selection = null;
-        String[] selectionArguments = null;
-        String selectionOrder = null;
         String name;
         String value;
-        Cursor cursor = cR.query(uri, projection, selection, selectionArguments, selectionOrder);
-        if (cursor != null) cursor.moveToFirst();
+        Cursor cursor = cR.query(uri, projection, null, null, null);
+        if (cursor == null) {
+            ContentValues[] result = new ContentValues[1];
+            ContentValues dummy = new ContentValues(3);
+            dummy.put(DBHandler.COLUMN_SETTING, "nothing found");
+            dummy.put(DBHandler.COLUMN_INITIAL, "N/A");
+            dummy.put(DBHandler.COLUMN_TYPE, 0);
+            result[0] = dummy;
+            return result;
 
+        }
+
+        cursor.moveToFirst();
         ContentValues[] contentValues = new ContentValues[cursor.getCount() - 1];
         ContentValues tempValue = new ContentValues(3);
         int counter = 0;
         int col = 0;
         int type = 0; // type: String
-        final TextView log = (TextView) findViewById(R.id.log);
+        final TextView log = findViewById(R.id.log);
 
 
         // parse all lines of the table
@@ -260,9 +267,7 @@ public class Analysis extends FoxITActivity {
             name = cursor.getString(col);
             // if (cursor.isLast()) return null;
             value = cursor.getString(col + 1);
-            type = 0;
-            if (value == null) type = 3;
-            else {
+            if (value != null) {
                 // type check: 0 = String 1 = boolean 2 = Number 3 = null
                 if (value.matches("-?\\d+(\\.\\d+)?")) type = 2; // type: Number
                 if (type == 2 && (value.equals("1") || value.equals("0"))) {

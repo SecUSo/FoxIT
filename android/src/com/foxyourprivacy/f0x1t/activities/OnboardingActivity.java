@@ -11,21 +11,18 @@ import com.foxyourprivacy.f0x1t.ValueKeeper;
 
 public class OnboardingActivity extends FoxITActivity {
 
-    TapAdapter_onboarding adapter; //defines the content of the tabs, OnboardingFragment-OnboardingFragment4
-    ViewPager mViewPager;
-
-    @Override
     /**
      * @author Hannah
      */
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
         //defining the tabs and the tab bar
-        adapter = new TapAdapter_onboarding(getFragmentManager(), this);
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        TapAdapter_onboarding adapter = new TapAdapter_onboarding(getFragmentManager());
+        ViewPager mViewPager = findViewById(R.id.pager);
         mViewPager.setAdapter(adapter);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
     }

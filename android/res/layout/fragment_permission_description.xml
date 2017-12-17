@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#aab7df"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <TextView
             android:id="@+id/text_permission_headline"
@@ -27,7 +28,7 @@
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/image_app_icon"
-            android:text=" "
+            android:text="@string/permissionName"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff" />
 
@@ -37,9 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp"
             android:adjustViewBounds="true"
-            android:contentDescription="Tier-Logo"
+            android:contentDescription="@string/animalSymbol"
             android:longClickable="false"
             android:maxHeight="40dp"
             android:maxWidth="40dp"
@@ -60,11 +61,9 @@
             android:id="@+id/text_permission_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/image_app_icon"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
-            android:text="Hier wird bald eine Beschreibung der Permission stehen! "
+            android:text="@string/permissionDescription"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </ScrollView>
 

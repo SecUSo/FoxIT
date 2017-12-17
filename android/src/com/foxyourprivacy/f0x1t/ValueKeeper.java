@@ -11,38 +11,40 @@ import java.util.Map;
 
 
 /**
- * Created by Ich on 12.09.2016.
+ * The ValueKeeper is the place where all the information of the user is stored during the use
+ * when the app is started, the VK gets all the information from the Database and stores it when the app is closed.
+ * Created by Tim on 12.09.2016.
  */
 //stores all the user's scores
 public class ValueKeeper {
 //this class implements the singleton design pattern therefor all instances are to be created by calling getInstance()
 
 
-    static ValueKeeper instance;
+    private static ValueKeeper instance;
     public HashMap<String, Boolean> trophyList = new HashMap<>();
-    public int currentEvaluation;
     public Boolean onboardingStartedBefore = false;
     public Boolean analysisDoneBefore = false;
-    public HashMap<String, Boolean> animationList = new HashMap<>();
-    HashMap<String, String> profilList = new HashMap<>();
-    HashMap<Long, Long> applicationAccessAndDuration = new HashMap<>();
-    long timeOfLastAccess = 0;
-    long timeOfFirstAccess = 0;
-    HashMap<Long, Long> applicationStartAndDuration = new HashMap<>();
-    HashMap<Long, Long> applicationStartAndActiveDuration = new HashMap<>();
-    Boolean notDisplayed = true;
-    //the absolute first start
-    long timeOfFirstStart = 0;
     int dailyLessonsUnlocked = 0;
     boolean valueKeeperAlreadyRefreshed = false;
-    int numberOfTimesOpenedAtNight = 0;
-    int numberOfTimesOpenedAtMorning = 0;
-    ArrayList<String> solvedClasses = new ArrayList<>();
-    ArrayList<Long> appStartsTheLastTwoDays = new ArrayList<>();
-    Boolean isEvaluationOutstanding = false;
     ArrayList<String> appsBefore = new ArrayList<>();
-    HashMap<String, String> evaluationResults = new HashMap<>();
-    Boolean freshlyStarted = true;
+    private int currentEvaluation;
+    private HashMap<String, Boolean> animationList = new HashMap<>();
+    private HashMap<String, String> profilList = new HashMap<>();
+    private HashMap<Long, Long> applicationAccessAndDuration = new HashMap<>();
+    private long timeOfLastAccess = 0;
+    private long timeOfFirstAccess = 0;
+    private HashMap<Long, Long> applicationStartAndDuration = new HashMap<>();
+    private HashMap<Long, Long> applicationStartAndActiveDuration = new HashMap<>();
+    private Boolean notDisplayed = true;
+    //the absolute first start
+    private long timeOfFirstStart = 0;
+    private int numberOfTimesOpenedAtNight = 0;
+    private int numberOfTimesOpenedAtMorning = 0;
+    private ArrayList<String> solvedClasses = new ArrayList<>();
+    private ArrayList<Long> appStartsTheLastTwoDays = new ArrayList<>();
+    private Boolean isEvaluationOutstanding = false;
+    private HashMap<String, String> evaluationResults = new HashMap<>();
+    private Boolean freshlyStarted = true;
     private String username;
     private int acornCount = 0; //amount of acorn the player collected
     private int tokenCount = 0; //amount of token the player collected
@@ -79,7 +81,7 @@ public class ValueKeeper {
 
         //HashMap<String,Boolean> trophyList=new HashMap<>();
 
-        DBHandler db = new DBHandler(context, null, null, 1);
+        DBHandler db = new DBHandler(context);
         HashMap<String, String> data = db.getIndividualData();
         dailyLessonsUnlocked = db.howManyDailiesUnlocked();
         //Log.d("ValuesTest","Revived Data:\n" + data.toString()+"\nData size: "+Integer.toString(data.size()));
@@ -116,6 +118,7 @@ public class ValueKeeper {
             currentEvaluation = Integer.valueOf(data.get("currentEvaluation"));
         }
         if (data.containsKey("dailyLessonsUnlocked")) {
+            //TODO fix together with unlocking functionality
             // dailyLessonsUnlocked = Integer.valueOf(data.get("dailyLessonsUnlocked"));
         }
         if (data.containsKey("numberOfTimesOpenedAtNight")) {
@@ -176,7 +179,7 @@ public class ValueKeeper {
     }
 
     public void saveInstance(Context context) {
-        HashMap<String, String> values = new HashMap<String, String>();
+        HashMap<String, String> values = new HashMap<>();
         values.put("onboardingStartedBefore", Boolean.toString(onboardingStartedBefore));
         values.put("analysisDoneBefore", Boolean.toString(analysisDoneBefore));
         values.put("acornCount", Integer.toString(acornCount));
@@ -254,7 +257,7 @@ public class ValueKeeper {
             x++;
         }
 
-        new DBWrite(context).execute("insertIndividualData", values);
+        new DBWrite().execute(context, "insertIndividualData", values);
     }
 
 
@@ -297,7 +300,7 @@ public class ValueKeeper {
     }
 
     /**
-     * @param animationName
+     * @param animationName name of the animation to be unlocked
      * @return true -> animation was found, false -> animation does not exist
      */
     public boolean unlockAnimation(String animationName) {
@@ -327,8 +330,8 @@ public class ValueKeeper {
         return currentEvaluation++;
     }
 
-    public void setProfilList(ProfilListObject[] profilList) {
-        for (ProfilListObject p : profilList) {
+    public void setProfilList(ProfileListObject[] profilList) {
+        for (ProfileListObject p : profilList) {
             this.profilList.put(p.getInputType(), p.getInput());
         }
 

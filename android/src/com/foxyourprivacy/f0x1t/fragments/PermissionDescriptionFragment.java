@@ -22,31 +22,26 @@ import com.foxyourprivacy.f0x1t.R;
 
 
 /**
- * Created by Ich on 25.06.2016.
+ * A fragment that is shown when clicked on a permission in the app view (which can be reached from the applist)
+ * Created by Tim on 25.06.2016.
  */
 public class PermissionDescriptionFragment extends Fragment {
-    String permissionName; //the permission described by the fragment
-    String shortPermissionName; //english permission name without the file structure up front
-    int appRating;
+    private String permissionName; //the permission described by the fragment
+    private String shortPermissionName; //english permission name without the file structure up front
+    private int appRating;
 
 
-    @Override
-    /**
-     * @author Tim
-     */
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
-    @Override
+
     /**fills the layout with the permission name and description
      * @author Tim
      */
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.fragment_permission_description, container, false);
 
         //entering the permissionName into the headline
-        TextView permissionNameTextView = (TextView) view.findViewById(R.id.text_permission_name);
+        TextView permissionNameTextView = view.findViewById(R.id.text_permission_name);
         if (!(permissionName.equals("Dangerous:") || permissionName.equals("Normal:") || permissionName.equals("Harmless:"))) {
             String[] array = permissionName.split("\\.");
             if (array.length == 3) {
@@ -59,21 +54,21 @@ public class PermissionDescriptionFragment extends Fragment {
             permissionNameTextView.setText(permissionName);
         }
 
-        DBHandler dbHandler = new DBHandler(this.getActivity(), null, null, 1);
+        DBHandler dbHandler = new DBHandler(this.getActivity());
 
         //entering the permissionDescription
-        TextView permissionDescriptionTextView = (TextView) view.findViewById(R.id.text_permission_description);
+        TextView permissionDescriptionTextView = view.findViewById(R.id.text_permission_description);
         permissionDescriptionTextView.setText(dbHandler.getPermissionDescription(shortPermissionName));
         dbHandler.close();
 
         //entering the permissionIcon into the headline
         Drawable drawable = getPermissionDrawable(permissionName);
-        ImageView appIcon = (ImageView) view.findViewById(R.id.image_app_icon);
+        ImageView appIcon = view.findViewById(R.id.image_app_icon);
         appIcon.setImageDrawable(drawable);
 
 
         //links the onClickEvent for returning to PermissionListFragment to the headline
-        RelativeLayout button = (RelativeLayout) view.findViewById(R.id.permission_headline_frame);
+        RelativeLayout button = view.findViewById(R.id.permission_headline_frame);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,11 +92,11 @@ public class PermissionDescriptionFragment extends Fragment {
         return view;
     }
 
-    @Override
     /**
      * Enables to pass arguments to the fragment
      * @author Tim
      */
+    @Override
     public void setArguments(Bundle arg) {
 
         permissionName = arg.getString("permissionName");
@@ -112,7 +107,7 @@ public class PermissionDescriptionFragment extends Fragment {
      * methodLeft for accessing the icon associated with the current Permission
      *
      * @param permission the current permissions name
-     * @return
+     * @return icon drawable that depicts the permission given
      */
     @Nullable
     private Drawable getPermissionDrawable(String permission) {

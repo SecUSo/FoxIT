@@ -5,11 +5,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 /**
+ * A drawable class to load images from the web and insert them in the lesson-slides
  * Created by noah on 13.09.17.
  */
 
-public class DownloadDrawable extends BitmapDrawable {
-    protected Drawable drawable;
+class DownloadDrawable extends BitmapDrawable {
+    Drawable drawable;
+
 
     @Override
     public void draw(Canvas canv) {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -31,11 +32,8 @@ import java.util.regex.Pattern;
 
 public class VideoSlide extends Slide {
 
-    String content;
-    View view;
-    VideoView videoView;
-    WebView webView;
-    MediaController mc;
+    private String content;
+    private VideoView videoView;
 
 
     @Override
@@ -53,13 +51,13 @@ public class VideoSlide extends Slide {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.layout_slide_video, container, false);
-        videoView = (VideoView) view.findViewById(R.id.videoView);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.layout_slide_video, container, false);
+        videoView = view.findViewById(R.id.videoView);
         if (!content.contains("iframe")) {
-            final ImageButton play = (ImageButton) view.findViewById(R.id.playbutton);
-            mc = new MediaController(getContext());
-            final TextView waittext = (TextView) view.findViewById(R.id.waittext);
+            final ImageButton play = view.findViewById(R.id.playbutton);
+            MediaController mc = new MediaController(getContext());
+            final TextView waittext = view.findViewById(R.id.waittext);
 
             waittext.setText(R.string.videowaittext);
             waittext.setVisibility(View.VISIBLE);
@@ -104,7 +102,7 @@ public class VideoSlide extends Slide {
             ViewGroup.LayoutParams params = videoView.getLayoutParams();
             params.height = 0;
             videoView.setLayoutParams(params);
-            webView = (WebView) view.findViewById(R.id.webvideo);
+            WebView webView = view.findViewById(R.id.webvideo);
             webView.getSettings().setLoadWithOverviewMode(true);
             webView.getSettings().setUseWideViewPort(true);
 

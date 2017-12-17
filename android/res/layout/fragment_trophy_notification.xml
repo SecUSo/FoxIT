@@ -7,7 +7,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="55dp"
@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|top"
+            android:layout_gravity="start|top"
             android:background="@color/creme">
 
             <TextView
@@ -25,13 +25,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/image_acorn_symbol"
+                android:layout_alignTop="@+id/image_trophy_symbol"
                 android:layout_toStartOf="@+id/image_trophy_symbol"
                 android:gravity="top|center"
                 android:maxLines="2"
                 android:paddingTop="2dp"
                 android:singleLine="false"
-                android:text="Schnüffler unlocked!"
+                android:text="@string/unlockedSniffer"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/background_dark"
                 android:textSize="24sp" />
@@ -42,10 +42,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_marginTop="1dp"
                 android:adjustViewBounds="true"
-                android:contentDescription="Eicheln"
+                android:contentDescription="@string/acorns"
                 android:maxHeight="35dp"
                 android:maxWidth="35dp"
                 android:src="@mipmap/eichel" />
