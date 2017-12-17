@@ -156,7 +156,7 @@ public class TrophyListFragment extends Fragment {
                 TextView textView = gridView.findViewById(R.id.grid_item_label);
                 if (trophyArray[position].isVisibleScore() && !v.isTrophyUnlocked(trophyArray[position].getName())) {
                     // limits amount of the left number with the amount of right number (eg. 30/30)
-                    textView.setText(getString(R.string.gridTrophyLabel, trophyArray[position].getScoreNeeded(), trophyArray[position].getScoreNeeded()));
+                    textView.setText(getString(R.string.gridTrophyLabel, trophyArray[position].getScoreCurrently(), trophyArray[position].getScoreNeeded()));
                 } else {
                     textView.setText("");
                 }

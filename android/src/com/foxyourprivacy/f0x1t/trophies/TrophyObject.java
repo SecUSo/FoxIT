@@ -53,12 +53,20 @@ abstract public class TrophyObject {
         return scoreNeeded;
     }
 
+    public int getScoreCurrently() {
+        return scoreCurrently;
+    }
+
     public int getIcon() {
         return icon;
     }
 
     public boolean isVisibleScore() {
         return visibleScore;
+    }
+
+    public boolean isUnlocked() {
+        return unlocked;
     }
 
     public String getToastDescription() {
