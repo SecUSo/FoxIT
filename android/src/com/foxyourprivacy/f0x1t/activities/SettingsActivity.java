@@ -141,7 +141,7 @@ public class SettingsActivity extends FoxITActivity {
         if (netInfo != null && netInfo.isConnected()) {
             //update from internet resource
             String URL = "https://foxit.secuso.org/CSVs/raw/lektionen.csv";//"https://app.seafile.de/f/e27034ec0a/?raw=1";
-            new CSVUpdateTask().execute(context, URL, "lessions", readLessonCSV(R.raw.lektionen, context));
+            new CSVUpdateTask().execute(context, URL, "lessons", readLessonCSV(R.raw.testcsv, context));
             URL = "https://foxit.secuso.org/CSVs/raw/classes.csv";//"https://app.seafile.de/f/7ca81fac4e/?raw=1";
             new CSVUpdateTask().execute(context, URL, "classes", readCSV(R.raw.classes, context));
 
