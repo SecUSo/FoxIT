@@ -318,7 +318,7 @@ public class Analysis extends FoxITActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                log.append("LISTEN AUFSCHREIBEN...\n");
+                log.append("\nLISTEN AUFSCHREIBEN...\n");
                 log.append("EICHELN SAMMELN...\n");
                 log.append("LEKTIONEN LERNEN...\n");
                 log.append("FUCHS EINLAUFEN...\n");

@@ -5,7 +5,7 @@
 
     android:id="@+id/foxit_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:layout_height="?android:attr/actionBarSize"
     android:background="@color/colorPrimary"
     android:elevation="4dp"
 

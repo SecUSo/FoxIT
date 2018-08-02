@@ -43,6 +43,8 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         // sets our toolbar as the actionbar
         Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         DBHandler dbHandler = new DBHandler(this);
@@ -110,7 +112,7 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
         menu.findItem(R.id.action_options).setVisible(false);
-        menu.findItem(R.id.goHome).setVisible(false);
+        menu.findItem(R.id.analyze).setVisible(false);
         return true;
     }
 
@@ -122,7 +124,7 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.goBack) {
+        if (id == android.R.id.home) {
             onBackPressed();
             return true;
         }

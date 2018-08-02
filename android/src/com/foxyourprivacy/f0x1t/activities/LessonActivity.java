@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -74,6 +75,9 @@ public class LessonActivity extends FoxITActivity {
         // sets our toolbar as the actionbar
         Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if (toolbar != null) {
             toolbar.setTitle(lesson.getLessonName());
         }
@@ -435,10 +439,21 @@ public class LessonActivity extends FoxITActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
         menu.findItem(R.id.action_options).setVisible(false);
-        menu.findItem(R.id.goHome).setVisible(false);
-        menu.findItem(R.id.goBack).setVisible(false);
+        menu.findItem(R.id.analyze).setVisible(false);
         setTitle(lesson.getLessonName());
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
 }

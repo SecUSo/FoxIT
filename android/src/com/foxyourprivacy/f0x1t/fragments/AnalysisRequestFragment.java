@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.activities.Analysis;
+import com.foxyourprivacy.f0x1t.activities.AnalysisResults;
 
 /**
  * Fragment for the settings to ask, if another analysis should be done
@@ -31,7 +32,7 @@ public class AnalysisRequestFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                cancel();
             }
         });
         //add the yes button's behavior
@@ -49,12 +50,20 @@ public class AnalysisRequestFragment extends Fragment {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                cancel();
             }
 
         });
 
+
         return view;
+    }
+
+    private void cancel() {
+        getFragmentManager().popBackStack();
+        AnalysisResults parent = (AnalysisResults) getActivity();
+        parent.requestActive = false;
+
     }
 
 

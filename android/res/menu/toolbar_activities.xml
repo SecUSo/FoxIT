@@ -5,16 +5,8 @@
     <!-- specifies the menu button -->
 
     <item
-        android:id="@+id/goBack"
-        android:layout_gravity="left"
-        android:icon="@drawable/back"
-        android:title="@string/back"
-        android:visible="true"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/goHome"
-        android:icon="@drawable/house"
+        android:id="@+id/analyze"
+        android:icon="@drawable/redo"
         android:title="@string/menu"
         android:visible="true"
         app:showAsAction="ifRoom" />

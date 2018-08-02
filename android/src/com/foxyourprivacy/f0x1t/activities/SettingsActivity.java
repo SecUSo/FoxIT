@@ -34,6 +34,8 @@ public class SettingsActivity extends FoxITActivity {
         setContentView(R.layout.activity_settings);
         Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Fragment is created
         SettingsFragment fragment = new SettingsFragment();
@@ -97,8 +99,7 @@ public class SettingsActivity extends FoxITActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
-        menu.findItem(R.id.goHome).setVisible(false);
-        menu.findItem(R.id.goBack).setVisible(true);
+        menu.findItem(R.id.analyze).setVisible(false);
         menu.findItem(R.id.action_options).setVisible(false);
         return true;
     }
@@ -111,7 +112,7 @@ public class SettingsActivity extends FoxITActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.goBack) {
+        if (id == android.R.id.home) {
             onBackPressed();
             return true;
         }
@@ -179,7 +180,7 @@ public class SettingsActivity extends FoxITActivity {
      */
     @Override
     public void onBackPressed() {
-        //if there is an fragment
+        //if there is a fragment
         RelativeLayout firstFragmentFrame = findViewById(R.id.first_fragment_frame);
 
 

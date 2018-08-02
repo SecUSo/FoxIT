@@ -1,6 +1,7 @@
 package com.foxyourprivacy.f0x1t.activities;
 
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -14,12 +15,15 @@ import android.widget.RelativeLayout;
 
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.TapAdapter_results;
+import com.foxyourprivacy.f0x1t.fragments.AnalysisRequestFragment;
 import com.foxyourprivacy.f0x1t.fragments.PermissionListFragment;
 
 public class AnalysisResults extends FoxITActivity {
 
     public ViewPager mViewPager; //defines the tabView's content
     public PermissionListFragment permissionList;
+    public boolean requestActive = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,8 @@ public class AnalysisResults extends FoxITActivity {
         //sets our toolbar as the actionbar
         Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         //get Settings from DB into ListView
         String[] settingsArray = getIntent().getStringArrayExtra("settings");
 
@@ -88,11 +93,29 @@ public class AnalysisResults extends FoxITActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.goHome) {
-            Intent intent = new Intent(getApplicationContext(), Home.class);
-            startActivity(intent);
-            return true;
+        switch (id) {
+            case R.id.analyze:
+                if (!requestActive) {
+                    //add the TradeRequestFragment to the activity's context
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    //AnalysisRequestFragment tradeRequest = new AnalysisRequestFragment();
+                    AnalysisRequestFragment analysisRequest = new AnalysisRequestFragment();
+                    //add the fragment to the count_frame RelativeLayout
+                    transaction.replace(R.id.request_frame, analysisRequest, "count");
+                    transaction.addToBackStack("analysisRequest");
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    transaction.commit();
+                    requestActive = true;
+                    return true;
+                }
+                return false;
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -101,7 +124,6 @@ public class AnalysisResults extends FoxITActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
         menu.findItem(R.id.action_options).setVisible(false);
-        menu.findItem(R.id.goBack).setVisible(false);
         return true;
     }
 
@@ -150,7 +172,10 @@ public class AnalysisResults extends FoxITActivity {
     @Override
     public void onBackPressed() {
         //if there is an fragment
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+        if (requestActive) {
+            getFragmentManager().popBackStackImmediate();
+            requestActive = false;
+        } else if (getFragmentManager().getBackStackEntryCount() > 0) {
             //if PermissionDescriptionFragment exists
             if (permissionList != null && permissionList.getChildFragmentManager().getBackStackEntryCount() > 0) {
                 permissionList.setListVisible();//make the hidden permissionList visible again
@@ -159,13 +184,13 @@ public class AnalysisResults extends FoxITActivity {
                 if (permissionList != null) {
                     permissionList = null;
                 }
-                getSupportFragmentManager().popBackStack(); //destroy PermissionListFragment
+                getFragmentManager().popBackStack(); //destroy PermissionListFragment
                 FrameLayout appFrame = findViewById(R.id.appFrame);
                 appFrame.setVisibility(View.VISIBLE); //make the hidden appList visible again
                 mViewPager.setVisibility(View.VISIBLE);
             }
         } else {//if no fragments exist go to home
-            Intent i = new Intent(getApplicationContext(), Home.class);
+            Intent i = new Intent(this, Home.class);
             startActivity(i);
             //super.onBackPressed();
         }

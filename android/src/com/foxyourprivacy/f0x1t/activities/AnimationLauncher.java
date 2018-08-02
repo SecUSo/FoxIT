@@ -43,6 +43,8 @@ public class AnimationLauncher extends AppCompatActivity implements AndroidFragm
         // show toolbar
         Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //erste Animation bereits beim starten anzeigen
         AnimationTail tail = new AnimationTail();
@@ -62,8 +64,7 @@ public class AnimationLauncher extends AppCompatActivity implements AndroidFragm
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
-        menu.findItem(R.id.goHome).setVisible(false);
-        menu.findItem(R.id.goBack).setVisible(true);
+        menu.findItem(R.id.analyze).setVisible(false);
         menu.findItem(R.id.action_options).setVisible(false);
         return true;
     }
@@ -81,7 +82,7 @@ public class AnimationLauncher extends AppCompatActivity implements AndroidFragm
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.goBack) {
+        if (id == android.R.id.home) {
             onBackPressed();
             return true;
         }

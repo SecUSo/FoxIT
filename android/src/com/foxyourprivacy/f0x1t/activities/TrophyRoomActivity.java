@@ -30,6 +30,8 @@ public class TrophyRoomActivity extends FoxITActivity {
         // sets our toolbar as the actionbar
         Toolbar toolbar = findViewById(R.id.foxit_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //if (toolbar != null) {
         //   toolbar.setTitle("Toolbar");
         //}
@@ -99,8 +101,7 @@ public class TrophyRoomActivity extends FoxITActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
         menu.findItem(R.id.action_options).setVisible(false);
-        menu.findItem(R.id.goHome).setVisible(false);
-        menu.findItem(R.id.goBack).setVisible(true);
+        menu.findItem(R.id.analyze).setVisible(false);
         return true;
     }
 
@@ -112,7 +113,7 @@ public class TrophyRoomActivity extends FoxITActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.goBack) {
+        if (id == android.R.id.home) {
             onBackPressed();
             return true;
         }
