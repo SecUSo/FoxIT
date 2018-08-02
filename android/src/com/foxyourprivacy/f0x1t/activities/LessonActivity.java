@@ -59,12 +59,36 @@ public class LessonActivity extends FoxITActivity {
         className = getIntent().getStringExtra("classname");
 
 
+        DBHandler dbHandler = new DBHandler(this);
+        int textchoice = Integer.valueOf(dbHandler.getIndividualValue("textsize"));
+        int textsize = 3;
+        switch (textchoice) {
+            case R.id.textsizesmall:
+                textsize = R.dimen.text_small;
+                break;
+            case R.id.textsizesmaller:
+                textsize = R.dimen.text_smaller;
+                break;
+            case R.id.textsizenormal:
+                textsize = R.dimen.text_normal;
+                break;
+            case R.id.textsizebigger:
+                textsize = R.dimen.text_bigger;
+                break;
+            case R.id.textsizebig:
+                textsize = R.dimen.text_big;
+                break;
+        }
+
+
+
         lesson.slidearray = new Slide[slideStringArray.length];
         int i = 0;
         for (String slideString : slideStringArray) {
             if (slideString.startsWith(" ")) slideString = slideString.replaceFirst(" ", "");
             Bundle args = new Bundle();
             args.putString("slide", slideString);
+            args.putInt("textsize", textsize);
             lesson.slidearray[i] = createSlide(slideString);
             lesson.slidearray[i].setArguments(args);
             i++;

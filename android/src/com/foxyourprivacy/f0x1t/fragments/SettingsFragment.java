@@ -47,12 +47,14 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
 
         profileListItems = new String[]{
                 getString(R.string.help),
+                getString(R.string.textsize),
                 getString(R.string.Impressum),
                 getString(R.string.debugging),
                 getString(R.string.legalInfo)
         };
 
         fragmentList.put(getString(R.string.personalData), new ProfileFragment());
+        fragmentList.put(getString(R.string.textsize), new SelectFragment());
         fragmentList.put(getString(R.string.help), new FAQFragment());
         fragmentList.put(getString(R.string.Impressum), new LegalInformationFragment());
         fragmentList.put(getString(R.string.debugging), new CSVRefreshFragment());

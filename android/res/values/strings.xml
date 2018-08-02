@@ -148,5 +148,12 @@
     <string name="newLessonAvailable">Eine neue Lektion ist verfügbar!</string>
     <string name="progressApps">Apps analysieren...</string>
     <string name="menu">Menü</string>
+    <string name="textsize">Textgröße</string>
+    <string name="selectSize">Hier kannst du die Textgröße für die Lektionen einstellen.</string>
+    <string name="small">klein</string>
+    <string name="smaller">kleiner</string>
+    <string name="normal">normal</string>
+    <string name="bigger">größer</string>
+    <string name="big">groß</string>
 
 </resources>

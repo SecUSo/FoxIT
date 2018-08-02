@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,7 @@ public class GenQuizSlide extends Slide {
     public void fillLayout() {
         TextView questionText = view.findViewById(R.id.quiz_text);
         questionText.setText(question);
+        questionText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getActivity().getResources().getDimension(textsize));
         GridLayout boxcontainer = view.findViewById(R.id.quiz_boxes);
 
         ids = new int[answers.length];
@@ -112,6 +114,7 @@ public class GenQuizSlide extends Slide {
         for (String str : answers) {
             CheckBox box = new CheckBox(getContext());
             box.setText(str);
+            box.setTextSize(TypedValue.COMPLEX_UNIT_PX, getActivity().getResources().getDimension(textsize));
             box.setId(k + 9999);
             ids[k] = box.getId();
             k++;

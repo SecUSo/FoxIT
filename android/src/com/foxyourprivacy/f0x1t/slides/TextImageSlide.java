@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class TextImageSlide extends Slide {
             htmlspanned = Html.fromHtml(slidetext, sig, null);
         }
         text.setText(htmlspanned);
+        text.setTextSize(TypedValue.COMPLEX_UNIT_PX, getActivity().getResources().getDimension(textsize));
     }
 
     @Override

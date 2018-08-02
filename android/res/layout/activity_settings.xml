@@ -8,6 +8,7 @@
 
     <RelativeLayout
         android:id="@+id/second_fragment_frame"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="55dp">
@@ -16,6 +17,7 @@
     <include layout="@layout/toolbar_actionbar" />
 
     <RelativeLayout
+        android:padding="8dp"
         android:id="@+id/first_fragment_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

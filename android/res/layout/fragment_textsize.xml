@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textsizeselectiontext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/selectSize"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RadioGroup
+        android:id="@+id/textsizeselection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textsizeselectiontext"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/textsizesmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/small"
+            android:textSize="@dimen/text_small" />
+
+        <RadioButton
+            android:id="@+id/textsizesmaller"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/smaller"
+            android:textSize="@dimen/text_smaller" />
+
+        <RadioButton
+            android:id="@+id/textsizenormal"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/normal"
+            android:textSize="@dimen/text_normal" />
+
+        <RadioButton
+            android:id="@+id/textsizebigger"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bigger"
+            android:textSize="@dimen/text_bigger" />
+
+        <RadioButton
+            android:id="@+id/textsizebig"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/big"
+            android:textSize="@dimen/text_big" />
+
+
+    </RadioGroup>
+</RelativeLayout>
