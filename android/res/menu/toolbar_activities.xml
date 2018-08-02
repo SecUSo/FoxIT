@@ -13,9 +13,9 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/goOn"
-        android:icon="@drawable/forward"
-        android:title="@string/forward"
+        android:id="@+id/goHome"
+        android:icon="@drawable/house"
+        android:title="@string/menu"
         android:visible="true"
         app:showAsAction="ifRoom" />
 

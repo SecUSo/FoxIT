@@ -1,5 +1,7 @@
 package com.foxyourprivacy.f0x1t.activities;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,9 +13,11 @@ import android.widget.RelativeLayout;
 import com.foxyourprivacy.f0x1t.DBHandler;
 import com.foxyourprivacy.f0x1t.R;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
+import com.foxyourprivacy.f0x1t.fragments.AnalysisRequestFragment;
 
 
 public class Home extends FoxITActivity {
+    private boolean requestActive = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +103,8 @@ public class Home extends FoxITActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
-        menu.findItem(R.id.goOn).setVisible(false);
+        menu.findItem(R.id.goHome).setVisible(true);
+        menu.findItem(R.id.goHome).setIcon(R.drawable.smartphone);
         menu.findItem(R.id.goBack).setVisible(false);
         menu.findItem(R.id.action_options).setVisible(false);
         return true;
@@ -108,10 +113,31 @@ public class Home extends FoxITActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.goHome && !requestActive) {
+            //add the TradeRequestFragment to the activity's context
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            //AnalysisRequestFragment tradeRequest = new AnalysisRequestFragment();
+            AnalysisRequestFragment analysisRequest = new AnalysisRequestFragment();
+            //add the fragment to the count_frame RelativeLayout
+            transaction.replace(R.id.request_frame, analysisRequest, "count");
+            transaction.addToBackStack("analysisRequest");
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.commit();
+            requestActive = true;
+            return true;
+        }
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        requestActive = false;
+        super.onBackPressed();
+    }
 }

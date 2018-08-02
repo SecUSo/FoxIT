@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/underToolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" >
+        android:layout_height="?android:attr/actionBarSize">
 
     </RelativeLayout>
 
@@ -175,7 +175,14 @@
                 android:contentDescription="@string/settings"
                 android:src="@drawable/account" />
         </RelativeLayout>
+
+
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/request_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
 
 
 </RelativeLayout>

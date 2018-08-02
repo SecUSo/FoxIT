@@ -62,7 +62,7 @@ public class AnimationLauncher extends AppCompatActivity implements AndroidFragm
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
-        menu.findItem(R.id.goOn).setVisible(false);
+        menu.findItem(R.id.goHome).setVisible(false);
         menu.findItem(R.id.goBack).setVisible(true);
         menu.findItem(R.id.action_options).setVisible(false);
         return true;

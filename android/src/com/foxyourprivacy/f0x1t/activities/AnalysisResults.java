@@ -88,7 +88,7 @@ public class AnalysisResults extends FoxITActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.goOn) {
+        if (id == R.id.goHome) {
             Intent intent = new Intent(getApplicationContext(), Home.class);
             startActivity(intent);
             return true;

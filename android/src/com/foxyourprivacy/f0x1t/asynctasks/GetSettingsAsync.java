@@ -50,4 +50,5 @@ class GetSettingsAsync extends AsyncTask<Void, Void, String[]> {
             }
         }, 3000L);
     }
+
 }

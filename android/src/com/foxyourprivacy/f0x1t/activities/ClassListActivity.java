@@ -110,7 +110,7 @@ public class ClassListActivity extends FoxITActivity implements AdapterView.OnIt
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar_activities, menu);
         menu.findItem(R.id.action_options).setVisible(false);
-        menu.findItem(R.id.goOn).setVisible(false);
+        menu.findItem(R.id.goHome).setVisible(false);
         return true;
     }
 

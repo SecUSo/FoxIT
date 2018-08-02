@@ -28,7 +28,6 @@
         </activity>
         <service
             android:name="BackgroundService"
-            android:icon="@drawable/back"
             android:label="@string/app_name"
             >
         </service>
