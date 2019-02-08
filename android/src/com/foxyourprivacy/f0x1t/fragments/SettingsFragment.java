@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -44,14 +45,26 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            profileListItems = new String[]{
+                    getString(R.string.help),
+                    getString(R.string.textsize),
+                    getString(R.string.activate_usage_stats),
+                    getString(R.string.Impressum),
+                    getString(R.string.debugging),
+                    getString(R.string.legalInfo)
+            };
+            fragmentList.put(getString(R.string.activate_usage_stats), new UsageStatsLinkFragment());
+        } else {
+            profileListItems = new String[]{
+                    getString(R.string.help),
+                    getString(R.string.textsize),
+                    getString(R.string.Impressum),
+                    getString(R.string.debugging),
+                    getString(R.string.legalInfo)
+            };
+        }
 
-        profileListItems = new String[]{
-                getString(R.string.help),
-                getString(R.string.textsize),
-                getString(R.string.Impressum),
-                getString(R.string.debugging),
-                getString(R.string.legalInfo)
-        };
 
         fragmentList.put(getString(R.string.personalData), new ProfileFragment());
         fragmentList.put(getString(R.string.textsize), new SelectFragment());
@@ -59,6 +72,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
         fragmentList.put(getString(R.string.Impressum), new LegalInformationFragment());
         fragmentList.put(getString(R.string.debugging), new CSVRefreshFragment());
         fragmentList.put(getString(R.string.legalInfo), new LegalInformationFragment_libGDX());
+
 
         context = getActivity().getApplicationContext();
         List<String> profileList = new ArrayList<>(Arrays.asList(profileListItems));
@@ -145,7 +159,7 @@ public class SettingsFragment extends ListFragment implements AdapterView.OnItem
      * @author Tim
      */
     private class MyListAdapter_permission extends ArrayAdapter<String> {
-        public MyListAdapter_permission() {
+        private MyListAdapter_permission() {
             //defining the listView's layout for single entries
             super(context, R.layout.list_item_profile, profileListItems);
         }

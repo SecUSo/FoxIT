@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/whole_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/rounded_corners">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="end"
+            android:background="@drawable/rounded_corners">
+
+            <TextView
+                android:id="@+id/text_product_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="10dp"
+                android:maxWidth="300dp"
+                android:text="@string/usage_stats_permission_question"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp"
+                tools:textColor="#323232" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_corners">
+
+            <Button
+                android:id="@+id/button_yes"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/button_no"
+                android:layout_alignBottom="@id/button_no"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:minWidth="70dp"
+                android:text="@string/yes" />
+
+            <Button
+                android:id="@+id/button_no"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="6dp"
+                android:layout_toEndOf="@id/button_yes"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:minWidth="70dp"
+                android:text="@string/no_usage_stats_button_description"
+                android:textSize="10sp" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

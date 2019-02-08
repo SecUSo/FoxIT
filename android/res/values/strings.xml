@@ -155,5 +155,11 @@
     <string name="normal">normal</string>
     <string name="bigger">größer</string>
     <string name="big">groß</string>
+    <string name="app_usage_time">0min</string>
+    <string name="usage_stats_permission_question">Um die Nutzungszeiten deiner Apps zu sehen, musst du eine zusätzliche Berechtigung geben. Einverstanden?</string>
+    <string name="no_usage_stats_button_description">Nein, ohne diese Funktion fortfahren</string>
+    <string name="activate_usage_stats">App Statistiken (de)aktivieren</string>
+    <string name="open_settings">Einstellungen öffnen</string>
+    <string name="usage_stats_explanation">Um die Nutzungszeiten (= Zeit im Vordergrund) deiner Apps zu sehen, benötigt FoxIT eine spezielle Berechtigung. Dieser Button führt direkt zur entsprechenden Einstellung zum (de)aktivieren.</string>
 
 </resources>

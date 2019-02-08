@@ -2,7 +2,11 @@ package com.foxyourprivacy.f0x1t.activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -18,17 +22,33 @@ import com.foxyourprivacy.f0x1t.TapAdapter_results;
 import com.foxyourprivacy.f0x1t.fragments.AnalysisRequestFragment;
 import com.foxyourprivacy.f0x1t.fragments.PermissionListFragment;
 
+import java.util.Calendar;
+import java.util.Map;
+
 public class AnalysisResults extends FoxITActivity {
 
     public ViewPager mViewPager; //defines the tabView's content
     public PermissionListFragment permissionList;
     public boolean requestActive = false;
+    public Map<String, UsageStats> usageStats;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
+
+
+        //on Android versions >= 5 collect and combine usage statistics for installed apps.
+        //to display foreground time in the app list
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            UsageStatsManager usageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
+            if (usageStatsManager != null) {
+                usageStats = usageStatsManager.queryAndAggregateUsageStats(0, Calendar.getInstance().getTimeInMillis());
+            }
+        }
 
         //sets our toolbar as the actionbar
         Toolbar toolbar = findViewById(R.id.foxit_toolbar);
@@ -171,7 +191,7 @@ public class AnalysisResults extends FoxITActivity {
      */
     @Override
     public void onBackPressed() {
-        //if there is an fragment
+        //if there is a fragment
         if (requestActive) {
             getFragmentManager().popBackStackImmediate();
             requestActive = false;

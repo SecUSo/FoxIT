@@ -13,8 +13,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
-        android:layout_toEndOf="@+id/image_app_icon"
         android:layout_toStartOf="@+id/image_permission_rating"
+        android:layout_toEndOf="@+id/image_app_icon"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -50,5 +50,14 @@
         android:minHeight="40dp"
         android:minWidth="40dp"
         android:src="@mipmap/badapprating" />
+
+    <TextView
+        android:id="@+id/app_usage_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:layout_toStartOf="@+id/image_permission_rating"
+        android:text="@string/app_usage_time"
+        android:visibility="gone" />
 
 </RelativeLayout>

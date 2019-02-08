@@ -1,7 +1,13 @@
 package com.foxyourprivacy.f0x1t.activities;
 
+import android.annotation.TargetApi;
+import android.app.AppOpsManager;
+import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
@@ -10,6 +16,8 @@ import com.foxyourprivacy.f0x1t.TapAdapter_onboarding;
 import com.foxyourprivacy.f0x1t.ValueKeeper;
 
 public class OnboardingActivity extends FoxITActivity {
+
+    public boolean askedForStats = false;
 
     /**
      * @author Hannah
@@ -46,6 +54,21 @@ public class OnboardingActivity extends FoxITActivity {
 
 
         //db.close();
+    }
+
+    public void requestUsageStatsPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                && !hasUsageStatsPermission(this)) {
+            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public boolean hasUsageStatsPermission(Context context) {
+        AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        int mode = appOps.checkOpNoThrow("android:get_usage_stats",
+                android.os.Process.myUid(), context.getPackageName());
+        return mode == AppOpsManager.MODE_ALLOWED;
     }
 
     @Override

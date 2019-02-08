@@ -3,11 +3,13 @@ package com.foxyourprivacy.f0x1t.fragments;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.app.usage.UsageStats;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -425,7 +427,7 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
      * @author Tim
      */
     private class MyListAdapter_app extends ArrayAdapter<ApplicationInfo> {
-        public MyListAdapter_app() {
+        private MyListAdapter_app() {
             //Here is defined, that the adapter is using our list of apps (apps)
             //and the R.layout.layout_app-XMLLayout for single listViewItems
             super(context, R.layout.layout_app, apps);
@@ -455,6 +457,29 @@ public class AppListFragment extends ListFragment implements AdapterView.OnItemC
             //setting the app's name
             TextView appName = itemView.findViewById(R.id.text_app_name);
             appName.setText(pm.getApplicationLabel(currentApp).toString());
+
+            TextView appTime = itemView.findViewById(R.id.app_usage_time);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                UsageStats usage = ((AnalysisResults) getActivity()).usageStats.get(currentApp.packageName);
+
+                if (usage != null) {
+                    long time = Long.valueOf(usage.getTotalTimeInForeground()) / 1000L;
+                    if (time > 60) {
+                        appTime.setText(String.valueOf(time / 60) + " min");
+                    } else {
+                        appTime.setText(String.valueOf(time) + " sek");
+                    }
+                    appTime.setVisibility(View.VISIBLE);
+
+                } else {
+                    appTime.setVisibility(View.INVISIBLE);
+                }
+
+            } else {
+                appTime.setVisibility(View.INVISIBLE);
+            }
+
 
             //adding an icon describing the risk posed by the app
             ImageView ratingIcon = itemView.findViewById(R.id.image_permission_rating);
